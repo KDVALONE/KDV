@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Machine>ALONE</Machine>
+    <WindowsUser>Дмитрий</WindowsUser>
+    <TargetPlatformIdentifier>Windows</TargetPlatformIdentifier>
+    <TargetOsVersion>6.3</TargetOsVersion>
+    <TargetOsDescription>Windows 8.1</TargetOsDescription>
+    <SolutionConfiguration>Debug|AnyCPU</SolutionConfiguration>
+    <PackageArchitecture>neutral</PackageArchitecture>
+    <PackageIdentityName>5e7bbed9-1b8f-4e9b-b5ff-562d1e2fc9e7</PackageIdentityName>
+    <IntermediateOutputPath>F:\Программирование\Project\visual studio 2015\Chapter_2_Programm_2\Chapter_2_Programm_2\obj\Debug\</IntermediateOutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <AppXManifest Include="F:\Программирование\Project\visual studio 2015\Chapter_2_Programm_2\Chapter_2_Programm_2\bin\Debug\AppxManifest.xml">
+      <PackagePath>AppxManifest.xml</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppXManifest>
+  </ItemGroup>
+  <ItemGroup>
+    <AppxPackagedFile Include="F:\Программирование\Project\visual studio 2015\Chapter_2_Programm_2\Chapter_2_Programm_2\bin\Debug\Chapter_2_Programm_2.exe">
+      <PackagePath>Chapter_2_Programm_2.exe</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="F:\Программирование\Project\visual studio 2015\Chapter_2_Programm_2\Chapter_2_Programm_2\Assets\Logo.scale-100.png">
+      <PackagePath>Assets\Logo.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="F:\Программирование\Project\visual studio 2015\Chapter_2_Programm_2\Chapter_2_Programm_2\Assets\SmallLogo.scale-100.png">
+      <PackagePath>Assets\SmallLogo.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="F:\Программирование\Project\visual studio 2015\Chapter_2_Programm_2\Chapter_2_Programm_2\Assets\SplashScreen.scale-100.png">
+      <PackagePath>Assets\SplashScreen.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="F:\Программирование\Project\visual studio 2015\Chapter_2_Programm_2\Chapter_2_Programm_2\Assets\StoreLogo.scale-100.png">
+      <PackagePath>Assets\StoreLogo.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="F:\Программирование\Project\visual studio 2015\Chapter_2_Programm_2\Chapter_2_Programm_2\bin\Debug\Chapter_2_Programm_2.xr.xml">
+      <PackagePath>Chapter_2_Programm_2.xr.xml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="F:\Программирование\Project\visual studio 2015\Chapter_2_Programm_2\Chapter_2_Programm_2\bin\Debug\App.xbf">
+      <PackagePath>App.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="F:\Программирование\Project\visual studio 2015\Chapter_2_Programm_2\Chapter_2_Programm_2\bin\Debug\MainPage.xbf">
+      <PackagePath>MainPage.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="F:\Программирование\Project\visual studio 2015\Chapter_2_Programm_2\Chapter_2_Programm_2\bin\Debug\resources.pri">
+      <PackagePath>resources.pri</PackagePath>
+    </AppxPackagedFile>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+</Project>

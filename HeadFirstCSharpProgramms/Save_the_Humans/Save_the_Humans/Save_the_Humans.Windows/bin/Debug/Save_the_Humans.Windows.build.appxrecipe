@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Machine>ALONE</Machine>
+    <WindowsUser>Дмитрий</WindowsUser>
+    <TargetPlatformIdentifier>Windows</TargetPlatformIdentifier>
+    <TargetOsVersion>6.3</TargetOsVersion>
+    <TargetOsDescription>Windows 8.1</TargetOsDescription>
+    <SolutionConfiguration>Debug|AnyCPU</SolutionConfiguration>
+    <PackageArchitecture>neutral</PackageArchitecture>
+    <PackageIdentityName>8cf5b16e-7859-478f-89e6-173346a63225</PackageIdentityName>
+    <IntermediateOutputPath>F:\Программирование\Project\visual studio 2015\Save_the_Humans\Save_the_Humans\Save_the_Humans.Windows\obj\Debug\</IntermediateOutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <AppXManifest Include="F:\Программирование\Project\visual studio 2015\Save_the_Humans\Save_the_Humans\Save_the_Humans.Windows\bin\Debug\AppxManifest.xml">
+      <PackagePath>AppxManifest.xml</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppXManifest>
+  </ItemGroup>
+  <ItemGroup>
+    <AppxPackagedFile Include="F:\Программирование\Project\visual studio 2015\Save_the_Humans\Save_the_Humans\Save_the_Humans.Windows\bin\Debug\Save_the_Humans.Windows.exe">
+      <PackagePath>Save_the_Humans.Windows.exe</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="F:\Программирование\Project\visual studio 2015\Save_the_Humans\Save_the_Humans\Save_the_Humans.Windows\Assets\Logo.scale-100.png">
+      <PackagePath>Assets\Logo.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="F:\Программирование\Project\visual studio 2015\Save_the_Humans\Save_the_Humans\Save_the_Humans.Windows\Assets\SmallLogo.scale-100.png">
+      <PackagePath>Assets\SmallLogo.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="F:\Программирование\Project\visual studio 2015\Save_the_Humans\Save_the_Humans\Save_the_Humans.Windows\Assets\SplashScreen.scale-100.png">
+      <PackagePath>Assets\SplashScreen.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="F:\Программирование\Project\visual studio 2015\Save_the_Humans\Save_the_Humans\Save_the_Humans.Windows\Assets\StoreLogo.scale-100.png">
+      <PackagePath>Assets\StoreLogo.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="F:\Программирование\Project\visual studio 2015\Save_the_Humans\Save_the_Humans\Save_the_Humans.Windows\bin\Debug\Save_the_Humans.Windows.xr.xml">
+      <PackagePath>Save_the_Humans.Windows.xr.xml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="F:\Программирование\Project\visual studio 2015\Save_the_Humans\Save_the_Humans\Save_the_Humans.Windows\bin\Debug\App.xbf">
+      <PackagePath>App.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="F:\Программирование\Project\visual studio 2015\Save_the_Humans\Save_the_Humans\Save_the_Humans.Windows\bin\Debug\MainPage.xbf">
+      <PackagePath>MainPage.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="F:\Программирование\Project\visual studio 2015\Save_the_Humans\Save_the_Humans\Save_the_Humans.Windows\bin\Debug\resources.pri">
+      <PackagePath>resources.pri</PackagePath>
+    </AppxPackagedFile>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+</Project>

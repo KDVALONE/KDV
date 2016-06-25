@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Machine>ALONE</Machine>
+    <WindowsUser>Дмитрий</WindowsUser>
+    <TargetPlatformIdentifier>Windows</TargetPlatformIdentifier>
+    <TargetOsVersion>6.3</TargetOsVersion>
+    <TargetOsDescription>Windows 8.1</TargetOsDescription>
+    <SolutionConfiguration>Debug|AnyCPU</SolutionConfiguration>
+    <PackageArchitecture>neutral</PackageArchitecture>
+    <PackageIdentityName>11b21fe2-8b3e-4c9a-ab91-c9fece0f675f</PackageIdentityName>
+    <IntermediateOutputPath>F:\Программирование\Project\visual studio 2015\PracticUsingIfElse\PracticUsingIfElse\obj\Debug\</IntermediateOutputPath>
+    <RegisteredManifestChecksum>B53F1A767904A3084FDF3D2A604537377ADC6D6D2D739AEB85D71D807D24B8C1</RegisteredManifestChecksum>
+    <RegisteredPackageMoniker>11b21fe2-8b3e-4c9a-ab91-c9fece0f675f_1.0.0.0_neutral__mejxfkpnx0qaw</RegisteredPackageMoniker>
+    <RegisteredUserModeAppID>11b21fe2-8b3e-4c9a-ab91-c9fece0f675f_mejxfkpnx0qaw!App</RegisteredUserModeAppID>
+    <RegisteredPackageID>11b21fe2-8b3e-4c9a-ab91-c9fece0f675f</RegisteredPackageID>
+    <RegisteredPackagePublisher>CN=Дмитрий</RegisteredPackagePublisher>
+    <RegisteredVersion>1.0.0.0</RegisteredVersion>
+    <JitOptimizationSuppressed>True</JitOptimizationSuppressed>
+  </PropertyGroup>
+  <ItemGroup>
+    <AppXManifest Include="F:\Программирование\Project\visual studio 2015\PracticUsingIfElse\PracticUsingIfElse\bin\Debug\AppxManifest.xml">
+      <PackagePath>AppxManifest.xml</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2016-06-12T16:36:04.997</Modified>
+    </AppXManifest>
+  </ItemGroup>
+  <ItemGroup>
+    <AppxPackagedFile Include="F:\Программирование\Project\visual studio 2015\PracticUsingIfElse\PracticUsingIfElse\bin\Debug\PracticUsingIfElse.exe">
+      <PackagePath>PracticUsingIfElse.exe</PackagePath>
+      <Modified>2016-06-13T12:38:00.980</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="F:\Программирование\Project\visual studio 2015\PracticUsingIfElse\PracticUsingIfElse\Assets\Logo.scale-100.png">
+      <PackagePath>Assets\Logo.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2015-07-06T19:05:20.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="F:\Программирование\Project\visual studio 2015\PracticUsingIfElse\PracticUsingIfElse\Assets\SmallLogo.scale-100.png">
+      <PackagePath>Assets\SmallLogo.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2015-07-06T19:05:20.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="F:\Программирование\Project\visual studio 2015\PracticUsingIfElse\PracticUsingIfElse\Assets\SplashScreen.scale-100.png">
+      <PackagePath>Assets\SplashScreen.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2015-07-06T19:05:20.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="F:\Программирование\Project\visual studio 2015\PracticUsingIfElse\PracticUsingIfElse\Assets\StoreLogo.scale-100.png">
+      <PackagePath>Assets\StoreLogo.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2015-07-06T19:05:20.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="F:\Программирование\Project\visual studio 2015\PracticUsingIfElse\PracticUsingIfElse\bin\Debug\PracticUsingIfElse.xr.xml">
+      <PackagePath>PracticUsingIfElse.xr.xml</PackagePath>
+      <Modified>2016-06-13T12:14:12.471</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="F:\Программирование\Project\visual studio 2015\PracticUsingIfElse\PracticUsingIfElse\bin\Debug\App.xbf">
+      <PackagePath>App.xbf</PackagePath>
+      <Modified>2016-06-12T16:36:04.684</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="F:\Программирование\Project\visual studio 2015\PracticUsingIfElse\PracticUsingIfElse\bin\Debug\MainPage.xbf">
+      <PackagePath>MainPage.xbf</PackagePath>
+      <Modified>2016-06-13T12:14:12.479</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="F:\Программирование\Project\visual studio 2015\PracticUsingIfElse\PracticUsingIfElse\bin\Debug\resources.pri">
+      <PackagePath>resources.pri</PackagePath>
+      <Modified>2016-06-12T16:36:04.856</Modified>
+    </AppxPackagedFile>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+</Project>

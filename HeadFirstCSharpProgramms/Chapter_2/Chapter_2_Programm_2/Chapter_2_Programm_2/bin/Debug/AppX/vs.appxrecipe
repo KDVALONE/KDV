@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Machine>ALONE</Machine>
+    <WindowsUser>Дмитрий</WindowsUser>
+    <TargetPlatformIdentifier>Windows</TargetPlatformIdentifier>
+    <TargetOsVersion>6.3</TargetOsVersion>
+    <TargetOsDescription>Windows 8.1</TargetOsDescription>
+    <SolutionConfiguration>Debug|AnyCPU</SolutionConfiguration>
+    <PackageArchitecture>neutral</PackageArchitecture>
+    <PackageIdentityName>5e7bbed9-1b8f-4e9b-b5ff-562d1e2fc9e7</PackageIdentityName>
+    <IntermediateOutputPath>F:\Программирование\Project\visual studio 2015\Chapter_2_Programm_2\Chapter_2_Programm_2\obj\Debug\</IntermediateOutputPath>
+    <RegisteredManifestChecksum>A33600D287871BEE76703113588B715BF6ED8F4704B9F4E11FC791F271B8D633</RegisteredManifestChecksum>
+    <RegisteredPackageMoniker>5e7bbed9-1b8f-4e9b-b5ff-562d1e2fc9e7_1.0.0.0_neutral__mejxfkpnx0qaw</RegisteredPackageMoniker>
+    <RegisteredUserModeAppID>5e7bbed9-1b8f-4e9b-b5ff-562d1e2fc9e7_mejxfkpnx0qaw!App</RegisteredUserModeAppID>
+    <RegisteredPackageID>5e7bbed9-1b8f-4e9b-b5ff-562d1e2fc9e7</RegisteredPackageID>
+    <RegisteredPackagePublisher>CN=Дмитрий</RegisteredPackagePublisher>
+    <RegisteredVersion>1.0.0.0</RegisteredVersion>
+    <JitOptimizationSuppressed>True</JitOptimizationSuppressed>
+  </PropertyGroup>
+  <ItemGroup>
+    <AppXManifest Include="F:\Программирование\Project\visual studio 2015\Chapter_2_Programm_2\Chapter_2_Programm_2\bin\Debug\AppxManifest.xml">
+      <PackagePath>AppxManifest.xml</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2016-06-11T19:49:43.380</Modified>
+    </AppXManifest>
+  </ItemGroup>
+  <ItemGroup>
+    <AppxPackagedFile Include="F:\Программирование\Project\visual studio 2015\Chapter_2_Programm_2\Chapter_2_Programm_2\bin\Debug\Chapter_2_Programm_2.exe">
+      <PackagePath>Chapter_2_Programm_2.exe</PackagePath>
+      <Modified>2016-06-11T21:41:45.883</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="F:\Программирование\Project\visual studio 2015\Chapter_2_Programm_2\Chapter_2_Programm_2\Assets\Logo.scale-100.png">
+      <PackagePath>Assets\Logo.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2015-07-06T19:05:20.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="F:\Программирование\Project\visual studio 2015\Chapter_2_Programm_2\Chapter_2_Programm_2\Assets\SmallLogo.scale-100.png">
+      <PackagePath>Assets\SmallLogo.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2015-07-06T19:05:20.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="F:\Программирование\Project\visual studio 2015\Chapter_2_Programm_2\Chapter_2_Programm_2\Assets\SplashScreen.scale-100.png">
+      <PackagePath>Assets\SplashScreen.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2015-07-06T19:05:20.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="F:\Программирование\Project\visual studio 2015\Chapter_2_Programm_2\Chapter_2_Programm_2\Assets\StoreLogo.scale-100.png">
+      <PackagePath>Assets\StoreLogo.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2015-07-06T19:05:20.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="F:\Программирование\Project\visual studio 2015\Chapter_2_Programm_2\Chapter_2_Programm_2\bin\Debug\Chapter_2_Programm_2.xr.xml">
+      <PackagePath>Chapter_2_Programm_2.xr.xml</PackagePath>
+      <Modified>2016-06-11T19:49:42.999</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="F:\Программирование\Project\visual studio 2015\Chapter_2_Programm_2\Chapter_2_Programm_2\bin\Debug\App.xbf">
+      <PackagePath>App.xbf</PackagePath>
+      <Modified>2016-06-11T19:49:43.035</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="F:\Программирование\Project\visual studio 2015\Chapter_2_Programm_2\Chapter_2_Programm_2\bin\Debug\MainPage.xbf">
+      <PackagePath>MainPage.xbf</PackagePath>
+      <Modified>2016-06-11T21:41:45.815</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="F:\Программирование\Project\visual studio 2015\Chapter_2_Programm_2\Chapter_2_Programm_2\bin\Debug\resources.pri">
+      <PackagePath>resources.pri</PackagePath>
+      <Modified>2016-06-11T19:49:43.220</Modified>
+    </AppxPackagedFile>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+</Project>

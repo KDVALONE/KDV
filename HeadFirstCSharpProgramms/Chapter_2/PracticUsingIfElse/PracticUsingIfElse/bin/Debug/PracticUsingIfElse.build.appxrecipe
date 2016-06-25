@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Machine>ALONE</Machine>
+    <WindowsUser>Дмитрий</WindowsUser>
+    <TargetPlatformIdentifier>Windows</TargetPlatformIdentifier>
+    <TargetOsVersion>6.3</TargetOsVersion>
+    <TargetOsDescription>Windows 8.1</TargetOsDescription>
+    <SolutionConfiguration>Debug|AnyCPU</SolutionConfiguration>
+    <PackageArchitecture>neutral</PackageArchitecture>
+    <PackageIdentityName>11b21fe2-8b3e-4c9a-ab91-c9fece0f675f</PackageIdentityName>
+    <IntermediateOutputPath>F:\Программирование\Project\visual studio 2015\PracticUsingIfElse\PracticUsingIfElse\obj\Debug\</IntermediateOutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <AppXManifest Include="F:\Программирование\Project\visual studio 2015\PracticUsingIfElse\PracticUsingIfElse\bin\Debug\AppxManifest.xml">
+      <PackagePath>AppxManifest.xml</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppXManifest>
+  </ItemGroup>
+  <ItemGroup>
+    <AppxPackagedFile Include="F:\Программирование\Project\visual studio 2015\PracticUsingIfElse\PracticUsingIfElse\bin\Debug\PracticUsingIfElse.exe">
+      <PackagePath>PracticUsingIfElse.exe</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="F:\Программирование\Project\visual studio 2015\PracticUsingIfElse\PracticUsingIfElse\Assets\Logo.scale-100.png">
+      <PackagePath>Assets\Logo.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="F:\Программирование\Project\visual studio 2015\PracticUsingIfElse\PracticUsingIfElse\Assets\SmallLogo.scale-100.png">
+      <PackagePath>Assets\SmallLogo.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="F:\Программирование\Project\visual studio 2015\PracticUsingIfElse\PracticUsingIfElse\Assets\SplashScreen.scale-100.png">
+      <PackagePath>Assets\SplashScreen.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="F:\Программирование\Project\visual studio 2015\PracticUsingIfElse\PracticUsingIfElse\Assets\StoreLogo.scale-100.png">
+      <PackagePath>Assets\StoreLogo.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="F:\Программирование\Project\visual studio 2015\PracticUsingIfElse\PracticUsingIfElse\bin\Debug\PracticUsingIfElse.xr.xml">
+      <PackagePath>PracticUsingIfElse.xr.xml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="F:\Программирование\Project\visual studio 2015\PracticUsingIfElse\PracticUsingIfElse\bin\Debug\App.xbf">
+      <PackagePath>App.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="F:\Программирование\Project\visual studio 2015\PracticUsingIfElse\PracticUsingIfElse\bin\Debug\MainPage.xbf">
+      <PackagePath>MainPage.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="F:\Программирование\Project\visual studio 2015\PracticUsingIfElse\PracticUsingIfElse\bin\Debug\resources.pri">
+      <PackagePath>resources.pri</PackagePath>
+    </AppxPackagedFile>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+</Project>

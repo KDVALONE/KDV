@@ -1,0 +1,10 @@
+F:\Программирование\Project\visual studio 2015\Chapter_2_Programm_4\Chapter_2_Programm_4\bin\Debug\Chapter_2_Programm_4.exe.config
+F:\Программирование\Project\visual studio 2015\HeadFirstCSharpProgramms\Chapter_2\Chapter_2_Programm_4\Chapter_2_Programm_4\bin\Debug\Chapter_2_Programm_4.exe.config
+F:\Программирование\Project\visual studio 2015\HeadFirstCSharpProgramms\Chapter_2\Chapter_2_Programm_4\Chapter_2_Programm_4\bin\Debug\Chapter_2_Programm_4.exe
+F:\Программирование\Project\visual studio 2015\HeadFirstCSharpProgramms\Chapter_2\Chapter_2_Programm_4\Chapter_2_Programm_4\bin\Debug\Chapter_2_Programm_4.pdb
+F:\Программирование\Project\visual studio 2015\HeadFirstCSharpProgramms\Chapter_2\Chapter_2_Programm_4\Chapter_2_Programm_4\obj\Debug\Chapter_2_Programm_4.csprojResolveAssemblyReference.cache
+F:\Программирование\Project\visual studio 2015\HeadFirstCSharpProgramms\Chapter_2\Chapter_2_Programm_4\Chapter_2_Programm_4\obj\Debug\Chapter_2_Programm_4.Form1.resources
+F:\Программирование\Project\visual studio 2015\HeadFirstCSharpProgramms\Chapter_2\Chapter_2_Programm_4\Chapter_2_Programm_4\obj\Debug\Chapter_2_Programm_4.Properties.Resources.resources
+F:\Программирование\Project\visual studio 2015\HeadFirstCSharpProgramms\Chapter_2\Chapter_2_Programm_4\Chapter_2_Programm_4\obj\Debug\Chapter_2_Programm_4.csproj.GenerateResource.Cache
+F:\Программирование\Project\visual studio 2015\HeadFirstCSharpProgramms\Chapter_2\Chapter_2_Programm_4\Chapter_2_Programm_4\obj\Debug\Chapter_2_Programm_4.exe
+F:\Программирование\Project\visual studio 2015\HeadFirstCSharpProgramms\Chapter_2\Chapter_2_Programm_4\Chapter_2_Programm_4\obj\Debug\Chapter_2_Programm_4.pdb
