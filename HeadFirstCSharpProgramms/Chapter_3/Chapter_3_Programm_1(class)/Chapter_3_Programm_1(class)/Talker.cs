@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace Chapter_3_Programm_1_class_
 {
-//Пробф GITHUB
+//Пробую контроль версий с помощью GITHUB и SmartGit
     class Talker
     {
 
