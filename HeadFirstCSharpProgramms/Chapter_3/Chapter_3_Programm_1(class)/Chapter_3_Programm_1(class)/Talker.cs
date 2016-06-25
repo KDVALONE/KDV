@@ -7,6 +7,7 @@ using System.Windows.Forms;
 
 namespace Chapter_3_Programm_1_class_
 {
+//Пробф GITHUB
     class Talker
     {
 
