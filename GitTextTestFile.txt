@@ -2,3 +2,7 @@
 string text;
 Print text =("просто тестовый пример");
 Exit;
+string text2;
+Print text2 =("вывод второго сообщения");
+Exit;
+End.
