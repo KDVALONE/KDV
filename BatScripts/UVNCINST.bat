@@ -1,8 +1,9 @@
+::v0.33  01.05.16
 @echo off
 cls
 :: заголовок окна
 TITLE UVNC BATFILE SILENT INSTALL
-::Создаем правило для входящего TCP/UDP порта 5900,5800 тЇ
+::Создаем правило для входящего TCP/UDP порта 5900,5800 
 netsh advfirewall firewall add rule name="VNCTCP59005800 " dir=in action=allow protocol=TCP localport=5900,5800
 netsh advfirewall firewall add rule name="VNCUDP59005800 " dir=in action=allow protocol=UDP localport=5900,5800
 
