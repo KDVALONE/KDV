@@ -1,4 +1,4 @@
-﻿::v0.45  13.07.16
+﻿::v0.46  13.07.16
 :: для корректного отображения крилицы в CMD batch файл нужно сохранить в OEM 866
 @echo off
 cls
@@ -65,12 +65,12 @@ Echo delete directory "uvncbvba" %YN% >> LogBatIsntall.txt
 :: запускаем установку UVNC в зависимости от архитектуры виндовс, в режиме пропуска подтверждения установки (/sp-)
 ::  с параметрами из лог файла, в скрытном режиме , по надобности с перезагрузкой без подтверждения /verysilent 
 echo [%time:~,8%] start install UVNC
-IF EXIST "%ProgramFiles(x86)%" ( CALL :INSTUVNC86) else ( CALL :INSTUVNC64)
-:INSTUVNC86
+IF EXIST "%ProgramFiles(x86)%" ( CALL :INSTUVNC64) else ( CALL :INSTUVNC86)
+:INSTUVNC64
 echo [%time:~,8%] UVNC64 running intsall... 
 start /wait "" "%~d0%~p0distr\UVNC64.exe" /sp- /loadinf= "%~d0%~p0distr\vnclog.log" /verysilent 
 GOTO :EOF
-:INSTUVNC64
+:INSTUVNC86
 echo [%time:~,8%] UVNC32 running install...
 start /wait "" "%~d0%~p0distr\UVNC86.exe" /sp- /loadinf= "%~d0%~p0distr\vnclog.log" /verysilent )
 GOTO :EOF
