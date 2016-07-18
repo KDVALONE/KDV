@@ -1,4 +1,4 @@
-﻿::v0.49  18.07.16
+﻿::v0.50  18.07.16
 :: для корректного отображения крилицы в CMD batch файл нужно сохранить в OEM 866
 @echo off
 cls
@@ -141,7 +141,7 @@ EXIT
 :: с параметрами из лог файла, в скрытном режиме , по надобности с перезагрузкой без подтверждения /verysilent
 :INSTUVNC64
 echo [%time:~,8%] UVNC64 running intsall... 
-start /wait "" "%~d0%~p0distr\UVNC64.exe" /sp- /loadinf= "%~d0%~p0distr\vnclog.log" /verysilent 
+start /wait "" "%~d0%~p0distr\UVNC64.exe" /sp- /loadinf="%~d0%~p0distr\vnclog.log" /verysilent 
 set e8=%ERRORLEVEL%
 IF %e8%==0 ( CALL :OK ) else ( CALL :NO )
 Echo start install UVNC64 %YN% >> LogBatIsntall.txt
@@ -151,7 +151,7 @@ GOTO :EOF
 :: с параметрами из лог файла, в скрытном режиме , по надобности с перезагрузкой без подтверждения /verysilent
 :INSTUVNC86
 echo [%time:~,8%] UVNC32 running install...
-start /wait "" "%~d0%~p0distr\UVNC86.exe" /sp- /loadinf= "%~d0%~p0distr\vnclog.log" /verysilent )
+start /wait "" "%~d0%~p0distr\UVNC86.exe" /sp- /loadinf="%~d0%~p0distr\vnclog.log" /verysilent
 set e9=%ERRORLEVEL%
 IF %e9%==0 ( CALL :OK ) else ( CALL :NO )
 Echo start install UVNC32 %YN% >> LogBatIsntall.txt
