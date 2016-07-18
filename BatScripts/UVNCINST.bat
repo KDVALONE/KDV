@@ -1,4 +1,4 @@
-﻿::v0.59  19.07.16
+﻿::v0.60  19.07.16
 :: для корректного отображения крилицы в CMD batch файл нужно сохранить в OEM 866
 @echo off
 cls
@@ -33,21 +33,39 @@ IF errorlevel==0 ( Echo OK ) else ( Echo NO )
 Echo on Remote Assistance
 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server" /v fAllowToGetHelp /t REG_DWORD /d 1 /f 
 Set errorlevel=%ERRORLEVEL%
-IF errorlevel==0 ( Echo OK ) else (Echo NO )
+IF errorlevel==0 ( Echo OK ) else ( Echo NO )
 ::---------------------------------Remote Assistance cancel---------------------------------------
 
 
 ::---------------------------------add to Domain-------------------------------------------------
-:TODMN
+::
+:QTODMN
 Echo Add PC to Domain: gb1.korolev.local (Y/N)? 
 Set /p TDMN=""
-if %TDMN%==y () else ()
-:: вызов утилиты wmic /интерактивный режим выкл(при выкл.режиме после выполнени¤ одной команды wmic, управление возвращаетс¤ к cls windows (PROMT))).
+if %TDMN%==y ( GOTO :ADDTODMN ) else ( GOTO :TODMN )
+:TODMN
+if %TDMN%==Y ( GOTO :ADDTODMN ) else ( GOTO :NTODMN )
+:NTODMN
+if %TDMN%==n ( GOTO :NOTADDTODMN ) else ( GOTO :NTODMN2 )
+:NTODMN2
+if %TDMN%==N ( GOTO :NOTADDTODMN ) else ( GOTO :INCORRECT )
+:INCORRECT
+Echo incorrected symbol, please enter Y or N 
+GOTO :QTODMN
+:ADDTODMN
+Echo Enter domain admin user ( example: User777 ):
+Set /p admin=""
+Echo Enter domain admin user password:
+Set /p PSWD=""
+:: вызов утилиты wmic /интерактивный режим выкл(при выкл.режиме после выполнения одной команды wmic, управление возвращается к cls windows (PROMT))).
 :: система где "имя пк" вызвать метод JoinDomainOrWorkgroup (заведения в домен),с параметрами точка хода=1 (если 1 то к домену, строки нет - к раб.группе),
 :: Name="имя домена/рабочей группы", имя пользователья домена с правами присоединения, пароль.  
-wmic /interactive:off ComputerSystem Where "name = '%computername%'" call JoinDomainOrWorkgroup FJoinOptions=1 Name="my.domain.com" UserName="admin@my.domain.com"  Password="123" 
-:: по умолчанию в cls отобразитьс¤ instance_PARMETRS value=0 (где 0 успех)
-pause
+wmic /interactive:off ComputerSystem Where "name = '%computername%'" call JoinDomainOrWorkgroup FJoinOptions=1 Name="gb1.korolev.local" UserName="%admin%@gb1.korolev.local"  Password="%PSWD%" 
+:: по умолчанию в cls отобразиться instance_PARMETRS value=0 (где 0 успех)
+Echo IF "instance_PARMETRS value=0" (see top, before) , PC add to domain successful
+
+:: (!!!непонятно как отработать возварщаемо значение для повторной попытки ввода  домен, errorlevel здесь всегда 0!!!)
+:NOTADDTODMN
 ::---------------------------------add to Domain cancel------------------------------------------
 
 ::---------Создаем правило для входящего TCP порта 5900,5800-------------------------------------
@@ -66,7 +84,7 @@ netsh advfirewall firewall add rule name="VNCUDP59005800 " dir=in action=allow p
 set e2=%ERRORLEVEL%
 IF %e2%==0 ( CALL :OK ) else ( CALL :NO )
 Echo advfirewall rule UDP %YN% >> LogBatIsntall.txt
-::-----------------------------------UDP cancel--------------------------------------------------
+::-----------------------------------UDP cancel --------------------------------------------------
 
 
 ::------------------------------Cоздаем правило для ICMPv4-(бат Коли)----------------------------
