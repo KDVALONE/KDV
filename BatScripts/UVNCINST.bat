@@ -1,4 +1,4 @@
-﻿::v0.57  18.07.16
+﻿::v0.58  18.07.16
 :: для корректного отображения крилицы в CMD batch файл нужно сохранить в OEM 866
 @echo off
 cls
@@ -38,9 +38,13 @@ IF errorlevel==0 ( Echo OK ) else (Echo NO )
 
 
 ::---------------------------------add to Domain-------------------------------------------------
+:TODMN
+Echo Add PC to Domain: gb1.korolev.local (Y/N)? 
+Set /p TDMN=""
+if %TDMN%==y () else ()
 :: вызов утилиты wmic /интерактивный режим выкл(при выкл.режиме после выполнени¤ одной команды wmic, управление возвращаетс¤ к cls windows (PROMT))).
-:: система где "им¤ пк" вызвать метод JoinDomainOrWorkgroup (заведени¤ в домен),с параметрами точка¬хода=1 (если 1 то к домену, строки нет - к раб.группе),
-:: Name="»м¤ домена/рабочей группы", им¤ пользователь¤ домена с правами присоединени¤, пароль.  
+:: система где "имя пк" вызвать метод JoinDomainOrWorkgroup (заведения в домен),с параметрами точка хода=1 (если 1 то к домену, строки нет - к раб.группе),
+:: Name="имя домена/рабочей группы", имя пользователья домена с правами присоединения, пароль.  
 wmic /interactive:off ComputerSystem Where "name = '%computername%'" call JoinDomainOrWorkgroup FJoinOptions=1 Name="my.domain.com" UserName="admin@my.domain.com"  Password="123" 
 :: по умолчанию в cls отобразитьс¤ instance_PARMETRS value=0 (где 0 успех)
 pause
