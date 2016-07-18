@@ -1,4 +1,4 @@
-﻿::v0.61  19.07.16
+﻿::v0.62  19.07.16
 :: для корректного отображения крилицы в CMD batch файл нужно сохранить в OEM 866
 @echo off
 cls
@@ -176,6 +176,27 @@ net start uvnc_service
 set e13=%ERRORLEVEL%
 IF %e13%==0 ( CALL :OK ) else ( CALL :NO )
 ::-----------------------------start UVNC service cancel-----------------------------------------
+
+::---------Создаем правило для входящего TCP порта 62354-----------------------------------------
+:: Создаем правило для FI
+Echo [%time:~,8%] addfirewall rule UTP "FI62354"
+netsh advfirewall firewall add rule name="FI" dir=in action=allow protocol=TCP localport=62354
+set e14=%ERRORLEVEL%
+IF %e14%==0 ( CALL :OK ) else ( CALL :NO )
+::------------------------------------TCP 62354 cancel--------------------------------------------
+
+
+::------------------------------------install FI agent---------------------------------------------
+::КОД Коли, РАЗОБРАТЬ, начинаем устновку FI
+Echo satrt install Fusion inventory Agent
+IF EXIST "%ProgramFiles(x86)%" ( cd "C:\Program Files\FusionInventory-Agent\perl\bin") else ( cd "C:\Program Files\FusionInventory-Agent\perl\bin")
+perl fusioninventory-agent
+::------------------------------------install FI cancel---------------------------------------------
+
+
+::-------------------------------------install BG INFO ---------------------------------------------
+
+::-------------------------------------install BG INFO ---------------------------------------------
 
 pause
 
