@@ -1,4 +1,4 @@
-﻿::v0.52  18.07.16
+﻿::v0.53  18.07.16
 :: для корректного отображения крилицы в CMD batch файл нужно сохранить в OEM 866
 @echo off
 cls
@@ -116,7 +116,8 @@ Echo stop service UVNC %YN% >> LogBatIsntall.txt
 ::----------------------------Copy .ini to core dir UVNC ----------------------------------------
 ::Копируем .ini файл с параметрами запуска в директрорию с программой
 Echo copy .INI seting file to directory
-copy "%~d0%~p0distr\ultravnc.ini" "%SystemDrive%\progra~1\"%DIR%"\" /y
+Set DIR2="uvnc bvba"
+copy "%~d0%~p0distr\ultravnc.ini" "%SystemDrive%\progra~1\"%DIR2%"\UltraVNC\" /y
 set e12=%ERRORLEVEL%
 IF %e12%==0 ( CALL :OK ) else ( CALL :NO )
 Echo copy .INI seting file to directory %YN% >> LogBatIsntall.txt
