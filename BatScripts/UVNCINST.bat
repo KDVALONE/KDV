@@ -1,4 +1,4 @@
-﻿::v0.47  18.07.16
+﻿::v0.48  18.07.16
 :: для корректного отображения крилицы в CMD batch файл нужно сохранить в OEM 866
 @echo off
 cls
@@ -81,64 +81,86 @@ Echo [%time:~,8%] delete directory "uvnc bvba"
 Set DIR=uvnc bvba
 IF EXIST "%systemdrive%"\progra~1\"%DIR%" ( rd %systemdrive%\progra~1\"%DIR%" /s /q )
 Echo delete directory "uvnc bvba" - SСRIPT DONT SEARCH THIS RESULT, LETER MUST DEBAG >> LogBatIsntall.txt
-::--------------------------------Delete dir "uvnc bvba" cancel--------------------------------- 
+::--------------------------------Delete dir "uvnc bvba" cancel-------------------------------- 
 
 
-:: запускаем установку UVNC в зависимости от архитектуры виндовс, в режиме пропуска подтверждения установки (/sp-)
-::  с параметрами из лог файла, в скрытном режиме , по надобности с перезагрузкой без подтверждения /verysilent 
+::--------------------------------Start install UVNC ------------------------------------------ 
 echo [%time:~,8%] start install UVNC
-IF EXIST "%ProgramFiles(x86)%" ( CALL :INSTUVNC64) else ( CALL :INSTUVNC86)
-:INSTUVNC64
-echo [%time:~,8%] UVNC64 running intsall... 
-start /wait "" "%~d0%~p0distr\UVNC64.exe" /sp- /loadinf= "%~d0%~p0distr\vnclog.log" /verysilent 
-GOTO :EOF
-:INSTUVNC86
-echo [%time:~,8%] UVNC32 running install...
-start /wait "" "%~d0%~p0distr\UVNC86.exe" /sp- /loadinf= "%~d0%~p0distr\vnclog.log" /verysilent )
-GOTO :EOF
-set e8=%ERRORLEVEL%
-IF %e8%==0 ( CALL :OK ) else ( CALL :NO )
-Echo start install UVNC %YN% >> LogBatIsntall.txt
+IF EXIST "%ProgramFiles(x86)%" ( CALL :INSTUVNC64 ) else ( CALL :INSTUVNC86 )
+::---------------------------------Start instal UVNC cancel------------------------------------
+
 
 ::по умолчанию UVNC работает сразу после установки, убиваем процесс, копируем наcтройки в папку с прогой, включаем
-
-Echo [%time:~,8%] stop task WINVNC
+::---------------------------kill task WINVNC--------------------------------------------------
+Echo [%time:~,8%] kill task WINVNC
 start /wait taskkill /f /im winvnc*
-set e9=%ERRORLEVEL%
-IF %e9%==0 ( CALL :OK ) else ( CALL :NO )
-Echo stop task WINVNC %YN% >> LogBatIsntall.txt
-
-Echo [%time:~,8%] stop service UVNC
-net stop uvnc_service
 set e10=%ERRORLEVEL%
 IF %e10%==0 ( CALL :OK ) else ( CALL :NO )
-Echo stop service UVNC %YN% >> LogBatIsntall.txt
+Echo kill task WINVNC %YN% >> LogBatIsntall.txt
+::---------------------------kill task WINVNC cancel--------------------------------------------
 
+
+::---------------------------stop service UVNC -------------------------------------------------
+Echo [%time:~,8%] stop service UVNC
+net stop uvnc_service
+set e11=%ERRORLEVEL%
+IF %e11%==0 ( CALL :OK ) else ( CALL :NO )
+Echo stop service UVNC %YN% >> LogBatIsntall.txt
+::---------------------------stop service UVNC cancel-------------------------------------------
+
+
+::----------------------------Copy .ini to core dir UVNC ----------------------------------------
 ::Копируем .ini файл с параметрами запуска в директрорию с программой
 Echo copy .INI seting file to directory 
 copy "%~d0%~p0distr\UltraVNC.ini" "%SystemDrive%\progra~1\ultravnc\" /y
-set e11=%ERRORLEVEL%
-IF %e11%==0 ( CALL :OK ) else ( CALL :NO )
+set e12=%ERRORLEVEL%
+IF %e12%==0 ( CALL :OK ) else ( CALL :NO )
 Echo copy .INI seting file to directory %YN% >> LogBatIsntall.txt
+::----------------------------Copy .ini to core dir UVNC cancel----------------------------------
 
+
+::-----------------------------start UVNC service------------------------------------------------
 :: запускаем службу UVNC
 Echo start UVNC service
 net start uvnc_service
-set e12=%ERRORLEVEL%
-IF %e12%==0 ( CALL :OK ) else ( CALL :NO )
+set e13=%ERRORLEVEL%
+IF %e13%==0 ( CALL :OK ) else ( CALL :NO )
 Echo start UVNC service %YN% >> LogBatIsntall.txt
+::-----------------------------start UVNC service cancel-----------------------------------------
+
 pause
+
 EXIT
 
-::В функции OK просиходи вывод сообщения на экран , запись значения в переменную YN (для полседующей записи в файл) потом возврат к моменту вызова
-:OK
-Echo OK
-SET YN=-ОК
+
+:: В функции INSTUVNC64 запускаем установку UVNC в зависимости от архитектуры виндовс, в режиме пропуска подтверждения установки (/sp-)
+:: с параметрами из лог файла, в скрытном режиме , по надобности с перезагрузкой без подтверждения /verysilent
+:INSTUVNC64
+echo [%time:~,8%] UVNC64 running intsall... 
+start /wait "" "%~d0%~p0distr\UVNC64.exe" /sp- /loadinf= "%~d0%~p0distr\vnclog.log" /verysilent 
+set e8=%ERRORLEVEL%
+IF %e8%==0 ( CALL :OK ) else ( CALL :NO )
+Echo start install UVNC64 %YN% >> LogBatIsntall.txt
 GOTO :EOF
 
-::В функции NO просиходи вывод сообщения на экран , запись значения в переменную YN (для полседующей записи в файл), потом возврат к моменту вызова
+:: В функции INSTUVNC86 запускаем установку UVNC в зависимости от архитектуры виндовс, в режиме пропуска подтверждения установки (/sp-)
+:: с параметрами из лог файла, в скрытном режиме , по надобности с перезагрузкой без подтверждения /verysilent
+:INSTUVNC86
+echo [%time:~,8%] UVNC32 running install...
+start /wait "" "%~d0%~p0distr\UVNC86.exe" /sp- /loadinf= "%~d0%~p0distr\vnclog.log" /verysilent )
+set e9=%ERRORLEVEL%
+IF %e9%==0 ( CALL :OK ) else ( CALL :NO )
+Echo start install UVNC32 %YN% >> LogBatIsntall.txt
+GOTO :EOF
+
+::В функции OK просиходит вывод сообщения на экран , запись значения в переменную YN (для полседующей записи в файл) потом возврат к моменту вызова
+:OK
+Echo OK
+SET YN=-OK
+GOTO :EOF
+
+::В функции NO просиходит вывод сообщения на экран , запись значения в переменную YN (для полседующей записи в файл), потом возврат к моменту вызова
 :NO
 Echo NO 
 SET YN=-NOT/ERROR
 GOTO :EOF
-
