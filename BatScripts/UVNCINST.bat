@@ -1,4 +1,4 @@
-﻿::v0.55  18.07.16
+﻿::v0.56  18.07.16
 :: для корректного отображения крилицы в CMD batch файл нужно сохранить в OEM 866
 @echo off
 cls
@@ -17,6 +17,15 @@ Set errorlevel=%ERRORLEVEL%
 IF errorlevel==0 ( Echo new pc name is %PCNAME% ) else ( Echo rename error )
 pause
 ::---------------------------------Rename PC cancel----------------------------------------------
+
+
+::---------------------------------Remote Desctop Access-----------------------------------------
+:::: разрешаем удаленный доступ к ПК, для разрешения правим реестр.
+Echo add Remote Desctop Access
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server" /v fDenyTSConnections /t REG_DWORD /d 0 /f
+Set errorlevel=%ERRORLEVEL%
+IF errorlevel==0 ( Echo OK ) else ( Echo rename error )
+::---------------------------------Remote Desctop Access cancel-----------------------------------
 
 
 ::---------------------------------add to Domain-------------------------------------------------
