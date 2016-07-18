@@ -1,4 +1,4 @@
-﻿::v0.56  18.07.16
+﻿::v0.57  18.07.16
 :: для корректного отображения крилицы в CMD batch файл нужно сохранить в OEM 866
 @echo off
 cls
@@ -14,22 +14,30 @@ Set /P PCNAME=""
 wmic computersystem where name="%computername%" call rename "%PCNAME%"
 cls
 Set errorlevel=%ERRORLEVEL%
-IF errorlevel==0 ( Echo new pc name is %PCNAME% ) else ( Echo rename error )
+IF errorlevel==0 ( Echo new pc name is %PCNAME% ) else ( Echo NO )
 pause
 ::---------------------------------Rename PC cancel----------------------------------------------
 
 
 ::---------------------------------Remote Desctop Access-----------------------------------------
 :::: разрешаем удаленный доступ к ПК, для разрешения правим реестр.
-Echo add Remote Desctop Access
+Echo on Remote Desctop Access
 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server" /v fDenyTSConnections /t REG_DWORD /d 0 /f
 Set errorlevel=%ERRORLEVEL%
-IF errorlevel==0 ( Echo OK ) else ( Echo rename error )
+IF errorlevel==0 ( Echo OK ) else ( Echo NO )
 ::---------------------------------Remote Desctop Access cancel-----------------------------------
+  
+  
+::---------------------------------Remote Assistance ---------------------------------------------
+::Включаем удаленный помощьник , для доступа правим реестр
+Echo on Remote Assistance
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server" /v fAllowToGetHelp /t REG_DWORD /d 1 /f 
+Set errorlevel=%ERRORLEVEL%
+IF errorlevel==0 ( Echo OK ) else (Echo NO )
+::---------------------------------Remote Assistance cancel---------------------------------------
 
 
 ::---------------------------------add to Domain-------------------------------------------------
-cls
 :: вызов утилиты wmic /интерактивный режим выкл(при выкл.режиме после выполнени¤ одной команды wmic, управление возвращаетс¤ к cls windows (PROMT))).
 :: система где "им¤ пк" вызвать метод JoinDomainOrWorkgroup (заведени¤ в домен),с параметрами точка¬хода=1 (если 1 то к домену, строки нет - к раб.группе),
 :: Name="»м¤ домена/рабочей группы", им¤ пользователь¤ домена с правами присоединени¤, пароль.  
