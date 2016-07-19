@@ -178,6 +178,7 @@ set e13=%ERRORLEVEL%
 IF %e13%==0 ( CALL :OK ) else ( CALL :NO )
 ::-----------------------------start UVNC service cancel-----------------------------------------
 
+
 ::---------Создаем правило для входящего TCP порта 62354-----------------------------------------
 :: Создаем правило для FI
 Echo [%time:~,8%] addfirewall rule UTP "FI62354"
@@ -213,8 +214,7 @@ set proga=%SystemDrive%\Program Files\BGInfo\Bginfo.exe
 REG ADD "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v BGINFO /t REG_SZ /d "%proga% /timer:0" /f
 set e17=%ERRORLEVEL%
 IF %e17%==0 ( Echo :OK ) else ( Echo NO )
-
-::-------------------------------------install BG INFO ---------------------------------------------
+::-------------------------------------install BG INFO cancel ----------------------------------------
 
 pause
 
