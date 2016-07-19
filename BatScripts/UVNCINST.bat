@@ -1,4 +1,4 @@
-﻿::v0.70  19.07.16
+﻿::v0.81  19.07.16
 :: для корректного отображения крилицы в CMD batch файл нужно сохранить в OEM 866
 @echo off
 cls
@@ -162,7 +162,7 @@ IF %e11%==0 ( CALL :OK ) else ( CALL :NO )
 
 ::----------------------------Copy .ini to core dir UVNC ----------------------------------------
 ::Копируем .ini файл с параметрами запуска в директрорию с программой
-Echo copy .INI seting file to directory
+Echo [%time:~,8%] copy .INI seting file to directory
 Set DIR2="uvnc bvba"
 copy "%~d0%~p0distr\ultravnc.ini" "%SystemDrive%\progra~1\"%DIR2%"\UltraVNC\" /y
 set e12=%ERRORLEVEL%
@@ -172,7 +172,7 @@ IF %e12%==0 ( CALL :OK ) else ( CALL :NO )
 
 ::-----------------------------start UVNC service------------------------------------------------
 :: запускаем службу UVNC
-Echo start UVNC service
+Echo [%time:~,8%] start UVNC service
 net start uvnc_service
 set e13=%ERRORLEVEL%
 IF %e13%==0 ( CALL :OK ) else ( CALL :NO )
@@ -189,22 +189,20 @@ IF %e14%==0 ( CALL :OK ) else ( CALL :NO )
 
 
 ::------------------------------------install FI agent---------------------------------------------
-::КОД Коли, РАЗОБРАТЬ, начинаем устновку FI
-Echo stаrt install Fusion inventory Agent
-IF EXIST "%ProgramFiles(x86)%" ( cd "C:\Program Files\FusionInventory-Agent\perl\bin") else ( cd "C:\Program Files\FusionInventory-Agent\perl\bin")
-perl fusioninventory-agent
+:: начинаем устновку FI
+Echo [%time:~,8%] stаrt install Fusion inventory Agent
+IF EXIST "%ProgramFiles(x86)%" ( CALL :FI64 ) else ( CALL :FI86 )
 ::------------------------------------install FI cancel---------------------------------------------
 
 
 ::-------------------------------------install BG INFO ---------------------------------------------
-Echo copy install BGinfo
-Echo create dir 
+Echo [%time:~,8%] create dir 
 md "%SystemDrive%\Program Files\BGInfo\"
 
-Echo copy distrib BGINFO
+Echo [%time:~,8%] copy distrib BGINFO
 copy "%~d0%~p0distr\BGInfo\" "%SystemDrive%\Program Files\BGInfo\" /y
 :: устанавливаем, ждем выполнения, с параметром таймера 0 (тоесть выполнение при запусе моментально)
-Echo BGinfo install
+Echo [%time:~,8%] BGinfo install
 start /wait "" "%SystemDrive%\Program Files\BGInfo\Bginfo.exe" /silent /timer:0
 
 set e17=%ERRORLEVEL%
@@ -216,6 +214,7 @@ set e17=%ERRORLEVEL%
 IF %e17%==0 ( Echo :OK ) else ( Echo NO )
 ::-------------------------------------install BG INFO cancel ----------------------------------------
 
+Echo [%time:~,8%] SCRIPT FINISHED WORK
 pause
 
 EXIT
@@ -249,4 +248,30 @@ GOTO :EOF
 :NO
 Echo NO 
 SET YN=-NOT/ERROR
+GOTO :EOF
+
+:FI64
+Echo [%time:~,8%] Start FIA x64
+start /wait "" "%~d0%~p0distr\FIA64.exe" /S /acceptlicense /server="http://192.168.62.2/glpi/plugins/fusioninventory/" /add-firewall-exception
+set e19=%ERRORLEVEL%
+IF %e19%==0 ( Echo OK ) else ( Echo NO )
+
+Echo [%time:~,8%] Run perl FIA x64
+cd "C:\Program Files\FusionInventory-Agent\perl\bin"
+perl fusioninventory-agent
+set e20=%ERRORLEVEL%
+IF %e20%==0 ( Echo OK ) else ( Echo NO )
+GOTO :EOF
+
+:FI86
+Echo [%time:~,8%] Start FIA x86
+start /wait "" "%~d0%~p0distr\FIA86.exe" /S /acceptlicense /server="http://192.168.62.2/glpi/plugins/fusioninventory/" /add-firewall-exception
+set e20=%ERRORLEVEL%
+IF %e20%==0 ( Echo OK ) else ( Echo NO )
+
+Echo [%time:~,8%] Run perl FIA x86
+cd "C:\Program Files\FusionInventory-Agent\perl\bin"
+perl fusioninventory-agent
+set e21=%ERRORLEVEL%
+IF %e21%==0 ( Echo OK ) else ( Echo NO )
 GOTO :EOF
