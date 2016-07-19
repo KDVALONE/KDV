@@ -1,9 +1,9 @@
-﻿::v0.64  19.07.16
+﻿::v0.70  19.07.16
 :: для корректного отображения крилицы в CMD batch файл нужно сохранить в OEM 866
 @echo off
 cls
 :: заголовок окна
-TITLE UVNC BATFILE SILENT INSTALL
+TITLE IT BATCH FILE SILENT INSTALL
 ::далее и после каждого действия используется код вывода сообщения об успешном выполненнии или нет.
 ::%ERRORLEVEL% равен 0 если успешно выполнена комманда выше, и 1 если не удачно. 
 
@@ -189,13 +189,30 @@ IF %e14%==0 ( CALL :OK ) else ( CALL :NO )
 
 ::------------------------------------install FI agent---------------------------------------------
 ::КОД Коли, РАЗОБРАТЬ, начинаем устновку FI
-Echo satrt install Fusion inventory Agent
+Echo stаrt install Fusion inventory Agent
 IF EXIST "%ProgramFiles(x86)%" ( cd "C:\Program Files\FusionInventory-Agent\perl\bin") else ( cd "C:\Program Files\FusionInventory-Agent\perl\bin")
 perl fusioninventory-agent
 ::------------------------------------install FI cancel---------------------------------------------
 
 
 ::-------------------------------------install BG INFO ---------------------------------------------
+Echo copy install BGinfo
+Echo create dir 
+md "%SystemDrive%\Program Files\BGInfo\"
+
+Echo copy distrib BGINFO
+copy "%~d0%~p0distr\BGInfo\" "%SystemDrive%\Program Files\BGInfo\" /y
+:: устанавливаем, ждем выполнения, с параметром таймера 0 (тоесть выполнение при запусе моментально)
+Echo BGinfo install
+start /wait "" "%SystemDrive%\Program Files\BGInfo\Bginfo.exe" /silent /timer:0
+
+set e17=%ERRORLEVEL%
+IF %e17%==0 ( Echo :OK ) else ( Echo NO )
+:: создаем запись в реестре для авторана.
+set proga=%SystemDrive%\Program Files\BGInfo\Bginfo.exe
+REG ADD "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v BGINFO /t REG_SZ /d "%proga% /timer:0" /f
+set e17=%ERRORLEVEL%
+IF %e17%==0 ( Echo :OK ) else ( Echo NO )
 
 ::-------------------------------------install BG INFO ---------------------------------------------
 
