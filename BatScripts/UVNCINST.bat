@@ -1,4 +1,4 @@
-﻿::v0.62  19.07.16
+﻿::v0.64  19.07.16
 :: для корректного отображения крилицы в CMD batch файл нужно сохранить в OEM 866
 @echo off
 cls
@@ -9,7 +9,8 @@ TITLE UVNC BATFILE SILENT INSTALL
 
 
 ::---------------------------------Rename PC ----------------------------------------------------
-Echo Enter new pc name:
+Echo You PC name:"%computername%"
+Echo Enter new PC name:
 Set /P PCNAME=""
 wmic computersystem where name="%computername%" call rename "%PCNAME%"
 cls
