@@ -1,4 +1,4 @@
-﻿::v0.82  19.07.16
+﻿::v0.83  19.07.16
 :: для корректного отображения крилицы в CMD batch файл нужно сохранить в OEM 866
 @echo off
 cls
@@ -81,7 +81,7 @@ Echo [%time:~,8%] addfirewall rule UTP "VNCTCP59005800"
 netsh advfirewall firewall add rule name="VNCTCP59005800" dir=in action=allow protocol=TCP localport=5900,5800
 ::Ниже типовой код вызова функции отображения информации об выполненнии, и занесения его в лог файл (создается при запуске бат)
 set e1=%ERRORLEVEL%
-IF %e1%==0 ( CALL :OK ) else ( CALL :NO )
+IF %e1%==0 ( Echo OK ) else ( Echo NO )
 ::------------------------------------TCP cancel-------------------------------------------------
 
 
@@ -89,7 +89,7 @@ IF %e1%==0 ( CALL :OK ) else ( CALL :NO )
 Echo [%time:~,8%] addfirewall rule UDP "VNCUDP59005800"
 netsh advfirewall firewall add rule name="VNCUDP59005800 " dir=in action=allow protocol=UDP localport=5900,5800
 set e2=%ERRORLEVEL%
-IF %e2%==0 ( CALL :OK ) else ( CALL :NO )
+IF %e2%==0 ( Echo OK ) else ( Echo NO )
 ::-----------------------------------UDP cancel --------------------------------------------------
 
 
@@ -97,7 +97,7 @@ IF %e2%==0 ( CALL :OK ) else ( CALL :NO )
 Echo [%time:~,8%] add firewall rule ICMP v4
 netsh advfirewall firewall add rule name="All ICMP V4" protocol=icmpv4:any,any dir=in action=allow
 set e3=%ERRORLEVEL%
-IF %e3%==0 ( CALL :OK ) else ( CALL :NO )
+IF %e3%==0 ( Echo OK ) else ( Echo NO )
 ::-----------------------------------------ICMPv4 cancel------------------------------------------
 
 
@@ -109,7 +109,7 @@ IF %e3%==0 ( CALL :OK ) else ( CALL :NO )
 Echo [%time:~,8%] kill task WINVNC
 start /wait taskkill /f /im winvnc*
 set e4=%ERRORLEVEL%
-IF %e4%==0 ( CALL :OK ) else ( CALL :NO )
+IF %e4%==0 ( Echo OK ) else ( Echo NO )
 ::------------------------------KIll WINVNC cancel------------------------------------------------
 
 
@@ -117,7 +117,7 @@ IF %e4%==0 ( CALL :OK ) else ( CALL :NO )
 Echo [%time:~,8%] stop UVNC_service
 net stop uvnc_service
 set e5=%ERRORLEVEL%
-IF %e5%==0 ( CALL :OK ) else ( CALL :NO )
+IF %e5%==0 ( Echo OK ) else ( Echo NO )
 ::--------------------------------stop uvnc cancel------------------------------------------------
 
 
@@ -155,7 +155,7 @@ IF EXIST "%ProgramFiles(x86)%" ( CALL :INSTUVNC64 ) else ( CALL :INSTUVNC86 )
 Echo [%time:~,8%] kill task WINVNC
 start /wait taskkill /f /im winvnc*
 set e10=%ERRORLEVEL%
-IF %e10%==0 ( CALL :OK ) else ( CALL :NO )
+IF %e10%==0 ( Echo OK ) else ( Echo NO )
 ::---------------------------kill task WINVNC cancel--------------------------------------------
 
 
@@ -163,7 +163,7 @@ IF %e10%==0 ( CALL :OK ) else ( CALL :NO )
 Echo [%time:~,8%] stop service UVNC
 net stop uvnc_service
 set e11=%ERRORLEVEL%
-IF %e11%==0 ( CALL :OK ) else ( CALL :NO )
+IF %e11%==0 ( Echo OK ) else ( Echo NO )
 ::---------------------------stop service UVNC cancel-------------------------------------------
 
 
@@ -173,7 +173,7 @@ Echo [%time:~,8%] copy .INI seting file to directory
 Set DIR2="uvnc bvba"
 copy "%~d0%~p0distr\ultravnc.ini" "%SystemDrive%\progra~1\"%DIR2%"\UltraVNC\" /y
 set e12=%ERRORLEVEL%
-IF %e12%==0 ( CALL :OK ) else ( CALL :NO )
+IF %e12%==0 ( Echo OK ) else ( Echo NO )
 ::----------------------------Copy .ini to core dir UVNC cancel----------------------------------
 
 
@@ -182,7 +182,7 @@ IF %e12%==0 ( CALL :OK ) else ( CALL :NO )
 Echo [%time:~,8%] start UVNC service
 net start uvnc_service
 set e13=%ERRORLEVEL%
-IF %e13%==0 ( CALL :OK ) else ( CALL :NO )
+IF %e13%==0 ( Echo OK ) else ( Echo NO )
 ::-----------------------------start UVNC service cancel-----------------------------------------
 
 
@@ -191,7 +191,7 @@ IF %e13%==0 ( CALL :OK ) else ( CALL :NO )
 Echo [%time:~,8%] addfirewall rule UTP "FI62354"
 netsh advfirewall firewall add rule name="FI" dir=in action=allow protocol=TCP localport=62354
 set e14=%ERRORLEVEL%
-IF %e14%==0 ( CALL :OK ) else ( CALL :NO )
+IF %e14%==0 ( Echo OK ) else ( Echo NO )
 ::------------------------------------TCP 62354 cancel--------------------------------------------
 
 
@@ -213,12 +213,12 @@ Echo [%time:~,8%] BGinfo install
 start /wait "" "%SystemDrive%\Program Files\BGInfo\Bginfo.exe" /silent /timer:0
 
 set e17=%ERRORLEVEL%
-IF %e17%==0 ( Echo :OK ) else ( Echo NO )
+IF %e17%==0 ( Echo OK ) else ( Echo NO )
 :: создаем запись в реестре для авторана.
 set proga=%SystemDrive%\Program Files\BGInfo\Bginfo.exe
 REG ADD "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v BGINFO /t REG_SZ /d "%proga% /timer:0" /f
 set e17=%ERRORLEVEL%
-IF %e17%==0 ( Echo :OK ) else ( Echo NO )
+IF %e17%==0 ( Echo OK ) else ( Echo NO )
 ::-------------------------------------install BG INFO cancel ----------------------------------------
 
 Echo [%time:~,8%] SCRIPT FINISHED WORK
@@ -233,7 +233,7 @@ EXIT
 echo [%time:~,8%] UVNC64 running intsall...
 start /wait "" "%~d0%~p0distr\UVNC64.exe" /sp- /LOADINF="%~d0%~p0distr\uvnclog.log" /verysilent
 set e8=%ERRORLEVEL%
-IF %e8%==0 ( CALL :OK ) else ( CALL :NO )
+IF %e8%==0 ( Echo OK ) else ( Echo NO )
 GOTO :EOF
 
 :: В функции INSTUVNC86 запускаем установку UVNC в зависимости от архитектуры виндовс, в режиме пропуска подтверждения установки (/sp-)
@@ -242,7 +242,7 @@ GOTO :EOF
 echo [%time:~,8%] UVNC32 running install...
 start /wait "" "%~d0%~p0distr\UVNC86.exe" /sp- /LOADINF="%~d0%~p0distr\uvnclog.log" /verysilent
 set e9=%ERRORLEVEL%
-IF %e9%==0 ( CALL :OK ) else ( CALL :NO )
+IF %e9%==0 ( Echo OK ) else ( Echo NO )
 GOTO :EOF
 
 ::В функции OK просиходит вывод сообщения на экран , запись значения в переменную YN (для полседующей записи в файл) потом возврат к моменту вызова
