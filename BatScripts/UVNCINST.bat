@@ -1,4 +1,4 @@
-﻿::v0.85  20.07.16
+﻿::v0.86  20.07.16
 :: для корректного отображения крилицы в CMD batch файл нужно сохранить в OEM 866
 @echo off
 cls
@@ -206,22 +206,22 @@ IF EXIST "%ProgramFiles(x86)%" ( CALL :FI64 ) else ( CALL :FI86 )
 
 
 ::-------------------------------------install BG INFO ---------------------------------------------
-Echo [%time:~,8%] create dir 
-md "%SystemDrive%\Program Files\BGInfo\"
+:::: Echo [%time:~,8%] create dir 
+:::: md "%SystemDrive%\Program Files\BGInfo\"
 
-Echo [%time:~,8%] copy distrib BGINFO
-copy "%~d0%~p0distr\BGInfo\" "%SystemDrive%\Program Files\BGInfo\" /y
+:::: Echo [%time:~,8%] copy distrib BGINFO
+:::: copy "%~d0%~p0distr\BGInfo\" "%SystemDrive%\Program Files\BGInfo\" /y
 :: устанавливаем, ждем выполнения, с параметром таймера 0 (тоесть выполнение при запусе моментально)
-Echo [%time:~,8%] BGinfo install
-start /wait "" "%SystemDrive%\Program Files\BGInfo\Bginfo.exe" /silent /timer:0
+:::: Echo [%time:~,8%] BGinfo install
+:::: start /wait "" "%SystemDrive%\Program Files\BGInfo\Bginfo.exe" /silent /timer:0
 
-set e14=%ERRORLEVEL%
-IF e14==0 ( Echo OK ) else ( Echo NO )
+:::: set e14=%ERRORLEVEL%
+:::: IF e14==0 ( Echo OK ) else ( Echo NO )
 :: создаем запись в реестре для авторана.
-set proga=%SystemDrive%\Program Files\BGInfo\Bginfo.exe
-REG ADD "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v BGINFO /t REG_SZ /d "%proga% /timer:0" /f
-set e15=%ERRORLEVEL%
-IF e15==0 ( Echo OK ) else ( Echo NO )
+:::: set proga=%SystemDrive%\Program Files\BGInfo\Bginfo.exe
+:::: REG ADD "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v BGINFO /t REG_SZ /d "%proga% /timer:0" /f
+:::: set e15=%ERRORLEVEL%
+:::: IF e15==0 ( Echo OK ) else ( Echo NO )
 ::-------------------------------------install BG INFO cancel ----------------------------------------
 
 Echo [%time:~,8%] SCRIPT FINISHED WORK
