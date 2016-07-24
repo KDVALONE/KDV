@@ -1,4 +1,4 @@
-﻿::v0.87  20.07.16
+﻿::v0.88  20.07.16
 :: для корректного отображения крилицы в CMD batch файл нужно сохранить в OEM 866
 @echo off
 cls
@@ -206,6 +206,9 @@ IF EXIST "%ProgramFiles(x86)%" ( CALL :FI64 ) else ( CALL :FI86 )
 
 
 ::-------------------------------------install BG INFO ---------------------------------------------
+Echo [%time:~,8%] delete directory "BGINFO"
+IF EXIST "%systemdrive%"\progra~1\BGInfo ( rd %systemdrive%\progra~1\BGInfo /s /q )
+ 
 Echo [%time:~,8%] create dir 
 md "%SystemDrive%\Program Files\BGInfo\"
 
