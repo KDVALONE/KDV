@@ -1,4 +1,4 @@
-:: Скрипт переименования существующей уч. записи
+:: вЂ”РєСЂРёРїС‚ РїРµСЂРµРёРјРµРЅРѕРІР°РЅРёВ¤ СЃСѓС‰РµСЃС‚РІСѓСЋС‰РµР№ СѓС‡. Р·Р°РїРёСЃРё
 @Echo off
 cls
 
@@ -7,7 +7,7 @@ cls
 ::echo new loacal user name not enter
 ::GOTO :ELUSER
 :: ) else (
-::echo ок User Name is %NUSER%
+::echo РѕРє User Name is %NUSER%
 :: )
 
 ::--------------------------------
@@ -22,40 +22,40 @@ cls
 
 
 ::-------------------------------------------
-::Отображает название группы локальных админов ищя ее по ее сиду.
+::СњС‚РѕР±СЂР°Р¶Р°РµС‚ РЅР°Р·РІР°РЅРёРµ РіСЂСѓРїРїС‹ Р»РѕРєР°Р»СЊРЅС‹С… Р°РґРјРёРЅРѕРІ РёС‰В¤ РµРµ РїРѕ РµРµ СЃРёРґСѓ.
 ::Echo Show Admin GROUP  
 ::WMIC Group Where "SID = 'S-1-5-32-544'" Get Name
 ::-------------------------------------------
 ::-----------------------------------------------
-::Устанавливает срок действия пароля неограничен
+::вЂќСЃС‚Р°РЅР°РІР»РёРІР°РµС‚ СЃСЂРѕРє РґРµР№СЃС‚РІРёВ¤ РїР°СЂРѕР»В¤ РЅРµРѕРіСЂР°РЅРёС‡РµРЅ
 ::Echo Set to password unlimited time
 ::wmic UserAccount WHERE Name="User-1" Set PasswordExpires=FALSE
-::переименование
+::РїРµСЂРµРёРјРµРЅРѕРІР°РЅРёРµ
 ::Echo Rename account
-::wmic UserAccount where "Name='Администратор'" call rename "123"
+::wmic UserAccount where "Name='СРґРјРёРЅРёСЃС‚СЂР°С‚РѕСЂ'" call rename "123"
 ::-----------------------------------------------
 Echo Add new administrato user
 set ADMINNAME=its11
 set ADMINPASS=1024-Old
-::Добавление нового пользователя /срок действия пароляя всегда 
+::Ж’РѕР±Р°РІР»РµРЅРёРµ РЅРѕРІРѕРіРѕ РїРѕР»СЊР·РѕРІР°С‚РµР»В¤ /СЃСЂРѕРє РґРµР№СЃС‚РІРёВ¤ РїР°СЂРѕР»В¤В¤ РІСЃРµРіРґР° 
 net user %ADMINNAME% %ADMINPASS% /add /expires:never /fullname:%ADMINNAME%
 Set errorlevel=%ERRORLEVEL%
 IF errorlevel==0 ( Echo OK ) else ( Echo NO )
 pause
 
-:: Обновление свойств пользователя
+:: СњР±РЅРѕРІР»РµРЅРёРµ СЃРІРѕР№СЃС‚РІ РїРѕР»СЊР·РѕРІР°С‚РµР»В¤
 echo Update admin user settings
 wmic Win32_Useraccount WHERE Name=%ADMINNAME% Set PasswordExpires=false /nointeractive
 ::UserAccount 
 Set errorlevel=%ERRORLEVEL%
 IF errorlevel==0 ( Echo OK ) else ( Echo NO )
-::аналог кода
+::Р°РЅР°Р»РѕРі РєРѕРґР°
 ::wmic path Win32_Useraccount where Name='%user_name%' set   passwordexpires=false /nointeractive
 pause
 
 echo Add to Administrator group rus
-::Добавление в группу "Администраторы"
-net localgroup "Администраторы""%ADMINNAME%" /add
+::Ж’РѕР±Р°РІР»РµРЅРёРµ РІ РіСЂСѓРїРїСѓ "СРґРјРёРЅРёСЃС‚СЂР°С‚РѕСЂС‹"
+net localgroup "РђРґРјРёРЅРёСЃС‚СЂР°С‚РѕСЂС‹""%ADMINNAME%" /add
 Set errorlevel=%ERRORLEVEL%
 IF errorlevel==0 ( Echo OK ) else ( Echo NO )
 
