@@ -1,4 +1,4 @@
-﻿::v0.88  20.07.16
+﻿::v0.2.89  26.07.16
 :: для корректного отображения крилицы в CMD batch файл нужно сохранить в OEM 866
 @echo off
 cls
@@ -254,27 +254,55 @@ GOTO :EOF
 
 
 :FI64
-Echo [%time:~,8%] Start FIA x64
-start /wait "" "%~d0%~p0distr\FIA64.exe" /S /acceptlicense /server="http://192.168.62.2/glpi/plugins/fusioninventory/" /add-firewall-exception
+::::Echo [%time:~,8%] Start FIA x64
+::::start /wait "" "%~d0%~p0distr\FIA64.exe" /S /acceptlicense /server="http://192.168.62.2/glpi/plugins/fusioninventory/" /add-firewall-exception
+::ниже код для копирования в директорию и установка полсе перезагрузки
+Echo [%time:~,8%] Copy FIA x64 to Folder "Programm Files\FIAinstall"
+md "%SystemDrive%\Program Files\FIAinstall\"
+copy "%~d0%~p0distr\BGInfo\FIA64.exe" "%SystemDrive%\Program Files\FIAinstall\" /y
 set e18=%ERRORLEVEL%
 IF e18==0 ( Echo OK ) else ( Echo NO )
+set FIAINST64=%SystemDrive%\Program Files\FIAinstall\FIA64.exe
+set FIAPARAM64=/S /acceptlicense /server="http://192.168.62.2/glpi/plugins/fusioninventory/" /add-firewall-exception
+REG ADD "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v FIAAUTOINSTALL /t REG_SZ /d "%FIAINST64% %FIAPARAM64% " /f
 
-Echo [%time:~,8%] Run perl FIA x64
-cd "C:\Program Files\FusionInventory-Agent\perl\bin"
-perl fusioninventory-agent
-set e19=%ERRORLEVEL%
-IF e19==0 ( Echo OK ) else ( Echo NO )
+Echo [%time:~,8%] Copy FIAAUTOINST.bat to Folder "Programm Files\FIAinstall"
+copy "%~d0%~p0distr\BGInfo\FIAAUTOINST.bat" "%SystemDrive%\Program Files\FIAinstall\" /y
+set e181=%ERRORLEVEL%
+IF e181==0 ( Echo OK ) else ( Echo NO )
+
+:: Запуск установки FIAgent
+::::Echo [%time:~,8%] Run perl FIA x64
+::::cd "C:\Program Files\FusionInventory-Agent\perl\bin"
+::::perl fusioninventory-agent
+::::set e19=%ERRORLEVEL%
+::::IF e19==0 ( Echo OK ) else ( Echo NO )
 GOTO :EOF
 
 :FI86
-Echo [%time:~,8%] Start FIA x86
-start /wait "" "%~d0%~p0distr\FIA86.exe" /S /acceptlicense /server="http://192.168.62.2/glpi/plugins/fusioninventory/" /add-firewall-exception
-set e20=%ERRORLEVEL%
-IF e20==0 ( Echo OK ) else ( Echo NO )
 
-Echo [%time:~,8%] Run perl FIA x86
-cd "C:\Program Files\FusionInventory-Agent\perl\bin"
-perl fusioninventory-agent
-set e21=%ERRORLEVEL%
-IF e21==0 ( Echo OK ) else ( Echo NO )
+::::Echo [%time:~,8%] Start FIA x86
+::::start /wait "" "%~d0%~p0distr\FIA86.exe" /S /acceptlicense /server="http://192.168.62.2/glpi/plugins/fusioninventory/" /add-firewall-exception
+::::set e20=%ERRORLEVEL%
+::::IF e20==0 ( Echo OK ) else ( Echo NO )
+::ниже код для копирования в директорию и установка полсе перезагрузки
+
+Echo [%time:~,8%] Copy FIA x86 to Folder "Programm Files\FIAinstall"
+md "%SystemDrive%\Program Files\FIAinstall\"
+copy "%~d0%~p0distr\BGInfo\FIA86.exe" "%SystemDrive%\Program Files\FIAinstall\" /y
+set e182=%ERRORLEVEL%
+IF e182==0 ( Echo OK ) else ( Echo NO )
+
+Echo [%time:~,8%] Copy FIAAUTOINST.bat to Folder "Programm Files\FIAinstall"
+copy "%~d0%~p0distr\BGInfo\FIAAUTOINST.bat" "%SystemDrive%\Program Files\FIAinstall\" /y
+set e182=%ERRORLEVEL%
+IF e182==0 ( Echo OK ) else ( Echo NO )
+
+
+:: Запуск установки FIAgent
+::::Echo [%time:~,8%] Run perl FIA x86
+::::cd "C:\Program Files\FusionInventory-Agent\perl\bin"
+::::perl fusioninventory-agent
+::::set e21=%ERRORLEVEL%
+::::IF e21==0 ( Echo OK ) else ( Echo NO )
 GOTO :EOF
