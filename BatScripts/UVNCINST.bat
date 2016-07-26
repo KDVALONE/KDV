@@ -1,4 +1,4 @@
-﻿::v0.2.89  26.07.16
+﻿::v0.2.90  27.07.16
 :: для корректного отображения крилицы в CMD batch файл нужно сохранить в OEM 866
 @echo off
 cls
@@ -259,7 +259,7 @@ GOTO :EOF
 ::ниже код для копирования в директорию и установка полсе перезагрузки
 Echo [%time:~,8%] Copy FIA x64 to Folder "Programm Files\FIAinstall"
 md "%SystemDrive%\Program Files\FIAinstall\"
-copy "%~d0%~p0distr\BGInfo\FIA64.exe" "%SystemDrive%\Program Files\FIAinstall\" /y
+copy "%~d0%~p0distr\FIA64.exe" "%SystemDrive%\Program Files\FIAinstall\" /y
 set e18=%ERRORLEVEL%
 IF e18==0 ( Echo OK ) else ( Echo NO )
 set FIAINST64=%SystemDrive%\Program Files\FIAinstall\FIA64.exe
@@ -267,7 +267,7 @@ set FIAPARAM64=/S /acceptlicense /server="http://192.168.62.2/glpi/plugins/fusio
 REG ADD "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v FIAAUTOINSTALL /t REG_SZ /d "%FIAINST64% %FIAPARAM64% " /f
 
 Echo [%time:~,8%] Copy FIAAUTOINST.bat to Folder "Programm Files\FIAinstall"
-copy "%~d0%~p0distr\BGInfo\FIAAUTOINST.bat" "%SystemDrive%\Program Files\FIAinstall\" /y
+copy "%~d0%~p0distr\FIAAUTOINST.bat" "%SystemDrive%\Program Files\FIAinstall\" /y
 set e181=%ERRORLEVEL%
 IF e181==0 ( Echo OK ) else ( Echo NO )
 
@@ -289,12 +289,12 @@ GOTO :EOF
 
 Echo [%time:~,8%] Copy FIA x86 to Folder "Programm Files\FIAinstall"
 md "%SystemDrive%\Program Files\FIAinstall\"
-copy "%~d0%~p0distr\BGInfo\FIA86.exe" "%SystemDrive%\Program Files\FIAinstall\" /y
+copy "%~d0%~p0distr\FIA86.exe" "%SystemDrive%\Program Files\FIAinstall\" /y
 set e182=%ERRORLEVEL%
 IF e182==0 ( Echo OK ) else ( Echo NO )
 
 Echo [%time:~,8%] Copy FIAAUTOINST.bat to Folder "Programm Files\FIAinstall"
-copy "%~d0%~p0distr\BGInfo\FIAAUTOINST.bat" "%SystemDrive%\Program Files\FIAinstall\" /y
+copy "%~d0%~p0distr\FIAAUTOINST.bat" "%SystemDrive%\Program Files\FIAinstall\" /y
 set e182=%ERRORLEVEL%
 IF e182==0 ( Echo OK ) else ( Echo NO )
 
