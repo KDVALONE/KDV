@@ -55,21 +55,41 @@ pause
 
 echo Add to Administrator group rus
 ::ƒобавление в группу "јдминистраторы"
-net localgroup "Администраторы""%ADMINNAME%" /add
-Set errorlevel=%ERRORLEVEL%
-IF errorlevel==0 ( Echo OK ) else ( Echo NO )
 
 echo Add to Administrator group eng
-net localgroup "Administrators""%ADMINNAME%" /add
+net localgroup "Administrators" "%ADMINNAME%" /add
 Set errorlevel=%ERRORLEVEL%
 IF errorlevel==0 ( Echo OK ) else ( Echo NO )
 
+echo Add to Administrator group rus
+chcp 65001
+net localgroup "Администраторы" "%ADMINNAME%" /add
+Set errorlevel=%ERRORLEVEL%
+IF errorlevel==0 ( Echo OK ) else ( Echo NO )
 
 pause
 Echo THE END
 pause 
 exit
 
-net localgroup "PowerUsersGroupName""MemberName"/add
+::net localgroup "PowerUsersGroupName""MemberName"/add
 pause
 exit
+:: АВТО ЗАХОД ПОСЛЕ  РЕСТАРТА:
+1. Пуск -> Выполнить -> введите коману regedit и нажмите ОК.
+2. Найдите следующую ветвь реестра:
+Код: Выделить весь код
+HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsNT\CurrentVersion\Winlogon
+3. Дважды щелкните параметр DefaultUserName (если такого параметра нет, то создайте Строковый параметр с этим именем), введите свое имя пользователя и нажмите кнопку OK.
+4. Дважды щелкните параметр DefaultPassword, введите в поле «Значение» свой пароль и нажмите кнопку OK.
+5. Дважды щелкните параметр AutoAdminLogon, введите в поле Значение число 1 и нажмите кнопку OK.
+
+Примечание. В случае если компьютер является членом домена перечисленные выше способы не будут работать, необходимо немного модифицировать второй способ прописав значения входа в домен:
+В реестре в ветви
+Код: Выделить весь код
+HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon
+параметру AutoAdminLogon установите значение 1
+параметру DefaultUserName установите значение равное имени пользователя для которого настраиваете автоматический вход в систему
+параметру DefaultDomainName установите значение равное имени домена для входа
+параметру DefaultPassword установите значение равное паролю пользователя для которого настраиваете автоматический вход в систему
+Если какого либо параметра нет, то его нужно создать, для всех параметров тип Строковый (REG_SZ)
