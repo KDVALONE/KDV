@@ -1,4 +1,4 @@
-﻿::v0.2.92  27.07.16
+﻿::v0.2.93  1.08.16
 :: для корректного отображения крилицы в CMD batch файл нужно сохранить в OEM 866
 @echo off
 cls
@@ -180,13 +180,15 @@ IF e11==0 ( Echo OK ) else ( Echo NO )
 ::----------------------------Copy .ini to core dir UVNC cancel----------------------------------
 
 
-::-----------------------------start winvnc service------------------------------------------------
+::(не нужно)-----------------------------start winvnc service------------------------------------------------
 :: запускаем службу UVNC
-Echo [%time:~,8%] start WINVNC service
-net start winvnc
-set e12=%ERRORLEVEL%
-IF e12==0 ( Echo OK ) else ( Echo NO )
+::Echo [%time:~,8%] start WINVNC service
+::net start winvnc
+::set e12=%ERRORLEVEL%
+::IF e12==0 ( Echo OK ) else ( Echo NO )
 ::-----------------------------start winvnc service cancel-----------------------------------------
+
+
 ::-----------------------------start UVNC service------------------------------------------------
 :: запускаем службу UVNC
 Echo [%time:~,8%] start UVNC service
@@ -194,6 +196,7 @@ net start uvnc_service
 set e12=%ERRORLEVEL%
 IF e12==0 ( Echo OK ) else ( Echo NO )
 ::-----------------------------start UVNC service cancel-----------------------------------------
+
 
 ::---------Создаем правило для входящего TCP порта 62354-----------------------------------------
 :: Создаем правило для FI
@@ -204,7 +207,7 @@ IF e13==0 ( Echo OK ) else ( Echo NO )
 ::------------------------------------TCP 62354 cancel--------------------------------------------
 
 
-::------------------------------------install FI agent---------------------------------------------
+::(переделать на для script2)-----------install FI agent---------------------------------------------
 :: начинаем устновку FI
 Echo [%time:~,8%] stаrt install Fusion inventory Agent
 IF EXIST "%ProgramFiles(x86)%" ( CALL :FI64 ) else ( CALL :FI86 )
@@ -272,8 +275,10 @@ set FIAINST64=%SystemDrive%\Program Files\FIAinstall\FIA64.exe
 set FIAPARAM64=/S /acceptlicense /server="http://192.168.62.2/glpi/plugins/fusioninventory/" /add-firewall-exception
 REG ADD "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v FIAAUTOINSTALL /t REG_SZ /d "%FIAINST64% %FIAPARAM64% " /f
 
-Echo [%time:~,8%] Copy FIAAUTOINST.bat to Folder "Programm Files\FIAinstall"
-copy "%~d0%~p0distr\FIAAUTOINST.bat" "%SystemDrive%\Program Files\FIAinstall\" /y
+::::Echo [%time:~,8%] Copy FIAAUTOINST.bat to Folder "Programm Files\FIAinstall"
+Echo [%time:~,8%] Create SCRIPT2 to autoinstall FIAgent
+Echo 
+::::copy "%~d0%~p0distr\FIAAUTOINST.bat" "%SystemDrive%\Program Files\FIAinstall\" /y
 set e181=%ERRORLEVEL%
 IF e181==0 ( Echo OK ) else ( Echo NO )
 
