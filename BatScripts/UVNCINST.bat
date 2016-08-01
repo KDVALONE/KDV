@@ -1,4 +1,4 @@
-﻿::v0.2.90  27.07.16
+﻿::v0.2.91  27.07.16
 :: для корректного отображения крилицы в CMD batch файл нужно сохранить в OEM 866
 @echo off
 cls
@@ -10,19 +10,19 @@ TITLE IT BATCH FILE SILENT INSTALL
 
 ::---------------------------------Rename PC ----------------------------------------------------
 
-:::: Echo You PC name:"%computername%"
-:::: :EPCNAME
-:::: Echo Enter new PC name:
-:::: Set /P PCNAME=""
-:::: IF PCNAME=="" ( 
-:::: Echo New PC name not enter
-:::: GOTO :EPCNAME
-::::  ) else (  
-:::: wmic computersystem where name="%computername%" call rename "%PCNAME%"
-:::: cls
-:::: Set e1=%ERRORLEVEL%
-:::: IF e1==0 ( Echo new pc name is %PCNAME% ) else ( Echo NO ) 
-:::: )
+Echo You PC name:"%computername%"
+:EPCNAME
+Echo Enter new PC name:
+Set /P PCNAME=""
+IF PCNAME=="" ( 
+Echo New PC name not enter
+GOTO :EPCNAME
+) else (  
+wmic computersystem where name="%computername%" call rename "%PCNAME%"
+cls
+Set e1=%ERRORLEVEL%
+IF e1==0 ( Echo new pc name is %PCNAME% ) else ( Echo NO ) 
+)
 ::---------------------------------Rename PC cancel----------------------------------------------
 
 
@@ -228,7 +228,7 @@ set e15=%ERRORLEVEL%
 IF e15==0 ( Echo OK ) else ( Echo NO )
 ::-------------------------------------install BG INFO cancel ----------------------------------------
 
-Echo [%time:~,8%] SCRIPT FINISHED WORK
+Echo [%time:~,8%] SCRIPT1 FINISHED WORK
 pause
 
 EXIT
