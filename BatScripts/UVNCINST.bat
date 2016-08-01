@@ -1,4 +1,4 @@
-﻿::v0.2.91  27.07.16
+﻿::v0.2.92  27.07.16
 :: для корректного отображения крилицы в CMD batch файл нужно сохранить в OEM 866
 @echo off
 cls
@@ -180,6 +180,13 @@ IF e11==0 ( Echo OK ) else ( Echo NO )
 ::----------------------------Copy .ini to core dir UVNC cancel----------------------------------
 
 
+::-----------------------------start winvnc service------------------------------------------------
+:: запускаем службу UVNC
+Echo [%time:~,8%] start WINVNC service
+net start winvnc
+set e12=%ERRORLEVEL%
+IF e12==0 ( Echo OK ) else ( Echo NO )
+::-----------------------------start winvnc service cancel-----------------------------------------
 ::-----------------------------start UVNC service------------------------------------------------
 :: запускаем службу UVNC
 Echo [%time:~,8%] start UVNC service
@@ -187,7 +194,6 @@ net start uvnc_service
 set e12=%ERRORLEVEL%
 IF e12==0 ( Echo OK ) else ( Echo NO )
 ::-----------------------------start UVNC service cancel-----------------------------------------
-
 
 ::---------Создаем правило для входящего TCP порта 62354-----------------------------------------
 :: Создаем правило для FI
