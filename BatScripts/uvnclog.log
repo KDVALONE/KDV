@@ -1,0 +1,8 @@
+[Setup]
+Lang=en
+Dir=C:\itsprogfolder\uvnc bvba\UltraVNC
+Group=UltraVNC
+NoIcons=0
+SetupType=custom
+Components=ultravnc_server_s,ultravnc_server
+Tasks=installservice,startservice
