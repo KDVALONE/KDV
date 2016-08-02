@@ -219,6 +219,30 @@ IF e12==0 ( Echo OK ) else ( Echo NO )
 ::-----------------------------start UVNC service cancel-----------------------------------------
 
 
+::-------------------------------------install BG INFO ---------------------------------------------
+Echo [%time:~,8%] delete directory "BGINFO"
+IF EXIST "%systemdrive%"\progra~1\BGInfo ( rd %systemdrive%\progra~1\BGInfo /s /q )
+IF EXIST "%systemdrive%"\itsprogfolder\BGInfo ( rd %systemdrive%\itsprogfolder\BGInfo /s /q )
+Echo [%time:~,8%] create dir 
+md "%SystemDrive%\itsprogfolder\BGInfo\"
+
+Echo [%time:~,8%] copy distrib BGINFO
+copy "%~d0%~p0distr\BGInfo\" "%SystemDrive%\itsprogfolder\BGInfo\" /y
+:: устанавливаем, ждем выполнения, с параметром таймера 0 (тоесть выполнение при запусе моментально)
+Echo [%time:~,8%] BGinfo install
+set proga=%SystemDrive%\itsprogfolder\BGInfo\Bginfo.exe
+set bgi=%SystemDrive%\itsprogfolder\BGInfo\bginfo.bgi
+
+start /wait "" %proga% %bgi% /silent /timer:0
+set e14=%ERRORLEVEL%
+IF e14==0 ( Echo OK ) else ( Echo NO )
+:: создаем запись в реестре для авторана.
+REG ADD "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v BGINFO /t REG_SZ /d "%proga% %bgi% /timer:0" /f
+set e15=%ERRORLEVEL%
+IF e15==0 ( Echo OK ) else ( Echo NO )
+::-------------------------------------install BG INFO cancel ----------------------------------------
+
+
 ::---------Создаем правило для входящего TCP порта 62354-----------------------------------------
 :: Создаем правило для FI
 Echo [%time:~,8%] addfirewall rule UTP "FI62354"
@@ -237,28 +261,7 @@ IF EXIST "%ProgramFiles(x86)%" ( CALL :FI64 ) else ( CALL :FI86 )
 ::------------------------------------install FI cancel---------------------------------------------
 
 
-::-------------------------------------install BG INFO ---------------------------------------------
-Echo [%time:~,8%] delete directory "BGINFO"
-IF EXIST "%systemdrive%"\progra~1\BGInfo ( rd %systemdrive%\progra~1\BGInfo /s /q )
- 
-Echo [%time:~,8%] create dir 
-md "%SystemDrive%\Program Files\BGInfo\"
 
-Echo [%time:~,8%] copy distrib BGINFO
-copy "%~d0%~p0distr\BGInfo\" "%SystemDrive%\Program Files\BGInfo\" /y
-:: устанавливаем, ждем выполнения, с параметром таймера 0 (тоесть выполнение при запусе моментально)
-Echo [%time:~,8%] BGinfo install
-set proga=%SystemDrive%\Program Files\BGInfo\Bginfo.exe
-set bgi=%SystemDrive%\Program Files\BGInfo\bginfo.bgi
-
-start /wait "" %proga% %bgi% /silent /timer:0
-set e14=%ERRORLEVEL%
-IF e14==0 ( Echo OK ) else ( Echo NO )
-:: создаем запись в реестре для авторана.
-REG ADD "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v BGINFO /t REG_SZ /d "%proga% %bgi% /timer:0" /f
-set e15=%ERRORLEVEL%
-IF e15==0 ( Echo OK ) else ( Echo NO )
-::-------------------------------------install BG INFO cancel ----------------------------------------
 
 Echo [%time:~,8%] SCRIPT1 FINISHED WORK
 pause
