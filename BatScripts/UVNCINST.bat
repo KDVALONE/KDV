@@ -1,4 +1,4 @@
-﻿::v0.2.97  2.08.16
+﻿::v0.2.99  2.08.16
 :: для корректного отображения крилицы в CMD batch файл нужно сохранить в OEM 866
 @echo off
 cls
@@ -264,8 +264,40 @@ IF EXIST "%ProgramFiles(x86)%" ( CALL :FI64 ) else ( CALL :FI86 )
 ::------------------------------------1step install FI cancel---------------------------------------------
 
 
+::---------------------------------------CREATE script2---------------------------------------------------
+Echo Create script2
+::add to reestr autoran script2
+set DISTR=%SystemDrive%\itsprogfolder\FIAinstall\script2.bat
+set PARAM=/silent /sp- 
+REG ADD "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v SCRIPT2 /t REG_SZ /d "%DISTR% %PARAM% " /f
+
+::создание скрипта в директории itsprogfolder\FIAinstall для устновки FIA и ввода в домен, а так же зачистки после себя фалов
+Echo @Echo off >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
+Echo cls >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
+::пробел
+Echo >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
+::delete autoran script2 in reestr
+Echo ::-------------------delete autoran script2 in reestr ------------->> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
+Echo REG delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v SCRIPT2 /f >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
+Echo ::-------------------delete autoran script2 in reestr (cancel)------------->> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
+Echo >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
 
 
+Echo ::-------------------install FIA part2 on script2 ------------->> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
+Echo [%time:~,8%] install FIAgent >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
+Echo %FIAbuf% >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
+Echo cd "C:\Program Files\FusionInventory-Agent\perl\bin" >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
+Echo perl fusioninventory-agent >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
+Echo e=%ERRORLEVEL% >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
+Echo IF e==0 ( Echo OK ) else ( Echo NO ) >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
+Echo ::-------------------install FIA part2 on script2 (cancel)------------->> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
+::пробел
+Echo >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
+Echo ::----------------------------- >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
+
+
+
+::---------------------------------------CREATE script2 (cancel)-------------------------------------------
 
 
 Echo [%time:~,8%] SCRIPT1 FINISHED WORK
