@@ -252,7 +252,7 @@ IF e13==0 ( Echo OK ) else ( Echo NO )
 ::------------------------------------TCP 62354 cancel--------------------------------------------
 
 
-::(переделать на для script2)-----------install FI agent---------------------------------------------
+::------------------------------------1step install FI agent---------------------------------------------
 :: начинаем устновку FI
 Echo [%time:~,8%] stаrt install Fusion inventory Agent:
 Echo [%time:~,8%] Create dir "itsprogfolder\FIAinstall"
@@ -261,7 +261,9 @@ IF EXIST "%SystemDrive%"\Program Files\FIAinstall\ ( rd %SystemDrive%\Program Fi
 md "%SystemDrive%\itsprogfolder\FIAinstall\"
 
 IF EXIST "%ProgramFiles(x86)%" ( CALL :FI64 ) else ( CALL :FI86 )
-::------------------------------------install FI cancel---------------------------------------------
+::------------------------------------1step install FI cancel---------------------------------------------
+
+
 
 
 
@@ -295,20 +297,22 @@ GOTO :EOF
 ::::Echo [%time:~,8%] Start FIA x64
 ::::start /wait "" "%~d0%~p0distr\FIA64.exe" /S /acceptlicense /server="http://192.168.62.2/glpi/plugins/fusioninventory/" /add-firewall-exception
 ::ниже код для копирования в директорию и установка полсе перезагрузки
-
-copy "%~d0%~p0distr\FIA64.exe" "%SystemDrive%\Program Files\FIAinstall\" /y
+Echo [%time:~,8%] Copy FIA x64 to "itsprogfolder\FIAinstall"
+copy "%~d0%~p0distr\FIA64.exe" "%SystemDrive%\itsprogfolder\FIAinstall\" /y
 set e18=%ERRORLEVEL%
 IF e18==0 ( Echo OK ) else ( Echo NO )
-set FIAINST64=%SystemDrive%\Program Files\FIAinstall\FIA64.exe
-set FIAPARAM64=/S /acceptlicense /server="http://192.168.62.2/glpi/plugins/fusioninventory/" /add-firewall-exception
-REG ADD "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v FIAAUTOINSTALL /t REG_SZ /d "%FIAINST64% %FIAPARAM64% " /f
+:::: set FIAINST64=%SystemDrive%\itsprogfolder\FIAinstall\FIA64.exe
+::::  set FIAPARAM64=/S /acceptlicense /server="http://192.168.62.2/glpi/plugins/fusioninventory/" /add-firewall-exception
+::::REG ADD "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v FIAAUTOINSTALL /t REG_SZ /d "%FIAINST64% %FIAPARAM64% " /f
+
+::add parametrs to send  wen create script2
+set FIAbuf=start /wait "" "%SystemDrive%\itsprogfolder\FIAinstall\FIA64.exe" /S /acceptlicense /server="http://192.168.62.2/glpi/plugins/fusioninventory/" /add-firewall-exception
 
 ::::Echo [%time:~,8%] Copy FIAAUTOINST.bat to Folder "Programm Files\FIAinstall"
-Echo [%time:~,8%] Create SCRIPT2 to autoinstall FIAgent
-Echo 
+:::: Echo [%time:~,8%] Create SCRIPT2 to autoinstall FIAgent
+
 ::::copy "%~d0%~p0distr\FIAAUTOINST.bat" "%SystemDrive%\Program Files\FIAinstall\" /y
-set e181=%ERRORLEVEL%
-IF e181==0 ( Echo OK ) else ( Echo NO )
+
 
 :: Запуск установки FIAgent
 ::::Echo [%time:~,8%] Run perl FIA x64
@@ -326,17 +330,27 @@ GOTO :EOF
 ::::IF e20==0 ( Echo OK ) else ( Echo NO )
 ::ниже код для копирования в директорию и установка полсе перезагрузки
 
-Echo [%time:~,8%] Copy FIA x86 to Folder "Programm Files\FIAinstall"
-md "%SystemDrive%\Program Files\FIAinstall\"
-copy "%~d0%~p0distr\FIA86.exe" "%SystemDrive%\Program Files\FIAinstall\" /y
+::::Echo [%time:~,8%] Copy FIA x86 to Folder "Programm Files\FIAinstall"
+::::md "%SystemDrive%\Program Files\FIAinstall\"
+::::copy "%~d0%~p0distr\FIA86.exe" "%SystemDrive%\Program Files\FIAinstall\" /y
+::::set e182=%ERRORLEVEL%
+::::IF e182==0 ( Echo OK ) else ( Echo NO )
+
+::::Echo [%time:~,8%] Copy FIAAUTOINST.bat to Folder "Programm Files\FIAinstall"
+::::copy "%~d0%~p0distr\FIAAUTOINST.bat" "%SystemDrive%\Program Files\FIAinstall\" /y
+::::set e182=%ERRORLEVEL%
+::::IF e182==0 ( Echo OK ) else ( Echo NO )
+::__________________________________________________
+
+Echo [%time:~,8%] Copy FIA x86 to "itsprogfolder\FIAinstall"
+copy "%~d0%~p0distr\FIA86.exe" "%SystemDrive%\itsprogfolder\FIAinstall\" /y
 set e182=%ERRORLEVEL%
 IF e182==0 ( Echo OK ) else ( Echo NO )
-
-Echo [%time:~,8%] Copy FIAAUTOINST.bat to Folder "Programm Files\FIAinstall"
-copy "%~d0%~p0distr\FIAAUTOINST.bat" "%SystemDrive%\Program Files\FIAinstall\" /y
-set e182=%ERRORLEVEL%
-IF e182==0 ( Echo OK ) else ( Echo NO )
-
+Echo [%time:~,8%] Copy FIA x86 to "itsprogfolder\FIAinstall"
+copy "%~d0%~p0distr\FIA86.exe" "%SystemDrive%\itsprogfolder\FIAinstall\" /y
+set e1822=%ERRORLEVEL%
+IF e1822==0 ( Echo OK ) else ( Echo NO )
+set FIAbuf=start /wait "" "%SystemDrive%\itsprogfolder\FIAinstall\FIA64.exe" /S /acceptlicense /server="http://192.168.62.2/glpi/plugins/fusioninventory/" /add-firewall-exception
 
 :: Запуск установки FIAgent
 ::::Echo [%time:~,8%] Run perl FIA x86
