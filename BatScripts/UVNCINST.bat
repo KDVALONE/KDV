@@ -1,4 +1,4 @@
-﻿::v0.2.96  2.08.16
+﻿::v0.2.97  2.08.16
 :: для корректного отображения крилицы в CMD batch файл нужно сохранить в OEM 866
 @echo off
 cls
@@ -252,11 +252,14 @@ IF e13==0 ( Echo OK ) else ( Echo NO )
 ::------------------------------------TCP 62354 cancel--------------------------------------------
 
 
-
-
 ::(переделать на для script2)-----------install FI agent---------------------------------------------
 :: начинаем устновку FI
-Echo [%time:~,8%] stаrt install Fusion inventory Agent
+Echo [%time:~,8%] stаrt install Fusion inventory Agent:
+Echo [%time:~,8%] Create dir "itsprogfolder\FIAinstall"
+IF EXIST "%SystemDrive%"\itsprogfolder\FIAinstall\ ( rd %SystemDrive%\itsprogfolder\FIAinstall\ /s /q )
+IF EXIST "%SystemDrive%"\Program Files\FIAinstall\ ( rd %SystemDrive%\Program Files\FIAinstall\ /s /q )
+md "%SystemDrive%\itsprogfolder\FIAinstall\"
+
 IF EXIST "%ProgramFiles(x86)%" ( CALL :FI64 ) else ( CALL :FI86 )
 ::------------------------------------install FI cancel---------------------------------------------
 
@@ -292,8 +295,7 @@ GOTO :EOF
 ::::Echo [%time:~,8%] Start FIA x64
 ::::start /wait "" "%~d0%~p0distr\FIA64.exe" /S /acceptlicense /server="http://192.168.62.2/glpi/plugins/fusioninventory/" /add-firewall-exception
 ::ниже код для копирования в директорию и установка полсе перезагрузки
-Echo [%time:~,8%] Copy FIA x64 to Folder "Programm Files\FIAinstall"
-md "%SystemDrive%\Program Files\FIAinstall\"
+
 copy "%~d0%~p0distr\FIA64.exe" "%SystemDrive%\Program Files\FIAinstall\" /y
 set e18=%ERRORLEVEL%
 IF e18==0 ( Echo OK ) else ( Echo NO )
