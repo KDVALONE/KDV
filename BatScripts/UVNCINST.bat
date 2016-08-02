@@ -1,4 +1,4 @@
-﻿::v0.2.99  2.08.16
+﻿::v0.3.01  2.08.16
 :: для корректного отображения крилицы в CMD batch файл нужно сохранить в OEM 866
 @echo off
 cls
@@ -44,26 +44,27 @@ IF e3==0 ( Echo OK ) else ( Echo NO )
 ::---------------------------------Remote Assistance cancel---------------------------------------
 
 
-::---------------------------------add to Domain-------------------------------------------------
+::---------------------------------add to Domain part1-------------------------------------------------
 ::
-:::: :QTODMN
-:::: Echo Add PC to Domain: gb1.korolev.local (Y/N)? 
-:::: Set /p TDMN=""
-:::: if %TDMN%==y ( GOTO :ADDTODMN ) else ( GOTO :TODMN )
-:::: :TODMN
-:::: if %TDMN%==Y ( GOTO :ADDTODMN ) else ( GOTO :NTODMN )
-:::: :NTODMN
-:::: if %TDMN%==n ( GOTO :NOTADDTODMN ) else ( GOTO :NTODMN2 )
-:::: :NTODMN2
-::::if %TDMN%==N ( GOTO :NOTADDTODMN ) else ( GOTO :INCORRECT )
-:::: :INCORRECT
-:::: Echo incorrected symbol, please enter Y or N 
-:::: GOTO :QTODMN
-:::: :ADDTODMN
-:::: Echo Enter domain admin user ( example: User777 ):
-:::: Set /p admin=""
-:::: Echo Enter domain admin user password:
-:::: Set /p PSWD=""
+:QTODMN
+Echo Add PC to Domain: gb1.korolev.local (Y/N)? 
+Set /p TDMN=""
+if %TDMN%==y ( GOTO :ADDTODMN ) else ( GOTO :TODMN )
+:TODMN
+if %TDMN%==Y ( GOTO :ADDTODMN ) else ( GOTO :NTODMN )
+:NTODMN
+if %TDMN%==n ( GOTO :NOTADDTODMN ) else ( GOTO :NTODMN2 )
+:NTODMN2
+if %TDMN%==N ( GOTO :NOTADDTODMN ) else ( GOTO :INCORRECT )
+:INCORRECT
+Echo incorrected symbol, please enter Y or N 
+GOTO :QTODMN
+:ADDTODMN
+Echo Enter domain admin user ( example: User777 ):
+Set /p admin=""
+Echo Enter domain admin user password:
+Set /p PSWD=""
+
 :: вызов утилиты wmic /интерактивный режим выкл(при выкл.режиме после выполнения одной команды wmic, управление возвращается к cls windows (PROMT))).
 :: система где "имя пк" вызвать метод JoinDomainOrWorkgroup (заведения в домен),с параметрами точка хода=1 (если 1 то к домену, строки нет - к раб.группе),
 :: Name="имя домена/рабочей группы", имя пользователья домена с правами присоединения, пароль.  
@@ -75,8 +76,8 @@ IF e3==0 ( Echo OK ) else ( Echo NO )
 :::: Echo IF "instance_PARMETRS value=0" (see top, before) , PC add to domain successful
 
 :: (!!!непонятно как отработать возварщаемо значение для повторной попытки ввода  домен, errorlevel здесь всегда 0!!!)
-:::: :NOTADDTODMN
-::---------------------------------add to Domain cancel------------------------------------------
+:NOTADDTODMN
+::---------------------------------add to Domain part1 cancel------------------------------------------
 
 
 ::---------Создаем правило для входящего TCP порта 5900,5800-------------------------------------
@@ -293,7 +294,18 @@ Echo IF e==0 ( Echo OK ) else ( Echo NO ) >> "%SystemDrive%\itsprogfolder\FIAins
 Echo ::-------------------install FIA part2 on script2 (cancel)------------->> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
 ::пробел
 Echo >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
-Echo ::----------------------------- >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
+
+Echo ::-----------------------------ADD to domain part2--------------------------- >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
+Echo Add to domain part 2 >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
+Echo set pcname1=%computername%>> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
+Echo wmic /interactive:off ComputerSystem Where "name = '%pcname1%'" call JoinDomainOrWorkgroup FJoinOptions=1 Name="gb1.korolev.local" UserName="%admin%@gb1.korolev.local"  Password="%PSWD%" >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
+Echo ::-------------------ADD to domain part2 (cancel)------------->> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
+
+::пробел
+Echo >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
+
+
+
 
 
 
