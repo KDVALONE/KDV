@@ -1,4 +1,4 @@
-﻿::v0.2.93  1.08.16
+﻿::v0.2.96  2.08.16
 :: для корректного отображения крилицы в CMD batch файл нужно сохранить в OEM 866
 @echo off
 cls
@@ -147,6 +147,27 @@ IF EXIST "%systemdrive%"\progra~1\"%DIR%" ( rd %systemdrive%\progra~1\"%DIR%" /s
 ::--------------------------------Delete dir "uvnc bvba" cancel-------------------------------- 
 
 
+::--------------------------------Delete dir "itsprogfolder\uvnc bvba" ------------------------------------- 
+Echo [%time:~,8%] delete directory "itsprogfolder\uvnc bvba"
+Set DIR=uvnc bvba
+IF EXIST "%systemdrive%"\itsprogfolder\"%DIR%" ( rd %systemdrive%\itsprogfolder\"%DIR%" /s /q )
+::--------------------------------Delete dir "itsprogfolder\uvnc bvba" cancel-------------------------------- 
+
+
+::------------------------------------Create itsprogfolder --------------------------------------
+::Создаем папку для установки всех программ
+Echo Create "itsprogfolder" on system drive
+IF EXIST "%systemdrive%"\itsprogfolder\ ( 
+Echo NO - folder exist
+goto :next1 
+) else (
+md "%SystemDrive%\itsprogfolder\"
+Echo OK
+)
+:next1
+::------------------------------------Create itsprogfolder (cancel)--------------------------------
+
+
 ::--------------------------------Start install UVNC ------------------------------------------ 
 echo [%time:~,8%] start install UVNC
 IF EXIST "%ProgramFiles(x86)%" ( CALL :INSTUVNC64 ) else ( CALL :INSTUVNC86 )
@@ -174,7 +195,7 @@ IF e10==0 ( Echo OK ) else ( Echo NO )
 ::Копируем .ini файл с параметрами запуска в директрорию с программой
 Echo [%time:~,8%] copy .INI seting file to directory
 Set DIR2="uvnc bvba"
-copy "%~d0%~p0distr\ultravnc.ini" "%SystemDrive%\progra~1\"%DIR2%"\UltraVNC\" /y
+copy "%~d0%~p0distr\ultravnc.ini" "%SystemDrive%\itsprogfolder\"%DIR2%"\UltraVNC\" /y
 set e11=%ERRORLEVEL%
 IF e11==0 ( Echo OK ) else ( Echo NO )
 ::----------------------------Copy .ini to core dir UVNC cancel----------------------------------
@@ -205,6 +226,8 @@ netsh advfirewall firewall add rule name="FI" dir=in action=allow protocol=TCP l
 set e13=%ERRORLEVEL%
 IF e13==0 ( Echo OK ) else ( Echo NO )
 ::------------------------------------TCP 62354 cancel--------------------------------------------
+
+
 
 
 ::(переделать на для script2)-----------install FI agent---------------------------------------------
