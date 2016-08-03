@@ -1,4 +1,4 @@
-﻿::v0.3.01  2.08.16
+﻿::v0.3.02  3.08.16
 :: для корректного отображения крилицы в CMD batch файл нужно сохранить в OEM 866
 @echo off
 cls
@@ -298,7 +298,7 @@ Echo >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
 Echo ::-----------------------------ADD to domain part2--------------------------- >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
 Echo Add to domain part 2 >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
 Echo set pcname1=%computername%>> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
-Echo wmic /interactive:off ComputerSystem Where "name = '%pcname1%'" call JoinDomainOrWorkgroup FJoinOptions=1 Name="gb1.korolev.local" UserName="%admin%@gb1.korolev.local"  Password="%PSWD%" >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
+Echo wmic /interactive:off ComputerSystem Where "name = '%pcname1%'" call JoinDomainOrWorkgroup FJoinOptions=3 Name="gb1.korolev.local" UserName="%admin%@gb1.korolev.local"  Password="%PSWD%" >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
 Echo ::-------------------ADD to domain part2 (cancel)------------->> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
 
 ::пробел
@@ -312,7 +312,21 @@ Echo >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
 ::---------------------------------------CREATE script2 (cancel)-------------------------------------------
 
 
-Echo [%time:~,8%] SCRIPT1 FINISHED WORK
+Echo [%time:~,8%] SCRIPT1 FINISHED WORK AND WILL BE REBOOT AFTER 3 SECONDS
+Echo [%time:~,8%] 3
+ping 127.0.0.1 -n 1 > nul 
+Echo [%time:~,8%] 2
+ping 127.0.0.1 -n 1 > nul 
+Echo [%time:~,8%] 1
+ping 127.0.0.1 -n 1 > nul 
+
+
+::---------------------------------------reboot ------------------------------------------------------------- 
+shutdown.exe -r -t 00
+::---------------------------------------reboot(cancel)----------------------------------------------------
+
+
+
 pause
 
 EXIT
