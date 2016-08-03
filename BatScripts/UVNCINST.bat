@@ -1,4 +1,4 @@
-﻿::v0.3.04  3.08.16
+﻿::v0.3.05  3.08.16
 :: для корректного отображения крилицы в CMD batch файл нужно сохранить в OEM 866
 @echo off
 cls
@@ -295,15 +295,6 @@ Echo ::-------------------install FIA part2 on script2 (cancel)------------->> "
 ::пробел
 Echo >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
 
-Echo ::-----------------------------ADD to domain part2--------------------------- >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
-Echo Add to domain part 2 >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
-Echo set pcname1=%computername%>> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
-Echo wmic /interactive:off ComputerSystem Where "name = '%pcname1%'" call JoinDomainOrWorkgroup FJoinOptions=3 Name="gb1.korolev.local" UserName="%admin%@gb1.korolev.local"  Password="%PSWD%" >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
-Echo ::-------------------ADD to domain part2 (cancel)------------->> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
-
-::пробел
-Echo >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
-
 ::---------------------------------------DeleteAutoEnerAfterRestart----------------------------------------
 Echo ::-----------------------------DeleteAutoEnerAfterRestart--------------------------- >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
 Echo REG Delete "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" /v DefaultPassword REG_SZ /f >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
@@ -312,6 +303,17 @@ Echo ::-----------------------------DeleteAutoEnerAfterRestart(cancel)----------
 
 ::---------------------------------------DeleteAutoEnerAfterRestart(cancel)--------------------------------
 
+Echo ::-----------------------------ADD to domain part2--------------------------- >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
+Echo Add to domain part 2 >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
+Echo set pcname1=%computername%>> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
+Echo wmic /interactive:off ComputerSystem Where "name = '%pcname1%'" call JoinDomainOrWorkgroup FJoinOptions=3 Name="gb1.korolev.local" UserName="%admin%@gb1.korolev.local"  Password="%PSWD%" >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
+Echo ::-------------------ADD to domain part2 (cancel)------------->> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
+
+::Скорее всего ПЕРЕНЕСТИ В скрипт3
+Echo >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
+Echo ::-------------------reboot script2------------->> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
+Echo shutdown.exe -r -t 00 >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
+Echo ::-------------------reboot script2(cancel)------------->> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
 
 
 
