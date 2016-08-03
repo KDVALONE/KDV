@@ -1,15 +1,33 @@
 :: Добавляем пользователя в разрешене в реестре
 @Echo off
 cls
-Echo
+Echo Add to REG rule
+:: АВТО ЗАХОД ПОСЛЕ  РЕСТАРТА:
+REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" /v DefaultPassword /t REG_SZ /d "1024-Old " /f
+REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" /v AutoAdminLogon /t REG_SZ /d "1" /f
+REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" /v DefaultUserName /t REG_SZ /d "its" /f
 
 pause
 exit
 :: АВТО ЗАХОД ПОСЛЕ  РЕСТАРТА:
+REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" /v DefaultPassword /t REG_SZ /d "1024-Old " /f
+REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" /v AutoAdminLogon /t REG_SZ /d "1" /f
+REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" /v DefaultUserName /t REG_SZ /d "its" /f
+
+
+
+______________________________
+
+
 1. Пуск -> Выполнить -> введите коману regedit и нажмите ОК.
 2. Найдите следующую ветвь реестра:
 Код: Выделить весь код
 HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsNT\CurrentVersion\Winlogon
+
+REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" /v DefaultPassword /t REG_SZ /d "1024-Old " /f
+REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" /v AutoAdminLogon /t REG_SZ /d "1" /f
+REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" /v DefaultUserName /t REG_SZ /d "its" /f
+
 3. Дважды щелкните параметр DefaultUserName (если такого параметра нет, то создайте Строковый параметр с этим именем), введите свое имя пользователя и нажмите кнопку OK.
 4. Дважды щелкните параметр DefaultPassword, введите в поле «Значение» свой пароль и нажмите кнопку OK.
 5. Дважды щелкните параметр AutoAdminLogon, введите в поле Значение число 1 и нажмите кнопку OK.
