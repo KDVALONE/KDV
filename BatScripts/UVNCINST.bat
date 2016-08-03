@@ -1,4 +1,4 @@
-﻿::v0.3.02  3.08.16
+﻿::v0.3.03  3.08.16
 :: для корректного отображения крилицы в CMD batch файл нужно сохранить в OEM 866
 @echo off
 cls
@@ -312,6 +312,25 @@ Echo >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
 ::---------------------------------------CREATE script2 (cancel)-------------------------------------------
 
 
+::---------------------------------------Local Admin Rename------------------------------------------------
+::batch file will be save in UTF-8 to correct use
+Echo rename local User ADMINISTRATOR, to ITS
+pause
+chcp 65001
+::время пароля не ограничено
+wmic path Win32_UserAccount where Name='Администратор' set PasswordExpires=false
+wmic path Win32_UserAccount where Name='Administrator' set PasswordExpires=false
+wmic useraccount where name='Administrator' rename its
+wmic useraccount where name='Администратор' rename its
+::задаем пароль its администратору.
+net user its 1024-Old
+
+set e=%errorlevel%
+Echo e = %e%, if e=0 is OK!
+::---------------------------------------Local Admin Rename(cancel)----------------------------------------
+
+
+::---------------------------------------reboot ------------------------------------------------------------- 
 Echo [%time:~,8%] SCRIPT1 FINISHED WORK AND WILL BE REBOOT AFTER 3 SECONDS
 Echo [%time:~,8%] 3
 ping 127.0.0.1 -n 1 > nul 
@@ -321,10 +340,10 @@ Echo [%time:~,8%] 1
 ping 127.0.0.1 -n 1 > nul 
 
 
-::---------------------------------------reboot ------------------------------------------------------------- 
+
 shutdown.exe -r -t 00
 ::---------------------------------------reboot(cancel)----------------------------------------------------
-
+::---------------------------------------END---------------------------------------------------------------
 
 
 pause
