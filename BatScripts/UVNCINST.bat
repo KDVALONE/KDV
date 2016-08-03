@@ -1,4 +1,4 @@
-﻿::v0.3.03  3.08.16
+﻿::v0.3.04  3.08.16
 :: для корректного отображения крилицы в CMD batch файл нужно сохранить в OEM 866
 @echo off
 cls
@@ -304,6 +304,13 @@ Echo ::-------------------ADD to domain part2 (cancel)------------->> "%SystemDr
 ::пробел
 Echo >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
 
+::---------------------------------------DeleteAutoEnerAfterRestart----------------------------------------
+Echo ::-----------------------------DeleteAutoEnerAfterRestart--------------------------- >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
+Echo REG Delete "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" /v DefaultPassword REG_SZ /f >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
+Echo REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" /v AutoAdminLogon /t REG_SZ /d "0" /f >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
+Echo ::-----------------------------DeleteAutoEnerAfterRestart(cancel)--------------------------- >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
+
+::---------------------------------------DeleteAutoEnerAfterRestart(cancel)--------------------------------
 
 
 
@@ -328,6 +335,14 @@ net user its 1024-Old
 set e=%errorlevel%
 Echo e = %e%, if e=0 is OK!
 ::---------------------------------------Local Admin Rename(cancel)----------------------------------------
+
+
+::---------------------------------------AutoEnerAfterRestart on its----------------------------------------
+REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" /v DefaultPassword /t REG_SZ /d "1024-Old " /f
+REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" /v AutoAdminLogon /t REG_SZ /d "1" /f
+REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" /v DefaultUserName /t REG_SZ /d "its" /f
+
+::---------------------------------------AutoEnerAfterRestart on its(cancel)--------------------------------
 
 
 ::---------------------------------------reboot ------------------------------------------------------------- 
