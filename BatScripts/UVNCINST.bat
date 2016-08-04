@@ -1,4 +1,4 @@
-﻿::v0.3.06  4.08.16
+﻿::v0.3.07  4.08.16
 :: для корректного отображения крилицы в CMD batch файл нужно сохранить в OEM 866
 @echo off
 cls
@@ -310,12 +310,12 @@ Echo wmic /interactive:off ComputerSystem Where "name = '%pcname1%'" call JoinDo
 Echo ::-------------------ADD to domain part2 (cancel)------------->> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
 
 ::Скорее всего ПЕРЕНЕСТИ В скрипт3
-Echo >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
-Echo ::-------------------reboot script2------------->> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
-Echo shutdown.exe -r -t 00 >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
-Echo ::-------------------reboot script2(cancel)------------->> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
-
-
+::::Echo >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
+::::Echo ::-------------------reboot script2------------->> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
+::::Echo shutdown.exe -r -t 00 >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
+::::Echo ::-------------------reboot script2(cancel)------------->> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
+::::Echo Call %SystemDrive%\itsprogfolder\script3.bat >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
+::::Echo exit >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
 
 
 ::---------------------------------------CREATE script2 (cancel)-------------------------------------------
@@ -324,7 +324,7 @@ Echo ::-------------------reboot script2(cancel)------------->> "%SystemDrive%\i
 ::---------------------------------------CREATE script3 ---------------------------------------------------
 :: script3 delet FIAinstall directory end dell himself
 Echo rd "%SystemDrive%\itsprogfolder\FIAinstall /s /q >> "%SystemDrive%\itsprogfolder\script3.bat"
-Echo ping 127.0.0.1 -n 8 > nul >> "%SystemDrive%\itsprogfolder\script3.bat"
+Echo ping 127.0.0.1 -n 5 > nul >> "%SystemDrive%\itsprogfolder\script3.bat"
 Echo shutdown.exe -r -t 05 >> "%SystemDrive%\itsprogfolder\script3.bat"
 Echo del "%~F0" >> "%SystemDrive%\itsprogfolder\script3.bat"
 Echo exit >> "%SystemDrive%\itsprogfolder\script3.bat"
