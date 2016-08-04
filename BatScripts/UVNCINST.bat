@@ -321,6 +321,16 @@ Echo ::-------------------reboot script2(cancel)------------->> "%SystemDrive%\i
 ::---------------------------------------CREATE script2 (cancel)-------------------------------------------
 
 
+::---------------------------------------CREATE script3 ---------------------------------------------------
+:: script3 delet FIAinstall directory end dell himself
+Echo rd "%SystemDrive%\itsprogfolder\FIAinstall /s /q >> "%SystemDrive%\itsprogfolder\script3.bat"
+Echo ping 127.0.0.1 -n 8 > nul >> "%SystemDrive%\itsprogfolder\script3.bat"
+Echo shutdown.exe -r -t 05 >> "%SystemDrive%\itsprogfolder\script3.bat"
+Echo del "%~F0" >> "%SystemDrive%\itsprogfolder\script3.bat"
+Echo exit >> "%SystemDrive%\itsprogfolder\script3.bat"
+::---------------------------------------CREATE script2 (cancel)-------------------------------------------
+
+
 ::---------------------------------------Local Admin Rename------------------------------------------------
 ::batch file will be save in UTF-8 to correct use
 Echo rename local User ADMINISTRATOR, to ITS
