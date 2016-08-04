@@ -1,4 +1,4 @@
-﻿::v0.3.05  3.08.16
+﻿::v0.3.06  4.08.16
 :: для корректного отображения крилицы в CMD batch файл нужно сохранить в OEM 866
 @echo off
 cls
@@ -350,11 +350,11 @@ REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" /v DefaultU
 ::---------------------------------------reboot ------------------------------------------------------------- 
 Echo [%time:~,8%] SCRIPT1 FINISHED WORK AND WILL BE REBOOT AFTER 3 SECONDS
 Echo [%time:~,8%] 3
-ping 127.0.0.1 -n 1 > nul 
+ping 127.0.0.1 -n 2 > nul 
 Echo [%time:~,8%] 2
-ping 127.0.0.1 -n 1 > nul 
+ping 127.0.0.1 -n 2 > nul 
 Echo [%time:~,8%] 1
-ping 127.0.0.1 -n 1 > nul 
+ping 127.0.0.1 -n 2 > nul 
 
 
 
