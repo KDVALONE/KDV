@@ -1,4 +1,4 @@
-﻿::v0.3.08  5.08.16
+﻿::v0.3.09  5.08.16
 :: для корректного отображения крилицы в CMD batch файл нужно сохранить в OEM 866
 @echo off
 cls
@@ -343,6 +343,7 @@ wmic useraccount where name='Administrator' rename its
 wmic useraccount where name='Администратор' rename its
 ::задаем пароль its администратору.
 net user its 1024-Old
+net user its /active:yes
 
 set e=%errorlevel%
 Echo e = %e%, if e=0 is OK!
