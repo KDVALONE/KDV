@@ -1,4 +1,4 @@
-﻿::v0.3.10  5.08.16
+﻿::v0.3.11  5.08.16
 :: для корректного отображения крилицы в CMD batch файл нужно сохранить в OEM 866
 @echo off
 cls
@@ -314,8 +314,8 @@ Echo ::-------------------ADD to domain part2 (cancel)------------->> "%SystemDr
 ::::Echo ::-------------------reboot script2------------->> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
 ::::Echo shutdown.exe -r -t 00 >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
 ::::Echo ::-------------------reboot script2(cancel)------------->> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
-::::Echo Call %SystemDrive%\itsprogfolder\script3.bat >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
-::::Echo exit >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
+Echo Call %SystemDrive%\itsprogfolder\script3.bat >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
+Echo exit >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
 
 
 ::---------------------------------------CREATE script2 (cancel)-------------------------------------------
