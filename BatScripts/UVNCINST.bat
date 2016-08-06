@@ -1,4 +1,4 @@
-﻿::v0.3.09  5.08.16
+﻿::v0.3.10  5.08.16
 :: для корректного отображения крилицы в CMD batch файл нужно сохранить в OEM 866
 @echo off
 cls
@@ -234,11 +234,11 @@ Echo [%time:~,8%] BGinfo install
 set proga=%SystemDrive%\itsprogfolder\BGInfo\Bginfo.exe
 set bgi=%SystemDrive%\itsprogfolder\BGInfo\bginfo.bgi
 
-start /wait "" %proga% %bgi% /silent /timer:0
+start /wait "" %proga% %bgi% /silent /nolicprompt /timer:0
 set e14=%ERRORLEVEL%
 IF e14==0 ( Echo OK ) else ( Echo NO )
 :: создаем запись в реестре для авторана.
-REG ADD "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v BGINFO /t REG_SZ /d "%proga% %bgi% /timer:0" /f
+REG ADD "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v BGINFO /t REG_SZ /d "%proga% %bgi% /nolicprompt /timer:0" /f
 set e15=%ERRORLEVEL%
 IF e15==0 ( Echo OK ) else ( Echo NO )
 ::-------------------------------------install BG INFO cancel ----------------------------------------
@@ -334,7 +334,6 @@ Echo exit >> "%SystemDrive%\itsprogfolder\script3.bat"
 ::---------------------------------------Local Admin Rename------------------------------------------------
 ::batch file will be save in UTF-8 to correct use
 Echo rename local User ADMINISTRATOR, to ITS
-pause
 chcp 65001
 ::время пароля не ограничено
 wmic path Win32_UserAccount where Name='Администратор' set PasswordExpires=false
