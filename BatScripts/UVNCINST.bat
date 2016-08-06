@@ -1,4 +1,4 @@
-﻿::v0.3.11  5.08.16
+﻿::v0.3.12  5.08.16
 :: для корректного отображения крилицы в CMD batch файл нужно сохранить в OEM 866
 @echo off
 cls
@@ -323,7 +323,9 @@ Echo exit >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
 
 ::---------------------------------------CREATE script3 ---------------------------------------------------
 :: script3 delet FIAinstall directory end dell himself
-Echo rd "%SystemDrive%\itsprogfolder\FIAinstall /s /q >> "%SystemDrive%\itsprogfolder\script3.bat"
+set SD=%SystemDrive%
+Set SD2=\itsprogfolder\FIAinstall /s /q
+Echo rd %SD%%SD2% >> "%SystemDrive%\itsprogfolder\script3.bat"
 Echo ping 127.0.0.1 -n 5 > nul >> "%SystemDrive%\itsprogfolder\script3.bat"
 Echo shutdown.exe -r -t 05 >> "%SystemDrive%\itsprogfolder\script3.bat"
 ::Echo Set DELDISTR1OF2="%" >> "%SystemDrive%\itsprogfolder\script3.bat"
