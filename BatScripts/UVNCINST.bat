@@ -1,4 +1,4 @@
-﻿::v0.3.12  5.08.16
+﻿::v0.3.13  5.08.16
 :: для корректного отображения крилицы в CMD batch файл нужно сохранить в OEM 866
 @echo off
 cls
@@ -24,24 +24,6 @@ Set e1=%ERRORLEVEL%
 IF e1==0 ( Echo new pc name is %PCNAME% ) else ( Echo NO ) 
 )
 ::---------------------------------Rename PC cancel----------------------------------------------
-
-
-::---------------------------------Remote Desctop Access-----------------------------------------
-:::: разрешаем удаленный доступ к ПК, для разрешения правим реестр.
-Echo on Remote Desctop Access
-reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server" /v fDenyTSConnections /t REG_DWORD /d 0 /f
-Set e2=%ERRORLEVEL%
-IF e2==0 ( Echo OK ) else ( Echo NO )
-::---------------------------------Remote Desctop Access cancel-----------------------------------
-  
-  
-::---------------------------------Remote Assistance ---------------------------------------------
-::Включаем удаленный помощьник , для доступа правим реестр
-Echo on Remote Assistance
-reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server" /v fAllowToGetHelp /t REG_DWORD /d 1 /f 
-Set e3=%ERRORLEVEL%
-IF e3==0 ( Echo OK ) else ( Echo NO )
-::---------------------------------Remote Assistance cancel---------------------------------------
 
 
 ::---------------------------------add to Domain part1-------------------------------------------------
@@ -78,6 +60,25 @@ Set /p PSWD=""
 :: (!!!непонятно как отработать возварщаемо значение для повторной попытки ввода  домен, errorlevel здесь всегда 0!!!)
 :NOTADDTODMN
 ::---------------------------------add to Domain part1 cancel------------------------------------------
+
+
+::---------------------------------Remote Desctop Access-----------------------------------------
+:::: разрешаем удаленный доступ к ПК, для разрешения правим реестр.
+Echo on Remote Desctop Access
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server" /v fDenyTSConnections /t REG_DWORD /d 0 /f
+Set e2=%ERRORLEVEL%
+IF e2==0 ( Echo OK ) else ( Echo NO )
+::---------------------------------Remote Desctop Access cancel-----------------------------------
+  
+  
+::---------------------------------Remote Assistance ---------------------------------------------
+::Включаем удаленный помощьник , для доступа правим реестр
+Echo on Remote Assistance
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server" /v fAllowToGetHelp /t REG_DWORD /d 1 /f 
+Set e3=%ERRORLEVEL%
+IF e3==0 ( Echo OK ) else ( Echo NO )
+::---------------------------------Remote Assistance cancel---------------------------------------
+
 
 
 ::---------Создаем правило для входящего TCP порта 5900,5800-------------------------------------
