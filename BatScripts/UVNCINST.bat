@@ -326,9 +326,11 @@ Echo exit >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
 Echo rd "%SystemDrive%\itsprogfolder\FIAinstall /s /q >> "%SystemDrive%\itsprogfolder\script3.bat"
 Echo ping 127.0.0.1 -n 5 > nul >> "%SystemDrive%\itsprogfolder\script3.bat"
 Echo shutdown.exe -r -t 05 >> "%SystemDrive%\itsprogfolder\script3.bat"
-Echo del "%~F0" >> "%SystemDrive%\itsprogfolder\script3.bat"
+::Echo Set DELDISTR1OF2="%" >> "%SystemDrive%\itsprogfolder\script3.bat"
+::Echo Set DELDISTR2OF2="~F0">> "%SystemDrive%\itsprogfolder\script3.bat"
+::Echo del "%SystemDrive%\itsprogfolder\script3.bat" >> "%SystemDrive%\itsprogfolder\script3.bat"
 Echo exit >> "%SystemDrive%\itsprogfolder\script3.bat"
-::---------------------------------------CREATE script2 (cancel)-------------------------------------------
+::---------------------------------------CREATE script3 (cancel)-------------------------------------------
 
 
 ::---------------------------------------Local Admin Rename------------------------------------------------
