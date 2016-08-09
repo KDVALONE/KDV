@@ -1,4 +1,4 @@
-﻿::v0.3.15  8.08.16
+﻿::v0.3.16  9.08.16
 :: для корректного отображения крилицы в CMD batch файл нужно сохранить в OEM 866
 @echo off
 cls
@@ -282,19 +282,14 @@ Echo >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
 Echo ::-------------------delete autoran script2 in reestr ------------->> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
 Echo REG delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v SCRIPT2 /f >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
 Echo ::-------------------delete autoran script2 in reestr (cancel)------------->> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
-Echo >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
 
 
 Echo ::-------------------install FIA part2 on script2 ------------->> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
-Echo [%time:~,8%] install FIAgent >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
+Echo Echo  install FIAgent >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
 Echo %FIAbuf% >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
 Echo cd "C:\Program Files\FusionInventory-Agent\perl\bin" >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
 Echo perl fusioninventory-agent >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
-Echo e=%ERRORLEVEL% >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
-Echo IF e==0 ( Echo OK ) else ( Echo NO ) >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
 Echo ::-------------------install FIA part2 on script2 (cancel)------------->> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
-::пробел
-Echo >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
 
 ::---------------------------------------DeleteAutoEnerAfterRestart----------------------------------------
 Echo ::-----------------------------DeleteAutoEnerAfterRestart--------------------------- >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
@@ -459,7 +454,7 @@ Echo [%time:~,8%] Copy FIA x86 to "itsprogfolder\FIAinstall"
 copy "%~d0%~p0distr\FIA86.exe" "%SystemDrive%\itsprogfolder\FIAinstall\" /y
 set e1822=%ERRORLEVEL%
 IF e1822==0 ( Echo OK ) else ( Echo NO )
-set FIAbuf=start /wait "" "%SystemDrive%\itsprogfolder\FIAinstall\FIA64.exe" /S /acceptlicense /server="http://192.168.62.2/glpi/plugins/fusioninventory/" /add-firewall-exception
+set FIAbuf=start /wait "" "%SystemDrive%\itsprogfolder\FIAinstall\FIA86.exe" /S /acceptlicense /server="http://192.168.62.2/glpi/plugins/fusioninventory/" /add-firewall-exception
 
 :: Запуск установки FIAgent
 ::::Echo [%time:~,8%] Run perl FIA x86
