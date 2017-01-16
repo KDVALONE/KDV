@@ -1,4 +1,4 @@
-﻿::v0.88  20.07.16
+﻿::v0.3.17  9.08.16
 :: для корректного отображения крилицы в CMD batch файл нужно сохранить в OEM 866
 @echo off
 cls
@@ -10,20 +10,56 @@ TITLE IT BATCH FILE SILENT INSTALL
 
 ::---------------------------------Rename PC ----------------------------------------------------
 
-:::: Echo You PC name:"%computername%"
-:::: :EPCNAME
-:::: Echo Enter new PC name:
-:::: Set /P PCNAME=""
-:::: IF PCNAME=="" ( 
-:::: Echo New PC name not enter
-:::: GOTO :EPCNAME
-::::  ) else (  
-:::: wmic computersystem where name="%computername%" call rename "%PCNAME%"
-:::: cls
-:::: Set e1=%ERRORLEVEL%
-:::: IF e1==0 ( Echo new pc name is %PCNAME% ) else ( Echo NO ) 
-:::: )
+Echo You PC name:"%computername%"
+:EPCNAME
+Echo Enter new PC name:
+Set /P PCNAME=""
+IF PCNAME=="" ( 
+Echo New PC name not enter
+GOTO :EPCNAME
+) else (  
+wmic computersystem where name="%computername%" call rename "%PCNAME%"
+cls
+Set e1=%ERRORLEVEL%
+IF e1==0 ( Echo new pc name is %PCNAME% ) else ( Echo NO ) 
+)
 ::---------------------------------Rename PC cancel----------------------------------------------
+
+
+::---------------------------------add to Domain part1-------------------------------------------------
+::
+:QTODMN
+Echo Add PC to Domain: gb1.korolev.local (Y/N)? 
+Set /p TDMN=""
+if %TDMN%==y ( GOTO :ADDTODMN ) else ( GOTO :TODMN )
+:TODMN
+if %TDMN%==Y ( GOTO :ADDTODMN ) else ( GOTO :NTODMN )
+:NTODMN
+if %TDMN%==n ( GOTO :NOTADDTODMN ) else ( GOTO :NTODMN2 )
+:NTODMN2
+if %TDMN%==N ( GOTO :NOTADDTODMN ) else ( GOTO :INCORRECT )
+:INCORRECT
+Echo incorrected symbol, please enter Y or N 
+GOTO :QTODMN
+:ADDTODMN
+Echo Enter domain admin user ( example: User777 ):
+Set /p admin=""
+Echo Enter domain admin user password:
+Set /p PSWD=""
+
+:: вызов утилиты wmic /интерактивный режим выкл(при выкл.режиме после выполнения одной команды wmic, управление возвращается к cls windows (PROMT))).
+:: система где "имя пк" вызвать метод JoinDomainOrWorkgroup (заведения в домен),с параметрами точка хода=1 (если 1 то к домену, строки нет - к раб.группе),
+:: Name="имя домена/рабочей группы", имя пользователья домена с правами присоединения, пароль.  
+:::: wmic /interactive:off ComputerSystem Where "name = '%computername%'" call JoinDomainOrWorkgroup FJoinOptions=1 Name="gb1.korolev.local" UserName="%admin%@gb1.korolev.local"  Password="%PSWD%" 
+
+:: по умолчанию в cls отобразиться instance_PARMETRS value=0 (где 0 успех)
+
+:::: Echo ******************************************************************************
+:::: Echo IF "instance_PARMETRS value=0" (see top, before) , PC add to domain successful
+
+:: (!!!непонятно как отработать возварщаемо значение для повторной попытки ввода  домен, errorlevel здесь всегда 0!!!)
+:NOTADDTODMN
+::---------------------------------add to Domain part1 cancel------------------------------------------
 
 
 ::---------------------------------Remote Desctop Access-----------------------------------------
@@ -43,40 +79,6 @@ Set e3=%ERRORLEVEL%
 IF e3==0 ( Echo OK ) else ( Echo NO )
 ::---------------------------------Remote Assistance cancel---------------------------------------
 
-
-::---------------------------------add to Domain-------------------------------------------------
-::
-:::: :QTODMN
-:::: Echo Add PC to Domain: gb1.korolev.local (Y/N)? 
-:::: Set /p TDMN=""
-:::: if %TDMN%==y ( GOTO :ADDTODMN ) else ( GOTO :TODMN )
-:::: :TODMN
-:::: if %TDMN%==Y ( GOTO :ADDTODMN ) else ( GOTO :NTODMN )
-:::: :NTODMN
-:::: if %TDMN%==n ( GOTO :NOTADDTODMN ) else ( GOTO :NTODMN2 )
-:::: :NTODMN2
-::::if %TDMN%==N ( GOTO :NOTADDTODMN ) else ( GOTO :INCORRECT )
-:::: :INCORRECT
-:::: Echo incorrected symbol, please enter Y or N 
-:::: GOTO :QTODMN
-:::: :ADDTODMN
-:::: Echo Enter domain admin user ( example: User777 ):
-:::: Set /p admin=""
-:::: Echo Enter domain admin user password:
-:::: Set /p PSWD=""
-:: вызов утилиты wmic /интерактивный режим выкл(при выкл.режиме после выполнения одной команды wmic, управление возвращается к cls windows (PROMT))).
-:: система где "имя пк" вызвать метод JoinDomainOrWorkgroup (заведения в домен),с параметрами точка хода=1 (если 1 то к домену, строки нет - к раб.группе),
-:: Name="имя домена/рабочей группы", имя пользователья домена с правами присоединения, пароль.  
-:::: wmic /interactive:off ComputerSystem Where "name = '%computername%'" call JoinDomainOrWorkgroup FJoinOptions=1 Name="gb1.korolev.local" UserName="%admin%@gb1.korolev.local"  Password="%PSWD%" 
-
-:: по умолчанию в cls отобразиться instance_PARMETRS value=0 (где 0 успех)
-
-:::: Echo ******************************************************************************
-:::: Echo IF "instance_PARMETRS value=0" (see top, before) , PC add to domain successful
-
-:: (!!!непонятно как отработать возварщаемо значение для повторной попытки ввода  домен, errorlevel здесь всегда 0!!!)
-:::: :NOTADDTODMN
-::---------------------------------add to Domain cancel------------------------------------------
 
 
 ::---------Создаем правило для входящего TCP порта 5900,5800-------------------------------------
@@ -147,6 +149,27 @@ IF EXIST "%systemdrive%"\progra~1\"%DIR%" ( rd %systemdrive%\progra~1\"%DIR%" /s
 ::--------------------------------Delete dir "uvnc bvba" cancel-------------------------------- 
 
 
+::--------------------------------Delete dir "itsprogfolder\uvnc bvba" ------------------------------------- 
+Echo [%time:~,8%] delete directory "itsprogfolder\uvnc bvba"
+Set DIR=uvnc bvba
+IF EXIST "%systemdrive%"\itsprogfolder\"%DIR%" ( rd %systemdrive%\itsprogfolder\"%DIR%" /s /q )
+::--------------------------------Delete dir "itsprogfolder\uvnc bvba" cancel-------------------------------- 
+
+
+::------------------------------------Create itsprogfolder --------------------------------------
+::Создаем папку для установки всех программ
+Echo Create "itsprogfolder" on system drive
+IF EXIST "%systemdrive%"\itsprogfolder\ ( 
+Echo NO - folder exist
+goto :next1 
+) else (
+md "%SystemDrive%\itsprogfolder\"
+Echo OK
+)
+:next1
+::------------------------------------Create itsprogfolder (cancel)--------------------------------
+
+
 ::--------------------------------Start install UVNC ------------------------------------------ 
 echo [%time:~,8%] start install UVNC
 IF EXIST "%ProgramFiles(x86)%" ( CALL :INSTUVNC64 ) else ( CALL :INSTUVNC86 )
@@ -174,10 +197,19 @@ IF e10==0 ( Echo OK ) else ( Echo NO )
 ::Копируем .ini файл с параметрами запуска в директрорию с программой
 Echo [%time:~,8%] copy .INI seting file to directory
 Set DIR2="uvnc bvba"
-copy "%~d0%~p0distr\ultravnc.ini" "%SystemDrive%\progra~1\"%DIR2%"\UltraVNC\" /y
+copy "%~d0%~p0distr\ultravnc.ini" "%SystemDrive%\itsprogfolder\"%DIR2%"\UltraVNC\" /y
 set e11=%ERRORLEVEL%
 IF e11==0 ( Echo OK ) else ( Echo NO )
 ::----------------------------Copy .ini to core dir UVNC cancel----------------------------------
+
+
+::(не нужно)-----------------------------start winvnc service------------------------------------------------
+:: запускаем службу UVNC
+::Echo [%time:~,8%] start WINVNC service
+::net start winvnc
+::set e12=%ERRORLEVEL%
+::IF e12==0 ( Echo OK ) else ( Echo NO )
+::-----------------------------start winvnc service cancel-----------------------------------------
 
 
 ::-----------------------------start UVNC service------------------------------------------------
@@ -189,6 +221,30 @@ IF e12==0 ( Echo OK ) else ( Echo NO )
 ::-----------------------------start UVNC service cancel-----------------------------------------
 
 
+::-------------------------------------install BG INFO ---------------------------------------------
+Echo [%time:~,8%] delete directory "BGINFO"
+IF EXIST "%systemdrive%"\progra~1\BGInfo ( rd %systemdrive%\progra~1\BGInfo /s /q )
+IF EXIST "%systemdrive%"\itsprogfolder\BGInfo ( rd %systemdrive%\itsprogfolder\BGInfo /s /q )
+Echo [%time:~,8%] create dir 
+md "%SystemDrive%\itsprogfolder\BGInfo\"
+
+Echo [%time:~,8%] copy distrib BGINFO
+copy "%~d0%~p0distr\BGInfo\" "%SystemDrive%\itsprogfolder\BGInfo\" /y
+:: устанавливаем, ждем выполнения, с параметром таймера 0 (тоесть выполнение при запусе моментально)
+Echo [%time:~,8%] BGinfo install
+set proga=%SystemDrive%\itsprogfolder\BGInfo\Bginfo.exe
+set bgi=%SystemDrive%\itsprogfolder\BGInfo\bginfo.bgi
+
+start /wait "" %proga% %bgi% /silent /nolicprompt /timer:0
+set e14=%ERRORLEVEL%
+IF e14==0 ( Echo OK ) else ( Echo NO )
+:: создаем запись в реестре для авторана.
+REG ADD "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v BGINFO /t REG_SZ /d "%proga% %bgi% /nolicprompt /timer:0" /f
+set e15=%ERRORLEVEL%
+IF e15==0 ( Echo OK ) else ( Echo NO )
+::-------------------------------------install BG INFO cancel ----------------------------------------
+
+
 ::---------Создаем правило для входящего TCP порта 62354-----------------------------------------
 :: Создаем правило для FI
 Echo [%time:~,8%] addfirewall rule UTP "FI62354"
@@ -198,37 +254,125 @@ IF e13==0 ( Echo OK ) else ( Echo NO )
 ::------------------------------------TCP 62354 cancel--------------------------------------------
 
 
-::------------------------------------install FI agent---------------------------------------------
+::------------------------------------1step install FI agent---------------------------------------------
 :: начинаем устновку FI
-Echo [%time:~,8%] stаrt install Fusion inventory Agent
+Echo [%time:~,8%] stаrt install Fusion inventory Agent:
+Echo [%time:~,8%] Create dir "itsprogfolder\FIAinstall"
+IF EXIST "%SystemDrive%"\itsprogfolder\FIAinstall\ ( rd %SystemDrive%\itsprogfolder\FIAinstall\ /s /q )
+IF EXIST "%SystemDrive%"\Program Files\FIAinstall\ ( rd %SystemDrive%\Program Files\FIAinstall\ /s /q )
+md "%SystemDrive%\itsprogfolder\FIAinstall\"
+
 IF EXIST "%ProgramFiles(x86)%" ( CALL :FI64 ) else ( CALL :FI86 )
-::------------------------------------install FI cancel---------------------------------------------
+::------------------------------------1step install FI cancel---------------------------------------------
 
 
-::-------------------------------------install BG INFO ---------------------------------------------
-Echo [%time:~,8%] delete directory "BGINFO"
-IF EXIST "%systemdrive%"\progra~1\BGInfo ( rd %systemdrive%\progra~1\BGInfo /s /q )
- 
-Echo [%time:~,8%] create dir 
-md "%SystemDrive%\Program Files\BGInfo\"
+::---------------------------------------CREATE script2---------------------------------------------------
+Echo Create script2
+::add to reestr autoran script2
+set DISTR=%SystemDrive%\itsprogfolder\FIAinstall\script2.bat
+set PARAM=/silent /sp- 
+REG ADD "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v SCRIPT2 /t REG_SZ /d "%DISTR% %PARAM% " /f
 
-Echo [%time:~,8%] copy distrib BGINFO
-copy "%~d0%~p0distr\BGInfo\" "%SystemDrive%\Program Files\BGInfo\" /y
-:: устанавливаем, ждем выполнения, с параметром таймера 0 (тоесть выполнение при запусе моментально)
-Echo [%time:~,8%] BGinfo install
-set proga=%SystemDrive%\Program Files\BGInfo\Bginfo.exe
-set bgi=%SystemDrive%\Program Files\BGInfo\bginfo.bgi
+::создание скрипта в директории itsprogfolder\FIAinstall для устновки FIA и ввода в домен, а так же зачистки после себя фалов
+Echo @Echo off >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
+Echo cls >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
+::пробел
+Echo >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
+::delete autoran script2 in reestr
+Echo ::-------------------delete autoran script2 in reestr ------------->> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
+Echo REG delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v SCRIPT2 /f >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
+Echo ::-------------------delete autoran script2 in reestr (cancel)------------->> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
 
-start /wait "" %proga% %bgi% /silent /timer:0
-set e14=%ERRORLEVEL%
-IF e14==0 ( Echo OK ) else ( Echo NO )
-:: создаем запись в реестре для авторана.
-REG ADD "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v BGINFO /t REG_SZ /d "%proga% %bgi% /timer:0" /f
-set e15=%ERRORLEVEL%
-IF e15==0 ( Echo OK ) else ( Echo NO )
-::-------------------------------------install BG INFO cancel ----------------------------------------
 
-Echo [%time:~,8%] SCRIPT FINISHED WORK
+Echo ::-------------------install FIA part2 on script2 ------------->> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
+Echo Echo  install FIAgent >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
+Echo %FIAbuf% >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
+Echo cd "C:\Program Files\FusionInventory-Agent\perl\bin" >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
+Echo perl fusioninventory-agent >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
+Echo ::-------------------install FIA part2 on script2 (cancel)------------->> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
+
+::---------------------------------------DeleteAutoEnerAfterRestart----------------------------------------
+Echo ::-----------------------------DeleteAutoEnerAfterRestart--------------------------- >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
+Echo REG Delete "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" /v DefaultPassword REG_SZ /f >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
+Echo REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" /v AutoAdminLogon /t REG_SZ /d "0" /f >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
+Echo ::-----------------------------DeleteAutoEnerAfterRestart(cancel)--------------------------- >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
+
+::---------------------------------------DeleteAutoEnerAfterRestart(cancel)--------------------------------
+
+Echo ::-----------------------------ADD to domain part2--------------------------- >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
+Echo Add to domain part 2 >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
+
+Echo wmic /interactive:off ComputerSystem Where "name = '%PCNAME%'" call JoinDomainOrWorkgroup FJoinOptions=3 Name="gb1.korolev.local" UserName="%admin%@gb1.korolev.local"  Password="%PSWD%" >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
+Echo ::-------------------ADD to domain part2 (cancel)------------->> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
+
+::Скорее всего ПЕРЕНЕСТИ В скрипт3
+::::Echo >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
+::::Echo ::-------------------reboot script2------------->> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
+::::Echo shutdown.exe -r -t 00 >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
+::::Echo ::-------------------reboot script2(cancel)------------->> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
+Echo Call %SystemDrive%\itsprogfolder\script3.bat >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
+Echo exit >> "%SystemDrive%\itsprogfolder\FIAinstall\script2.bat"
+
+
+::---------------------------------------CREATE script2 (cancel)-------------------------------------------
+
+
+::---------------------------------------CREATE script3 ---------------------------------------------------
+:: script3 delet FIAinstall directory end dell himself
+set SD=%SystemDrive%
+Set SD2=\itsprogfolder\FIAinstall /s /q
+Echo rd %SD%%SD2% >> "%SystemDrive%\itsprogfolder\script3.bat"
+::Echo ping 127.0.0.1 -n 5 > nul >> "%SystemDrive%\itsprogfolder\script3.bat"
+Echo shutdown.exe -r -t 05 >> "%SystemDrive%\itsprogfolder\script3.bat"
+::Echo Set DELDISTR1OF2="%" >> "%SystemDrive%\itsprogfolder\script3.bat"
+::Echo Set DELDISTR2OF2="~F0">> "%SystemDrive%\itsprogfolder\script3.bat"
+::Echo del "%SystemDrive%\itsprogfolder\script3.bat" >> "%SystemDrive%\itsprogfolder\script3.bat"
+Echo exit >> "%SystemDrive%\itsprogfolder\script3.bat"
+::---------------------------------------CREATE script3 (cancel)-------------------------------------------
+
+
+::---------------------------------------Local Admin Rename------------------------------------------------
+::batch file will be save in UTF-8 to correct use
+Echo rename local User ADMINISTRATOR, to ITS
+chcp 65001
+::время пароля не ограничено
+wmic path Win32_UserAccount where Name='Администратор' set PasswordExpires=false
+wmic path Win32_UserAccount where Name='Administrator' set PasswordExpires=false
+wmic useraccount where name='Administrator' rename its
+wmic useraccount where name='Администратор' rename its
+::задаем пароль its администратору.
+net user its 1024-Old
+net user its /active:yes
+
+set e=%errorlevel%
+Echo e = %e%, if e=0 is OK!
+::---------------------------------------Local Admin Rename(cancel)----------------------------------------
+
+
+::---------------------------------------AutoEnerAfterRestart on its----------------------------------------
+REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" /v DefaultPassword /t REG_SZ /d "1024-Old" /f
+REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" /v AutoAdminLogon /t REG_SZ /d "1" /f
+REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" /v DefaultUserName /t REG_SZ /d "its" /f
+
+::---------------------------------------AutoEnerAfterRestart on its(cancel)--------------------------------
+
+
+::---------------------------------------reboot ------------------------------------------------------------- 
+Echo [%time:~,8%] SCRIPT1 FINISHED WORK AND WILL BE REBOOT AFTER 3 SECONDS
+Echo [%time:~,8%] 3
+ping 127.0.0.1 -n 2 > nul 
+Echo [%time:~,8%] 2
+ping 127.0.0.1 -n 2 > nul 
+Echo [%time:~,8%] 1
+ping 127.0.0.1 -n 2 > nul 
+
+
+
+shutdown.exe -r -t 00
+::---------------------------------------reboot(cancel)----------------------------------------------------
+::---------------------------------------END---------------------------------------------------------------
+
+
 pause
 
 EXIT
@@ -254,27 +398,68 @@ GOTO :EOF
 
 
 :FI64
-Echo [%time:~,8%] Start FIA x64
-start /wait "" "%~d0%~p0distr\FIA64.exe" /S /acceptlicense /server="http://192.168.62.2/glpi/plugins/fusioninventory/" /add-firewall-exception
+::::Echo [%time:~,8%] Start FIA x64
+::::start /wait "" "%~d0%~p0distr\FIA64.exe" /S /acceptlicense /server="http://192.168.62.2/glpi/plugins/fusioninventory/" /add-firewall-exception
+::ниже код для копирования в директорию и установка полсе перезагрузки
+Echo [%time:~,8%] Copy FIA x64 to "itsprogfolder\FIAinstall"
+copy "%~d0%~p0distr\FIA64.exe" "%SystemDrive%\itsprogfolder\FIAinstall\" /y
 set e18=%ERRORLEVEL%
 IF e18==0 ( Echo OK ) else ( Echo NO )
+:::: set FIAINST64=%SystemDrive%\itsprogfolder\FIAinstall\FIA64.exe
+::::  set FIAPARAM64=/S /acceptlicense /server="http://192.168.62.2/glpi/plugins/fusioninventory/" /add-firewall-exception
+::::REG ADD "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v FIAAUTOINSTALL /t REG_SZ /d "%FIAINST64% %FIAPARAM64% " /f
 
-Echo [%time:~,8%] Run perl FIA x64
-cd "C:\Program Files\FusionInventory-Agent\perl\bin"
-perl fusioninventory-agent
-set e19=%ERRORLEVEL%
-IF e19==0 ( Echo OK ) else ( Echo NO )
+::add parametrs to send  wen create script2
+set FIAbuf=start /wait "" "%SystemDrive%\itsprogfolder\FIAinstall\FIA64.exe" /S /acceptlicense /server="http://192.168.62.2/glpi/plugins/fusioninventory/" /add-firewall-exception
+
+::::Echo [%time:~,8%] Copy FIAAUTOINST.bat to Folder "Programm Files\FIAinstall"
+:::: Echo [%time:~,8%] Create SCRIPT2 to autoinstall FIAgent
+
+::::copy "%~d0%~p0distr\FIAAUTOINST.bat" "%SystemDrive%\Program Files\FIAinstall\" /y
+
+
+:: Запуск установки FIAgent
+::::Echo [%time:~,8%] Run perl FIA x64
+::::cd "C:\Program Files\FusionInventory-Agent\perl\bin"
+::::perl fusioninventory-agent
+::::set e19=%ERRORLEVEL%
+::::IF e19==0 ( Echo OK ) else ( Echo NO )
 GOTO :EOF
 
 :FI86
-Echo [%time:~,8%] Start FIA x86
-start /wait "" "%~d0%~p0distr\FIA86.exe" /S /acceptlicense /server="http://192.168.62.2/glpi/plugins/fusioninventory/" /add-firewall-exception
-set e20=%ERRORLEVEL%
-IF e20==0 ( Echo OK ) else ( Echo NO )
 
-Echo [%time:~,8%] Run perl FIA x86
-cd "C:\Program Files\FusionInventory-Agent\perl\bin"
-perl fusioninventory-agent
-set e21=%ERRORLEVEL%
-IF e21==0 ( Echo OK ) else ( Echo NO )
+::::Echo [%time:~,8%] Start FIA x86
+::::start /wait "" "%~d0%~p0distr\FIA86.exe" /S /acceptlicense /server="http://192.168.62.2/glpi/plugins/fusioninventory/" /add-firewall-exception
+::::set e20=%ERRORLEVEL%
+::::IF e20==0 ( Echo OK ) else ( Echo NO )
+::ниже код для копирования в директорию и установка полсе перезагрузки
+
+::::Echo [%time:~,8%] Copy FIA x86 to Folder "Programm Files\FIAinstall"
+::::md "%SystemDrive%\Program Files\FIAinstall\"
+::::copy "%~d0%~p0distr\FIA86.exe" "%SystemDrive%\Program Files\FIAinstall\" /y
+::::set e182=%ERRORLEVEL%
+::::IF e182==0 ( Echo OK ) else ( Echo NO )
+
+::::Echo [%time:~,8%] Copy FIAAUTOINST.bat to Folder "Programm Files\FIAinstall"
+::::copy "%~d0%~p0distr\FIAAUTOINST.bat" "%SystemDrive%\Program Files\FIAinstall\" /y
+::::set e182=%ERRORLEVEL%
+::::IF e182==0 ( Echo OK ) else ( Echo NO )
+::__________________________________________________
+
+Echo [%time:~,8%] Copy FIA x86 to "itsprogfolder\FIAinstall"
+copy "%~d0%~p0distr\FIA86.exe" "%SystemDrive%\itsprogfolder\FIAinstall\" /y
+set e182=%ERRORLEVEL%
+IF e182==0 ( Echo OK ) else ( Echo NO )
+Echo [%time:~,8%] Copy FIA x86 to "itsprogfolder\FIAinstall"
+copy "%~d0%~p0distr\FIA86.exe" "%SystemDrive%\itsprogfolder\FIAinstall\" /y
+set e1822=%ERRORLEVEL%
+IF e1822==0 ( Echo OK ) else ( Echo NO )
+set FIAbuf=start /wait "" "%SystemDrive%\itsprogfolder\FIAinstall\FIA86.exe" /S /acceptlicense /server="http://192.168.62.2/glpi/plugins/fusioninventory/" /add-firewall-exception
+
+:: Запуск установки FIAgent
+::::Echo [%time:~,8%] Run perl FIA x86
+::::cd "C:\Program Files\FusionInventory-Agent\perl\bin"
+::::perl fusioninventory-agent
+::::set e21=%ERRORLEVEL%
+::::IF e21==0 ( Echo OK ) else ( Echo NO )
 GOTO :EOF
