@@ -45,10 +45,11 @@ if($slider_setting['home_banner_enabled'] == 0 ) {
 		*-->
 		
 		</div>  
-		<ul class="carou-direction-nav">
+		<!--<ul class="carou-direction-nav">
 			<li><a class="carou-prev" href="#carousel-example-generic" data-slide="prev"></a></li>
 			<li><a class="carou-next" href="#carousel-example-generic" data-slide="next"></a></li>
-		</ul>		
+		</ul>
+!-->		
 		<?php 
 			}
 			
