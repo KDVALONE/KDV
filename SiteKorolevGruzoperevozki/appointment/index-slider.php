@@ -11,11 +11,12 @@ if($slider_setting['home_banner_enabled'] == 0 ) {
 		<?php
 			$query_args = array();
 			if($slider_setting['slider_radio'] == 'demo') { ?>
-		<ol class="carousel-indicators">
+		<!--<ol class="carousel-indicators">
 		<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
 		<li data-target="#carousel-example-generic" data-slide-to="1"></li>
 		<li data-target="#carousel-example-generic" data-slide-to="2"></li>
 		</ol>
+		!-->
 		<div class="carousel-inner" role="listbox">
 		<div class="item active">
 		   <img src="<?php echo WEBRITI_TEMPLATE_DIR_URI; ?>/images/slide/slide1.jpg">
@@ -67,7 +68,8 @@ if($slider_setting['home_banner_enabled'] == 0 ) {
 
 			$the_query = new WP_Query($query_args);	
 		?>
-			<ol class="carousel-indicators">
+			 <ol class="carousel-indicators"> 
+			
 				<?php
 				$i=0;
 				if ( $the_query->have_posts() ) {
