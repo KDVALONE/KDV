@@ -25,7 +25,7 @@ if($slider_setting['home_banner_enabled'] == 0 ) {
 				<div class="slide-btn-area-sm"><a href="#" class="slide-btn-sm"><?php _e('Read More','appointment'); ?></a></div>		
 			</div>
 		</div>  
-		//Слайдер убирать от сюда 
+	<!-- comment /*	//Слайдер убирать от сюда 
 		<div class="item">
 		   <img src="<?php echo WEBRITI_TEMPLATE_DIR_URI; ?>/images/slide/slide2.jpg">
 			<div class="container slide-caption">
@@ -42,7 +42,8 @@ if($slider_setting['home_banner_enabled'] == 0 ) {
 				<div class="slide-btn-area-sm"><a href="#" class="slide-btn-sm"><?php _e('Read More','appointment'); ?></a></div>		
 			</div>	
 		</div>
-		//до сюда
+		*-->
+		
 		</div>  
 		<ul class="carou-direction-nav">
 			<li><a class="carou-prev" href="#carousel-example-generic" data-slide="prev"></a></li>
