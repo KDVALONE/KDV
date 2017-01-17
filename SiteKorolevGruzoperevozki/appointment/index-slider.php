@@ -23,7 +23,8 @@ if($slider_setting['home_banner_enabled'] == 0 ) {
 			<div class="container slide-caption">
 				<div class="slide-text-bg1"><h2><?php _e('Грузоперевозки по Москве и области по оптимальным ценам','appointment'); ?></h2></div>
 				<div class="slide-text-bg2"><span><?php _e('Выгодные и быстрые грузоперевозки! Подача машины от 500 рублей, последующие 2 часа по 350 рублей за час','appointment'); ?></span></div>	
-				<div class="slide-btn-area-sm"><a href="#" class="slide-btn-sm"><?php _e('<span style:="fontsize:125%;">8 888 888 88 88</span>','appointment'); ?></a></div>		
+				<div class="slide-btn-area-sm"><div class="callout-btn2">
+<i class="fa fa-phone"></i>   8 977-100-79-95</div></div>		
 			</div>
 		</div>  
 	<!-- comment /*	//Слайдер убирать от сюда 
