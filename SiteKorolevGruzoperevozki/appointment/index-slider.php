@@ -19,11 +19,11 @@ if($slider_setting['home_banner_enabled'] == 0 ) {
 		!-->
 		<div class="carousel-inner" role="listbox">
 		<div class="item active">
-		   <img src="<?php echo WEBRITI_TEMPLATE_DIR_URI; ?>/images/slide/slide1.jpg">
+		   <img src="<?php echo WEBRITI_TEMPLATE_DIR_URI; ?>/images/slide/slide12.jpg">
 			<div class="container slide-caption">
-				<div class="slide-text-bg1"><h2><?php _e('Powerful Bootstrap Theme','appointment'); ?></h2></div>
-				<div class="slide-text-bg2"><span><?php _e('This is a very powerful theme can be used for any type of business. Layout is clean and elegant.','appointment'); ?></span></div>	
-				<div class="slide-btn-area-sm"><a href="#" class="slide-btn-sm"><?php _e('Read More','appointment'); ?></a></div>		
+				<div class="slide-text-bg1"><h2><?php _e('Грузоперевозки по Москве и области по оптимальным ценам','appointment'); ?></h2></div>
+				<div class="slide-text-bg2"><span><?php _e('Выгодные и быстрые грузоперевозки! Подача машины от 500 рублей, последующие 2 часа по 350 рублей за час','appointment'); ?></span></div>	
+				<div class="slide-btn-area-sm"><a href="#" class="slide-btn-sm"><?php _e('<span style:="fontsize:125%;">8 888 888 88 88</span>','appointment'); ?></a></div>		
 			</div>
 		</div>  
 	<!-- comment /*	//Слайдер убирать от сюда 
