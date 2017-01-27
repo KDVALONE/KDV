@@ -11,21 +11,23 @@ if($slider_setting['home_banner_enabled'] == 0 ) {
 		<?php
 			$query_args = array();
 			if($slider_setting['slider_radio'] == 'demo') { ?>
-		<ol class="carousel-indicators">
+		<!--<ol class="carousel-indicators">
 		<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
 		<li data-target="#carousel-example-generic" data-slide-to="1"></li>
 		<li data-target="#carousel-example-generic" data-slide-to="2"></li>
 		</ol>
+		!-->
 		<div class="carousel-inner" role="listbox">
 		<div class="item active">
-		   <img src="<?php echo WEBRITI_TEMPLATE_DIR_URI; ?>/images/slide/slide1.jpg">
+		   <img src="<?php echo WEBRITI_TEMPLATE_DIR_URI; ?>/images/slide/slide12.jpg">
 			<div class="container slide-caption">
-				<div class="slide-text-bg1"><h2><?php _e('Powerful Bootstrap Theme','appointment'); ?></h2></div>
-				<div class="slide-text-bg2"><span><?php _e('This is a very powerful theme can be used for any type of business. Layout is clean and elegant.','appointment'); ?></span></div>	
-				<div class="slide-btn-area-sm"><a href="#" class="slide-btn-sm"><?php _e('Read More','appointment'); ?></a></div>		
+				<div class="slide-text-bg1"><h2><?php _e('Грузоперевозки по Москве и области по оптимальным ценам','appointment'); ?></h2></div>
+				<div class="slide-text-bg2"><span><?php _e('Выгодные и быстрые грузоперевозки! Подача машины от 500 рублей, последующие 2 часа по 350 рублей за час','appointment'); ?></span></div>	
+				<div class="slide-btn-area-sm"><div class="callout-btn2">
+<i class="fa fa-phone"></i>   8 977-100-79-95</div></div>		
 			</div>
 		</div>  
-		//Слайдер убирать от сюда 
+	<!-- comment /*	//Слайдер убирать от сюда 
 		<div class="item">
 		   <img src="<?php echo WEBRITI_TEMPLATE_DIR_URI; ?>/images/slide/slide2.jpg">
 			<div class="container slide-caption">
@@ -42,12 +44,14 @@ if($slider_setting['home_banner_enabled'] == 0 ) {
 				<div class="slide-btn-area-sm"><a href="#" class="slide-btn-sm"><?php _e('Read More','appointment'); ?></a></div>		
 			</div>	
 		</div>
-		//до сюда
+		*-->
+		
 		</div>  
-		<ul class="carou-direction-nav">
+		<!--<ul class="carou-direction-nav">
 			<li><a class="carou-prev" href="#carousel-example-generic" data-slide="prev"></a></li>
 			<li><a class="carou-next" href="#carousel-example-generic" data-slide="next"></a></li>
-		</ul>		
+		</ul>
+!-->		
 		<?php 
 			}
 			
@@ -65,7 +69,8 @@ if($slider_setting['home_banner_enabled'] == 0 ) {
 
 			$the_query = new WP_Query($query_args);	
 		?>
-			<ol class="carousel-indicators">
+			 <ol class="carousel-indicators"> 
+			
 				<?php
 				$i=0;
 				if ( $the_query->have_posts() ) {
