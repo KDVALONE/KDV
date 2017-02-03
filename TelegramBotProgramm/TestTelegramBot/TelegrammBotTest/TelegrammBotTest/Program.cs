@@ -31,7 +31,7 @@ namespace TelegrammBotTest
             {
                 Console.WriteLine("Запрос обновление {0}", LastUpdateID + 1);
 
-                string response = webClient.DownloadString("https://api.telegramm.org/bot" + Token + "/getUpdates" + "?offset=" + (LastUpdateID + 1));
+                string response = webClient.DownloadString("https://api.telegram.org/bot" + Token + "/getUpdates" + "?offset=" + (LastUpdateID + 1));
 
                 var N = JSON.Parse(response);
 

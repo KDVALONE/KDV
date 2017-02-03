@@ -1,0 +1,6 @@
+D:\GitLocalRepo\TelegramBotProgramm\TestTelegramBot\TelegrammBotTest\TelegrammBotTest\bin\Debug\TelegrammBotTest.exe.config
+D:\GitLocalRepo\TelegramBotProgramm\TestTelegramBot\TelegrammBotTest\TelegrammBotTest\bin\Debug\TelegrammBotTest.exe
+D:\GitLocalRepo\TelegramBotProgramm\TestTelegramBot\TelegrammBotTest\TelegrammBotTest\bin\Debug\TelegrammBotTest.pdb
+D:\GitLocalRepo\TelegramBotProgramm\TestTelegramBot\TelegrammBotTest\TelegrammBotTest\obj\Debug\TelegrammBotTest.csprojResolveAssemblyReference.cache
+D:\GitLocalRepo\TelegramBotProgramm\TestTelegramBot\TelegrammBotTest\TelegrammBotTest\obj\Debug\TelegrammBotTest.exe
+D:\GitLocalRepo\TelegramBotProgramm\TestTelegramBot\TelegrammBotTest\TelegrammBotTest\obj\Debug\TelegrammBotTest.pdb
