@@ -1,7 +1,4 @@
-﻿
-
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -1292,9 +1289,13 @@ namespace TelegramBotProgramm2
         public class TelegramRequest
         {
             // класс обработчик запросов
-            
-            int LastUpdateID = 0;
 
+            public string _token;
+            public TelegramRequest(string Token)
+            {
+                _token = Token;
+            }
+            int LastUpdateID = 0;
             public event Response ResponseRecived; //событие, при получение ответа
             ParameterResponse e = new ParameterResponse();
 
@@ -1304,7 +1305,7 @@ namespace TelegramBotProgramm2
                 {
                     using (WebClient webClient = new WebClient())
                     {
-                        string response = webClient.DownloadString("https://api.telegram.org/bot" + Token + "/getUpdates?offset=" + (LastUpdateID + 1)); //переменная для ответа
+                        string response = webClient.DownloadString("https://api.telegram.org/bot" + _token + "/getUpdates?offset=" + (LastUpdateID + 1)); //переменная для ответа
                         if (response.Length <= 23)
                             continue;
                         var N = JSON.Parse(response);
