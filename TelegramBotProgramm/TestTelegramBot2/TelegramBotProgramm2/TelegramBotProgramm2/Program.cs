@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net;
 using SimpleJSON;
-
+using System.Threading;
 
 namespace TelegramBotProgramm2
 {
@@ -15,6 +15,15 @@ namespace TelegramBotProgramm2
         {
             TelegramRequest Tr = new TelegramRequest();
             Tr.ResponseRecived += Tr_ResponseRecived;
+            Thread thr = new Thread(Tr.GetUpdate);
+            thr.IsBackground = true;
+
+            while (true)
+            {
+                Console.WriteLine("Фоновый поток работает");
+                Thread.Sleep(500);
+
+            }
             Tr.GetUpdate();
         }
 
