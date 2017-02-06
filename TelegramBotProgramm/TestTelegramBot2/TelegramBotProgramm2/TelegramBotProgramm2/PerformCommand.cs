@@ -1273,11 +1273,6 @@ namespace TelegramBotProgramm2
     }
     namespace Reqest
     {
-        private static void Tr_ResponseRecived(object sender, ParameterResponse e)
-        {
-            Console.WriteLine("{0}:{1} chatId:{2}", e.name, e.message, e.chatId);
-        }
-
         public delegate void Response(object sender, ParameterResponse e);
         public class ParameterResponse : EventArgs
         {
