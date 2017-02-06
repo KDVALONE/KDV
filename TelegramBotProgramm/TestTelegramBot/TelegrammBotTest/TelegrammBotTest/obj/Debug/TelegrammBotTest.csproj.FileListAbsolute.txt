@@ -4,3 +4,6 @@ D:\GitLocalRepo\TelegramBotProgramm\TestTelegramBot\TelegrammBotTest\TelegrammBo
 D:\GitLocalRepo\TelegramBotProgramm\TestTelegramBot\TelegrammBotTest\TelegrammBotTest\obj\Debug\TelegrammBotTest.csprojResolveAssemblyReference.cache
 D:\GitLocalRepo\TelegramBotProgramm\TestTelegramBot\TelegrammBotTest\TelegrammBotTest\obj\Debug\TelegrammBotTest.exe
 D:\GitLocalRepo\TelegramBotProgramm\TestTelegramBot\TelegrammBotTest\TelegrammBotTest\obj\Debug\TelegrammBotTest.pdb
+F:\Программирование\Project\visual studio 2015\TelegramBotProgramm\TestTelegramBot\TelegrammBotTest\TelegrammBotTest\bin\Debug\TelegrammBotTest.exe.config
+F:\Программирование\Project\visual studio 2015\TelegramBotProgramm\TestTelegramBot\TelegrammBotTest\TelegrammBotTest\obj\Debug\TelegrammBotTest.exe
+F:\Программирование\Project\visual studio 2015\TelegramBotProgramm\TestTelegramBot\TelegrammBotTest\TelegrammBotTest\obj\Debug\TelegrammBotTest.pdb
