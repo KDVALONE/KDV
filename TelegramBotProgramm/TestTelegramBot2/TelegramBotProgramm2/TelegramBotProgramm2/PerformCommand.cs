@@ -1271,7 +1271,7 @@ namespace TelegramBotProgramm2
             }
         }
     }
-    class Reqest
+    namespace Reqest
     {
         private static void Tr_ResponseRecived(object sender, ParameterResponse e)
         {
@@ -1327,4 +1327,5 @@ namespace TelegramBotProgramm2
     class PerformCommand
     {
     }
+
 }
