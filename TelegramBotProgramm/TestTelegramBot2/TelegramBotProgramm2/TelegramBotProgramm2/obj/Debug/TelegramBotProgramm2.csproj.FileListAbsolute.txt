@@ -1,2 +1,7 @@
 D:\GitLocalRepo\TelegramBotProgramm\TestTelegramBot2\TelegramBotProgramm2\TelegramBotProgramm2\bin\Debug\TelegramBotProgramm2.exe.config
 F:\Программирование\Project\visual studio 2015\TelegramBotProgramm\TestTelegramBot2\TelegramBotProgramm2\TelegramBotProgramm2\bin\Debug\TelegramBotProgramm2.exe.config
+D:\GitLocalRepo\TelegramBotProgramm\TestTelegramBot2\TelegramBotProgramm2\TelegramBotProgramm2\obj\Debug\TelegramBotProgramm2.csprojResolveAssemblyReference.cache
+D:\GitLocalRepo\TelegramBotProgramm\TestTelegramBot2\TelegramBotProgramm2\TelegramBotProgramm2\bin\Debug\TelegramBotProgramm2.exe
+D:\GitLocalRepo\TelegramBotProgramm\TestTelegramBot2\TelegramBotProgramm2\TelegramBotProgramm2\bin\Debug\TelegramBotProgramm2.pdb
+D:\GitLocalRepo\TelegramBotProgramm\TestTelegramBot2\TelegramBotProgramm2\TelegramBotProgramm2\obj\Debug\TelegramBotProgramm2.exe
+D:\GitLocalRepo\TelegramBotProgramm\TestTelegramBot2\TelegramBotProgramm2\TelegramBotProgramm2\obj\Debug\TelegramBotProgramm2.pdb
