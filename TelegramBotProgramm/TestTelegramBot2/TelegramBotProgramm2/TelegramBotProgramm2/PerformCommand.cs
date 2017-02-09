@@ -1316,9 +1316,4 @@ namespace Telegram
         }
     }
 
-
-    class PerformCommand
-    {
-    }
-
 }

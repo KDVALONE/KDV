@@ -18,14 +18,7 @@ namespace TelegramBotProgramm2
             TelegramRequest Tr = new TelegramRequest(Settings.Default.Token);
             Tr.ResponseRecived += Tr_ResponseRecived;
             Thread thr = new Thread(Tr.GetUpdate);
-            thr.IsBackground = true;
-
-            while (true)
-            {
-                Console.WriteLine("Фоновый поток работает");
-                Thread.Sleep(500);
-            }
-            
+            thr.IsBackground = true;           
         }
 
         private static void Tr_ResponseRecived(object sender, ParameterResponse e)
