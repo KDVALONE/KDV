@@ -19,14 +19,16 @@ namespace TelegramBotProgramm2
             //Tr.ResponseRecived += Tr_ResponseRecived;
             //Thread thr = new Thread(Tr.GetUpdate);
             //thr.IsBackground = true;
+            ///------------------Методы-------------------------
             Method m = new Method(Settings.Default.Token); 
             Console.WriteLine(m.Getme()); // выводим на консоль резултат getMe
+            ///-------------------------------------------------
         }
 
         private static void Tr_ResponseRecived(object sender, ParameterResponse e)
         {
             Console.WriteLine("{0}: {1}  chatId:{2} ", e.name, e.message, e.chatId);
         }
-        }
-    }
+     }
+}
 

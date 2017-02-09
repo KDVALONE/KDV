@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Net;
 using Telegram.SimpleJSON;
+using System.Collections.Specialized;
 
 namespace Telegram
 {
@@ -1317,7 +1318,7 @@ namespace Telegram
     }
 
 
-    
+
     class Method
     {
         string _token;
@@ -1328,10 +1329,22 @@ namespace Telegram
         }
         public string Getme()
         {
-            using (WebClient wevClient = new WebClient())
+            using (WebClient webClient = new WebClient())
             {
-                string response = wevClient.DownloadString(LINK + _token + "/getMe");
+                string response = webClient.DownloadString(LINK + _token + "/getMe");
                 return response;
+            }
+        }
+
+        public string SendMessage(string message, int ChatId)
+        {
+            using (WebClient webClient = new WebClient())
+            {
+                NameValueCollection pars = new NameValueCollection();
+                {
+                
+                
+                }
             }
         }
 
