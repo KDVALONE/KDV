@@ -1316,4 +1316,25 @@ namespace Telegram
         }
     }
 
+
+    
+    class Method
+    {
+        string _token;
+        string LINK = "https://api.telegram.org/bot";
+        public Method(string Token) //метод чтоб не вызывать токен постоянно
+        {
+            _token = Token;
+        }
+        public string Getme()
+        {
+            using (WebClient wevClient = new WebClient())
+            {
+                string response = wevClient.DownloadString(LINK + _token + "/getMe");
+                return response;
+            }
+        }
+
+    }
+
 }
