@@ -12,10 +12,10 @@ namespace TelegramBotProgramm2
 {
     class Program
     {
-       // public string Token = "249206099:AAHaLl2nxqwdmRR0mQZWJW5fsYLxL_mJnPU";
+       
         static void Main(string[] args)
         {
-            TelegramRequest Tr = new TelegramRequest();
+            TelegramRequest Tr = new TelegramRequest(Settings.Default.Token);
             Tr.ResponseRecived += Tr_ResponseRecived;
             Thread thr = new Thread(Tr.GetUpdate);
             thr.IsBackground = true;

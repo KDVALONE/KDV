@@ -8,14 +8,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Net;
-using TelegramBotProgramm2.SimpleJSON;
+using Telegram.SimpleJSON;
 
-namespace TelegramBotProgramm2
+namespace Telegram
 {
+    
     namespace SimpleJSON
-    {
-
-        namespace SimpleJSON
         {
             public enum JSONBinaryTag
             {
@@ -1270,7 +1268,7 @@ namespace TelegramBotProgramm2
                 }
             }
         }
-    }
+    
     namespace Reqest
     {
         public delegate void Response(object sender, ParameterResponse e);
