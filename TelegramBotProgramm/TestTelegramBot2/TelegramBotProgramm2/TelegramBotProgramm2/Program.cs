@@ -15,10 +15,12 @@ namespace TelegramBotProgramm2
        
         static void Main(string[] args)
         {
-            TelegramRequest Tr = new TelegramRequest(Settings.Default.Token);
-            Tr.ResponseRecived += Tr_ResponseRecived;
-            Thread thr = new Thread(Tr.GetUpdate);
-            thr.IsBackground = true;           
+            //TelegramRequest Tr = new TelegramRequest(Settings.Default.Token);
+            //Tr.ResponseRecived += Tr_ResponseRecived;
+            //Thread thr = new Thread(Tr.GetUpdate);
+            //thr.IsBackground = true;
+            Method m = new Method(Settings.Default.Token); 
+            Console.WriteLine(m.Getme()); // выводим на консоль резултат getMe
         }
 
         private static void Tr_ResponseRecived(object sender, ParameterResponse e)
