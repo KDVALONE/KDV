@@ -20,8 +20,10 @@ namespace TelegramBotProgramm2
             //Thread thr = new Thread(Tr.GetUpdate);
             //thr.IsBackground = true;
             ///------------------Методы-------------------------
-            Method m = new Method(Settings.Default.Token); 
-            Console.WriteLine(m.Getme()); // выводим на консоль резултат getMe
+            Method m = new Method(Settings.Default.Token);
+            //Console.WriteLine(m.Getme()); // выводим на консоль резултат getMe
+            m.Getme();
+            m.SendMessage("Ну привет", 115774926);
             ///-------------------------------------------------
         }
 

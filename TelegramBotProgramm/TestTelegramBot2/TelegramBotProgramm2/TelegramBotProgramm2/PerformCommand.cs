@@ -4,9 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Net;
 using Telegram.SimpleJSON;
 using System.Collections.Specialized;
@@ -1336,7 +1333,7 @@ namespace Telegram
             }
         }
 
-        public string SendMessage(string message, int ChatId)
+        public void SendMessage(string message, int ChatId)
         {
             using (WebClient webClient = new WebClient())
             {
