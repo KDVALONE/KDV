@@ -1341,10 +1341,10 @@ namespace Telegram
             using (WebClient webClient = new WebClient())
             {
                 NameValueCollection pars = new NameValueCollection();
-                {
-                
-                
-                }
+                pars.Add("chat_id", ChatId.ToString());
+                pars.Add("text", message);
+                webClient.UploadValues(LINK + _token + "/sendMessage", pars);
+
             }
         }
 
