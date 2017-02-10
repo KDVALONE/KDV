@@ -23,7 +23,8 @@ namespace TelegramBotProgramm2
             Method m = new Method(Settings.Default.Token);
             //Console.WriteLine(m.Getme()); // выводим на консоль резултат getMe
             m.Getme();
-            m.SendMessage("Ну привет", 115774926);
+            m.SendMessage("Ну привет", 115774926); //отправим сообщение(текст отправки и ID чата)
+            m.ForwardMessage(115774926, 115774926, 16);//перешлем сообщение(откуда,куда,ID сообщегия)
             ///-------------------------------------------------
         }
 

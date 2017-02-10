@@ -1314,8 +1314,6 @@ namespace Telegram
         }
     }
 
-
-
     class Method
     {
         string _token;
@@ -1331,7 +1329,7 @@ namespace Telegram
                 string response = webClient.DownloadString(LINK + _token + "/getMe");
                 return response;
             }
-        }
+        } //тестовый метод для проверки запросов
 
         public void SendMessage(string message, int ChatId)
         {
@@ -1343,8 +1341,22 @@ namespace Telegram
                 webClient.UploadValues(LINK + _token + "/sendMessage", pars);
 
             }
-        }
+        } //отправляет сообщение
 
+        public void ForwardMessage(int fromChatId, int ChatId,  int messageId)  //пересылает сообщение
+        {
+            using (WebClient webClient = new WebClient())
+            {
+                NameValueCollection pars = new NameValueCollection();
+                pars.Add("chat_id", ChatId.ToString());
+                pars.Add("from_chat_id", fromChatId.ToString());
+                pars.Add("message_id", messageId.ToString());
+                webClient.UploadValues(LINK + _token + "/forwardMessage", pars);
+            }
+         }
+
+        
+        
     }
 
 }
