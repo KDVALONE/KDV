@@ -1337,6 +1337,7 @@ namespace Telegram
         {
             using (WebClient webClient = new WebClient())
             {
+                SendChatAction(ChatId, Method.CahtAction.typing); //отображает действия бота в чате  
                 NameValueCollection pars = new NameValueCollection();
                 pars.Add("chat_id", ChatId.ToString());
                 pars.Add("text", message);
@@ -1376,6 +1377,73 @@ namespace Telegram
 
              }
         }//посылает фото и подпись к нему
+        public void SendPhotoLink(int ChatId, string linkToPhoto, string caption ="")
+        {
+            using (WebClient webClient = new WebClient())
+            {
+                NameValueCollection pars = new NameValueCollection();
+                pars.Add("chat_id", ChatId.ToString());
+                pars.Add("photo", linkToPhoto);
+                pars.Add("caption", caption);
+                webClient.UploadValues(LINK + _token + "/sendPhoto", pars);
+
+            }
+
+        }// отпраялем ссылку на фотку
+
+        async public Task SendDocumentInputFile(int ChatId, string pathToDocument, string caption = "")
+        {
+            using (MultipartFormDataContent form = new MultipartFormDataContent())
+            {
+                string url = LINK + _token + "/sendDocument";
+                string fileName = pathToDocument.Split('\\').Last();
+
+                form.Add(new StringContent(ChatId.ToString(), Encoding.UTF8), "chat_id");
+                form.Add(new StringContent(caption.ToString(), Encoding.UTF8), "caption");// параметр который используется по "желанию", для этого передавали пустое значение string caption = ""
+                using (FileStream fileStream = new FileStream(pathToDocument, FileMode.Open, FileAccess.Read)) //добавляем саму загрузку файла
+                {
+                    form.Add(new StreamContent(fileStream), "document", fileName);
+                    using (HttpClient client = new HttpClient())// отправка запроса
+                        await client.PostAsync(url, form); //ждем пока клиент обработает и загрузит ее на сервер
+
+                }
+
+            }
+        }//посылает фото и подпись к нему
+        public void SenDocumentLink(int ChatId, string linkToDocument, string caption = "")
+        {
+            using (WebClient webClient = new WebClient())
+            {
+                NameValueCollection pars = new NameValueCollection();
+                pars.Add("chat_id", ChatId.ToString());
+                pars.Add("document", linkToDocument);
+                pars.Add("caption", caption);
+                webClient.UploadValues(LINK + _token + "/sendDocument", pars);
+
+            }
+
+        }// отпраялем ссылку на фотку
+        public void SendChatAction(int chatId, CahtAction action)
+        {
+            using (WebClient webClient = new WebClient())
+            {
+                NameValueCollection pars = new NameValueCollection();
+                pars.Add("chat_id", chatId.ToString());
+                pars.Add("action", action.ToString());
+                webClient.UploadValues(LINK + _token + "/sendChatAction", pars);
+            }
+        }//отображает действия бота в строке состояния в чате телеграмма
+        public enum CahtAction //enum для SendAction
+        {
+            typing,
+            upload_photo,
+            record_video,
+            upload_video,
+            record_audio,
+            upload_audio,
+            upload_document,
+            find_location
+        }
 
     }
 
