@@ -15,6 +15,7 @@ namespace TelegramBotProgramm2
        
         static void Main(string[] args)
         {
+            int ChatID = 115774926;
             //TelegramRequest Tr = new TelegramRequest(Settings.Default.Token);
             //Tr.ResponseRecived += Tr_ResponseRecived;
             //Thread thr = new Thread(Tr.GetUpdate);
@@ -22,9 +23,11 @@ namespace TelegramBotProgramm2
             ///------------------Методы-------------------------
             Method m = new Method(Settings.Default.Token);
             //Console.WriteLine(m.Getme()); // выводим на консоль резултат getMe
-            m.Getme();
-            m.SendMessage("Ну привет", 115774926); //отправим сообщение(текст отправки и ID чата)
-            m.ForwardMessage(115774926, 115774926, 16);//перешлем сообщение(откуда,куда,ID сообщегия)
+            // m.Getme();
+            // m.SendMessage("Ну привет", ChatID); //отправим сообщение(текст отправки и ID чата)
+            // m.ForwardMessage(ChatID, ChatID, 16);//перешлем сообщение(откуда,куда,ID сообщегия)
+            m.SendPhotoInputFile(ChatID, @"D:\GitLocalRepo\TelegramBotProgramm\TestTelegramBot2\TelegramBotProgramm2\TelegramBotProgramm2\1.jpg", "держи картинку" ); // отправляем картинку(куда ID, путь к картинке, и текст сопутствующий )
+            Console.ReadLine();//нужно для SendPhoto так как метод ждет, то он запускается и ждет
             ///-------------------------------------------------
         }
 

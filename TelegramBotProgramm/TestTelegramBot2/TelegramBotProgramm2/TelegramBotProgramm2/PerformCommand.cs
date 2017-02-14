@@ -7,6 +7,8 @@ using System.Collections;
 using System.Net;
 using Telegram.SimpleJSON;
 using System.Collections.Specialized;
+using System.Net.Http;
+using System.IO; //для FileStraem
 
 namespace Telegram
 {
@@ -1355,8 +1357,26 @@ namespace Telegram
             }
          }
 
-        
-        
+        async public Task SendPhotoInputFile(int ChatId, string pathToPhoto,string caption = "")
+        {
+            using (MultipartFormDataContent form = new MultipartFormDataContent())
+            {
+                string url = LINK + _token + "/sendPhoto";
+                string fileName = pathToPhoto.Split('\\').Last();
+
+                form.Add(new StringContent(ChatId.ToString(), Encoding.UTF8), "chat_id");
+                form.Add(new StringContent(caption.ToString(), Encoding.UTF8), "caption");// параметр который используется по "желанию", для этого передавали пустое значение string caption = ""
+                using (FileStream fileStream = new FileStream(pathToPhoto, FileMode.Open, FileAccess.Read)) //добавляем саму загрузку файла
+                {
+                    form.Add(new StreamContent(fileStream), "photo", fileName);
+                    using (HttpClient client = new HttpClient())// отправка запроса
+                        await client.PostAsync(url, form); //ждем пока клиент обработает и загрузит ее на сервер
+
+                }
+
+             }
+        }//посылает фото и подпись к нему
+
     }
 
 }
