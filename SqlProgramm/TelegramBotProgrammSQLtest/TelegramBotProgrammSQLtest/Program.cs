@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Data.SqlClient;
 using MySql.Data.MySqlClient;
 using MySql.Data;
+using TelegramBotSql;
 
 
 namespace TelegramBotProgrammSQLtest
@@ -14,24 +15,16 @@ namespace TelegramBotProgrammSQLtest
     class Program
     {
         static void Main(string[] args)
-        {
+             {
+                SqlMethod mDataBase = new SqlMethod();
+                // mDataBase.OpenConnectSqlBase(); //подключаемся к базе данных MySql (тествыйЮ данную функцию нужно реализовывать в методе где запрос, так как он не наследуемый.)
+                // mDataBase.CloseConnectSqlBase();// отключаемся от бд MySql
+                mDataBase.SqlCmd("SELECT name FROM glpi_tickets WHERE id = 1");// запрос селект "SELECT 'name' FROM 'glpi_tickets' WHERE 'id' = 1"
+                mDataBase.SqlCmd("SELECT content FROM glpi_tickets WHERE id = 1");
+                Console.ReadKey();
+             }
             
-            string connectionString = "datasource=127.0.0.1;port=3306;username=root;password=;";
-            //"Server=127.0.0.1;" + "Database=glpi_db;" + "Uid=root;" + "Pwd=;"
-            //"server=192.168.104.12;user=tech1;database=tpc2;port=3306;password=Y-96mnrSw;Allow Zero Datetime=true";
-            //"server=localhost;user=root;database=glpi_db;port=3306;password=;";
-            MySqlConnection sqlConnection = new MySqlConnection(connectionString);
-            try
-            { Console.WriteLine("Connect to DB.."); sqlConnection.Open(); }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-                Console.ReadLine();
-            }
-            Console.WriteLine("Close connect...");
-            sqlConnection.Close();
             
-
-        }
+        
     }
 }
