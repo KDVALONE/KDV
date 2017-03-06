@@ -5,3 +5,5 @@ D:\GitLocalRepo\TelegramBotProgramm\TestTelegramBot2\TelegramBotProgramm2\Telegr
 D:\GitLocalRepo\TelegramBotProgramm\TestTelegramBot2\TelegramBotProgramm2\TelegramBotProgramm2\bin\Debug\TelegramBotProgramm2.pdb
 D:\GitLocalRepo\TelegramBotProgramm\TestTelegramBot2\TelegramBotProgramm2\TelegramBotProgramm2\obj\Debug\TelegramBotProgramm2.exe
 D:\GitLocalRepo\TelegramBotProgramm\TestTelegramBot2\TelegramBotProgramm2\TelegramBotProgramm2\obj\Debug\TelegramBotProgramm2.pdb
+F:\Программирование\Project\visual studio 2015\TelegramBotProgramm\TestTelegramBot2\TelegramBotProgramm2\TelegramBotProgramm2\obj\Debug\TelegramBotProgramm2.exe
+F:\Программирование\Project\visual studio 2015\TelegramBotProgramm\TestTelegramBot2\TelegramBotProgramm2\TelegramBotProgramm2\obj\Debug\TelegramBotProgramm2.pdb
