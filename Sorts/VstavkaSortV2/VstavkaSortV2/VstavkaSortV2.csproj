@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{6AEE02AD-E847-4FD7-9EB0-5DE39F464A1B}</ProjectGuid>
+    <ProjectGuid>{F04061B4-4E07-4543-ABCB-E824D65B6181}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TestProgrammClass</RootNamespace>
-    <AssemblyName>TestProgrammClass</AssemblyName>
+    <RootNamespace>VstavkaSortV2</RootNamespace>
+    <AssemblyName>VstavkaSortV2</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
