@@ -11,9 +11,15 @@ namespace AllSorts
         static void Main()
         {
             Message gm = new Message();
-            gm.GetMessage();
-            int a = int.Parse(Console.ReadLine());
-            gm.GetMessage(a);
+            Sorts srt = new Sorts();
+
+                gm.GetStartMessage();
+                gm.GetSortNameMessage(gm.SetSortName());
+                gm.GetSetArrayMessage();
+                srt.BubleSort(gm.SetArray()); 
+           
+
+        
         }
     }
 }
