@@ -15,7 +15,8 @@ namespace AllSorts
       
         public void GetStartMessage()
         {
-            Console.WriteLine("Выберите сортировку (введите цифру)\n 1 - Сортировка пузырьком ");
+            Console.WriteLine("Выберите сортировку (введите цифру)\n\n 1 - Сортировка пузырьком \n 2 - Сортировка вставками "+
+                "\n 3 - Сортировка Выбором");
         } // вывести 1 сообщение
         public int SetSortName()
         {
@@ -28,7 +29,7 @@ namespace AllSorts
                 Console.WriteLine("Ошибка: это не число:" + ex.Message + "/n/n");
                 SetSortName();
             }
-            if (SortName < 1 && SortName > 4)
+            if (SortName < 1 && SortName > 5)
             {
                 Console.WriteLine("Ошибка:введите числа с 1 до 4");
                 SetSortName();
@@ -41,6 +42,18 @@ namespace AllSorts
             {
                 case 1:
                     Console.WriteLine( "Выбрана: Сортировка Пузырьком \n ");
+                    break;
+                case 2:
+                    Console.WriteLine("Выбрана: Сортировка Вставками \n ");
+                    break;
+                case 3:
+                    Console.WriteLine("Выбрана: Сортировка Выбором \n ");
+                    break;
+                case 4:
+                    Console.WriteLine("Выбрана: Быстрая сортировка  \n ");
+                    break;
+                case 5:
+                    Console.WriteLine("Выбрана: Сортировка Слиянием \n ");
                     break;
             }
         } // вывести название сортировки 
@@ -61,10 +74,16 @@ namespace AllSorts
                 }
             return Array;
             }
-       static public void GetArrayCountMessage(int [] array) //вывести значение массива на экран
+        static public void GetArrayCountMessage(int [] array) //вывести значение массива на экран
         {
             string stringArray = string.Concat(array);
-            Console.WriteLine(" ОТВЕТ: \n Отсортированный массиив:  {0}", stringArray);
+            Console.WriteLine(" Массив:  {0}", stringArray);
+            Console.ReadKey();
+        }
+        static public void GetFinalArrayCountMessage(int[] array) //вывести значение отсортированного массива на экран
+        {
+            string stringArray = string.Concat(array);
+            Console.WriteLine(" Массив отсортирован :  {0} \n\n Конец.", stringArray);
             Console.ReadKey();
 
         }

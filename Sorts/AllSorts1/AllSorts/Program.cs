@@ -8,16 +8,19 @@ namespace AllSorts
 {
     class Program
     {
+       
+
         static void Main()
         {
             Message gm = new Message();
-            Sorts srt = new Sorts();
+            
+            int sortName;
 
                 gm.GetStartMessage();
-                gm.GetSortNameMessage(gm.SetSortName());
+                sortName = gm.SetSortName();
+                gm.GetSortNameMessage(sortName);
                 gm.GetSetArrayMessage();
-                srt.BubleSort(gm.SetArray()); 
-           
+                Methods.ChoseSort(sortName, gm.SetArray());
 
         
         }
