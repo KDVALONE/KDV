@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EmployeeApp
+namespace Employees
 {
     partial class Employee
     {
@@ -43,7 +43,9 @@ namespace EmployeeApp
             get { return empSSN; }
         }
 
-       
+        // Содержит объект BenefitPackage.
+        protected BenefitPackage empBenefits = new BenefitPackage();
+
         //Методы 
         public void GiveBonus(float amount)
         { Pay += amount; }
