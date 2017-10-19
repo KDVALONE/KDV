@@ -8,20 +8,14 @@ namespace IsAndAsTest
 {
     abstract class Human
     {
-        private string Name { get; set; }
-        private int Age { get; set; }
-        private string Sex { get; set; }
-        private DateTime BDate { get; set; }
+        abstract public string Name { get; set; }
+        abstract public int Age { get; set; }
+        abstract public string Sex { get; set; }
+        abstract public DateTime BDate { get; set; }
+
+        public abstract void SetSex(); 
         
 
-        public Human(string[] sex = { "Men","Woomen"}; )
-        {
-
-        int[] a = { 1, 2, 3, 4, 5 };
-        Console.WriteLine (a[new Random().Next(0, a.Length)]);
-
-          
-        } 
       
     }
 }

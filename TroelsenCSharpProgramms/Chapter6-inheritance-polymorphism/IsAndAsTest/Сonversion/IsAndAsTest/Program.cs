@@ -9,7 +9,7 @@ namespace IsAndAsTest
     class Program
     {
         /// <summary>
-        /// Создать 5 классов  Человек -- Специалист -- Главный Дизайнр -- Дизайнер
+        /// Создать 5 классов  Человек -- Специалист -- ГлавныйДизайнер -- Дизайнер
         ///                                          -- программист
         ///  отработать наследование,
         ///  полиморфизм,
@@ -23,6 +23,9 @@ namespace IsAndAsTest
 
         static void Main(string[] args)
         {
+            Specialist s = new Specialist();
+            s.SetSex();
+            Console.ReadKey();
         }
     }
 }

@@ -1315,7 +1315,7 @@ namespace Telegram
             }
         }
     }
-
+    
     class Method
     {
         string _token;
@@ -1324,14 +1324,21 @@ namespace Telegram
         {
             _token = Token;
         }
-        public string Getme()
+        public string Getme()  
         {
+            //коннектится через webClient по составной ссылке, помещает полученный ответ
+            //в переменную response
             using (WebClient webClient = new WebClient())
             {
                 string response = webClient.DownloadString(LINK + _token + "/getMe");
                 return response;
             }
         } //тестовый метод для проверки запросов
+        /* ключевое слово using в C# имеет двойное предназначение 
+        (импорт пространств имен и вызов метода Dispose() интерфейса IDisposable, метод выполниться сразу после
+        выхода из конструкции.) Dispose() служит для очистки выделяемой памяти еще впроцессе испольния,
+        не дожидаясь сборщика мусора.Рекомендуется использовать его везде где он поддерживается.
+        */
 
         public void SendMessage(string message, int ChatId)
         {
