@@ -1320,7 +1320,7 @@ namespace Telegram
     {
         string _token;
         string LINK = "https://api.telegram.org/bot";
-        public Method(string Token) //метод чтоб не вызывать токен постоянно
+        public Method(string Token) //конструктор чтоб не вызывать токен постоянно
         {
             _token = Token;
         }
