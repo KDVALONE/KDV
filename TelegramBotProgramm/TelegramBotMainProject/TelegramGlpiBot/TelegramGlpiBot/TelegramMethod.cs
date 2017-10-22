@@ -62,15 +62,74 @@ namespace TelegramGlpiBot
             //Console.WriteLine("{0}: {1}  chatId:{2} ", e.name, e.message, e.chatId);  вывод в консоль иныфы с информацией о последнем ммообщении
 
             if (e.message == "/hello")
-            { Console.WriteLine("Ничинаем работу с ботом"); }
+            {
+            ///TODO:
+            ///вставить метод
+            }
             if (e.message == "/gettickets")
             {
-                CmdSting = "SELECT name FROM glpi_tickets WHERE id = '1'";
-                sqlMethod.SqlCmd(CmdSting);
+             ///TODO:
+             ///Вставить метод
+             
+             //ниже корректная реализация, работать с ней, сверху вызов ложного показного метода, убрать.
+             //CmdSting = "SELECT name FROM glpi_tickets WHERE id = '1'";
+             //sqlMethod.GetTickets(CmdSting);
+            }
+            if (e.message == "/getticketsall")
+            {             
+                //TODO:
+                //Втавить метод
 
-                // Console.WriteLine("Ваши заявки: /n 13666 \n п1 Центральный корпус, Болдорева М.Ю. /n  Установка ПК в Взрослой поликлинике /n Установить Пк в кабинете №15, Старый забрать. "); }
+                //ниже корректная реализация, работать с ней, сверху вызов ложного показного метода, убрать.
+                //CmdSting = "SELECT name FROM glpi_tickets WHERE id = '1'";
+                //sqlMethod.GetTickets(CmdSting);
             }
 
         }
+
+        public void FalseGetticket(int ChatId)
+        {
+           
+            using (WebClient webClient = new WebClient())
+            {
+                string message = "Текущая заявка: \n 13666 \n п1 Центральный корпус, Болдорева М.Ю. \n  Установка ПК в Взрослой поликлинике \n Установить Пк в кабинете №15, Старый забрать. ";
+                NameValueCollection pars = new NameValueCollection();
+                pars.Add("chat_id", ChatId.ToString());
+                pars.Add("text", message);
+                webClient.UploadValues(Link + Token + "/sendMessage", pars);
+
+            }
+        } //отправляет сообщение
+          // Console.WriteLine("Ваши заявки: /n 13666 \n п1 Центральный корпус, Болдорева М.Ю. /n  Установка ПК в Взрослой поликлинике /n Установить Пк в кабинете №15, Старый забрать. "); }
+        public void FalseHello(int ChatId)
+        {
+
+            using (WebClient webClient = new WebClient())
+            {
+                string message = "Начинаем работу с ботом GLPI";
+                NameValueCollection pars = new NameValueCollection();
+                pars.Add("chat_id", ChatId.ToString());
+                pars.Add("text", message);
+                webClient.UploadValues(Link + Token + "/sendMessage", pars);
+
+            }
+        }
+        public void FalseGetticketAll(int ChatId)
+        {
+
+            using (WebClient webClient = new WebClient())
+            {
+                string message = "Ваши заявк: \n 13666 \n п1 \n Центральный корпус\n Болдорева М.Ю. \n  Установка ПК в Взрослой поликлинике \n Установить Пк в кабинете №15, Старый забрать. "+
+                                    "\n\n 13667 \n п1 \n Центральный корпус \n Багров Д.С. \n  Протяжка сети \n Протянуть сеть  в кб 12.";
+                NameValueCollection pars = new NameValueCollection();
+                pars.Add("chat_id", ChatId.ToString());
+                pars.Add("text", message);
+                webClient.UploadValues(Link + Token + "/sendMessage", pars);
+
+            }
+        }
     }
-}
+  
+    }
+
+

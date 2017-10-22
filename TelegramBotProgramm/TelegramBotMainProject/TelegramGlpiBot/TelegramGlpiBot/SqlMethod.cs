@@ -21,8 +21,12 @@ namespace TelegramGlpiBot
             }
 
 
-            public void SqlCmd(string cmdStr)
+            public void GetTickets(string cmdStr)
             {
+            //TODO:
+            //переписать в соответствии с ООП
+            //изменить reader.Read поместив данные в массив или список
+            // переписать входящий запрос на используя обращение к нескольким таблицам
                 MySqlConnection sqlConnect = new MySqlConnection(ConnString);
                 sqlConnect.Open();
 
@@ -30,7 +34,23 @@ namespace TelegramGlpiBot
                 cmd.Connection = sqlConnect;
                 cmd.CommandText = cmdStr;
 
+            MySqlDataReader reader = cmd.ExecuteReader();
+
+            if (reader.Read())
+            {
+                string name = string.Empty;
+                string content = string.Empty;
+                string status = string.Empty;
+                string location = string.Empty;
+                 name = reader["name"].ToString();
+                 content = reader["content"].ToString();
+                 status = reader["status"].ToString();
+                 location = reader["location_id"].ToString();
+
+                Console.WriteLine("Вывод значения запроса: " + name);
             }
+
+        }
         
 
     }
