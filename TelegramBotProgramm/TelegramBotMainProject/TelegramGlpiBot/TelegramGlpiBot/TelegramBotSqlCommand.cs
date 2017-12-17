@@ -10,28 +10,15 @@ namespace TelegramGlpiBot
     class TelegramBotSqlCommand
     {
         /// <summary>
-        /// Базовый класс для обращения
+        /// Базовый класс для выполнения команд при обращении к нему
         /// TODO:
         /// подготовить для наследования от него 
         /// </summary>
 
-        string ConnString { get; set; }
 
-        public TelegramBotSqlCommand()
-        {
-            ConnString = Settings.Default.ConnectionString;
-        }
 
-        virtual public void ExecuteSqlCommand(string cmdStr)
-        {
-        MySqlConnection sqlConnect = new MySqlConnection(ConnString);
-        sqlConnect.Open();
+ 
 
-        MySqlCommand cmd = new MySqlCommand();
-        cmd.Connection = sqlConnect;
-        cmd.CommandText = cmdStr;
-        
-        }
-
+  
     }
 }

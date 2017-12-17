@@ -64,6 +64,8 @@
     </Compile>
     <Compile Include="SimpleJson.cs" />
     <Compile Include="SqlMethod.cs" />
+    <Compile Include="TelegramBotSqlCommand.cs" />
+    <Compile Include="TelegramExecuteComand.cs" />
     <Compile Include="TelegramMethod.cs" />
   </ItemGroup>
   <ItemGroup>
