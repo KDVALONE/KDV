@@ -12,18 +12,16 @@ namespace TaskServerEndProgramm
 {
     class Program
     {
-        public string procMemoryCount;
+        public static string pathOfProcess = "F:\\Soft\\Steam\\Steam.exe"; // путь для старта процесса.
+        public static string killProc = "steam"; // название процесса для зваершения.
+
         static void Main(string[] args)
         {
-            //   GetRAMv2();
+              GetRAMv2();
             // KillProcess();
-            StartProcess();
+           
         }
-        public static void StartProgramm() // метод запуска программы
-        {
-             GetRAMv2();
-
-        }
+        
         //public static  void GetRAMv1() {
         //    PerformanceCounter perfMemCounter = new PerformanceCounter("Memory", "Available MBytes");
 
@@ -45,10 +43,9 @@ namespace TaskServerEndProgramm
                 ulong totalRam = Convert.ToUInt64(objram["TotalVisibleMemorySize"]);    //общая память ОЗУ
                 ulong busyRam = totalRam - Convert.ToUInt64(objram["FreePhysicalMemory"]);         //занятная память = (total-free)
                 ulong procentRam = (busyRam * 100) / totalRam; //вычисляем проценты занятой памяти
-                    if (procentRam > 80)
+                    if (procentRam >= 80)
                     {
                         KillProcess();
-
                     }
              //   Console.ReadKey();
             }
@@ -57,26 +54,16 @@ namespace TaskServerEndProgramm
         public static void KillProcess() //выключает ненужный процесс 
         {
             //   создаем список процессов, ищем нужный и завершаем. 
-            string killProc = "steam";
+            
             Process[] listprosecc = Process.GetProcesses();
             try
             {
-                /*  foreach (Process killProc in listprosecc)
-                  {
-                     string ProsessName = killProc.ProcessName;
-
-                      ProsessName = ProsessName.ToLower(); // ToLower() возвращает копию данной строки,переведенной в нижний регистр.
-                      if (ProsessName.Equals("chrome.exe"))
-                      {
-                          killProc.Kill();
-                          MessageBox.Show("{0} Process was killed", );
-                      } */
-
                 foreach (Process proc in Process.GetProcessesByName(killProc))
                     {
                         proc.Kill();
-                        
-                    }
+                        Thread.Sleep(10000);
+                        StartProcess();
+                }
              }
                     catch (Exception ex)
                      {
@@ -85,8 +72,7 @@ namespace TaskServerEndProgramm
             }
         public static void StartProcess() // запускает выбранный процесс
         {     
-            Process.Start(@"F:\\Soft\\Steam\\Steam.exe");
-
+            Process.Start(@"{0}",pathOfProcess);
         }
         }
 
