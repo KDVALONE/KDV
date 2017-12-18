@@ -12,21 +12,27 @@ namespace TaskServerEndProgramm
 {
     class Program
     {
+        public string procMemoryCount;
         static void Main(string[] args)
         {
             //   GetRAMv2();
             // KillProcess();
             StartProcess();
         }
-        public static  void GetRAMv1() {
-            PerformanceCounter perfMemCounter = new PerformanceCounter("Memory", "Available MBytes");
+        public static void StartProgramm() // метод запуска программы
+        {
+             GetRAMv2();
 
-            while (true)
-            {
-                Thread.Sleep(1000);
-                Console.WriteLine("Memory Load: {0}%", perfMemCounter.NextValue());
-            }
-        } // вариант 1, выдает кол-во исп. памяти в мегабайтах.
+        }
+        //public static  void GetRAMv1() {
+        //    PerformanceCounter perfMemCounter = new PerformanceCounter("Memory", "Available MBytes");
+
+        //    while (true)
+        //    {
+        //        Thread.Sleep(1000);
+        //        Console.WriteLine("Memory Load: {0}%", perfMemCounter.NextValue());
+        //    }
+        //} // вариант 1, выдает кол-во исп. памяти в мегабайтах.
         public static void GetRAMv2() // вариант 2, выдает исп. кол-во памяти в процентах, поток
         {
 
@@ -38,8 +44,12 @@ namespace TaskServerEndProgramm
             {
                 ulong totalRam = Convert.ToUInt64(objram["TotalVisibleMemorySize"]);    //общая память ОЗУ
                 ulong busyRam = totalRam - Convert.ToUInt64(objram["FreePhysicalMemory"]);         //занятная память = (total-free)
-                ulong pocentRam = (busyRam * 100) / totalRam; //вычисляем проценты занятой памяти
-                 Console.WriteLine(pocentRam);      
+                ulong procentRam = (busyRam * 100) / totalRam; //вычисляем проценты занятой памяти
+                    if (procentRam > 80)
+                    {
+                        KillProcess();
+
+                    }
              //   Console.ReadKey();
             }
            }
@@ -65,6 +75,7 @@ namespace TaskServerEndProgramm
                 foreach (Process proc in Process.GetProcessesByName(killProc))
                     {
                         proc.Kill();
+                        
                     }
              }
                     catch (Exception ex)
