@@ -12,8 +12,9 @@ namespace TaskServerEndProgramm
 {
     class Program
     {
-        public static string pathOfProcess = "F:\\Soft\\Steam\\Steam.exe"; // путь для старта процесса.
-        public static string killProc = "steam"; // название процесса для зваершения.
+
+        public static string killProc = "steam"; // название процесса для завершения.
+        const int procentRamMax = 43 ; // максимальный процен загрузки RAM.
 
         static void Main(string[] args)
         {
@@ -42,8 +43,8 @@ namespace TaskServerEndProgramm
             {
                 ulong totalRam = Convert.ToUInt64(objram["TotalVisibleMemorySize"]);    //общая память ОЗУ
                 ulong busyRam = totalRam - Convert.ToUInt64(objram["FreePhysicalMemory"]);         //занятная память = (total-free)
-                ulong procentRam = (busyRam * 100) / totalRam; //вычисляем проценты занятой памяти
-                    if (procentRam >= 80)
+                ulong procentRamCurrent = (busyRam * 100) / totalRam; //вычисляем проценты занятой памяти
+                    if (procentRamCurrent >= procentRamMax)
                     {
                         KillProcess();
                     }
@@ -61,9 +62,8 @@ namespace TaskServerEndProgramm
                 foreach (Process proc in Process.GetProcessesByName(killProc))
                     {
                         proc.Kill();
-                        Thread.Sleep(10000);
                         StartProcess();
-                }
+                    }
              }
                     catch (Exception ex)
                      {
@@ -71,8 +71,8 @@ namespace TaskServerEndProgramm
                      }
             }
         public static void StartProcess() // запускает выбранный процесс
-        {     
-            Process.Start(@"{0}",pathOfProcess);
+        {
+            Process.Start(@"F:\\Soft\\Steam\\Steam.exe");
         }
         }
 
