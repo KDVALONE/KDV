@@ -7,31 +7,41 @@ using System.Diagnostics;
 using System.Threading;
 using Microsoft.VisualBasic;
 using System.Management;
+using System.Runtime.InteropServices;
 
 namespace TaskServerEndProgramm
 {
     class Program
     {
+        //скрываем консоль
+        [DllImport("kernel32.dll")]
+        static extern IntPtr GetConsoleWindow();
 
-        public static string killProc = "steam"; // название процесса для завершения.
-        const int procentRamMax = 43 ; // максимальный процен загрузки RAM.
+        [DllImport("user32.dll")]
+        static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
+
+        const int SW_HIDE = 0;
+        const int SW_SHOW = 5;
+        //скрываем консоль конец
+
+
+        public static string killProc = "SQL Server Windows NT - 64 Bit"; // название процесса для завершения.
+        const int procentRamMax = 80 ; // максимальный процен загрузки RAM.
 
         static void Main(string[] args)
         {
-              GetRAMv2();
-            // KillProcess();
-           
+            var handle = GetConsoleWindow();//скрываем консоль
+            ShowWindow(handle, SW_HIDE);
+
+            GetRAMv2();//вызываем метод получения значения памяти.
+
+
         }
         
-        //public static  void GetRAMv1() {
-        //    PerformanceCounter perfMemCounter = new PerformanceCounter("Memory", "Available MBytes");
 
-        //    while (true)
-        //    {
-        //        Thread.Sleep(1000);
-        //        Console.WriteLine("Memory Load: {0}%", perfMemCounter.NextValue());
-        //    }
-        //} // вариант 1, выдает кол-во исп. памяти в мегабайтах.
+
+
+        
         public static void GetRAMv2() // вариант 2, выдает исп. кол-во памяти в процентах, поток
         {
 
@@ -72,7 +82,8 @@ namespace TaskServerEndProgramm
             }
         public static void StartProcess() // запускает выбранный процесс
         {
-            Process.Start(@"F:\\Soft\\Steam\\Steam.exe");
+            Thread.Sleep(5000);
+            Process.Start(@"C:\Program Files\Microsoft SQL Server\MSSQL11.SQLEXPRESS\MSSQL\Binn\sqlservr.exe");
         }
         }
 
