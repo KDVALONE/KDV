@@ -83,7 +83,7 @@ namespace TaskServerEndProgramm
         public static void StartProcess() // запускает выбранный процесс
         {
             Thread.Sleep(5000);
-            Process.Start(@"C:\Program Files\Microsoft SQL Server\MSSQL11.SQLEXPRESS\MSSQL\Binn\sqlservr.exe");
+            Process.Start(@"C:\\Program Files\\Microsoft SQL Server\\MSSQL11.SQLEXPRESS\\MSSQL\\Binn\\sqlservr.exe");
         }
         }
 
