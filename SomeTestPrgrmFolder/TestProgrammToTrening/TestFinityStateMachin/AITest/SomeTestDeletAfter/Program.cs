@@ -16,7 +16,7 @@ namespace SomeTestDeletAfter
 
             Battle battle = new Battle();
             Hero hero = new Hero("Избранный");
-            List<Enemy> enemyList = new List<Enemy>();
+            List<Enemy> enemyList = new List<Enemy>();//комент
             enemyList.Add(new Enemy("Рейдер1"));
             enemyList.Add(new Enemy("Рейдер2"));
 
