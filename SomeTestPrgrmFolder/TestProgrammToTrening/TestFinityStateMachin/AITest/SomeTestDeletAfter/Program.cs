@@ -141,6 +141,7 @@ namespace SomeTestDeletAfter
             this.Health = 100;
         }
 
+
         public void Atack(ref List<Charackter> hero, int myIndex) // переделать, чтоб враг мог атаковать и своих))Сделать индекс переменной
         {
             Thread.Sleep(500);

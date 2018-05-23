@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace TravelerGame
 {
-    class NPC : Character, ISaler //Класс торговца
+    interface IQuester
     {
+        int QuestCont { get; set; }
+
+        void QuestGeve();
+        void QuestCompleet();
     }
 }

@@ -21,6 +21,7 @@ namespace TravelerGame
         }
         #endregion
 
+       
 
         public void Attack(int endurence, Attack attackType, bool fastKill = false)
         {

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TravelerGame;
 
-namespace InterfaceProgramm
+namespace TravelerGame
 {
     class Battle 
     {///класс для описания битвы, .

@@ -45,9 +45,11 @@
   <ItemGroup>
     <Compile Include="Battle.cs" />
     <Compile Include="Biom.cs" />
+    <Compile Include="Difficult.cs" />
     <Compile Include="EnemyNameGenerator.cs" />
     <Compile Include="GameService.cs" />
     <Compile Include="HeroCreate.cs" />
+    <Compile Include="IQuester.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="Attack.cs" />
     <Compile Include="Charcter.cs" />
@@ -58,11 +60,13 @@
     <Compile Include="NPC.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Quest.cs" />
+    <Compile Include="QuestDescriptionGenerator.cs" />
+    <Compile Include="QuestType.cs" />
     <Compile Include="WayGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
