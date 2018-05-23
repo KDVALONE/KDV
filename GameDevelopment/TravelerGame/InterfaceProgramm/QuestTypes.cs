@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace TravelerGame
 {
 
-    enum QuestType
+    enum QuestTypes
     {
         Hunt,
         Exploring

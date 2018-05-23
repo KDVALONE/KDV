@@ -10,7 +10,7 @@ namespace TravelerGame
     {
         int QuestCont { get; set; }
 
-        void QuestGeve();
+        void QuestGive();
         void QuestCompleet();
     }
 }

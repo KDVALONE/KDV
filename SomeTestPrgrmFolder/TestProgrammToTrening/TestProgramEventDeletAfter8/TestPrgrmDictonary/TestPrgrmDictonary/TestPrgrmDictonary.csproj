@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{290F9852-F2CA-4A12-A36F-A23C75487FD1}</ProjectGuid>
+    <ProjectGuid>{CA78F3D9-F74C-44D4-867F-AE936F8259AF}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>InterfaceProgramm</RootNamespace>
-    <AssemblyName>InterfaceProgramm</AssemblyName>
+    <RootNamespace>TestPrgrmDictonary</RootNamespace>
+    <AssemblyName>TestPrgrmDictonary</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -43,27 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Battle.cs" />
-    <Compile Include="Biom.cs" />
-    <Compile Include="Difficults.cs" />
-    <Compile Include="EnemyNameGenerator.cs" />
-    <Compile Include="GameService.cs" />
-    <Compile Include="HeroCreate.cs" />
-    <Compile Include="IQuester.cs" />
-    <Compile Include="Item.cs" />
-    <Compile Include="Attack.cs" />
-    <Compile Include="Charcter.cs" />
-    <Compile Include="Enemy.cs" />
-    <Compile Include="Hero.cs" />
-    <Compile Include="IFighter.cs" />
-    <Compile Include="ISaler.cs" />
-    <Compile Include="NPC.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Quest.cs" />
-    <Compile Include="QuestDescriptionGenerator.cs" />
-    <Compile Include="QuestTypes.cs" />
-    <Compile Include="WayGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

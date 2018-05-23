@@ -11,7 +11,7 @@ namespace TravelerGame
         //TODO: переделать класс, наверное не на статику,Сделать класс генерирующий
         // случайное кол-во биом, которое будет считаться путем до квестовой цели. 
 
-        static int BiomCountIndex { get; private set; }
+        public static int BiomCountIndex { get; private set; }
         private static Random rnd = new Random();
         private static int[] arrayToIndexation;
 
@@ -23,9 +23,7 @@ namespace TravelerGame
         {
             BiomCountIndex = arrayToIndexation[rnd.Next(0,)];
             List<Biom> BiomList = new List<Biom>();
-            for (int i = 0; I )
-            BiomList
-            l
+            
             return BiomList;
         } 
 
