@@ -6,29 +6,43 @@ using System.Threading.Tasks;
 
 namespace TravelerGame
 {
-    public static class WayGenerator
+    public class WayGenerator
     {
-        //TODO: переделать класс, наверное не на статику,Сделать класс генерирующий
-        // случайное кол-во биом, которое будет считаться путем до квестовой цели. 
-
-        public static int BiomCount { get; private set; }
         private static Random rnd = new Random();
-        private static int[] arrayToIndexation;
 
-    
-        
-        
         public static List<Biom> GenerateWay(Difficults difficult, QuestTypes questType)
         {
-            BiomCount = arrayToIndexation[rnd.Next(0,)];
-            List<Biom> BiomList = new List<Biom>();
-            foreach (Biom biom in BiomList)
-            {
+            int minBiomCount = 0;
+            int maxBiomCount = 0;
+            int fullBiomCount = 0;
+            List<Biom> biomList;
 
+            switch (difficult)
+                {
+                    case Difficults.low:
+                        minBiomCount = 7;
+                        maxBiomCount = 15;
+                        break;
+                    case Difficults.medium:
+                        minBiomCount = 11;
+                        maxBiomCount = 19;
+                        break;
+                    case Difficults.hard:
+                        minBiomCount = 15;
+                        maxBiomCount = 23;
+                        break;
+                }
+
+            fullBiomCount = rnd.Next(minBiomCount, maxBiomCount);
+            biomList = new List<Biom>(fullBiomCount);
+            if (questType != QuestTypes.FreeRun)
+            {
+                biomList.Add(new Biom());// TODO: cделать так, что бы последний биом был квестовый, в вбиом сделать поле квестовый или нет.Добавить к коснстркуктору biom коструктор с параметрами QestType и Difficult (будет влиять на сложность босса и врагов).
             }
-            return BiomList;
-        } 
+
+            return biomList; 
+        }
 
     }
-   
 }
+

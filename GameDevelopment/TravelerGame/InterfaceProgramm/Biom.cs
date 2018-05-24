@@ -7,7 +7,7 @@ using TravelerGame;
 
 namespace TravelerGame
 {
-    class Biom
+    public class Biom
     {
      
         /// биом, содержащий в себе описание встреченной области, 

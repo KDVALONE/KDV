@@ -10,31 +10,70 @@ namespace TestProgram
     {
         static void Main(string[] args)
         {
-            List<Fighter> fighters = new List<Fighter>(4);
          
-            foreach (Fighter f in fighters)
-            {
-                Console.WriteLine($"{f.Name} {f.Age}");
-            }
-
+           MyClass.GenerateWay(Difficults.hard,QuestTypes.Exploring);
+            MyClass.GenerateWay(Difficults.hard, QuestTypes.Exploring);
+            MyClass.GenerateWay(Difficults.hard, QuestTypes.Exploring);
+            MyClass.GenerateWay(Difficults.hard, QuestTypes.Exploring);
+            MyClass.GenerateWay(Difficults.hard, QuestTypes.Exploring);
+            MyClass.GenerateWay(Difficults.hard, QuestTypes.Exploring);
+            MyClass.GenerateWay(Difficults.hard, QuestTypes.Exploring);
+            MyClass.GenerateWay(Difficults.hard, QuestTypes.Exploring);
+            MyClass.GenerateWay(Difficults.hard, QuestTypes.Exploring);
+            MyClass.GenerateWay(Difficults.hard, QuestTypes.Exploring);
+            MyClass.GenerateWay(Difficults.hard, QuestTypes.Exploring);
+            MyClass.GenerateWay(Difficults.hard, QuestTypes.Exploring);
+            MyClass.GenerateWay(Difficults.hard, QuestTypes.Exploring);
+            MyClass.GenerateWay(Difficults.hard, QuestTypes.Exploring);
+            MyClass.GenerateWay(Difficults.hard, QuestTypes.Exploring);
             Console.ReadKey();
         }
     }
-
-    public class Fighter
+    static class MyClass
     {
-        public string Name;
-        public int Age;
-        static Random rnd = new Random();
-        public Fighter()
+       static Random rnd = new Random();
+       static public void GenerateWay(Difficults difficult, QuestTypes questType)
         {
-            
-            string[] RndName = { "Smoke", "Scorpion", "Syrax", "Sub-Zero" };
-            int[] RndAge = { 32, 29, 39, 33, 28, 31 };
-            Name = RndName[rnd.Next(0, RndName.Length)];
-            Age = RndAge[rnd.Next(0, RndAge.Length)];
+            int minBiomCount= 0;
+            int maxBiomCount =0;
+            int fullBiomCount = 0;
+
+            switch (difficult)
+            {
+                case Difficults.low:
+                    minBiomCount = 7;
+                    maxBiomCount = 15;
+                    break;
+                case Difficults.medium:
+                    minBiomCount = 11;
+                    maxBiomCount = 19;
+                    break;
+                case Difficults.hard:
+                    minBiomCount = 15;
+                    maxBiomCount = 23;
+                    break;
+            }
+
+            fullBiomCount = rnd.Next(minBiomCount, maxBiomCount);
+
+            Console.WriteLine($"{fullBiomCount}");
+       
         }
     }
 
+    enum Difficults
+    {
+        hard,
+            low,
+            medium
+    }
+    enum QuestTypes
+    {
+        Hunt,
+        Exploring,
+        FreeRun
+        
+
+    }
 }
 

@@ -7,21 +7,24 @@ using System.Threading.Tasks;
 namespace TravelerGame
 {
     class Quest
-    {
+    {/// <summary>
+    /// Quest служит для хранения данных о квесте
+    /// </summary>
         public QuestTypes QuestType { get; private set; } //тип квеста убить монстра(Hunt), найти предмет(Exploring).
         public Difficults QuestDifficult { get; private set; }
         public string QuestName { get; private set; }
         public string QuestDescription { get; private set; }
-        public Dictionary<string,string> QestDescriptionDict { get; private set; }
+        public Dictionary<string,string> QuestDescriptionDict { get; private set; }
         public List<Biom> QuestWay { get; private set; }
         public Quest()
         {
             this.QuestDifficult = GameService.GetDifficult();
             this.QuestType = GameService.GetQuestType();
-            this.QestDescriptionDict = QuestDescriptionGenerator.GetQuestDescription(QuestType);
-            QuestName =  QestDescriptionDict.ElementAt(0).Key;
-            QuestDescription = QestDescriptionDict.ElementAt(0).Key;
-            QuestWay = 
+            this.QuestDescriptionDict = QuestDescriptionGenerator.GetQuestDescription(QuestType);
+            QuestName =  QuestDescriptionDict.ElementAt(0).Key;
+            QuestDescription = QuestDescriptionDict.ElementAt(0).Value;
+            QuestWay = WayGenerator.GenerateWay(this.QuestDifficult, this.QuestType);
+               
         }
         
        
