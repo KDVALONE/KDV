@@ -12,10 +12,12 @@ namespace TravelerGame
      
         /// биом, содержащий в себе описание встреченной области, 
         /// с возможными врагами или непроходимыми местами и лутом 
-        ///
+
         Random rnd = new Random();
-        public int[] arrayToIndexation = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-        List<string> BiomDescription;  
+        public int[] arrayToIndexation = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };// TODO: отрефакторить, убрав массив, сделав проще черех rnd.Next
+        BiomTypes BiomType { get; private set; } // тип биома, лес, луг, поле,  и тд
+        BiomLayers BiomLayer { get; private set; }
+    
         public bool HardWay { get; private set; } // затруднение в пути, не может быть в месте с врагами
         public int EnemyCount
         {

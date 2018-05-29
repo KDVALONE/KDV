@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TravelerGame
 {
-    class Quest
+    public class Quest
     {/// <summary>
     /// Quest служит для хранения данных о квесте
     /// </summary>
@@ -16,6 +16,7 @@ namespace TravelerGame
         public string QuestDescription { get; private set; }
         public Dictionary<string,string> QuestDescriptionDict { get; private set; }
         public List<Biom> QuestWay { get; private set; }
+
         public Quest()
         {
             this.QuestDifficult = GameService.GetDifficult();
@@ -23,8 +24,7 @@ namespace TravelerGame
             this.QuestDescriptionDict = QuestDescriptionGenerator.GetQuestDescription(QuestType);
             QuestName =  QuestDescriptionDict.ElementAt(0).Key;
             QuestDescription = QuestDescriptionDict.ElementAt(0).Value;
-            QuestWay = WayGenerator.GenerateWay(this.QuestDifficult, this.QuestType);
-               
+            QuestWay = WayGenerator.GenerateWay(this);   
         }
         
        

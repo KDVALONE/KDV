@@ -10,14 +10,15 @@ namespace TravelerGame
     {
         private static Random rnd = new Random();
 
-        public static List<Biom> GenerateWay(Difficults difficult, QuestTypes questType)
+        public static List<Biom> GenerateWay(Quest currentQuest)
         {
+            
             int minBiomCount = 0;
             int maxBiomCount = 0;
             int fullBiomCount = 0;
             List<Biom> biomList;
 
-            switch (difficult)
+            switch (currentQuest.QuestDifficult)
                 {
                     case Difficults.low:
                         minBiomCount = 7;
@@ -34,15 +35,30 @@ namespace TravelerGame
                 }
 
             fullBiomCount = rnd.Next(minBiomCount, maxBiomCount);
+
             biomList = new List<Biom>(fullBiomCount);
-            if (questType != QuestTypes.FreeRun)
-            {
-                biomList.Add(new Biom());// TODO: cделать так, что бы последний биом был квестовый, в вбиом сделать поле квестовый или нет.Добавить к коснстркуктору biom коструктор с параметрами QestType и Difficult (будет влиять на сложность босса и врагов).
-            }
+            biomList.Add(new Biom());// TODO: cделать так, что бы последний биом был квестовый, в вбиом сделать поле квестовый или нет.Добавить к коснстркуктору biom коструктор с параметрами QestType и Difficult (будет влиять на сложность босса и врагов).
 
             return biomList; 
         }
+        public static List<Biom> GenerateWay()
+        {
 
+            int minBiomCount = 0;
+            int maxBiomCount = 0;
+            int fullBiomCount = 0;
+            List<Biom> biomList;
+
+            minBiomCount = 7;
+            maxBiomCount = 15;
+
+            fullBiomCount = rnd.Next(minBiomCount, maxBiomCount);
+
+            biomList = new List<Biom>(fullBiomCount);
+            biomList.Add(new Biom());// TODO: cделать так, что бы последний биом был квестовый, в вбиом сделать поле квестовый или нет.Добавить к коснстркуктору biom коструктор с параметрами QestType и Difficult (будет влиять на сложность босса и врагов).
+
+            return biomList;
+        }
     }
 }
 
