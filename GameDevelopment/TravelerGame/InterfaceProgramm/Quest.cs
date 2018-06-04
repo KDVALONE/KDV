@@ -12,10 +12,11 @@ namespace TravelerGame
     /// </summary>
         public QuestTypes QuestType { get; private set; } //тип квеста убить монстра(Hunt), найти предмет(Exploring).
         public Difficults QuestDifficult { get; private set; }
+        public List<Biom> QuestWay { get; private set; }
         public string QuestName { get; private set; }
         public string QuestDescription { get; private set; }
         public Dictionary<string,string> QuestDescriptionDict { get; private set; }
-        public List<Biom> QuestWay { get; private set; }
+        
 
         public Quest()
         {

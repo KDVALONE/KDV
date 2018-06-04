@@ -19,8 +19,16 @@ namespace RndDerivedClassGnrtr
         class Hall : Room { override public void Print() { Console.WriteLine("Hall"); } }
         class Restroom : Room { override public void Print() { Console.WriteLine("Restroom"); } }
         class Storeroom : Room { override public void Print() { Console.WriteLine("Storeroom"); } }
-
-        class Program
+        class FunRoom : Room
+            {
+              override public void Print() { Console.WriteLine("FunRoom"); }
+              public void GetFun()
+        {
+            Console.WriteLine("SOME FUNN BABY!!!");
+        }
+            }
+       
+    class Program
         {
             static List<Room> rooms;
 
@@ -35,8 +43,19 @@ namespace RndDerivedClassGnrtr
                     Room room = (Room)Activator.CreateInstance(types[rnd.Next(types.Length)]);
                     rooms.Add(room);
                 }
-                foreach (Room room in rooms)
-                    room.Print();
+            foreach (Room room in rooms)
+            {
+                room.Print();
+               
+                if (room.GetType() == typeof(FunRoom)) // если данный тип FunRoom, то используй его метод
+                {
+                    (room as FunRoom ).GetFun();
+                }
+            }
+
+
+
+            Console.ReadKey();
             }
         }
 }

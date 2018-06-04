@@ -18,14 +18,10 @@ namespace TravelerGame
             return hit;
             } // класс проверки выполненния какого то действия. ринимает n - шанс выполнения, и возвращаяет, тру или фолс
 
-            static public Difficults GetDifficult() // возвращает случайное занчиение сложности
-            {
-              return  (Difficults)rnd.Next(Enum.GetValues(typeof(Difficults)).Length);
-            }
-            static public QuestTypes GetQuestType() // возвращает случайное типа квеста
-            {
-            return (QuestTypes)rnd.Next(Enum.GetValues(typeof(QuestTypes)).Length);
-            }
+            static public Difficults GetDifficult() => (Difficults)rnd.Next(Enum.GetValues(typeof(Difficults)).Length); // возвращает случайное занчиение сложности
+            static public QuestTypes GetQuestType() => (QuestTypes)rnd.Next(Enum.GetValues(typeof(QuestTypes)).Length); // возвращает случайное типа квеста
+            static public CityTypes GetCityType() => (CityTypes)rnd.Next(Enum.GetNames(typeof(CityTypes)).Length);// возвращает случайное типа города
+
     }
     
 }
