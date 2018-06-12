@@ -20,8 +20,7 @@ namespace TravelerGame
     
         public static string GetEnemyName()
         {
-             return EnemyFirstName[random.Next(0, EnemyFirstName.Length)];
-            
+             return EnemyFirstName[random.Next(0, EnemyFirstName.Length)];  
         }
         public static string GetEnemyNickName()
         {

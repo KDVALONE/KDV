@@ -14,8 +14,7 @@ namespace TravelerGame
         public CityPlaceTypes CityPlaceType { get;  set; }
         public string CityPlaceName { get; set; }
         public string CityPlaceDescription { get;  set;}
-        Dictionary<string, string> CityDescList = new Dictionary<string, string>();
-      
-
+        public List<NPC> NpcOnLocation { get; set; } 
+        public City CurrentCity { get; set; }
     }
 }

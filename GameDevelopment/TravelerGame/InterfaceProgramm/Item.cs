@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace TravelerGame
 {
-    class Item // предмет, находитсья в инвентаре.
+    public class Item // предмет, находитсья в инвентаре.
     {
+        public float IdItem { get; set; }
         public string Name { get; set; }
         public string Description { get; set; } // описание
 

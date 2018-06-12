@@ -7,7 +7,7 @@ using System.Threading;
 
 namespace TravelerGame
 {
-    abstract class Character //Класс персонажа с характеристиками TODO: отрефакотрить по SOLID
+   public abstract class Character //Класс персонажа с характеристиками TODO: отрефакотрить по SOLID
     {
         Random rnd = new Random();
 

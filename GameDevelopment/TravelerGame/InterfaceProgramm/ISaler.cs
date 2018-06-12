@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TravelerGame
 {
-    interface ISaler // интефейс поведения торговли
+    public interface ISaler // интефейс поведения торговли
     {  
         void Trade();
         void Thieve();

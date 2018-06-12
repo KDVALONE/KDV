@@ -13,7 +13,7 @@ namespace TravelerGame
     /// Города генерируются случайным образом, бывают разных типов Промышленные, простые поселения, торговые хабы, мелкие деревушки
     /// </summary>
 
-    class City
+    public class City
     {
        Random rnd = new Random();
        public CityTypes CityType { get; private set; }
@@ -21,7 +21,8 @@ namespace TravelerGame
        public string CityName { get; private set; }
        public string CityDescription { get; private set; }
        public List<CityPlace> CityPlace { get; private set; }
-
+        
+       
        public City()
         {
             this.CityType = GameService.GetCityType();

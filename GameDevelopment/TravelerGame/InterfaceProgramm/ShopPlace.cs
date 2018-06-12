@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 
 namespace TravelerGame
 {
-   public sealed class ShopPlace : CityPlace
+    public sealed class ShopPlace : CityPlace
     {
-        
+
         public ShopPlace()
         {
             CityPlaceType = CityPlaceTypes.shop;
-            
+
         }
+    }
 }
