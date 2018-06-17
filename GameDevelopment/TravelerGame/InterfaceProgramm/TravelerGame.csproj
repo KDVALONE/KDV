@@ -73,6 +73,7 @@
     <Compile Include="CityTypes.cs" />
     <Compile Include="Difficults.cs" />
     <Compile Include="EnemyNameGenerator.cs" />
+    <Compile Include="Game.cs" />
     <Compile Include="GameService.cs" />
     <Compile Include="HeroCreate.cs" />
     <Compile Include="IQuester.cs" />
@@ -94,6 +95,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">

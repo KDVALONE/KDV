@@ -9,7 +9,7 @@ namespace TravelerGame
     public enum Difficults // сложноность, по началу пбудет влиять на множетели 
                           //количесвто бомов в пути, потом шанса спавна количества врагов в биомах.  
     {
-        low,
+        low=1,
         medium,
         hard
     }

@@ -22,6 +22,26 @@ namespace TravelerGame
             static public QuestTypes GetQuestType() => (QuestTypes)rnd.Next(Enum.GetValues(typeof(QuestTypes)).Length); // возвращает случайное типа квеста
             static public CityTypes GetCityType() => (CityTypes)rnd.Next(Enum.GetNames(typeof(CityTypes)).Length);// возвращает случайное типа города
 
+            static public Difficults SetGameDifficult()
+        {
+            int difficult;
+            
+            Console.WriteLine("Выбирите уровень сложности\n 1-легкий 2-средний 3-тяжелый");
+            difficult = Console.Read();
+            while (difficult == 1 || difficult == 2 || difficult == 3)
+            {
+                difficult = Console.Read();
+            }
+
+            return (Difficults)difficult;
+
+
+        }  //  выбор сложности игры
+            static public int GetCityCount(Difficults gameDif)
+            {
+            int cityCount= 2 + ((int)gameDif * 2);
+            return cityCount;
+            } // задает количество городов в игре
     }
     
 }

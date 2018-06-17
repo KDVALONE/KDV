@@ -8,10 +8,9 @@ namespace TravelerGame
 {
     class HeroCreate
     {
-        string HeroFirstName { get; set; }
-
-        public void CreatePlayerName()
+        public string CreatePlayerName()
         {
+            string HeroFirstName;
             string substring = "";// первые 2 буквы имени
             string substring2 = "";// последние 2 буквы имени
             string substring3 = ""; // первые 3 буквы имени
@@ -40,6 +39,8 @@ namespace TravelerGame
             Console.WriteLine("'[Прищуривается и сплевывает] '");
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine($"{substring3}... {HeroFirstName}, вроде... Да похрен, сойдет. Короче, {HeroFirstName}, ты нанят.");
+
+            return HeroFirstName;
         }
     }
 }
