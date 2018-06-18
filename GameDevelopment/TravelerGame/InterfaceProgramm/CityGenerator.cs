@@ -7,11 +7,16 @@ using System.Threading.Tasks;
 namespace TravelerGame
 {
     public static class CityGenerator
-    { const int CityCount = 0; // Константа количества городов.Всего не должно быть больше определенног околичества городов.
+    { 
 
-        public static void GenerateCity()
+        public static List<City> GenerateCity(int cityCount)
         {
-            CityCount++;
+            List<City> cityList = new List<City>();
+            for (int i = 0; i < cityCount; i++)
+            {
+                cityList.Add( new City());
+            }
+            return cityList;
         }
     }
 }

@@ -10,11 +10,15 @@ namespace TravelerGame
  /// </summary>
     public sealed class Game
     {
-     public Hero hero; 
-     public Difficults GameDifficult;
-     public int CityCount { get; private set; }
+        private Hero hero;
+        private List<City> citysList = new List<City>();
 
-     public Game()
+        public Difficults GameDifficult;
+        public int CityCount { get; private set; }
+        public List<City> CitysList { get => citysList; set => citysList = value; }
+        public Hero Hero { get => hero; set => hero = value; }
+
+        public Game()
         {
             GameDifficult = GameService.SetGameDifficult();
             CityCount = GameService.GetCityCount(GameDifficult);
@@ -22,8 +26,11 @@ namespace TravelerGame
 
         public void PlayerCreate()
         {  HeroCreate heroCreate = new HeroCreate();
-           hero = new Hero (heroCreate.CreatePlayerName());
+           Hero = heroCreate.CreatePlayer();
         }
-
+        public void CreateCityes()
+        {
+            CitysList = CityGenerator.GenerateCity(CityCount);
+        }
     }
 }

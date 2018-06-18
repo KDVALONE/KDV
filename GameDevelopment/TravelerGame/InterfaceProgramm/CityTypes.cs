@@ -12,7 +12,7 @@ namespace TravelerGame
     {
        town,
        bigCity,
-       villag
+       village
     }
 
 

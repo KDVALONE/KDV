@@ -8,7 +8,9 @@ namespace TravelerGame
 {
     class HeroCreate
     {
-        public string CreatePlayerName()
+        Hero hero;
+        
+        private string CreatePlayerName()
         {
             string HeroFirstName;
             string substring = "";// первые 2 буквы имени
@@ -42,5 +44,12 @@ namespace TravelerGame
 
             return HeroFirstName;
         }
+
+        public Hero CreatePlayer()
+        {
+            hero = new Hero(CreatePlayerName());
+            return hero;
+        }
+
     }
 }

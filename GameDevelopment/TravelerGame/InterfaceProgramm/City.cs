@@ -30,7 +30,7 @@ namespace TravelerGame
             this.CityDescriptionDict = CityDescriptionGenerator.GetCityDescription(CityType);
             CityName = CityDescriptionDict.ElementAt(0).Key;
             CityDescription = CityDescriptionDict.ElementAt(0).Value;
-            CityPlace = //TODO:Сюда сделать Generator для CityPlace на основании типа города,
+            CityPlace = CityPlaceGenerator. //TODO:Сюда сделать Generator для CityPlace на основании типа города,
         }
 
 
