@@ -23,4 +23,5 @@ namespace TravelerGame
             this.AttackDescriptionHit.Add($"{attackDescriptionHit}");
         }
     }
+
 }

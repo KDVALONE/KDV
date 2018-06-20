@@ -68,8 +68,9 @@
     <Compile Include="CityPlace\CityPlace.cs" />
     <Compile Include="CityPlaceDescGenerator.cs" />
     <Compile Include="CityPlaceGenerator.cs" />
-    <Compile Include="CityPlaceTypes.cs" />
-    <Compile Include="CityPlace\MedCenter.cs" />
+    <Compile Include="CityPlace\CityPlaceTypes.cs" />
+    <Compile Include="CityPlace\InnPlace.cs" />
+    <Compile Include="CityPlace\MedCenterPlace.cs" />
     <Compile Include="CityTypes.cs" />
     <Compile Include="Difficults.cs" />
     <Compile Include="EnemyNameGenerator.cs" />
@@ -90,7 +91,7 @@
     <Compile Include="Quest.cs" />
     <Compile Include="QuestDescriptionGenerator.cs" />
     <Compile Include="QuestTypes.cs" />
-    <Compile Include="ShopPlace.cs" />
+    <Compile Include="CityPlace\ShopPlace.cs" />
     <Compile Include="WayGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
