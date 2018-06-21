@@ -59,44 +59,43 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Battle.cs" />
-    <Compile Include="Biom.cs" />
-    <Compile Include="BiomeTypes.cs" />
-    <Compile Include="BiomLayers.cs" />
+    <Compile Include="BiomFolder\Biom.cs" />
+    <Compile Include="BiomFolder\BiomeTypes.cs" />
+    <Compile Include="BiomFolder\BiomLayers.cs" />
     <Compile Include="City.cs" />
-    <Compile Include="CityDescriptionGenerator.cs" />
-    <Compile Include="CityGenerator.cs" />
-    <Compile Include="CityPlace\CityPlace.cs" />
-    <Compile Include="CityPlaceDescGenerator.cs" />
-    <Compile Include="CityPlaceGenerator.cs" />
-    <Compile Include="CityPlace\CityPlaceTypes.cs" />
-    <Compile Include="CityPlace\InnPlace.cs" />
-    <Compile Include="CityPlace\MedCenterPlace.cs" />
+    <Compile Include="StaticClassFolder\CityDescriptionGenerator.cs" />
+    <Compile Include="StaticClassFolder\CityGenerator.cs" />
+    <Compile Include="CityPlaceFolder\CityPlace.cs" />
+    <Compile Include="StaticClassFolder\CityPlaceDescGenerator.cs" />
+    <Compile Include="StaticClassFolder\CityPlaceGenerator.cs" />
+    <Compile Include="CityPlaceFolder\CityPlaceTypes.cs" />
+    <Compile Include="CityPlaceFolder\InnPlace.cs" />
+    <Compile Include="CityPlaceFolder\MedCenterPlace.cs" />
     <Compile Include="CityTypes.cs" />
     <Compile Include="Difficults.cs" />
-    <Compile Include="EnemyNameGenerator.cs" />
+    <Compile Include="StaticClassFolder\EnemyNameGenerator.cs" />
     <Compile Include="Game.cs" />
-    <Compile Include="GameService.cs" />
+    <Compile Include="StaticClassFolder\GameService.cs" />
     <Compile Include="HeroCreate.cs" />
     <Compile Include="IQuester.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="Attack.cs" />
-    <Compile Include="Charcter.cs" />
-    <Compile Include="Enemy.cs" />
-    <Compile Include="Hero.cs" />
+    <Compile Include="CharacterFolder\Character.cs" />
+    <Compile Include="CharacterFolder\Enemy.cs" />
+    <Compile Include="CharacterFolder\Hero.cs" />
     <Compile Include="IFighter.cs" />
     <Compile Include="ISaler.cs" />
-    <Compile Include="NPC.cs" />
+    <Compile Include="CharacterFolder\NPC.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Quest.cs" />
-    <Compile Include="QuestDescriptionGenerator.cs" />
-    <Compile Include="QuestTypes.cs" />
-    <Compile Include="CityPlace\ShopPlace.cs" />
-    <Compile Include="WayGenerator.cs" />
+    <Compile Include="QuestFolder\Quest.cs" />
+    <Compile Include="StaticClassFolder\QuestDescriptionGenerator.cs" />
+    <Compile Include="QuestFolder\QuestTypes.cs" />
+    <Compile Include="CityPlaceFolder\ShopPlace.cs" />
+    <Compile Include="StaticClassFolder\WayGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
@@ -110,6 +109,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
