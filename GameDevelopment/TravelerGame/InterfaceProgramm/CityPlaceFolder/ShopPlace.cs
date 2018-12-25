@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace TravelerGame
-{
+{   [MainPlace]
     public sealed class ShopPlace : CityPlace
     {
 

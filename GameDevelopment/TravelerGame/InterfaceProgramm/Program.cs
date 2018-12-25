@@ -18,11 +18,7 @@ namespace TravelerGame
         static void Main(string[] args)
         {
 
-
-
            
-
-
             /* TODO: 
             - Генерация биомов */
             ///- Механика боя

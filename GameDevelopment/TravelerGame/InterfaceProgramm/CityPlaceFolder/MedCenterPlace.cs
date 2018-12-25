@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace TravelerGame
 {
+    [MainPlace]
     public class MedCenterPlace : CityPlace
     {
         public MedCenterPlace(City city)

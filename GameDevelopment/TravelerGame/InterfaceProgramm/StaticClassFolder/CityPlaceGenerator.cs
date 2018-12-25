@@ -19,22 +19,13 @@ namespace TravelerGame
             Type[] types = Assembly.GetAssembly(ourtype).GetTypes().Where(type => type.IsSubclassOf(ourtype)).ToArray();
             for (int i = 0; i < types.Length; i++)
             {
-                CityPlace cityPlace = (CityPlace)Activator.CreateInstance(types[(types.Length)]);
-                cityPlaceList.Add(cityPlace);
+                MainPlaceAttribute mainPlace = (MainPlaceAttribute)Attribute.GetCustomAttribute(types[i], typeof(MainPlaceAttribute));
+                if (mainPlace != null)
+                {
+                    cityPlaceList.Add((CityPlace)Activator.CreateInstance(types[i], cityType));
+                }
             }
-            
-
-            return cityPlaceList;
+                return cityPlaceList;
         }
-
-        private static CityPlace AddCityPlace()
-        {
-            Random rnd = new Random();
-            
-
-            return CityPlace
-        }
-
-
     }
 }

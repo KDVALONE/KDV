@@ -11,10 +11,15 @@ namespace TravelerGame
 /// </summary>
     public abstract class CityPlace
     {
-        public CityPlaceTypes CityPlaceType { get;  set; }
+        public CityPlaceTypes CityPlaceType { get; set; }
         public string CityPlaceName { get; set; }
-        public string CityPlaceDescription { get;  set;}
+        public string CityPlaceDescription { get; set; }
+        public int Id { get { return this.Id; }
+                        set { value = IdGenerator.GetId(); }  }
         public List<NPC> NpcOnLocation { get; set; } 
         public City CurrentCity { get; set; }
+
     }
+      
+    
 }

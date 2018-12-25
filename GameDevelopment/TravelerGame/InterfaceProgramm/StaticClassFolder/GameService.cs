@@ -42,6 +42,15 @@ namespace TravelerGame
             int cityCount= 2 + ((int)gameDif * 2);
             return cityCount;
             } // задает количество городов в игре
+            static public int GetNumberOfOption()
+            {
+            int inputNumber;
+           
+            try { inputNumber = (int)(Console.Read()); }
+            catch { inputNumber = GetNumberOfOption(); }
+            return inputNumber;
+            }// возвращает с полученное с клавиатуры занчение
+
     }
     
 }

@@ -6,7 +6,8 @@ using System.Linq;
 using System.Text;
 
 namespace TravelerGame
-{ 
+{
+    [MainPlace]
     public class InnPlace : CityPlace
     {
         public InnPlace(City city)
@@ -15,8 +16,9 @@ namespace TravelerGame
             CurrentCity = city;
             Dictionary<string, string> cityPlaceDescDictonary = CityPlaceDescGenerator.GetCityPlaceDesc(CityPlaceType, CurrentCity.CityType);
             CityPlaceDescription = cityPlaceDescDictonary.ElementAt(0).Value;
-
+            
         }
-
+        
     }
+    
 }

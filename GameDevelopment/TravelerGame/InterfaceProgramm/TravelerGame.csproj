@@ -58,6 +58,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\MainPlaceAttribute.cs" />
     <Compile Include="Battle.cs" />
     <Compile Include="BiomFolder\Biom.cs" />
     <Compile Include="BiomFolder\BiomeTypes.cs" />
@@ -89,6 +90,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QuestFolder\Quest.cs" />
+    <Compile Include="StaticClassFolder\IdGenerator.cs" />
     <Compile Include="StaticClassFolder\QuestDescriptionGenerator.cs" />
     <Compile Include="QuestFolder\QuestTypes.cs" />
     <Compile Include="CityPlaceFolder\ShopPlace.cs" />

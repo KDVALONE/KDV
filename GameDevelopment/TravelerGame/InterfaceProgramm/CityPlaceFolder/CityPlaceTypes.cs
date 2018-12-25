@@ -11,6 +11,6 @@ namespace TravelerGame
         medCenter,
         inn,
         shop,
-        
+        //station - только в больших городах,станция служит для быстрого перемещения между городами
     }
 }

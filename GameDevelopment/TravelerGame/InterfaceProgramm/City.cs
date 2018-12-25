@@ -21,7 +21,7 @@ namespace TravelerGame
        public string CityName { get; private set; }
        public string CityDescription { get; private set; }
        public List<CityPlace> CityPlace { get; private set; }
-        
+        public int CityVisitedCount { get; private set; }
        
        public City()
         {
@@ -30,11 +30,51 @@ namespace TravelerGame
             this.CityDescriptionDict = CityDescriptionGenerator.GetCityDescription(CityType);
             CityName = CityDescriptionDict.ElementAt(0).Key;
             CityDescription = CityDescriptionDict.ElementAt(0).Value;
-            CityPlace = CityPlaceGenerator. //TODO:Сюда сделать Generator для CityPlace на основании типа города,
+            CityPlace = CityPlaceGenerator.GetCityPlaceList(CityType);
+            CityVisitedCount = 0;
+        }
+
+        public void ComeInCityPlace(Hero hero) { }
+        public void ExiteCityPlace(Hero hero) { }
+
+        public void ArrivededInCity()
+        {
+            Console.WriteLine($"Вы приходите в {CityName}./n");
+            if (CityVisitedCount == 0)
+            { SeeCityDescription(); CityVisitedCount = 1; }
+            SelectCityOption();
+
+
+        }
+        private void SeeCityDescription() => Console.WriteLine($"{CityDescription}/n");
+        
+        public void SelectCityOption()
+        {
+            
+            
         }
 
 
-        
+        private void SelectCityPlace()
+        {
+            int cityPlaceNumber = 1;
+            int selectOptionNumber ;
+            Console.WriteLine("Выбирите куда вы хотите отправиться: ");
+            Console.WriteLine("0 В меню поселения");
+            foreach (CityPlace e in CityPlace)
+            {
+                Console.WriteLine($"{cityPlaceNumber} {e.CityPlaceName}");
+                cityPlaceNumber++;
+            }
+            if ((selectOptionNumber = Int32.Parse(Console.ReadLine())) == )
+            { } 
+            
+                
+                
+            
+            
+
+        }
 
 
     }
