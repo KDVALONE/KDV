@@ -38,8 +38,11 @@ namespace _2DelPrgm
                     }
                     else
                     {
-                        // а теперь от финалдьной точки к меньшему числу в обратку по кругу
-                        wayIsFind = true;
+                        Display dsp = new Display();
+                        dsp.ShowFieldArray(fieldIntArray);
+                    //    // а теперь от финалдьной точки к меньшему числу в обратку по кругу
+                    //    wayIsFind = true;
+                    //    tank.WayToTarget = GetWayToTarget(fieldIntArray, target.X, target.Y, tank);//TODO: передалать параметры , вообще target не нужен если я танк как класс передаю, в нем есть
                     }
                 }
 
@@ -54,6 +57,7 @@ namespace _2DelPrgm
             
             Display dp = new Display();
             dp.ShowFieldArray(fieldIntArray);
+           
         }
         public int[,] InitWayArray(FieldObjectEnum[,]field) //TODO: Все же нужно распарсить массив enum, -3 свободно для прохода -5 проезд закрыт 
         {
@@ -82,13 +86,68 @@ namespace _2DelPrgm
             return Access;
         }
 
-        public GetWayToTarget(int[,] fieldIntArray, int targetI, int targetJ)
+        public List<Point> GetWayToTarget(int[,] fieldIntArray, int targetI, int targetJ, Tank tank)
         {
-            List<Point> WayToTarget = new List<Point>();
-            
+            List<Point> wayToTargetList = new List<Point>();
+            wayToTargetList.Add(new Point (targetI, targetJ));
+
+            int currentElement = fieldIntArray[targetI, targetJ];
+            Point currentPoint = new Point(targetI, targetJ);
+            bool elementFound = false;
+            bool wayFound = false;
+            // TODO: тут разделить все на методы
+            while (!wayFound)
+            {
+                if (!wayFound ) { elementFound = false; };
+
+                if (currentPoint.Y - 1 >= 0 & fieldIntArray[currentPoint.Y - 1, currentPoint.X] == currentElement - 1 & !elementFound) { // проверяем верхний элемент
+
+                    wayToTargetList.Add(new Point(currentPoint.Y - 1, currentPoint.X));
+                    
+                    currentPoint.Y = currentPoint.Y - 1;
+                    currentPoint.X = currentPoint.X;
+                    elementFound = true;
+                }
+                //*****************
+                if (currentPoint.Y + 1 < fieldIntArray.GetLength(0) & fieldIntArray[currentPoint.Y + 1, currentPoint.X] == currentElement-1 & !elementFound)// проверяем нижний элемент
+                {
+                    wayToTargetList.Add(new Point(currentPoint.Y + 1, currentPoint.X));
+
+                    currentPoint.Y = currentPoint.Y + 1;
+                    currentPoint.X = currentPoint.X;
+                    elementFound = true;
+                }
+                //*****************
+                if (currentPoint.X - 1 >= 0  & fieldIntArray[currentPoint.Y , currentPoint.X -1 ] == currentElement - 1 & !elementFound)// проверяем левыйы элемент
+                {
+                    wayToTargetList.Add(new Point(currentPoint.Y , currentPoint.X-1));
+
+                    currentPoint.Y = currentPoint.Y ;
+                    currentPoint.X = currentPoint.X - 1;
+                    elementFound = true;
+                }
+                //*****************
+                if (currentPoint.X + 1 < fieldIntArray.GetLength(1) && fieldIntArray[currentPoint.Y , currentPoint.X + 1] == currentElement - 1 && !elementFound)// проверяем правый элемент
+                {
+                    wayToTargetList.Add(new Point(currentPoint.Y, currentPoint.X + 1));
+
+                    currentPoint.Y = currentPoint.Y;
+                    currentPoint.X = currentPoint.X + 1;
+                    elementFound = true;
+                }
+                //*****************
+                if (fieldIntArray[currentPoint.Y,currentPoint.X] == 0) { wayFound = true; }
+
+            }
+            wayToTargetList.Add(new Point(tank.TankI, tank.TankJ));
+
+            return wayToTargetList;
+           
 
 
         }
+
+       
 
         public  void GetUpElement(Point pointCurent, int[,] array, ref List<Point> pointToNextTurn)
         {

@@ -18,6 +18,7 @@ namespace _2DelPrgm
         TeamTypeEnum Team { get; set; }
         public int FinishJ { get; set; }
         public int FinishI { get; set; }
+        public List<Point> WayToTarget { get; set; }
 
 
         public Tank(TeamTypeEnum teamType, int tankJ, int tankI, int finishJ , int finishI)
@@ -30,6 +31,8 @@ namespace _2DelPrgm
             TankJ = tankJ;
             FinishJ = finishJ;
             FinishI = FinishJ;
+
+
         } 
 
     }
