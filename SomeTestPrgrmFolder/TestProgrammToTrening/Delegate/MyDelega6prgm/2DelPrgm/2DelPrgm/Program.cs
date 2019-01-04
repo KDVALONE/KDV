@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _2DelPrgm
+namespace TankGame
 {/// <summary>
 /// написать прогу для тренировки делегатов.
 /// Есть танк. Едет по минному полю.

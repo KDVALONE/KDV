@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace _2DelPrgm
+namespace TankGame
 {
     class Pathfinder
     {
@@ -24,6 +24,7 @@ namespace _2DelPrgm
             List<Point> pointCurrent = new List<Point>();
             pointCurrent.Add(new Point(tank.TankI,tank.TankJ));
             List<Point> pointToNextTurn = new List<Point>();
+
             while (pointCurrent.Count > 0 || !wayIsFind )
             { 
             foreach (var e in pointCurrent)
@@ -41,8 +42,8 @@ namespace _2DelPrgm
                         Display dsp = new Display();
                         dsp.ShowFieldArray(fieldIntArray);
                     //    // а теперь от финалдьной точки к меньшему числу в обратку по кругу
-                    //    wayIsFind = true;
-                    //    tank.WayToTarget = GetWayToTarget(fieldIntArray, target.X, target.Y, tank);//TODO: передалать параметры , вообще target не нужен если я танк как класс передаю, в нем есть
+                       wayIsFind = true;
+                       tank.WayToTarget = GetWayToTarget(fieldIntArray, target.X, target.Y, tank);//TODO: передалать параметры , вообще target не нужен если я танк как класс передаю, в нем есть
                     }
                 }
 
@@ -56,7 +57,8 @@ namespace _2DelPrgm
             }
             
             Display dp = new Display();
-            dp.ShowFieldArray(fieldIntArray);
+            //dp.ShowFieldArray(fieldIntArray); //выводит размеченный массив
+            dp.ShowFieldArray(fieldIntArray, tank.WayToTarget); // выводит размеченный массив и путь
            
         }
         public int[,] InitWayArray(FieldObjectEnum[,]field) //TODO: Все же нужно распарсить массив enum, -3 свободно для прохода -5 проезд закрыт 
@@ -103,9 +105,11 @@ namespace _2DelPrgm
                 if (currentPoint.Y - 1 >= 0 & fieldIntArray[currentPoint.Y - 1, currentPoint.X] == currentElement - 1 & !elementFound) { // проверяем верхний элемент
 
                     wayToTargetList.Add(new Point(currentPoint.Y - 1, currentPoint.X));
-                    
+
+                    currentElement = fieldIntArray[currentPoint.Y - 1, currentPoint.X];
                     currentPoint.Y = currentPoint.Y - 1;
                     currentPoint.X = currentPoint.X;
+                    
                     elementFound = true;
                 }
                 //*****************
@@ -113,8 +117,10 @@ namespace _2DelPrgm
                 {
                     wayToTargetList.Add(new Point(currentPoint.Y + 1, currentPoint.X));
 
+                    currentElement = fieldIntArray[currentPoint.Y + 1, currentPoint.X];
                     currentPoint.Y = currentPoint.Y + 1;
                     currentPoint.X = currentPoint.X;
+                    
                     elementFound = true;
                 }
                 //*****************
@@ -122,8 +128,10 @@ namespace _2DelPrgm
                 {
                     wayToTargetList.Add(new Point(currentPoint.Y , currentPoint.X-1));
 
+                    currentElement = fieldIntArray[currentPoint.Y, currentPoint.X - 1];
                     currentPoint.Y = currentPoint.Y ;
                     currentPoint.X = currentPoint.X - 1;
+                    
                     elementFound = true;
                 }
                 //*****************
@@ -131,15 +139,19 @@ namespace _2DelPrgm
                 {
                     wayToTargetList.Add(new Point(currentPoint.Y, currentPoint.X + 1));
 
+                    currentElement = fieldIntArray[currentPoint.Y, currentPoint.X + 1];
                     currentPoint.Y = currentPoint.Y;
                     currentPoint.X = currentPoint.X + 1;
+                    
                     elementFound = true;
                 }
                 //*****************
                 if (fieldIntArray[currentPoint.Y,currentPoint.X] == 0) { wayFound = true; }
 
             }
-            wayToTargetList.Add(new Point(tank.TankI, tank.TankJ));
+            //wayToTargetList.Add(new Point(tank.TankI, tank.TankJ)); // хз за чемаписал, удалить
+
+            wayToTargetList.Reverse();
 
             return wayToTargetList;
            

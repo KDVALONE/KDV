@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace _2DelPrgm
+namespace TankGame
 {
     class Display
     {
@@ -36,6 +36,31 @@ namespace _2DelPrgm
             }
             Console.WriteLine("\n ");
         }
+        public void ShowFieldArray(int[,] field,List<Point> wayToTarget)
+        {
+            
+            Console.WriteLine("\n ");
+
+            for (int i = 0; i < field.GetLength(0); i++)
+            {
+                Console.WriteLine();
+                for (int j = 0; j < field.GetLength(0); j++)
+                {
+                    foreach (var e in wayToTarget)
+                    {
+                        if (e.Y == i & e.X == j)
+                        { Console.ForegroundColor = ConsoleColor.Red;
+                          break;
+                        }
+                        
+                    }
+                    Console.Write("|" + field[i, j] + "|");
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+            }
+            Console.WriteLine("\n ");
+        }
+
         private void ShowColoredSymbol( FieldObjectEnum  symbol )
         {
             switch (symbol)

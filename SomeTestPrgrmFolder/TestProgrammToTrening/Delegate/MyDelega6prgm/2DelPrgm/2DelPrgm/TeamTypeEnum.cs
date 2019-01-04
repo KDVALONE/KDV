@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace _2DelPrgm
+namespace TankGame
 {
     public enum TeamTypeEnum
     {
