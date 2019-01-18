@@ -13,36 +13,21 @@ namespace TestNameSpace
         static void Main(string[] args)
         {
 
-            int[,] array = new int[10, 10];
-            for (int i = 0; i < array.GetLength(0); i++)
-            {
-                for (int j = 0; j < array.GetLength(0); j++)
-                {
-                    array[i, j] = -3;
-                }
-            }
+            string text =  "Космос";
+            char text2 = 'о';
+            string text3 = "Космос2";
 
-            array[3, 3] = 22;
+            //Console.WriteLine(text[1].Equals(text2) );
+            //Console.WriteLine(text[0].Equals(text2));
+            Console.WriteLine(text[1].Equals (text2));
+            //Console.WriteLine( "v".Equals( text[3]) );
+            //Console.WriteLine("м".Equals(text[3]));
 
-
-           int a = Array.IndexOf(array, 22);
-            Console.WriteLine(a);
             Console.ReadKey();
 
         }
         
     }
 
-    public struct FieldPoint
-    {
-        int a;
-        string b;
-      
-        public FieldPoint(int a, string b)
-        {
-            this.a = a;
-            this.b = b;
-        }
-
-    }
+   
 }

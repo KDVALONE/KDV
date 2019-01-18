@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C725A24C-578C-4389-BC7E-B8534616469D}</ProjectGuid>
+    <ProjectGuid>{D006EE5E-BF60-477A-9417-9DE6D03AA22A}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>_2DelPrgm</RootNamespace>
-    <AssemblyName>2DelPrgm</AssemblyName>
+    <RootNamespace>BerthenkhamAlgoritm</RootNamespace>
+    <AssemblyName>BerthenkhamAlgoritm</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -43,26 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BattlefieldGenerator.cs" />
-    <Compile Include="Display.cs" />
-    <Compile Include="FieldCell.cs" />
-    <Compile Include="GameModeEnum.cs" />
-    <Compile Include="TankNameGenerator.cs" />
-    <Compile Include="WayPoint.cs" />
-    <Compile Include="Game.cs" />
-    <Compile Include="TankEnemy.cs" />
-    <Compile Include="TankPlayer.cs" />
-    <Compile Include="TeamTypeEnum.cs" />
-    <Compile Include="FieldObjectEnum.cs" />
-    <Compile Include="Pathfinder.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tank.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config">
-      <SubType>Designer</SubType>
-    </None>
+    <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

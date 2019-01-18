@@ -36,7 +36,7 @@ namespace TankGame
             }
             Console.WriteLine("\n ");
         }
-        public void ShowFieldArray(int[,] field,List<Point> wayToTarget)
+        public void ShowFieldArray(int[,] field,List<WayPoint> wayToTarget)
         {
             
             Console.WriteLine("\n ");

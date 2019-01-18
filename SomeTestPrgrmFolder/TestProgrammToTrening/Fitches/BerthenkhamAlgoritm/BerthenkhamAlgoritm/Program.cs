@@ -1,0 +1,268 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace BerthenkhamAlgoritm
+{/// <summary>
+/// Алгорим Берзенкхема, оцифровки линии к точке
+/// Бедет мофдифинован чтоьы закрасить висю видимую зону для обьекта, за перпятствиями в видно не будет
+/// </summary>
+    class Program
+    {
+       static Random rnd = new Random();
+       static public int HorizontalTreeCount = 4;
+       static public int VerticalTreeCount = 2;
+       static public  int[,] array = new int[20,20] ;
+       static public int ForestDeep = 4;
+      // static MapPoint playerCurrentPoint;
+        
+
+        static void Main(string[] args)
+        {
+            array = InitializeArray(array);
+            Display.ShowArray(array);
+            PlayerMoving.PlayerMoved(array);
+           
+            
+
+            Console.ReadKey();
+        }
+
+        static int[,] InitializeArray(int [,] array)
+        {
+            array = AddGround(array); 
+            array = AddTree(array);
+
+            return array;
+        }
+
+        private static int[,] AddGround(int[,] array)
+        {
+            for (int i = 0; i < array.GetLength(0); i++)
+            {
+                for (int j = 0; j < array.GetLength(0); j++)
+                {
+                    array[i, j] = (int)ElementOnMap.Ground;
+                }
+            }
+            return array;
+
+        }
+        private static int[,] AddTree(int[,] array)
+        {
+            array = AddTreeHorizntal(array, HorizontalTreeCount);
+            array = AddTreeVertical(array, VerticalTreeCount);
+
+            return array;
+        }
+        private static int[,] AddTreeHorizntal(int [,] array,int horizontalTreeCount)
+        {
+            int y;
+            int x;
+            int AddedTree = 0;
+            while (AddedTree < horizontalTreeCount)
+            {
+                int forestDeep = 1;
+                y = rnd.Next(ForestDeep, array.GetLength(0) - ForestDeep);
+                x = rnd.Next(ForestDeep, array.GetLength(1) - ForestDeep);
+                array[y, x] = (int)ElementOnMap.Tree;
+                while (forestDeep != ForestDeep)
+                {
+                    array[y, x + forestDeep] = (int)ElementOnMap.Tree; // cдвиг влево по х
+                    forestDeep++;
+                }
+                AddedTree++;
+            }
+            return array;
+
+        }
+        private static int[,] AddTreeVertical(int[,] array, int verticalTreeCount)
+        {
+            int y;
+            int x;
+            int AddedTree = 0;
+            while (AddedTree < verticalTreeCount)
+            {
+                int forestDeep = 1;
+                y = rnd.Next(ForestDeep, array.GetLength(0) - ForestDeep);
+                x = rnd.Next(ForestDeep, array.GetLength(1) - ForestDeep);
+                array[y, x] = (int)ElementOnMap.Tree;
+                while (forestDeep != ForestDeep)
+                {
+                    array[y + forestDeep, x] = (int)ElementOnMap.Tree; // cдвиг вниз по y
+                    forestDeep++;
+                }
+
+                AddedTree++;
+            }
+            return array;
+        }
+
+    }
+
+
+   public enum ElementOnMap
+    {
+        Ground = 0,
+        Player,
+        Tree,
+        VisibleZone
+
+    }
+    public enum PlayerMoveVariant
+    {
+        GoDown,
+        GoRight
+    }
+   static class Display
+    {
+        public static void ShowArray(int [,] array)
+        {
+
+            for (int i = 0; i < array.GetLength(0); i++)
+            {
+                for (int j = 0; j < array.GetLength(0); j++)
+                {
+                    ColoredSymbol(array[i, j]);
+                }
+                Console.WriteLine();
+            }
+            Thread.Sleep(200);
+            Console.Clear();
+        }
+
+        private static void ColoredSymbol(int symbol)
+        {
+            switch(symbol)
+            {
+                case (int)ElementOnMap.Ground:{Console.ForegroundColor = ConsoleColor.DarkYellow; break; }
+                case (int)ElementOnMap.Player: { Console.ForegroundColor = ConsoleColor.Blue; break; }
+                case (int)ElementOnMap.Tree: { Console.ForegroundColor = ConsoleColor.Green; break; }
+                case (int)ElementOnMap.VisibleZone: { Console.ForegroundColor = ConsoleColor.Red; break; }
+            }
+           Console.Write(symbol);
+           Console.ResetColor();
+        }
+    }
+
+    public static  class PlayerMoving
+    {
+
+        public static void PlayerMoved(int[,] array)
+        {
+
+            PlayerGoRight(array);
+            PlayerGoDown(array);
+            //MapPoint playerUpStartPoint = PlayerStartPointInitialization(array, PlayerMoveVariant.GoDown);
+
+
+
+        }
+
+        private static void  PlayerGoRight(int[,] array)
+        {
+
+            MapPoint playerCurrentPoint = PlayerStartPointInitialization(array, PlayerMoveVariant.GoRight);
+            MapPoint playerBeforePoint = playerCurrentPoint;
+            int playerBeforeCellElement = array[playerCurrentPoint.Y , playerCurrentPoint.X];
+            
+            while (playerCurrentPoint.X != array.GetLength(0))
+            {
+                array = PlayerStepRight(ref array, playerCurrentPoint,ref playerBeforeCellElement,ref playerBeforePoint);
+                Display.ShowArray(array);
+                playerCurrentPoint.X++;
+            }
+           
+            Console.WriteLine("Проход в право завершен");
+            Thread.Sleep(1000);
+            array[playerBeforePoint.Y, playerBeforePoint.X] = playerBeforeCellElement;
+
+        }
+
+        private static int[,] PlayerStepRight(ref int[,] array, MapPoint playerCurrentPoint, ref int playerBeforeCellElement,ref MapPoint playerBeforePoint)
+        {
+            array[playerBeforePoint.Y, playerBeforePoint.X] = playerBeforeCellElement;
+            playerBeforeCellElement = array[playerCurrentPoint.Y, playerCurrentPoint.X];
+
+            if (array[playerCurrentPoint.Y, playerCurrentPoint.X] == (int)ElementOnMap.Ground)
+            {
+                array[playerCurrentPoint.Y, playerCurrentPoint.X] = (int)ElementOnMap.Player;
+            }
+
+            playerBeforePoint.Y = playerCurrentPoint.Y;
+            playerBeforePoint.X = playerCurrentPoint.X;
+            return array;
+        }
+        private static void PlayerGoDown(int[,] array)
+        {
+            MapPoint playerCurrentPoint = PlayerStartPointInitialization(array, PlayerMoveVariant.GoDown);
+            MapPoint playerBeforePoint = playerCurrentPoint;
+            int playerBeforeCellElement = array[playerCurrentPoint.Y, playerCurrentPoint.X];
+
+            while (playerCurrentPoint.Y != array.GetLength(1))
+            {
+                array = PlayerStepDown(ref array, playerCurrentPoint, ref playerBeforeCellElement, ref playerBeforePoint);
+                Display.ShowArray(array);
+                playerCurrentPoint.Y++;
+            }
+
+            Console.WriteLine("Проход влево завершен");
+            Thread.Sleep(1000);
+            Display.ShowArray(array);
+            array[playerBeforePoint.Y, playerBeforePoint.X] = playerBeforeCellElement;
+        }
+
+        private static int[,] PlayerStepDown(ref int[,] array, MapPoint playerCurrentPoint, ref int playerBeforeCellElement, ref MapPoint playerBeforePoint)
+        {
+            array[playerBeforePoint.Y, playerBeforePoint.X] = playerBeforeCellElement;
+            playerBeforeCellElement = array[playerCurrentPoint.Y, playerCurrentPoint.X];
+
+            if (array[playerCurrentPoint.Y, playerCurrentPoint.X] == (int)ElementOnMap.Ground)
+            {
+                array[playerCurrentPoint.Y, playerCurrentPoint.X] = (int)ElementOnMap.Player;
+            }
+
+            playerBeforePoint.Y = playerCurrentPoint.Y;
+            playerBeforePoint.X = playerCurrentPoint.X;
+            return array;
+        }
+
+        public static MapPoint PlayerStartPointInitialization(int[,] array, PlayerMoveVariant playerCurrentMove)
+        {
+            MapPoint startPlayerPoint;
+            startPlayerPoint = playerCurrentMove == PlayerMoveVariant.GoRight ? FindLeftStartPoint(array) : FindUpStartPoint(array);
+
+            return startPlayerPoint;
+
+        }
+
+        private static MapPoint FindUpStartPoint(int[,] array)
+        {
+            int y = 0;
+            int x = (array.GetLength(1) % 2) == 0 ? array.GetLength(1) / 2 : (array.GetLength(1) + 1) / 2;
+            return new MapPoint(y, x);
+        }
+        private static MapPoint FindLeftStartPoint(int[,] array)
+        {
+            int y = (array.GetLength(0) % 2) == 0 ? array.GetLength(0) / 2 : (array.GetLength(0) + 1) / 2;
+            int x = 0;
+            return new MapPoint(y, x);
+        }
+    }
+
+
+   public struct MapPoint
+    {
+        public int Y;
+        public int X;
+        public MapPoint(int y, int x)
+        {
+            Y = y;
+            X = x;
+        }
+    }
+}
+    

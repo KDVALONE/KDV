@@ -17,13 +17,13 @@ namespace TankGame
         {
 
             Console.WriteLine("Lee Algoritm On");
-            Point target = new Point(tank.FinishI,tank.FinishJ);
+            WayPoint target = new WayPoint(tank.FinishI,tank.FinishJ);
             int[,] fieldIntArray = InitWayArray(field);
             bool wayIsFind = false;
             int stepCount = 0;
-            List<Point> pointCurrent = new List<Point>();
-            pointCurrent.Add(new Point(tank.TankI,tank.TankJ));
-            List<Point> pointToNextTurn = new List<Point>();
+            List<WayPoint> pointCurrent = new List<WayPoint>();
+            pointCurrent.Add(new WayPoint(tank.TankI,tank.TankJ));
+            List<WayPoint> pointToNextTurn = new List<WayPoint>();
 
             while (pointCurrent.Count > 0 || !wayIsFind )
             { 
@@ -50,7 +50,7 @@ namespace TankGame
               pointCurrent.Clear();
               pointToNextTurn.ForEach((item) =>
               {
-                    pointCurrent.Add(new Point(item.Y, item.X));
+                    pointCurrent.Add(new WayPoint(item.Y, item.X));
               });
                 pointToNextTurn.Clear();
                 stepCount++;
@@ -88,13 +88,13 @@ namespace TankGame
             return Access;
         }
 
-        public List<Point> GetWayToTarget(int[,] fieldIntArray, int targetI, int targetJ, Tank tank)
+        public List<WayPoint> GetWayToTarget(int[,] fieldIntArray, int targetI, int targetJ, Tank tank)
         {
-            List<Point> wayToTargetList = new List<Point>();
-            wayToTargetList.Add(new Point (targetI, targetJ));
+            List<WayPoint> wayToTargetList = new List<WayPoint>();
+            wayToTargetList.Add(new WayPoint (targetI, targetJ));
 
             int currentElement = fieldIntArray[targetI, targetJ];
-            Point currentPoint = new Point(targetI, targetJ);
+            WayPoint currentPoint = new WayPoint(targetI, targetJ);
             bool elementFound = false;
             bool wayFound = false;
             // TODO: тут разделить все на методы
@@ -104,7 +104,7 @@ namespace TankGame
 
                 if (currentPoint.Y - 1 >= 0 & fieldIntArray[currentPoint.Y - 1, currentPoint.X] == currentElement - 1 & !elementFound) { // проверяем верхний элемент
 
-                    wayToTargetList.Add(new Point(currentPoint.Y - 1, currentPoint.X));
+                    wayToTargetList.Add(new WayPoint(currentPoint.Y - 1, currentPoint.X));
 
                     currentElement = fieldIntArray[currentPoint.Y - 1, currentPoint.X];
                     currentPoint.Y = currentPoint.Y - 1;
@@ -115,7 +115,7 @@ namespace TankGame
                 //*****************
                 if (currentPoint.Y + 1 < fieldIntArray.GetLength(0) & fieldIntArray[currentPoint.Y + 1, currentPoint.X] == currentElement-1 & !elementFound)// проверяем нижний элемент
                 {
-                    wayToTargetList.Add(new Point(currentPoint.Y + 1, currentPoint.X));
+                    wayToTargetList.Add(new WayPoint(currentPoint.Y + 1, currentPoint.X));
 
                     currentElement = fieldIntArray[currentPoint.Y + 1, currentPoint.X];
                     currentPoint.Y = currentPoint.Y + 1;
@@ -126,7 +126,7 @@ namespace TankGame
                 //*****************
                 if (currentPoint.X - 1 >= 0  & fieldIntArray[currentPoint.Y , currentPoint.X -1 ] == currentElement - 1 & !elementFound)// проверяем левыйы элемент
                 {
-                    wayToTargetList.Add(new Point(currentPoint.Y , currentPoint.X-1));
+                    wayToTargetList.Add(new WayPoint(currentPoint.Y , currentPoint.X-1));
 
                     currentElement = fieldIntArray[currentPoint.Y, currentPoint.X - 1];
                     currentPoint.Y = currentPoint.Y ;
@@ -137,7 +137,7 @@ namespace TankGame
                 //*****************
                 if (currentPoint.X + 1 < fieldIntArray.GetLength(1) && fieldIntArray[currentPoint.Y , currentPoint.X + 1] == currentElement - 1 && !elementFound)// проверяем правый элемент
                 {
-                    wayToTargetList.Add(new Point(currentPoint.Y, currentPoint.X + 1));
+                    wayToTargetList.Add(new WayPoint(currentPoint.Y, currentPoint.X + 1));
 
                     currentElement = fieldIntArray[currentPoint.Y, currentPoint.X + 1];
                     currentPoint.Y = currentPoint.Y;
@@ -149,7 +149,7 @@ namespace TankGame
                 if (fieldIntArray[currentPoint.Y,currentPoint.X] == 0) { wayFound = true; }
 
             }
-            //wayToTargetList.Add(new Point(tank.TankI, tank.TankJ)); // хз за чемаписал, удалить
+            //wayToTargetList.Add(new WayPoint(tank.TankI, tank.TankJ)); // хз за чемаписал, удалить
 
             wayToTargetList.Reverse();
 
@@ -161,46 +161,46 @@ namespace TankGame
 
        
 
-        public  void GetUpElement(Point pointCurent, int[,] array, ref List<Point> pointToNextTurn)
+        public  void GetUpElement(WayPoint pointCurent, int[,] array, ref List<WayPoint> pointToNextTurn)
         {
             if (pointCurent.Y - 1 >= 0)
             {
                 if (!pointToNextTurn.Exists(x => x.Y == pointCurent.Y - 1 & x.X == pointCurent.X) & array[pointCurent.Y - 1, pointCurent.X] == Access )
                 {
-                    pointToNextTurn.Add(new Point(pointCurent.Y - 1, pointCurent.X));
+                    pointToNextTurn.Add(new WayPoint(pointCurent.Y - 1, pointCurent.X));
                 }
             }
 
         }
-        public  void GetDownElement(Point pointCurent, int[,] array, ref List<Point> pointToNextTurn)
+        public  void GetDownElement(WayPoint pointCurent, int[,] array, ref List<WayPoint> pointToNextTurn)
         {
             if (pointCurent.Y + 1 < array.GetLength(0))
             {
                 if (!pointToNextTurn.Exists(x => x.Y == pointCurent.Y + 1 & x.X == pointCurent.X) & array[pointCurent.Y + 1, pointCurent.X] == Access)
                 {
-                    pointToNextTurn.Add(new Point(pointCurent.Y + 1, pointCurent.X));
+                    pointToNextTurn.Add(new WayPoint(pointCurent.Y + 1, pointCurent.X));
                 }
             }
 
         }
-        public  void GetLeftElement(Point pointCurent, int[,] array, ref List<Point> pointToNextTurn)
+        public  void GetLeftElement(WayPoint pointCurent, int[,] array, ref List<WayPoint> pointToNextTurn)
         {
             if (pointCurent.X - 1 >= 0)
             {
                 if (!pointToNextTurn.Exists(x => x.Y == pointCurent.Y & x.X == pointCurent.X - 1) & array[pointCurent.Y, pointCurent.X - 1] == Access)
                 {
-                    pointToNextTurn.Add(new Point(pointCurent.Y, pointCurent.X - 1));
+                    pointToNextTurn.Add(new WayPoint(pointCurent.Y, pointCurent.X - 1));
                 }
             }
 
         }
-        public  void GetRightElement(Point pointCurent, int[,] array, ref List<Point> pointToNextTurn)
+        public  void GetRightElement(WayPoint pointCurent, int[,] array, ref List<WayPoint> pointToNextTurn)
         {
             if (pointCurent.X + 1 < array.GetLength(1))
             {
                 if (!pointToNextTurn.Exists(x => x.Y == pointCurent.Y & x.X == pointCurent.X + 1) & array[pointCurent.Y, pointCurent.X + 1] == Access)
                 {
-                    pointToNextTurn.Add(new Point(pointCurent.Y, pointCurent.X + 1));
+                    pointToNextTurn.Add(new WayPoint(pointCurent.Y, pointCurent.X + 1));
                 }
             }
 

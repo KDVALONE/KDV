@@ -6,12 +6,12 @@ using System.Text;
 
 namespace TankGame
 {
-    public struct Point
+    public struct WayPoint
     {
         public int Y { get; set; }
         public int X { get; set; }
         
-        public Point( int y,int x)
+        public WayPoint( int y,int x)
         {
             
             Y = y;

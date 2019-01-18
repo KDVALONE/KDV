@@ -11,28 +11,23 @@ namespace TankGame
     {
 
         public bool TankIsDead { get; set; }
-        public int Ekipage { get; set; }
-        public int Venchils { get; set; }
-        public int TankI { get; set; }
-        public int TankJ { get; set; }
-        TeamTypeEnum Team { get; set; }
-        public int FinishJ { get; set; }
-        public int FinishI { get; set; }
-        public List<Point> WayToTarget { get; set; }
+        public int Ekipage { get; set; } // Кол-во человек в экипаже, влияет на кол во очков действия
+        // public int Venchils { get; set; } //TODO: тут подумать, над состоянимями танка, предметами и прочим 
+        public WayPoint CurrentCellPoint { get; set; } // местоположение танка на карте
+        public TeamTypeEnum Team { get; set; }
+        public string TankName { get; set;}
+        public List<WayPoint> WayToTarget { get; set; }
+        
 
-
-        public Tank(TeamTypeEnum teamType, int tankJ, int tankI, int finishJ , int finishI)
+        public Tank(TeamTypeEnum teamType, int tankI, int tankJ /*, int finishJ , int finishI*/)
         {
+            
             TankIsDead = false;
             Ekipage = 3;
-            Venchils = 3;
             Team = teamType;
-            TankI = tankI;
-            TankJ = tankJ;
-            FinishJ = finishJ;
-            FinishI = FinishJ;
-
-
+            CurrentCellPoint = new WayPoint(tankI, tankJ);
+           
+         
         } 
 
     }

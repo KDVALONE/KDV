@@ -20,8 +20,9 @@ namespace TankGame
     {
         static void Main(string[] args)
         {
-            Battlefield bf = new Battlefield();
-            bf.InitializeField();
+            Game game = new Game();
+            game.StartGame();
+
             Console.ReadLine();
         }
     }

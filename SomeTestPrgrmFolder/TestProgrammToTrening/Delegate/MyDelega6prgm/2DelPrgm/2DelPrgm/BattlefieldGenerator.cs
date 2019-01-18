@@ -5,8 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace TankGame
-{
-    class Battlefield
+{/// <summary>
+/// Класс инициализации
+/// </summary>
+    class BattlefieldGenerator
     {
         public FieldObjectEnum [,] Field { get; set; }
         public int MineLimit { get; set; } // лимит мин
@@ -15,7 +17,7 @@ namespace TankGame
         static Random rnd = new Random();
 
 
-        public Battlefield()
+        public BattlefieldGenerator()
         {
             Field = new FieldObjectEnum[20, 20];
             MineLimit = rnd.Next(4,8);
