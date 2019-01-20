@@ -30,8 +30,10 @@ namespace _6_2v13
             Display.ShowObjectives();
             // Text = Display.GetParametrs(); // разкоменть, если нужен прользовательский ввод
 
-             Text = " Мама, (поздно ночью) ,  мы((())л)а раму () сидя( стоя) за стол(б)ом , а Ивашка (  ) - ( Наша няшка ), кр(( икну)л) р(ад)остно: ( (Впер)(ед)! ";
-           
+            // Text = " Мама, (поздно ночью) ,  мы((())л)а раму () сидя( стоя) за стол(б)ом , а Ивашка (  ) - ( Наша няшка ), кр(( икну)л) р(ад)остно: ( (Впер)(ед)! ";
+           // Text = "( ( ( ( ) А ) ) )";
+           //  Text = "(((()A))((())))";
+            Text = "((a()))";
             FindNotCorrectBracket(Text);
             Console.ReadLine();
         }
@@ -42,18 +44,18 @@ namespace _6_2v13
             List<int> indexBracketOpen = new List<int>();
             List<int> indexBracketBackspace = new List<int>();
 
-            indexBracketOpen = FindOpeningBrackets(text);
+           // indexBracketOpen = FindOpeningBrackets(text);
             indexBadBracket = FindEmptyBrackets(text);
-            indexBracketBackspace = FindBracketsBackspace(text);
+           // indexBracketBackspace = FindBracketsBackspace(text);
 
-            foreach (var e in indexBracketOpen)
-            {
-                indexBadBracket.Add(e);
-            }
-            foreach (var e in indexBracketBackspace)
-            {
-                indexBadBracket.Add(e);
-            }
+            //foreach (var e in indexBracketOpen)
+            //{
+            //    indexBadBracket.Add(e);
+            //}
+            //foreach (var e in indexBracketBackspace)
+            //{
+            //    indexBadBracket.Add(e);
+            //}
 
             Display.ShowAnswer(text, indexBadBracket.ToArray());
         }
@@ -114,6 +116,7 @@ namespace _6_2v13
                     else
                     {
                         indexBracketOpen.RemoveAt(indexBracketOpen.Count - 1); //?
+                        bracketIsEpmty = true;
                     }
                 }
                 else
