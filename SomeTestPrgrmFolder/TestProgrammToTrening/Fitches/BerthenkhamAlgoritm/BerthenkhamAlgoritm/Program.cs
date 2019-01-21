@@ -158,8 +158,6 @@ namespace BerthenkhamAlgoritm
             PlayerGoDown(array);
             //MapPoint playerUpStartPoint = PlayerStartPointInitialization(array, PlayerMoveVariant.GoDown);
 
-
-
         }
 
         private static void  PlayerGoRight(int[,] array)
