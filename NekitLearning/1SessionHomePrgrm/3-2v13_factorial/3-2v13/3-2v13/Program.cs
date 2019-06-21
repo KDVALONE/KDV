@@ -181,7 +181,6 @@ namespace _3_2v13
             if (number < 0)
             {
                throw new Exception($"Нельзя посчитать факториал отрицательного числа {number}");
-               
             }
             int nNumberCount = 1;
             int factorial = 1;

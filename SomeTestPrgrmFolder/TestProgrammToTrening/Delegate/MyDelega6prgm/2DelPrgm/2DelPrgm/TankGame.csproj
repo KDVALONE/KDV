@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{C725A24C-578C-4389-BC7E-B8534616469D}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>_2DelPrgm</RootNamespace>
-    <AssemblyName>2DelPrgm</AssemblyName>
+    <RootNamespace>TankGame</RootNamespace>
+    <AssemblyName>TankGame</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

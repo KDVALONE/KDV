@@ -7,9 +7,10 @@ using System.Text;
 
 namespace TankGame
 {
-    class Display
+    public static class Display
     {
-        public void ShowFieldArray(FieldObjectEnum[,] field)
+        //TODO: отрефакторить отображение массивов
+        public static void ShowFieldArray(FieldObjectEnum[,] field)
         {
             Console.WriteLine("\n ");
             for (int i = 0; i < field.GetLength(0); i++)
@@ -22,7 +23,7 @@ namespace TankGame
             }
             Console.WriteLine("\n ");
         }
-        public void ShowFieldArray(int [,] field)
+        public static void  ShowFieldArray(int [,] field)
         {
             Console.WriteLine("\n ");
            
@@ -36,7 +37,7 @@ namespace TankGame
             }
             Console.WriteLine("\n ");
         }
-        public void ShowFieldArray(int[,] field,List<WayPoint> wayToTarget)
+        public static void ShowFieldArray(int[,] field,List<WayPoint> wayToTarget)
         {
             
             Console.WriteLine("\n ");
@@ -61,7 +62,7 @@ namespace TankGame
             Console.WriteLine("\n ");
         }
 
-        private void ShowColoredSymbol( FieldObjectEnum  symbol )
+        private static void ShowColoredSymbol( FieldObjectEnum  symbol )
         {
             switch (symbol)
             {

@@ -13,11 +13,11 @@ namespace SeeSpaceFainder
     {
         static void Main(string[] args)
         {
-            int arrayY = 80;
-            int arrayX = 80;
-            int playerY = 40;
-            int playerX = 40;
-            int R = 30;
+            int arrayY = 320; //80
+            int arrayX = 320; // 80
+            int playerY = 120; // 40
+            int playerX = 120; // 40
+            int R = 120; //30
             Methods mtd = new Methods();
 
             mtd.PaintSeeFeild(playerY, playerX, arrayY, arrayX, R);
@@ -28,7 +28,7 @@ namespace SeeSpaceFainder
     
     class Methods
     {
-        public void PaintSeeFeild(int YPlayer,int XPlayer,int arrayYLenght, int arrayXLenght,int R) // начертить полный круг
+        public void PaintSeeFeild(int YPlayer,int XPlayer,int arrayYLenght, int arrayXLenght,int R) // начертить радиус видимости игрока
         {
             List<Point> CircleSeePoints = new List<Point>();
             int[,] array = new int[arrayYLenght, arrayXLenght];
@@ -68,6 +68,7 @@ namespace SeeSpaceFainder
 
                 }
             }
+            array[playerY, playerX] = 1; 
             Display.ShowArray(array);
 
         }

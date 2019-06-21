@@ -12,28 +12,29 @@ namespace BerthenkhamAlgoritm
 /// </summary>
     class Program
     {
-       static Random rnd = new Random();
-       static public int HorizontalTreeCount = 4;
-       static public int VerticalTreeCount = 2;
-       static public  int[,] array = new int[20,20] ;
-       static public int ForestDeep = 4;
-      // static MapPoint playerCurrentPoint;
-        
+        static Random rnd = new Random();
+        static public int HorizontalTreeCount = 4;
+        static public int VerticalTreeCount = 3;
+        static public int[,] array = new int[20, 20];
+        static public int ForestDeep = 4;
+        static public int PlayerVisbleRadius = 5;
+        // static MapPoint playerCurrentPoint;
+
 
         static void Main(string[] args)
         {
             array = InitializeArray(array);
             Display.ShowArray(array);
-            PlayerMoving.PlayerMoved(array);
+            PlayerMoving.PlayerMoved(array, PlayerVisbleRadius);
 
 
 
             Console.ReadKey();
         }
 
-        static int[,] InitializeArray(int [,] array)
+        static int[,] InitializeArray(int[,] array)
         {
-            array = AddGround(array); 
+            array = AddGround(array);
             array = AddTree(array);
 
             return array;
@@ -58,7 +59,7 @@ namespace BerthenkhamAlgoritm
 
             return array;
         }
-        private static int[,] AddTreeHorizntal(int [,] array,int horizontalTreeCount)
+        private static int[,] AddTreeHorizntal(int[,] array, int horizontalTreeCount)
         {
             int y;
             int x;
@@ -104,7 +105,7 @@ namespace BerthenkhamAlgoritm
     }
 
 
-   public enum ElementOnMap
+    public enum ElementOnMap
     {
         Ground = 0,
         Player,
@@ -112,15 +113,16 @@ namespace BerthenkhamAlgoritm
         VisibleZone
 
     }
-   public enum PlayerMoveVariant
+    public enum PlayerMoveVariant
     {
         GoDown,
         GoRight
     }
-   static class Display
+    static class Display
     {
-        public static void ShowArray(int [,] array)
+        public static void ShowArray(int[,] array)
         {
+            Console.Clear();
 
             for (int i = 0; i < array.GetLength(0); i++)
             {
@@ -131,55 +133,65 @@ namespace BerthenkhamAlgoritm
                 Console.WriteLine();
             }
             Thread.Sleep(200);
-            Console.Clear();
+
         }
 
         private static void ColoredSymbol(int symbol)
         {
-            switch(symbol)
+            switch (symbol)
             {
-                case (int)ElementOnMap.Ground:{Console.ForegroundColor = ConsoleColor.DarkYellow; break; }
+                case (int)ElementOnMap.Ground: { Console.ForegroundColor = ConsoleColor.DarkYellow; break; }
                 case (int)ElementOnMap.Player: { Console.ForegroundColor = ConsoleColor.Blue; break; }
                 case (int)ElementOnMap.Tree: { Console.ForegroundColor = ConsoleColor.Green; break; }
                 case (int)ElementOnMap.VisibleZone: { Console.ForegroundColor = ConsoleColor.Red; break; }
             }
-           Console.Write(symbol);
-           Console.ResetColor();
+            Console.Write(symbol);
+            Console.ResetColor();
         }
     }
-
-   public static  class PlayerMoving
+    public struct MapPoint
+    {
+        public int Y;
+        public int X;
+        public MapPoint(int y, int x)
+        {
+            Y = y;
+            X = x;
+        }
+    }
+    public static class PlayerMoving
     {
 
-        public static void PlayerMoved(int[,] array)
+        public static void PlayerMoved(int[,] array, int playerVisbleRadius)
         {
 
-            PlayerGoRight(array);
+            PlayerGoRight(array,playerVisbleRadius);
             PlayerGoDown(array);
             //MapPoint playerUpStartPoint = PlayerStartPointInitialization(array, PlayerMoveVariant.GoDown);
 
         }
 
-        private static void  PlayerGoRight(int[,] array)
+        private static void PlayerGoRight(int[,] array ,int playerVisbleRadius)
         {
 
             MapPoint playerCurrentPoint = PlayerStartPointInitialization(array, PlayerMoveVariant.GoRight);
             MapPoint playerBeforePoint = playerCurrentPoint;
-            int playerBeforeCellElement = array[playerCurrentPoint.Y , playerCurrentPoint.X];
-            
+            int playerBeforeCellElement = array[playerCurrentPoint.Y, playerCurrentPoint.X];
+
             while (playerCurrentPoint.X != array.GetLength(0))
             {
-                array = PlayerStepRight(ref array, playerCurrentPoint,ref playerBeforeCellElement,ref playerBeforePoint);
+                array = PlayerStepRight(ref array, playerCurrentPoint, ref playerBeforeCellElement, ref playerBeforePoint);
+                GetPlayerVisibleSpace(array,playerCurrentPoint, playerVisbleRadius);
                 Display.ShowArray(array);
                 playerCurrentPoint.X++;
             }
-           
+
             Console.WriteLine("Проход в право завершен");
             Thread.Sleep(1000);
             array[playerBeforePoint.Y, playerBeforePoint.X] = playerBeforeCellElement;
 
         }
-        private static int[,] PlayerStepRight(ref int[,] array, MapPoint playerCurrentPoint, ref int playerBeforeCellElement,ref MapPoint playerBeforePoint)
+        private static int[,] PlayerStepRight(ref int[,] array, MapPoint playerCurrentPoint, ref int playerBeforeCellElement, ref MapPoint playerBeforePoint)
         {
             array[playerBeforePoint.Y, playerBeforePoint.X] = playerBeforeCellElement;
             playerBeforeCellElement = array[playerCurrentPoint.Y, playerCurrentPoint.X];
@@ -248,14 +260,37 @@ namespace BerthenkhamAlgoritm
             return new MapPoint(y, x);
         }
 
-        private static void GetPlayerVisibleSpace(int[,] array) // главный метод для получения простраства видимости
+        private static void GetPlayerVisibleSpace(int[,] array,MapPoint playerPoint, int playerVisbleRadius ) // главный метод для получения простраства видимости
+        {
+            List<MapPoint> playerVisiblePoints = new List<MapPoint>();
+
+            playerVisiblePoints = GetPlayerVisibleDistancePoint(playerPoint.X, playerPoint.Y, playerVisbleRadius);
+            //TODO: сделать обрезку видимой части по границам массива, в отдельный метод
+
+        } // реализация алогоритма Бр. для круга
+
+        private static List<MapPoint> GetPlayerVisibleDistancePoint(int X1, int Y1, int r)// получаем список точек дистанции видимости персонажа
         {
 
+            List<MapPoint> SeeRadiusPoints = new List<MapPoint>();
+            int x = -r, y = 0, err = 2 - 2 * r; /* II. Quadrant */
+            do
+            {
+                SeeRadiusPoints.Add(new MapPoint(Y1 + y, X1 - x)); /*   I. Quadrant */
+                SeeRadiusPoints.Add(new MapPoint(Y1 - x, X1 - y));  /*  II. Quadrant */
+                SeeRadiusPoints.Add(new MapPoint(Y1 - y, X1 + x)); /* III. Quadrant */
+                SeeRadiusPoints.Add(new MapPoint(Y1 + x, X1 + y)); /*  IV. Quadrant */
+
+                r = err;
+                if (r <= y) err += ++y * 2 + 1;           /* e_xy+e_y < 0 */
+                if (r > x || err > y) err += ++x * 2 + 1; /* e_xy+e_x > 0 or no 2nd y-step */
+            } while (x < 0);
+
+            return SeeRadiusPoints;
         }
-
-        private static void GetMaxVisibleDistance(int[,] array, MapPoint playerPoint, int visibleRadius, int minVisibleWidth  ) // // нахождение макс возможных точек дистанции
+        private static void GetMaxVisibleDistance(int[,] array, MapPoint playerPoint, int visibleRadius, int minVisibleWidth) // // нахождение макс возможных точек дистанции
         {
-           
+
             int indexA = GetA(playerPoint.X, visibleRadius);// самая левая точка
             int indexB = GetB(playerPoint.X, visibleRadius, array.GetLength(0));// самая правая точка
 
@@ -276,7 +311,7 @@ namespace BerthenkhamAlgoritm
 
 
         }
-        public static int GetA( int playerX, int visibleRadius)
+        public static int GetA(int playerX, int visibleRadius)
         {
             int indexA;
             if (visibleRadius - 1 > playerX)
@@ -289,14 +324,14 @@ namespace BerthenkhamAlgoritm
             }
 
             return indexA;
-        } // найти самую левую точку видимости
+        } // найти самую левую точку видимости 
         public static int GetB(int playerX, int visibleRadius, int mapLenght)
         {
             int indexB;
 
             if (visibleRadius > (mapLenght - 1) - playerX)
             {
-                indexB = mapLenght-1;
+                indexB = mapLenght - 1;
             }
             else
             {
@@ -305,17 +340,9 @@ namespace BerthenkhamAlgoritm
             return indexB;
         }// найти самую правую точку видимости
     }
-
-
-   public struct MapPoint
-    {
-        public int Y;
-        public int X;
-        public MapPoint(int y, int x)
-        {
-            Y = y;
-            X = x;
-        }
-    }
 }
-    
+
+
+
+
+

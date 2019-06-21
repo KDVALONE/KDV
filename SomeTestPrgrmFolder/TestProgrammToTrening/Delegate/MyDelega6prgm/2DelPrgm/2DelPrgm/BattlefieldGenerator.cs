@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TankGame
 {/// <summary>
-/// Класс инициализации
+/// Класс инициализации боевого поля
 /// </summary>
     class BattlefieldGenerator
     {
@@ -128,8 +128,7 @@ namespace TankGame
 
         public void ShowField()
         {
-            Display disp = new Display();
-            disp.ShowFieldArray(Field);
+            Display.ShowFieldArray(Field);
         }
     }
 }
