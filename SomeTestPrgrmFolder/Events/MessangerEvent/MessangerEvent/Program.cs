@@ -1,0 +1,110 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MessangerEvent
+{/// <summary>
+/// Тестовая прога для тренировки евентов
+/// Создать событие прием письма, подписать на него два класса
+/// Fax и Printer каждый из которых будет его обрабатывать по своему
+/// По Рихтеру
+/// </summary>
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string message = "Привет";
+            MailMessanger mm = new MailMessanger();
+            Fax fax = new Fax(mm);
+            Printer printer = new Printer(mm);
+
+            mm.SimilateNewMail(message);
+
+            Console.ReadKey();
+            
+
+        }
+    }
+
+
+   
+
+    // 1. Класс для хранения иноформации передоваемоего как параметр получателям уведомления о событиях
+    class MessagnerEventArgs : EventArgs
+    {
+        public string Message;
+        public MessagnerEventArgs(string msg)
+        {
+            Message = msg;
+        }
+    }
+
+    class MailMessanger
+    {
+        // 2. Обьявляем событие с типом обобщенного делегата EventHandler<T>, где Т это мой тип параметр унаследованый от EventArgs  
+        public event EventHandler<MessagnerEventArgs> NewMail;
+
+        // 3. Обьявляем метод уведомляющий о событиях подписчиков, принимающий мой тип параметров
+        public void OnNewMail(MessagnerEventArgs e)
+        {
+            // проверяем есть ли подписчики на событие, если есть то вызываем его
+            NewMail?.Invoke(this, e);
+        }
+       
+        // 4. Определяем метод ответсвенный за преобразование входных данных сообщения в мой тип для параметров события
+        public void SimilateNewMail(string message)
+        {
+            //Обьект для хранения информации которую нужно передать наблюдателям
+            MessagnerEventArgs e = new MessagnerEventArgs(message);
+
+            //оповещаем подписчиков события
+            OnNewMail(e);
+        }
+    }
+
+    // 5. класс подписчик на событие 1 
+    class Fax
+    {
+        public Fax()
+        {
+
+        }
+        public Fax(MailMessanger mm)
+        {
+            // подписываемся на событие в конструкторе
+            mm.NewMail += FaxMsg;
+        }
+
+        // Метот выполняющийся при наступлении события, должен удовлетворять типу делегата события,
+        // тоесть EventHandler<T> , где Т это мой тип параметр унаследованый от EventArgs 
+        public void FaxMsg(object sender, MessagnerEventArgs e)
+        {
+            Console.WriteLine($"Fax выводит сообщение: {e.Message}");
+        }
+
+    }
+    // 6. класс подписчик на событие 2
+    class Printer
+    {
+        public Printer()
+        {
+
+        }
+        public Printer(MailMessanger mm)
+        {
+            // подписываемся на событие в конструкторе
+            mm.NewMail += PrinterMsg;
+        }
+
+        // Метот выполняющийся при наступлении события, должен удовлетворять типу делегата события,
+        // тоесть EventHandler<T> , где Т это мой тип параметр унаследованый от EventArgs 
+        public void PrinterMsg(object sender, MessagnerEventArgs e)
+        {
+            Console.WriteLine($"Printer печатает сообщение: {e.Message}");
+        }
+
+    }
+
+}
