@@ -65,7 +65,7 @@ namespace MessangerEvent
         }
     }
 
-    // 6. класс подписчик на событие 1 
+    // 6. класс подписчик на событие  
     class Fax
     {
         public Fax()
@@ -86,7 +86,7 @@ namespace MessangerEvent
         }
 
     }
-    // 7. класс подписчик на событие 2
+    // 7. класс подписчик на событие 
     class Printer
     {
         public Printer()
