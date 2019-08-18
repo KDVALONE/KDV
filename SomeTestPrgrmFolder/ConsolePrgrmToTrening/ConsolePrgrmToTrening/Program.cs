@@ -7,93 +7,93 @@ using System.Collections;
 using System.IO;
 using System.Net.NetworkInformation;
 using System.Threading;
+using System.Diagnostics;
+using System.Management;
+using Microsoft.Win32;
+
 
 namespace TestNameSpace
 {
 
     class Program
     {
-
         public static void Main()
         {
-            A a = new A();
-            a.Start();
-            for (int i = 0; i < 100; i++) Console.WriteLine($"Hello from MAiN in Thread №{Thread.CurrentThread.ManagedThreadId}");
+
+            Console.WriteLine("MAIN Process count: " + Process.GetCurrentProcess().Threads.Count.ToString());
+           /// Foo();
+           PCinfo();
             Console.ReadKey();
+        }
+
+        public async static void Foo()
+        {
+
+            Task.Run(() => StartProc.StartPrc());
+
 
         }
 
-        
-
-    }
-
-
-   public class A
-    {
-
-        public void Start()
+        public static void PCinfo()
         {
-            Console.WriteLine("Start ");
-            FOO();
-            BAR();
-            for (int i = 0; i < 100; i++) Console.WriteLine($"Hello from STRAT in Thread №{Thread.CurrentThread.ManagedThreadId}");
-        }
-        public async  void FOO()
-        {
-            string b = "FOO";
-            Console.WriteLine($"Hello from FOO in Thread №{Thread.CurrentThread.ManagedThreadId}");
-            await Task.Run(() => Go(200,b ));
 
-        }
+            Console.WriteLine(Environment.UserDomainName);
+            Console.WriteLine(Environment.MachineName);
 
-        public async void BAR()
-        {
-            string b = "BAR";
-            Console.WriteLine($"Hello from BAR in Thread №{Thread.CurrentThread.ManagedThreadId}");
-            Task.Run(() => Go(200,b));
-            Console.WriteLine($"Hello from BAR NO ASYNC1 №{Thread.CurrentThread.ManagedThreadId}");
-            Console.WriteLine($"Hello from BAR NO ASYNC2 №{Thread.CurrentThread.ManagedThreadId}");
-            Console.WriteLine($"Hello from BAR NO ASYNC3 №{Thread.CurrentThread.ManagedThreadId}");
-            Console.WriteLine($"Hello from BAR NO ASYNC1 №{Thread.CurrentThread.ManagedThreadId}");
-            Console.WriteLine($"Hello from BAR NO ASYNC2 №{Thread.CurrentThread.ManagedThreadId}");
-            Console.WriteLine($"Hello from BAR NO ASYNC3 №{Thread.CurrentThread.ManagedThreadId}");
-            Console.WriteLine($"Hello from BAR NO ASYNC1 №{Thread.CurrentThread.ManagedThreadId}");
-            Console.WriteLine($"Hello from BAR NO ASYNC2 №{Thread.CurrentThread.ManagedThreadId}");
-            Console.WriteLine($"Hello from BAR NO ASYNC3 №{Thread.CurrentThread.ManagedThreadId}");
-            Console.WriteLine($"Hello from BAR NO ASYNC1 №{Thread.CurrentThread.ManagedThreadId}");
-            Console.WriteLine($"Hello from BAR NO ASYNC2 №{Thread.CurrentThread.ManagedThreadId}");
-            Console.WriteLine($"Hello from BAR NO ASYNC3 №{Thread.CurrentThread.ManagedThreadId}");
-            Console.WriteLine($"Hello from BAR NO ASYNC1 №{Thread.CurrentThread.ManagedThreadId}");
-            Console.WriteLine($"Hello from BAR NO ASYNC2 №{Thread.CurrentThread.ManagedThreadId}");
-            Console.WriteLine($"Hello from BAR NO ASYNC3 №{Thread.CurrentThread.ManagedThreadId}");
-            Console.WriteLine($"Hello from BAR NO ASYNC1 №{Thread.CurrentThread.ManagedThreadId}");
-            Console.WriteLine($"Hello from BAR NO ASYNC2 №{Thread.CurrentThread.ManagedThreadId}");
-            Console.WriteLine($"Hello from BAR NO ASYNC3 №{Thread.CurrentThread.ManagedThreadId}");
-            Console.WriteLine($"Hello from BAR NO ASYNC1 №{Thread.CurrentThread.ManagedThreadId}");
-            Console.WriteLine($"Hello from BAR NO ASYNC2 №{Thread.CurrentThread.ManagedThreadId}");
-            Console.WriteLine($"Hello from BAR NO ASYNC1 №{Thread.CurrentThread.ManagedThreadId}");
-            Console.WriteLine($"Hello from BAR NO ASYNC2 №{Thread.CurrentThread.ManagedThreadId}");
-            Console.WriteLine($"Hello from BAR NO ASYNC1 №{Thread.CurrentThread.ManagedThreadId}");
-            Console.WriteLine($"Hello from BAR NO ASYNC2 №{Thread.CurrentThread.ManagedThreadId}");
-            Console.WriteLine($"Hello from BAR NO ASYNC1 №{Thread.CurrentThread.ManagedThreadId}");
-            Console.WriteLine($"Hello from BAR NO ASYNC2 №{Thread.CurrentThread.ManagedThreadId}");
-            Console.WriteLine($"Hello from BAR NO ASYNC3 №{Thread.CurrentThread.ManagedThreadId}");
-            Console.WriteLine($"Hello from BAR NO ASYNC3 №{Thread.CurrentThread.ManagedThreadId}");
-            Console.WriteLine($"Hello from BAR NO ASYNC3 №{Thread.CurrentThread.ManagedThreadId}");
-            Console.WriteLine($"Hello from BAR NO ASYNC3 №{Thread.CurrentThread.ManagedThreadId}");
-
-        }
-
-        public void Go(int n,string b)
-        {
-            for (int a = 0; a < n; a++)
-            { 
-            Console.WriteLine($"GO in {b} in Thread №{Thread.CurrentThread.ManagedThreadId}");
-         
+            Console.WriteLine("Displaying operating system info....\n");
+            //Create an object of ManagementObjectSearcher class and pass query as parameter.
+            ManagementObjectSearcher mos = new ManagementObjectSearcher("select * from Win32_OperatingSystem");
+            foreach (ManagementObject managementObject in mos.Get())
+            {
+                if (managementObject["Caption"] != null)
+                {
+                    Console.WriteLine("Operating System Name  :  " + managementObject["Caption"].ToString());   //Display operating system caption
+                }
+                if (managementObject["OSArchitecture"] != null)
+                {
+                    Console.WriteLine("Operating System Architecture  :  " + managementObject["OSArchitecture"].ToString());   //Display operating system architecture.
+                }
+                if (managementObject["CSDVersion"] != null)
+                {
+                    Console.WriteLine("Operating System Service Pack   :  " + managementObject["CSDVersion"].ToString());     //Display operating system version.
+                }
             }
-            Console.WriteLine($"** End in Thread №{Thread.CurrentThread.ManagedThreadId}");
+            RegistryKey processor_name = Registry.LocalMachine.OpenSubKey(@"Hardware\Description\System\CentralProcessor\0", RegistryKeyPermissionCheck.ReadSubTree);   //This registry entry contains entry for processor info.
+
+            if (processor_name != null)
+            {
+                if (processor_name.GetValue("ProcessorNameString") != null)
+                {
+                    Console.WriteLine(processor_name.GetValue("ProcessorNameString"));   //Display processor ingo.
+                }
+            }
+
         }
+
 
     }
 
+
+
+    public class StartProc
+    {
+        delegate string GettedString();
+        public static void StartPrc()
+        {
+
+            Process prc = new Process();
+            prc.StartInfo.FileName = "cmd.exe";
+            prc.StartInfo.UseShellExecute = false;
+            prc.StartInfo.RedirectStandardOutput = true;
+            prc.StartInfo.Arguments = @"/c ping ya.ru ";
+            prc.Start();
+
+            var output = prc.StandardOutput.ReadToEnd();
+
+            prc.WaitForExit();
+
+        }
+
+
+    }
 }
