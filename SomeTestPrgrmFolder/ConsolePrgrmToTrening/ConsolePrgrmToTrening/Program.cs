@@ -39,6 +39,8 @@ namespace TestNameSpace
 
             Console.WriteLine(Environment.UserDomainName);
             Console.WriteLine(Environment.MachineName);
+            Console.WriteLine(Environment.SystemDirectory);
+            Console.WriteLine(Environment.);
 
             Console.WriteLine("Displaying operating system info....\n");
             //Create an object of ManagementObjectSearcher class and pass query as parameter.
