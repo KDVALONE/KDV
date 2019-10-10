@@ -56,6 +56,193 @@ namespace ScyScrapers
         }
     }
 
+
+    /// <summary>
+    /// Класс использующий реализацию на основе словаря или типо того
+    /// </summary>
+    public class ScyScrapersWithDict
+    {
+        public int[,] Field;
+        public int[] UpLimits;
+        public int[] RightLimits;
+        public int[] DownLimits;
+        public int[] LeftLimits;
+        public int CellCapacity;
+        public Cell[,] CellBox;
+        public ScyScrapersWithDict(string limits, int fieldCount)
+        {
+            Field = ArrayWithLimitsInitialization(limits, fieldCount);
+            UpLimits = GetUpLimits(Field);
+            RightLimits = GetRightLimits(Field);
+            DownLimits = GetDownLimits(Field);
+            LeftLimits = GetLeftLimits(Field);
+            CellCapacity = fieldCount * fieldCount;
+            CellBox = cellInitialazer(fieldCount);
+        }
+        
+        private Cell[,] cellInitialazer (int fieldCount)
+        {
+            string cellName = "A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P";
+            int cellNameIndex = 0;
+            Cell[,] cellBox = new Cell[fieldCount,fieldCount];
+            for (int i = 0; i < cellBox.GetLength(0); i++, cellNameIndex++)
+            {
+                for (int j = 0; j < cellBox.GetLength(1); j++)
+                {
+                    cellBox[i, j].X = j;
+                    cellBox[i, j].Y = i;
+                    cellBox[i, j].Name = Convert.ToString(cellName[cellNameIndex]+j) ;
+                }
+            }
+
+            return cellBox;
+        }
+        private int[,] ArrayWithLimitsInitialization(string limitations, int fieldCount)
+        {
+            //убираем запятые из строки
+            var str = "";
+            str = new string((from c in limitations
+                              where char.IsWhiteSpace(c) || char.IsLetterOrDigit(c)
+                              select c
+                ).ToArray());
+
+            int[,] field = new int[fieldCount + 2, fieldCount + 2];
+
+            // инициализируем матрицу нулями
+            for (int i = 0; i < field.GetLength(0); i++)
+            {
+                for (int j = 0; j < field.GetLength(1); j++)
+                {
+                    field[i, j] = 0;
+                }
+            }
+
+            int strCurIndex = 0;
+
+            // 1 cтрока - заполняем ограничения
+            field[0, 0] = -1;
+            for (int j = 1; j < field.GetLength(1) - 1; j++, strCurIndex++)
+            {
+                field[0, j] = (int)char.GetNumericValue(str[strCurIndex]);
+            }
+            field[0, field.GetLength(0) - 1] = -1;
+
+            // последний столбец - заполняем ограничения
+            for (int i = 1, j = field.GetLength(1) - 1; i < field.GetLength(0) - 1; i++, strCurIndex++)
+            {
+                field[i, j] = (int)char.GetNumericValue(str[strCurIndex]);
+            }
+
+            // последняя строка - заполняем ограничения
+            field[field.GetLength(1) - 1, field.GetLength(0) - 1] = -1;
+            for (int j = field.GetLength(1) - 2; j > 0; j--, strCurIndex++)
+            {
+                field[field.GetLength(0) - 1, j] = (int)char.GetNumericValue(str[strCurIndex]);
+            }
+            field[field.GetLength(0) - 1, 0] = -1;
+
+            // Первый столбец - заполняем ограничения
+            for (int i = field.GetLength(0) - 2; i > 0; i--, strCurIndex++)
+            {
+                field[i, 0] = (int)char.GetNumericValue(str[strCurIndex]);
+            }
+
+            return field;
+        }
+
+        private int[] GetUpLimits(int[,] field)
+        {
+            int[] upLimits = new int[field.GetLength(0) - 2];
+
+            for (int j = 1; j < field.GetLength(0) - 1; j++)
+            {
+                upLimits[j - 1] = field[0, j];
+            }
+
+            return upLimits;
+        }
+        private int[] GetRightLimits(int[,] field)
+
+        {
+            int[] rightLimits = new int[field.GetLength(1) - 2];
+            for (int i = 1, j = field.GetLength(1) - 1; i < field.GetLength(0) - 1; i++)
+            {
+                rightLimits[i - 1] = field[i, j];
+            }
+            return rightLimits;
+        }
+        private int[] GetDownLimits(int[,] field)
+        {
+            int limitsIndex = 0;
+            int[] downLimits = new int[field.GetLength(0) - 2];
+            for (int j = field.GetLength(1) - 2; j > 0; j--, limitsIndex++)
+            {
+                downLimits[limitsIndex] = field[field.GetLength(0) - 1, j];
+            }
+
+            Array.Reverse(downLimits);
+            return downLimits;
+        }
+        private int[] GetLeftLimits(int[,] field)
+        {
+            int limitsIndex = 0;
+            int[] leftLimits = new int[field.GetLength(1) - 2];
+            for (int i = field.GetLength(0) - 2; i > 0; i--, limitsIndex++)
+            {
+                leftLimits[limitsIndex] = field[i, 0];
+            }
+
+            Array.Reverse(leftLimits);
+            return leftLimits;
+        }
+
+
+
+
+
+
+
+    }
+
+    /// <summary>
+    /// Класс для ячейки
+    /// </summary>
+    public class Cell
+    {
+        public string Name;
+        public int Y;
+        public int X;
+        public int FoundBuld;
+        public bool BuildIsFound;
+
+        public List<int> BuildVariants;
+
+        public Cell(int cellInRow)
+        {
+            BuildVariants = BuildVariantsInitializer(cellInRow);
+            BuildIsFound = false;
+            
+        }
+
+        private List<int> BuildVariantsInitializer(int cellInRow)
+        {
+            List<int> buildVariants = new List<int>(cellInRow);
+            for (int i = 1; i <= cellInRow; i++)
+            {
+                buildVariants.Add(i);
+            }
+
+            return buildVariants;
+        }
+
+
+    }
+
+
+
+
+
+    //**************************************
     /// <summary>
     /// Основной класс игры небоскребы
     /// </summary>
