@@ -1,6 +1,6 @@
 using System;
 
-namespace LoftBlogAspNetCore.Models
+namespace LoftBlogNCoreMVC.Models
 {
     public class ErrorViewModel
     {

@@ -5,9 +5,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using LoftBlogAspNetCore.Models;
+using LoftBlogNCoreMVC.Models;
 
-namespace LoftBlogAspNetCore.Controllers
+namespace LoftBlogNCoreMVC.Controllers
 {
     public class HomeController : Controller
     {
@@ -20,7 +20,8 @@ namespace LoftBlogAspNetCore.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            HelloModel _model = new HelloModel() {HelloMessage = "Az Buki Vedi"};
+            return View(_model);
         }
 
         public IActionResult Privacy()
