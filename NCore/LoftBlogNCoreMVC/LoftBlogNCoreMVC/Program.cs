@@ -14,6 +14,13 @@ namespace LoftBlogNCoreMVC
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();
+           var host = CreateWebHostBuilder(args).Build();
+            using (var scope = host.Services.CreateScope())
+           {
+
+           }
+
+
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
