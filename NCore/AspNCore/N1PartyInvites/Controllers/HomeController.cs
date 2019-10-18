@@ -8,7 +8,7 @@ using N1PartyInvites.Models;
 
 namespace N1PartyInvites.Controllers
 {
-    public class HomeController : Controller    
+    public class HomeController : Controller
     {
         public ViewResult Index()
         {
@@ -16,9 +16,20 @@ namespace N1PartyInvites.Controllers
             ViewBag.Greeting = hour < 12 ? "Good Morning" : "Good Afternoon";
             return View("MyView");
         }
-        public ViewResult RsvpForm() 
+        [HttpGet]
+        public ViewResult RsvpForm()
         {
             return View();
+        }
+        [HttpPost]
+        public ViewResult RsvpForm(GuestResponse guestResponse)
+        {
+            Repository.AddResponse(guestResponse); //сохраняет ответ от гостя
+            return View("Thanks",guestResponse);
+        }
+        public ViewResult ListResponses()
+        {
+            return View(Repository.Responses.Where(r => r.WillAttend == true));
         }
     }
 }
