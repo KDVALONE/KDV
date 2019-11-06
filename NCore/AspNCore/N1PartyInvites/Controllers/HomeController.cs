@@ -24,8 +24,14 @@ namespace N1PartyInvites.Controllers
         [HttpPost]
         public ViewResult RsvpForm(GuestResponse guestResponse)
         {
-            Repository.AddResponse(guestResponse); //сохраняет ответ от гостя
-            return View("Thanks",guestResponse);
+            if (ModelState.IsValid)
+            {
+                Repository.AddResponse(guestResponse); //сохраняет ответ от гостя
+                return View("Thanks", guestResponse);
+            }
+            else {
+                return View();
+            }
         }
         public ViewResult ListResponses()
         {
