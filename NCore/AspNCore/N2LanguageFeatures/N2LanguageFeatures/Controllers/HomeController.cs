@@ -10,9 +10,9 @@ namespace N2LanguageFeatures.Controllers
             List<string> result = new List<string>();
             foreach (Product p in Product.GetProducts() )
             {
-                string name = p?.Name;
-                decimal? price = p?.Price;
-                string relatedName = p?.Related.Name;
+                string name = p?.Name ?? "No Name";
+                decimal? price = p?.Price ?? 0;
+                string relatedName = p?.Related?.Name ?? "<None>";
                 result.Add(string.Format("Name:{0}, Price:{1},Related:{2}", name, price,relatedName));
             }
 
