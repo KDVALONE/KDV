@@ -9,6 +9,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace N2LanguageFeatures
 {
+    /// <summary>
+    /// Фримен. AspNetCore. Глава 4. Empty WebApp.net core приложение.
+    /// </summary>
     public class Startup
     {
         // This method gets called by the runtime. Use this method to add services to the container.
