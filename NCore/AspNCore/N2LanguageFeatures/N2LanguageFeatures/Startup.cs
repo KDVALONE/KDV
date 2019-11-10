@@ -11,6 +11,7 @@ namespace N2LanguageFeatures
 {
     /// <summary>
     /// Фримен. AspNetCore. Глава 4. Empty WebApp.net core приложение.
+    /// для практики С# функциональности для MVC Asp. net Core
     /// </summary>
     public class Startup
     {
