@@ -7,9 +7,16 @@ namespace N2LanguageFeatures.Controllers
     {
         public ViewResult Index()
         {
+            #region синтаксис с использованием методов расширения
+            ShoppingCart cart = new ShoppingCart { Products = Product.GetProducts() };
+
+            decimal cartTotal = cart.TotalPrices(); // применение метода расширения TotalPrice класса MyExtensionMethods расширяющего ShoppingCart
+            return View("Index", new string[] {$"Total: {cartTotal:C2}"});
+
+            #endregion
             #region синтаксис с использованием IS и SWITCH - сопоставление с образцом
-            
-            
+
+
             object[] data = new object[] {275M, 29.95M, "apple", "orange",100, 10 };
             decimal total = 0;
             //синтаксис с использованием IS
@@ -23,20 +30,20 @@ namespace N2LanguageFeatures.Controllers
 
             //************
             //синтаксис с использованием SWITCH
-            for (int i = 0; i < data.Length; i++)
-            {
-                switch (data[i])
-                {
-                    case decimal decimalValue: // для сравнения нужного типа обратить необходимо использовать его переменную
-                        total += decimalValue; 
-                        break;
-                    case int intValue when intValue > 50:
-                        total += intValue;
-                        break;
-                }
-            }
+            //for (int i = 0; i < data.Length; i++)
+            //{
+            //    switch (data[i])
+            //    {
+            //        case decimal decimalValue: // для сравнения нужного типа обратить необходимо использовать его переменную
+            //            total += decimalValue; 
+            //            break;
+            //        case int intValue when intValue > 50:
+            //            total += intValue;
+            //            break;
+            //    }
+            //}
 
-            return View("Index", new string[] {$"Total: {total:C2}"});
+           // return View("Index", new string[] {$"Total: {total:C2}"});
             #endregion
 
             #region синтаксис с использованием инициализации коллекции Dictionary
