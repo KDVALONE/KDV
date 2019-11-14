@@ -8,6 +8,27 @@ namespace N2LanguageFeatures.Controllers
     {
         public ViewResult Index()
         {
+            #region синтаксис с использованием методов расширения с лямбда выражением 
+            //позволяет не писать кучу методов расширения для новых филтраций, а делать это быстро и лаконично с помощью лямбд
+            ShoppingCart cart = new ShoppingCart { Products = Product.GetProducts() };
+            Product[] productsArray =
+            {
+                new Product { Name = "Kayak", Price = 275M},
+                new Product { Name = "Lifejacket", Price = 48.95M},
+                new Product { Name = "Soccer ball", Price = 19.50M},
+                new Product { Name = "Corner flag", Price = 34.95M}
+            };
+            decimal priceFilterTotal = productsArray
+                .Filter(p => (p?.Price ?? 00) >= 20).TotalPrices();
+            decimal nameFilterTotal = productsArray
+                .Filter(p => p?.Name?[0] == 'S').TotalPrices();
+            return View("Index", new string[]
+            {
+                $"Price Total: {priceFilterTotal:С2}",
+                $"Name Total: {nameFilterTotal:C2}"
+            });
+            #endregion
+
             #region синтаксис с использованием методов расширения
             //ShoppingCart cart = new ShoppingCart { Products = Product.GetProducts() };
 
@@ -17,15 +38,15 @@ namespace N2LanguageFeatures.Controllers
             #endregion
 
             #region синтаксис с использованием методов расширения применительно к интерфейсу
-            ShoppingCart cart = new ShoppingCart { Products = Product.GetProducts() };
-            Product[] productsArray =
-            {
-                new Product { Name = "Kayak", Price = 275M},
-                new Product { Name = "Lifejacket", Price = 48.95M},
-                new Product { Name = "Soccer ball", Price = 19.50M},
-                new Product { Name = "Corner flag", Price = 34.95M}
+            //ShoppingCart cart = new ShoppingCart { Products = Product.GetProducts() };
+            //Product[] productsArray =
+            //{
+            //    new Product { Name = "Kayak", Price = 275M},
+            //    new Product { Name = "Lifejacket", Price = 48.95M},
+            //    new Product { Name = "Soccer ball", Price = 19.50M},
+            //    new Product { Name = "Corner flag", Price = 34.95M}
 
-            };
+            //};
             //синтаксис для использования мет.расширения к интерфейсам БЕЗ ФИЛЬТРАЦИИ.
             //decimal cartTotal = cart.TotalPrices();
             //decimal arrayTotal = productsArray.TotalPrices();
@@ -38,8 +59,8 @@ namespace N2LanguageFeatures.Controllers
 
             //*********************
             //синтаксис для использования мет.расширения к интерфейсам C ФИЛЬТРАЦИЕЙ.
-            decimal arrayTotal = productsArray.FilterByPrice(20).TotalPrices();
-            return View("Index", new string[] {$"Array Total: {arrayTotal:C2}"});
+            //decimal arrayTotal = productsArray.FilterByPrice(20).TotalPrices();
+            //return View("Index", new string[] {$"Array Total: {arrayTotal:C2}"});
 
             #endregion
 
