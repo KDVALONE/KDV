@@ -7,20 +7,64 @@ namespace N2LanguageFeatures.Controllers
     {
         public ViewResult Index()
         {
-            Dictionary<string, Product> products = new Dictionary<string, Product> // инициализация коллекции с помощью словаря
+            #region синтаксис с использованием IS и SWITCH - сопоставление с образцом
+            
+            
+            object[] data = new object[] {275M, 29.95M, "apple", "orange",100, 10 };
+            decimal total = 0;
+            //синтаксис с использованием IS
+            //for (int i = 0; i < data.Length; i++)
+            //{
+            //    if (data[i] is decimal d)
+            //    {
+            //        total += d;
+            //    }
+            //}
+
+            //************
+            //синтаксис с использованием SWITCH
+            for (int i = 0; i < data.Length; i++)
             {
-                // старый синтаксис
-                //{"Kayak",new Product{ Name = "Kayak", Price = 275M }  },
-                //{"Lifejacket", new Product{ Name = "Lifejacket", Price = 48.95M} } 
+                switch (data[i])
+                {
+                    case decimal decimalValue: // для сравнения нужного типа обратить необходимо использовать его переменную
+                        total += decimalValue; 
+                        break;
+                    case int intValue when intValue > 50:
+                        total += intValue;
+                        break;
+                }
+            }
 
-                //более простой новый синтаксис инициализация коллекции с помощью словаря
-                ["Kayak"] = new Product { Name = "Kayak", Price = 275M },
-                ["Lifejacket"] = new Product { Name = "Lifejacket", Price = 48.95M }
-            };
+            return View("Index", new string[] {$"Total: {total:C2}"});
+            #endregion
 
-            return View("Index", products.Keys);
+            #region синтаксис с использованием инициализации коллекции Dictionary
+
+            // инициализация коллекции с помощью словаря
+            // Dictionary<string, Product> products = new Dictionary<string, Product> 
+            // {
+            // старый синтаксис инициализация коллекции с помощью словаря
+            //{"Kayak",new Product{ Name = "Kayak", Price = 275M }  },
+            //{"Lifejacket", new Product{ Name = "Lifejacket", Price = 48.95M} } 
+
+            //**********************
+
+            // более простой новый синтаксис инициализация коллекции с помощью словаря
+            // ["Kayak"] = new Product { Name = "Kayak", Price = 275M },
+            // ["Lifejacket"] = new Product { Name = "Lifejacket", Price = 48.95M }
+            // };
+            // return View("Index", products.Keys);
+
+            #endregion
+
+            #region синтаксиси с использованием инициализации коллекции
 
             // return View("Index", new string[] {"Bob", "Joe", "Alice"}); //использование инициализации коллекции
+
+            #endregion
+
+            #region синтаксиси с использованием Null-услованой операции
 
             //List<string> result = new List<string>();
             //foreach (Product p in Product.GetProducts() )
@@ -32,6 +76,8 @@ namespace N2LanguageFeatures.Controllers
             //}
 
             //return View(result);
+
+            #endregion
         }
     }
 }
