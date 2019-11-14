@@ -1,5 +1,6 @@
 ﻿using  Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using N2LanguageFeatures.Models;
 namespace N2LanguageFeatures.Controllers
 {
@@ -8,12 +9,30 @@ namespace N2LanguageFeatures.Controllers
         public ViewResult Index()
         {
             #region синтаксис с использованием методов расширения
-            ShoppingCart cart = new ShoppingCart { Products = Product.GetProducts() };
+            //ShoppingCart cart = new ShoppingCart { Products = Product.GetProducts() };
 
-            decimal cartTotal = cart.TotalPrices(); // применение метода расширения TotalPrice класса MyExtensionMethods расширяющего ShoppingCart
-            return View("Index", new string[] {$"Total: {cartTotal:C2}"});
+            //decimal cartTotal = cart.TotalPrices(); // применение метода расширения TotalPrice класса MyExtensionMethods расширяющего ShoppingCart
+            //return View("Index", new string[] {$"Total: {cartTotal:C2}"});
 
             #endregion
+
+            #region синтаксис с использованием методов расширения применительно к интерфейсу
+            ShoppingCart cart = new ShoppingCart { Products = Product.GetProducts() };
+            Product[] productsArray =
+            {
+                new Product { Name = "Kayak", Price = 275M},
+                new Product { Name = "Lifejacket", Price = 48.95M}
+            };
+            decimal cartTotal = cart.TotalPrices();
+            decimal arrayTotal = productsArray.TotalPrices();
+
+            return View("Index", new string[]
+            {
+                $"Cart Total: {cartTotal:C2}",
+                $"Array Total: {arrayTotal:C2}"
+            });
+            #endregion
+
             #region синтаксис с использованием IS и SWITCH - сопоставление с образцом
 
 
@@ -64,13 +83,11 @@ namespace N2LanguageFeatures.Controllers
             // return View("Index", products.Keys);
 
             #endregion
-
             #region синтаксиси с использованием инициализации коллекции
 
             // return View("Index", new string[] {"Bob", "Joe", "Alice"}); //использование инициализации коллекции
 
             #endregion
-
             #region синтаксиси с использованием Null-услованой операции
 
             //List<string> result = new List<string>();

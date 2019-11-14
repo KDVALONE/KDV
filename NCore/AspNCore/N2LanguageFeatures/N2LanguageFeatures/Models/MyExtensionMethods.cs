@@ -1,4 +1,5 @@
-﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
+﻿using System.Collections.Generic;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace N2LanguageFeatures.Models
 {
@@ -9,10 +10,10 @@ namespace N2LanguageFeatures.Models
         /// </summary>
         /// <param name="cartParam"></param>
         /// <returns></returns>
-        public static decimal TotalPrices(this ShoppingCart cartParam)
+        public static decimal TotalPrices(this IEnumerable<Product> products)
         {
             decimal total = 0;
-            foreach (Product prod in cartParam.Products)
+            foreach (Product prod in products)
             {
                 total += prod?.Price ?? 0;
             }
