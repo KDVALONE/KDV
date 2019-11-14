@@ -21,16 +21,26 @@ namespace N2LanguageFeatures.Controllers
             Product[] productsArray =
             {
                 new Product { Name = "Kayak", Price = 275M},
-                new Product { Name = "Lifejacket", Price = 48.95M}
-            };
-            decimal cartTotal = cart.TotalPrices();
-            decimal arrayTotal = productsArray.TotalPrices();
+                new Product { Name = "Lifejacket", Price = 48.95M},
+                new Product { Name = "Soccer ball", Price = 19.50M},
+                new Product { Name = "Corner flag", Price = 34.95M}
 
-            return View("Index", new string[]
-            {
-                $"Cart Total: {cartTotal:C2}",
-                $"Array Total: {arrayTotal:C2}"
-            });
+            };
+            //синтаксис для использования мет.расширения к интерфейсам БЕЗ ФИЛЬТРАЦИИ.
+            //decimal cartTotal = cart.TotalPrices();
+            //decimal arrayTotal = productsArray.TotalPrices();
+
+            //return View("Index", new string[]
+            //{
+            //    $"Cart Total: {cartTotal:C2}",
+            //    $"Array Total: {arrayTotal:C2}"
+            //});
+
+            //*********************
+            //синтаксис для использования мет.расширения к интерфейсам C ФИЛЬТРАЦИЕЙ.
+            decimal arrayTotal = productsArray.FilterByPrice(20).TotalPrices();
+            return View("Index", new string[] {$"Array Total: {arrayTotal:C2}"});
+
             #endregion
 
             #region синтаксис с использованием IS и SWITCH - сопоставление с образцом

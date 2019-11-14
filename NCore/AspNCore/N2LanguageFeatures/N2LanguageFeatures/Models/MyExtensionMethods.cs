@@ -21,6 +21,20 @@ namespace N2LanguageFeatures.Models
             return total;
         }
 
-      
+        #region Добавление фильтрующего метода расширения
+
+        //FilterByPrice содержит доп параметр decimal minimumPrice, исп. для фильтрации товаров
+        public static IEnumerable<Product> FilterByPrice( this IEnumerable<Product> productEnum, decimal minimumPrice)
+        {
+           foreach (var prod in productEnum)
+           {
+             if ((prod?.Price ?? 0) >= minimumPrice)
+             {
+                yield return prod;
+             }
+           }
+         }
+        #endregion
+
     }
 }
