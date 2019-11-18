@@ -1,73 +1,82 @@
 ﻿using  Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using N2LanguageFeatures.Models;
 namespace N2LanguageFeatures.Controllers
 {
     public class HomeController : Controller
     {
-        public ViewResult Index()
+        #region синтаксис с использованием асинхронных методов действия
+        public async Task<ViewResult> Index()
         {
-            #region синтаксис с использованием методов расширения с лямбда выражением 
-            //позволяет не писать кучу методов расширения для новых филтраций, а делать это быстро и лаконично с помощью лямбд
-            ShoppingCart cart = new ShoppingCart { Products = Product.GetProducts() };
-            Product[] productsArray =
-            {
-                new Product { Name = "Kayak", Price = 275M},
-                new Product { Name = "Lifejacket", Price = 48.95M},
-                new Product { Name = "Soccer ball", Price = 19.50M},
-                new Product { Name = "Corner flag", Price = 34.95M}
-            };
-            decimal priceFilterTotal = productsArray
-                .Filter(p => (p?.Price ?? 00) >= 20).TotalPrices();
-            decimal nameFilterTotal = productsArray
-                .Filter(p => p?.Name?[0] == 'S').TotalPrices();
-            return View("Index", new string[]
-            {
-                $"Price Total: {priceFilterTotal:С2}",
-                $"Name Total: {nameFilterTotal:C2}"
-            });
-            #endregion
+            long? length = await MyAsyncMethods.GetPageLength();
+            return View(new string[] {$"Length:{length}"});
+        }
+        #endregion
+        //public ViewResult Index()
+        //{
 
-            #region синтаксис с использованием методов расширения
-            //ShoppingCart cart = new ShoppingCart { Products = Product.GetProducts() };
+        #region синтаксис с использованием методов расширения с лямбда выражением 
+        //позволяет не писать кучу методов расширения для новых филтраций, а делать это быстро и лаконично с помощью лямбд
+        //ShoppingCart cart = new ShoppingCart { Products = Product.GetProducts() };
+        //Product[] productsArray =
+        //{
+        //    new Product { Name = "Kayak", Price = 275M},
+        //    new Product { Name = "Lifejacket", Price = 48.95M},
+        //    new Product { Name = "Soccer ball", Price = 19.50M},
+        //    new Product { Name = "Corner flag", Price = 34.95M}
+        //};
+        //decimal priceFilterTotal = productsArray
+        //    .Filter(p => (p?.Price ?? 00) >= 20).TotalPrices();
+        //decimal nameFilterTotal = productsArray
+        //    .Filter(p => p?.Name?[0] == 'S').TotalPrices();
+        //return View("Index", new string[]
+        //{
+        //    $"Price Total: {priceFilterTotal:С2}",
+        //    $"Name Total: {nameFilterTotal:C2}"
+        //});
+        #endregion
 
-            //decimal cartTotal = cart.TotalPrices(); // применение метода расширения TotalPrice класса MyExtensionMethods расширяющего ShoppingCart
-            //return View("Index", new string[] {$"Total: {cartTotal:C2}"});
+        #region синтаксис с использованием методов расширения
+        //ShoppingCart cart = new ShoppingCart { Products = Product.GetProducts() };
 
-            #endregion
+        //decimal cartTotal = cart.TotalPrices(); // применение метода расширения TotalPrice класса MyExtensionMethods расширяющего ShoppingCart
+        //return View("Index", new string[] {$"Total: {cartTotal:C2}"});
 
-            #region синтаксис с использованием методов расширения применительно к интерфейсу
-            //ShoppingCart cart = new ShoppingCart { Products = Product.GetProducts() };
-            //Product[] productsArray =
-            //{
-            //    new Product { Name = "Kayak", Price = 275M},
-            //    new Product { Name = "Lifejacket", Price = 48.95M},
-            //    new Product { Name = "Soccer ball", Price = 19.50M},
-            //    new Product { Name = "Corner flag", Price = 34.95M}
+        #endregion
 
-            //};
-            //синтаксис для использования мет.расширения к интерфейсам БЕЗ ФИЛЬТРАЦИИ.
-            //decimal cartTotal = cart.TotalPrices();
-            //decimal arrayTotal = productsArray.TotalPrices();
+        #region синтаксис с использованием методов расширения применительно к интерфейсу
+        //ShoppingCart cart = new ShoppingCart { Products = Product.GetProducts() };
+        //Product[] productsArray =
+        //{
+        //    new Product { Name = "Kayak", Price = 275M},
+        //    new Product { Name = "Lifejacket", Price = 48.95M},
+        //    new Product { Name = "Soccer ball", Price = 19.50M},
+        //    new Product { Name = "Corner flag", Price = 34.95M}
 
-            //return View("Index", new string[]
-            //{
-            //    $"Cart Total: {cartTotal:C2}",
-            //    $"Array Total: {arrayTotal:C2}"
-            //});
+        //};
+        //синтаксис для использования мет.расширения к интерфейсам БЕЗ ФИЛЬТРАЦИИ.
+        //decimal cartTotal = cart.TotalPrices();
+        //decimal arrayTotal = productsArray.TotalPrices();
 
-            //*********************
-            //синтаксис для использования мет.расширения к интерфейсам C ФИЛЬТРАЦИЕЙ.
-            //decimal arrayTotal = productsArray.FilterByPrice(20).TotalPrices();
-            //return View("Index", new string[] {$"Array Total: {arrayTotal:C2}"});
+        //return View("Index", new string[]
+        //{
+        //    $"Cart Total: {cartTotal:C2}",
+        //    $"Array Total: {arrayTotal:C2}"
+        //});
 
-            #endregion
+        //*********************
+        //синтаксис для использования мет.расширения к интерфейсам C ФИЛЬТРАЦИЕЙ.
+        //decimal arrayTotal = productsArray.FilterByPrice(20).TotalPrices();
+        //return View("Index", new string[] {$"Array Total: {arrayTotal:C2}"});
 
-            #region синтаксис с использованием IS и SWITCH - сопоставление с образцом
+        #endregion
+
+        #region синтаксис с использованием IS и SWITCH - сопоставление с образцом
 
 
-            object[] data = new object[] {275M, 29.95M, "apple", "orange",100, 10 };
+        object[] data = new object[] {275M, 29.95M, "apple", "orange",100, 10 };
             decimal total = 0;
             //синтаксис с использованием IS
             //for (int i = 0; i < data.Length; i++)
@@ -133,6 +142,6 @@ namespace N2LanguageFeatures.Controllers
             //return View(result);
 
             #endregion
-        }
+        //}
     }
 }
