@@ -1,6 +1,5 @@
 ﻿
 <!--Представление Razor (в старых версиях Страница представления MVC)-->
-@model N3Razor.Models.Product
 @{
     Layout = null;
 }
@@ -12,6 +11,8 @@
     <title> Index</title>
 </head>
 <body>
-Content will go here
+
+    @Model.Name
+
 </body>
 </html>
