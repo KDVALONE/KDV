@@ -1,5 +1,10 @@
 ﻿
 <!--Представление Razor (в старых версиях Страница представления MVC)-->
+@model Product
+@{
+    ViewBag.Title = "Product Name";
+}
 
-
-Product Name: @Model.Name
+<p>Product Name: @Model.Name</p>
+<p>Product Price: @($"{Model.Price:C2}")</p>
+<p>Stock Level: @ViewBag.StockLevel</p>
