@@ -1,18 +1,8 @@
 ﻿
 <!--Представление Razor (в старых версиях Страница представления MVC)-->
 @{
-    Layout = null;
+    Layout = "_Layout";
+    ViewBag.Title = "Product Name";
 }
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta name ="viewport" content="width=device-vidth" />
-    <title> Index</title>
-</head>
-<body>
-
-    @Model.Name
-
-</body>
-</html>
+Product Name: @Model.Name
