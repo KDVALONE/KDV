@@ -8,9 +8,24 @@
 <div data-productid="@Model.ProductID" data-socklevel="@ViewBag.StockLevel">
 <p>Product Name: @Model.Name</p>
 <p>Product Price: @($"{Model.Price:C2}")</p>
-    <p>Stock Level:
-        
-        @switch (ViewBag.StockLevel)
+<p>
+    Stock Level:
+    <!--использованиe if/else -->
+    @if (ViewBag.StockLevel == 0)
+    {
+        @: Out of Stock
+    }
+    else if (ViewBag.StockLevel > 0 && ViewBag.StockLevel <= 3)
+    {
+        <b>Low Stock (@ViewBag.StockLevel)</b>
+    }
+    else
+    {
+        @: @ViewBag.StockLevel in Stock
+    }
+
+    <!--использованиe switch -->
+    @*@switch (ViewBag.StockLevel)
         {
             case 0:
                 @: Out of Stock
@@ -23,6 +38,6 @@
                 default:
                     @: @ViewBag.StockLevel in Stock;
                     break;
-        }
-        </p>
+        }*@
+</p>
 </div>
