@@ -7,6 +7,7 @@
     <title>Working with Visual Studio </title>
 </head>
 <body>
+<h3>Product</h3>
 <table>
     <thead>
     <tr><td>Name</td><td>Price</td></tr>
@@ -16,7 +17,7 @@
     {
         <tr>
             <td>@p.Name</td>
-            <td>@p.Price</td>
+            <td>@($"{p.Price:C2}")</td>
         </tr>
     }
     </tbody>
