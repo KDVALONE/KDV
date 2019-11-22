@@ -1,5 +1,5 @@
 ﻿document.addEventListener("DOMContentLoaded", function() {
     var element = document.createElement("p");
-    element.textContent = "Thsi is the element from third.js file";
+    element.textContent = "This is the element from (modified with minification) third.js file";
     document.querySelector("body").appendChild(element);
 });
