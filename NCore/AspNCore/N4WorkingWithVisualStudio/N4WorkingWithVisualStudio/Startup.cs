@@ -12,7 +12,7 @@ using Microsoft.Extensions.FileProviders;
 namespace N4WorkingWithVisualStudio
 {
     /// <summary>
-    ///Фримен. AspNetCore. Глава 7. N4WorkingWithVisualStudio. Модульное тестирование. Используем проект из главы 6.+++
+    ///Фримен. AspNetCore. Глава 7. N4WorkingWithVisualStudio. Модульное тестирование. Используем проект из главы 6.v1
     /// </summary>
     public class Startup
     {
