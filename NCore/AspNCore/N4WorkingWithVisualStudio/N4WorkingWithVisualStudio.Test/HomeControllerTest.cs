@@ -12,6 +12,7 @@ namespace N4WorkingWithVisualStudio.Test
     /// </summary>
     public class HomeControllerTest
     {
+        // фиктивоное хранилище данных для теста
         class ModelCompleteFakeRepository : IRepository
         {
             public IEnumerable<Product> Products { get; } = new Product[]
@@ -29,7 +30,7 @@ namespace N4WorkingWithVisualStudio.Test
         }
         // тест проверяет что метод действия Index() передает представлению все обьекты хранилища
         [Fact]
-        public void IndexActionModelComplete()
+        public void IndexActionModelComplete() 
         {
             //организация
             var controller = new HomeController();
@@ -44,7 +45,7 @@ namespace N4WorkingWithVisualStudio.Test
         /// <summary>
         /// Тест с применением нового хранилища, содержавшем елементы только меньше 50
         /// </summary>
-        class ModelCompleteFakeRepositoryPricesUnder50 : IRepository
+        class ModelCompleteFakeRepositoryPricesUnder50 : IRepository // фиктивоное хранилище данных для теста
         {
             public IEnumerable<Product> Products { get; } = new Product[]
             {
