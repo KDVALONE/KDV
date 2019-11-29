@@ -25,21 +25,15 @@ namespace N4WorkingWithVisualStudio.Test
 
         // тест проверяет что метод действия Index() передает представлению все обьекты хранилища, с применением прамаетрезации.
         [Theory]
-        [InlineData(275, 48.95, 19.50, 24.95)]
-        [InlineData(5, 48.95, 19.50, 24.95)]
-        public void IndexActionModelIsComplete(decimal price1, decimal price2, decimal price3, decimal price4)
+        [ClassData(typeof(ProductTestData))] // данный атрибут конфигуриуется с типом тестовых данных (ProductTestData), во время выполнения создасться
+        //экземпляр ProductTestData и будет применен для получения последовательных тестовых данных
+        public void IndexActionModelIsComplete(Product [] products)
         {
             //организация
             var controller = new HomeController();
             controller.Repository = new ModelCompleteFakeRepository
             { 
-                Products = new Product[]
-                {
-                    new Product {Name = "P1", Price = price1},
-                    new Product {Name = "P2", Price = price2},
-                    new Product {Name = "P3", Price = price3},
-                    new Product {Name = "P4", Price = price4}
-                }
+                Products = products
             };
             //действие
             var model = (controller.Index() as ViewResult)?.ViewData.Model as IEnumerable<Product>;
