@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
+using N5SportsStore.Models;
 
 namespace N5SportsStore
 {
@@ -22,6 +23,8 @@ namespace N5SportsStore
         /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
+            /// метод AddTransient указывает что каждый раз при реазизации IProductRepository создается обьект FakeProductRepository. подробнее глава 18
+            services.AddTransient<IProductRepository, FakeProductRepository>();
             services.AddMvc();
         }
 
