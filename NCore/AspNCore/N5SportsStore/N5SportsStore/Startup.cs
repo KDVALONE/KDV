@@ -24,6 +24,7 @@ namespace N5SportsStore
         public void ConfigureServices(IServiceCollection services)
         {
             /// метод AddTransient указывает что каждый раз при реазизации IProductRepository создается обьект FakeProductRepository. подробнее глава 18
+            /// по сути это Dependency Injection
             services.AddTransient<IProductRepository, FakeProductRepository>();
             services.AddMvc();
         }
