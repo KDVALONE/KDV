@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc;
 using N5SportsStore.Models;
 namespace N5SportsStore.Controllers
 {
@@ -11,5 +12,11 @@ namespace N5SportsStore.Controllers
         {
             repository = repo;
         }
+
+        /// <summary>
+        /// Метод действия для визуализации представления, выводит весь список товаров из хранилища 
+        /// </summary>
+        /// <returns></returns>
+        public ViewResult List() => View(repository.Products);
     }
 }
