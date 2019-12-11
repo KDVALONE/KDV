@@ -43,7 +43,12 @@ namespace N5SportsStore
             /// Необходим для обслуживания статических файлов из wwwroot
             app.UseStaticFiles();
             /// Включает Net.Core MVC
-            app.UseMvc(routes => { });
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Product}/{action=List}/{id?}");
+            });
         }
     }
 }
