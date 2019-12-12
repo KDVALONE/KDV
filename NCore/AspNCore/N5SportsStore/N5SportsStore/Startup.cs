@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using N5SportsStore.Models;
+using Microsoft.Extensions.Configuration;
+using Microsoft.EntityFrameworkCore;
 
 namespace N5SportsStore
 {
@@ -15,6 +17,10 @@ namespace N5SportsStore
     /// </summary>
     public class Startup
     {
+        public Startup(IConfiguration configuration) => Configuration = configuration;
+      
+        public IConfiguration Configuration { get; }
+
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         /// <summary>
@@ -23,9 +29,16 @@ namespace N5SportsStore
         /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
+            ///метод настраивает службы EFCore для контекста БД
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(
+                    Configuration["Data:SportStoreProducts:ConnectionString"]));
+            //заменили фективное хранилеще реальным
+            services.AddTransient<IProductRepository, EFProductRepository>();
+
             /// метод AddTransient указывает что каждый раз при реазизации IProductRepository создается обьект FakeProductRepository. подробнее глава 18
             /// по сути это Dependency Injection
-            services.AddTransient<IProductRepository, FakeProductRepository>();
+            // services.AddTransient<IProductRepository, FakeProductRepository>();
             services.AddMvc();
         }
 
