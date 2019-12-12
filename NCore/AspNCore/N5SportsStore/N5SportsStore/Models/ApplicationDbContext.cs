@@ -13,9 +13,9 @@ namespace N5SportsStore.Models
     /// </summary>
     public class ApplicationDbContext : DbContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base()
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
-
+            //Database.EnsureCreated();   // создаем базу данных при первом обращении
         }
         public DbSet<Product> Products { get; set; }
     }

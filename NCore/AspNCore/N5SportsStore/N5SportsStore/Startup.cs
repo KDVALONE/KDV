@@ -30,9 +30,20 @@ namespace N5SportsStore
         public void ConfigureServices(IServiceCollection services)
         {
             ///метод настраивает службы EFCore для контекста БД
+
+            //services.AddDbContext<ApplicationDbContext>(options =>
+            //    options.UseSqlServer(
+            //        Configuration["Data:SportStoreProducts:ConnectionString"]));
+            //1
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
-                    Configuration["Data:SportStoreProducts:ConnectionString"]));
+                    Configuration["ConnectionStrings:DefaultConnection"]));
+
+            //2
+            //string connection = Configuration.GetConnectionString("DefaultConnection");
+            //services.AddDbContext<ApplicationDbContext>(options =>
+            //    options.UseSqlServer(connection));
+
             //заменили фективное хранилеще реальным
             services.AddTransient<IProductRepository, EFProductRepository>();
 
