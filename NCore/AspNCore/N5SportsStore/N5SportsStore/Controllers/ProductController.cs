@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using N5SportsStore.Models;
 namespace N5SportsStore.Controllers
@@ -6,6 +7,8 @@ namespace N5SportsStore.Controllers
     public class ProductController : Controller
     {
         private IProductRepository repository;
+
+        public int PageSize = 4;
 
         //принимает обьект реализующий IProductRepository, по сути это DInjection, класс Startup метод services.AddTransient<> отвечают за предоставление нужного обьекта
         public ProductController(IProductRepository repo)
@@ -17,6 +20,10 @@ namespace N5SportsStore.Controllers
         /// Метод действия для визуализации представления, выводит весь список товаров из хранилища 
         /// </summary>
         /// <returns></returns>
-        public ViewResult List() => View(repository.Products);
+        public ViewResult List(int productPage = 1)
+            => View(repository.Products
+                .OrderBy(p => p.ProductID)
+                .Skip((productPage - 1) * PageSize)
+                .Take(PageSize));
     }
 }
