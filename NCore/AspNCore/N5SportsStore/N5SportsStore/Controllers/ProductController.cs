@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using N5SportsStore.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using N5SportsStore.Models;
 namespace N5SportsStore.Controllers
@@ -21,9 +22,18 @@ namespace N5SportsStore.Controllers
         /// </summary>
         /// <returns></returns>
         public ViewResult List(int productPage = 1)
-            => View(repository.Products
+            => View(new ProductsListViewModel
+            {
+                Products = repository.Products
                 .OrderBy(p => p.ProductID)
                 .Skip((productPage - 1) * PageSize)
-                .Take(PageSize));
+                .Take(PageSize),
+                PagingInfo = new PagingInfo
+                {
+                    CurrentPage = productPage,
+                    ItemsPerPage = PageSize,
+                    TotalItems = repository.Products.Count()
+                }
+            });
     }
 }
