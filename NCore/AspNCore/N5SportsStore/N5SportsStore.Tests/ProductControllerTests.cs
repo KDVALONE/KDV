@@ -96,12 +96,6 @@ namespace N5SportsStore.Tests
             Assert.Equal(2, result.Length);
             Assert.True(result[0].Name == "P2" && result[0].Category == "Cat2");
             Assert.True(result[1].Name == "P4" && result[1].Category == "Cat2");
-
-
         }
-
-
-
-
     }
 }
