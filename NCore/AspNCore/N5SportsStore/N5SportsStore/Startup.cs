@@ -15,7 +15,7 @@ using Microsoft.Extensions.FileProviders;
 namespace N5SportsStore
 {
     /// <summary>
-    /// Фримен. AspNetCore. Глава 8. N5SportsStore. Онлайн спорт магазин. Максимально приближенный к реальности проект NetCore MVC на NCore 2.1
+    /// Фримен. AspNetCore. Глава 9. N5SportsStore. Навигация и корзина покупок. Максимально приближенный к реальности проект NetCore MVC на NCore 2.1
     /// </summary>
     public class Startup
     {
