@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 using N5SportsStore.Models.ViewModels;
+using System.Collections.Generic;
 
 namespace N5SportsStore.Infrastructure
 {
@@ -33,6 +34,8 @@ namespace N5SportsStore.Infrastructure
         public string PageClass { get; set; }
         public string PageClassNormal { get; set; }
         public string PageClassSelected { get; set; }
+        [HtmlAttributeName(DictionaryAttributePrefix = "page-url-")]
+        public Dictionary<string, object> PageUrlValues { get; set; } = new Dictionary<string, object>();
 
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
@@ -41,8 +44,11 @@ namespace N5SportsStore.Infrastructure
             for (int i = 1; i <= PageModel.TotalPages; i++)
             {
                 TagBuilder tag = new TagBuilder("a");
-                tag.Attributes["href"] = urlHelper.Action(PageAction,
-                    new {productPage = i});
+                PageUrlValues["productPage"] = i;
+                tag.Attributes["href"] = urlHelper.Action(PageAction, PageUrlValues);
+
+                //tag.Attributes["href"] = urlHelper.Action(PageAction,
+                //    new {productPage = i});
                 if (PageClassesEnabled) {
                     tag.AddCssClass(PageClass);
                     tag.AddCssClass(i == PageModel.CurrentPage
