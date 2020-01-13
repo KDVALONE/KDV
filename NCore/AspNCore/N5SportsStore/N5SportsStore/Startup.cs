@@ -9,6 +9,8 @@ using Microsoft.Extensions.DependencyInjection;
 using N5SportsStore.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
+using System.IO;
+using Microsoft.Extensions.FileProviders;
 
 namespace N5SportsStore
 {
@@ -60,12 +62,13 @@ namespace N5SportsStore
         /// <param name="env"></param>
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            app.UseStaticFiles();
             /// Метод расширения, показывает детали исключений в приложении
             app.UseDeveloperExceptionPage();
             /// Добавляет простые сообщения в HTTP ответы - 404 Not Found и т.д.
             app.UseStatusCodePages();
             /// Необходим для обслуживания статических файлов из wwwroot
-            app.UseStaticFiles();
+         
             /// Включает Net.Core MVC
             app.UseMvc(routes =>
             {
@@ -79,6 +82,16 @@ namespace N5SportsStore
                     template: "{controller=Product}/{action=List}/{id?}");
             });
             SeedData.EnsurePopulated(app);
+
+            //подключение к закрытой папке node_module куда npm какчает bootstrap, обязятельно должна быть после app.UseStaticFiles()
+            app.UseFileServer(new FileServerOptions()
+            {
+                FileProvider = new PhysicalFileProvider(
+                    Path.Combine(env.ContentRootPath, @"node_modules") //строка получения пути к папке
+                ),
+                RequestPath = "/node_modules", //это вроде псевдоним для обращения.
+                EnableDirectoryBrowsing = false
+            });
         }
     }
 }
