@@ -32,7 +32,7 @@ namespace N5SportsStore.Tests
             //Действие
             // IEnumerable<Product> result = controller.List(2).ViewData.Model as IEnumerable<Product>;
             ProductsListViewModel result =
-                controller.List(2).ViewData.Model as ProductsListViewModel;
+                controller.List(null,2).ViewData.Model as ProductsListViewModel;
             
             //Утверждение
             Product[] prodArray = result.Products.ToArray();
@@ -60,7 +60,7 @@ namespace N5SportsStore.Tests
             //Организация
             ProductController controller =  new ProductController(mock.Object) { PageSize = 3};
             //Действие
-            ProductsListViewModel result = controller.List(2).ViewData.Model as ProductsListViewModel;
+            ProductsListViewModel result = controller.List(null,2).ViewData.Model as ProductsListViewModel;
             //Утверждение
             PagingInfo pageInfo = result.PagingInfo;
             Assert.Equal(2, pageInfo.CurrentPage);
