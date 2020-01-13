@@ -26,6 +26,9 @@ namespace N5SportsStore.Componetnts
         /// </summary>
         /// <returns></returns>
         public IViewComponentResult Invoke() {
+            //тут мы динамически создаем сво-во SelectedCategory и устанавливаем ему значение текущей категории 
+            ViewBag.SelectedCategory = RouteData?.Values["category"];
+            
             return  View(repository.Products
                 .Select(x => x.Category)
                 .Distinct()
