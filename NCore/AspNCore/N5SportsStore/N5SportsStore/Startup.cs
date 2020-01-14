@@ -53,6 +53,8 @@ namespace N5SportsStore
             /// по сути это Dependency Injection
             // services.AddTransient<IProductRepository, FakeProductRepository>();
             services.AddMvc();
+            services.AddMemoryCache();
+            services.AddSession();
         }
 
         /// <summary>
@@ -68,7 +70,10 @@ namespace N5SportsStore
             /// Добавляет простые сообщения в HTTP ответы - 404 Not Found и т.д.
             app.UseStatusCodePages();
             /// Необходим для обслуживания статических файлов из wwwroot
-         
+
+            ///Метод позволяет системе сеансов автоматически ассоциировать запросы сеансами, когда они проступают от клиента.
+            app.UseSession();
+
             /// Включает Net.Core MVC
             app.UseMvc(routes =>
             {
