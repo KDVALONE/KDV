@@ -49,9 +49,18 @@ namespace N5SportsStore
             //заменили фективное хранилеще реальным
             services.AddTransient<IProductRepository, EFProductRepository>();
 
+
+
             /// метод AddTransient указывает что каждый раз при реазизации IProductRepository создается обьект FakeProductRepository. подробнее глава 18
             /// по сути это Dependency Injection
-            // services.AddTransient<IProductRepository, FakeProductRepository>();
+            services.AddTransient<IProductRepository, FakeProductRepository>();
+            ///метод служит указтелем, что для удовлет. запросов к экземплярам Cart должен прим. один и тотже обьект, в данном
+            ///случае это коллекция зарегистрированных служб полученных с помощью лямбда выражения.
+            /// подробнее описание на стр.283
+            services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
+            ///данная служба обязательна, и устанавливает что всегда должен применяться один и тот же обьект.
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            
             services.AddMvc();
             services.AddMemoryCache();
             services.AddSession();
