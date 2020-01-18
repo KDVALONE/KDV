@@ -46,14 +46,14 @@ namespace N5SportsStore
             //services.AddDbContext<ApplicationDbContext>(options =>
             //    options.UseSqlServer(connection));
 
-            //заменили фективное хранилеще реальным
-            services.AddTransient<IProductRepository, EFProductRepository>();
-
-
 
             /// метод AddTransient указывает что каждый раз при реазизации IProductRepository создается обьект FakeProductRepository. подробнее глава 18
             /// по сути это Dependency Injection
-            services.AddTransient<IProductRepository, FakeProductRepository>();
+            // services.AddTransient<IProductRepository, FakeProductRepository>();
+
+            //заменили фективное хранилеще реальным
+            services.AddTransient<IProductRepository, EFProductRepository>();
+
             ///метод служит указтелем, что для удовлет. запросов к экземплярам Cart должен прим. один и тотже обьект, в данном
             ///случае это коллекция зарегистрированных служб полученных с помощью лямбда выражения.
             /// подробнее описание на стр.283

@@ -19,9 +19,9 @@ namespace N5SportsStore.Models
         /// </summary>
         /// <param name="service"></param>
         /// <returns></returns>
-        public static Cart GetCart(IServiceProvider service)
+        public static Cart GetCart(IServiceProvider services)
         {
-            ISession session = service.GetRequiredService<IHttpContextAccessor>()?.HttpContext.Session;
+            ISession session = services.GetRequiredService<IHttpContextAccessor>()?.HttpContext.Session;
             SessionCart cart = session?.GetJson<SessionCart>("Cart")
                 ?? new SessionCart();
             cart.Session = session;
