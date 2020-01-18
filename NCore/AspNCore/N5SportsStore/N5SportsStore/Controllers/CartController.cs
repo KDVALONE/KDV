@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using N5SportsStore.Infrastructure;
 using N5SportsStore.Models;
+using N5SportsStore.Models.ViewModels;
 
 namespace N5SportsStore.Controllers
 {
@@ -15,6 +16,22 @@ namespace N5SportsStore.Controllers
         public CartController(IProductRepository repo)
         {
             repository = repo;
+        }
+
+
+        /// <summary>
+        /// Метод действия Index() извлекает обьект Cart из состояния сеанса и использует его при создании обьекта CartIndexViewModel,
+        /// который затем передается методу View() для применения в качестве модели пердставления.
+        /// </summary>
+        /// <param name="returnUrl"></param>
+        /// <returns></returns>
+        public ViewResult Index(string returnUrl)
+        {
+            return View(new CartIndexViewModel
+            {
+                Cart = GetCart(),
+                ReturnUrl = returnUrl
+            });
         }
         public RedirectToActionResult AddToCart(int productId, string returnUrl)
         {

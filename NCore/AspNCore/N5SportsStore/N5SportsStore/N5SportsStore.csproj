@@ -6,6 +6,15 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\css\" />
+    <Folder Include="wwwroot\lib\bootstrap\dist\css\" />
+    <Folder Include="wwwroot\lib\bootstrap\dist\js\" />
+    <Folder Include="wwwroot\lib\bootstrap\js\dist\" />
+    <Folder Include="wwwroot\lib\bootstrap\js\src\" />
+    <Folder Include="wwwroot\lib\bootstrap\js\src\tools\" />
+    <Folder Include="wwwroot\lib\bootstrap\scss\" />
+    <Folder Include="wwwroot\lib\bootstrap\scss\mixins\" />
+    <Folder Include="wwwroot\lib\bootstrap\scss\utilities\" />
+    <Folder Include="wwwroot\lib\bootstrap\scss\vendor\" />
   </ItemGroup>
 
   <ItemGroup>

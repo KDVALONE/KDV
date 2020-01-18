@@ -114,14 +114,15 @@ namespace N5SportsStore
             SeedData.EnsurePopulated(app);
 
             //подключение к закрытой папке node_module куда npm какчает bootstrap, обязятельно должна быть после app.UseStaticFiles()
-            app.UseFileServer(new FileServerOptions()
-            {
-                FileProvider = new PhysicalFileProvider(
-                    Path.Combine(env.ContentRootPath, @"node_modules") //строка получения пути к папке
-                ),
-                RequestPath = "/node_modules", //это вроде псевдоним для обращения.
-                EnableDirectoryBrowsing = false
-            });
+            // если подключать bootstrap не через NMP а через libman, то это не нужно
+            //app.UseFileServer(new FileServerOptions()
+            //{
+            //    FileProvider = new PhysicalFileProvider(
+            //        Path.Combine(env.ContentRootPath, @"node_modules") //строка получения пути к папке
+            //    ),
+            //    RequestPath = "/node_modules", //это вроде псевдоним для обращения.
+            //    EnableDirectoryBrowsing = false
+            //});
         }
     }
 }
