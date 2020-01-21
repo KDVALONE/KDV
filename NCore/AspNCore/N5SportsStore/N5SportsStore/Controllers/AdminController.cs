@@ -15,5 +15,14 @@ namespace N5SportsStore.Controllers
             repository = repo;
         }
         public ViewResult Index() => View(repository.Products);
+
+        /// <summary>
+        /// Метод  ищет товар с ID соответсвующим productId и передает его как обьект меоде представления в метод View()
+        /// </summary>
+        /// <param name="productId"></param>
+        /// <returns></returns>
+        public ViewResult Edit(int productId) =>
+            View(repository.Products
+                .FirstOrDefault(p => p.ProductID == productId));
     }
 }
