@@ -60,7 +60,9 @@ namespace N5SportsStore
             services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
             ///данная служба обязательна, и устанавливает что всегда должен применяться один и тот же обьект.
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            
+            //регистарция хранилища заказов (ORDER) как службу 
+            services.AddTransient<IOrderRepository, EFOrderRepository>();
+
             services.AddMvc();
             services.AddMemoryCache();
             services.AddSession();

@@ -18,5 +18,6 @@ namespace N5SportsStore.Models
             //Database.EnsureCreated();   // создаем базу данных при первом обращении
         }
         public DbSet<Product> Products { get; set; }
+        public DbSet<Order> Orders { get; set; }
     }
 }

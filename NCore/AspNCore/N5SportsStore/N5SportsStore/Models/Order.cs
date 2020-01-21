@@ -6,7 +6,9 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System.ComponentModel.DataAnnotations;
 
 namespace N5SportsStore.Models
-{
+{ /// <summary>
+  /// Класс модель для формирования заказов, генерация атрибутов с помщью дескрипторов (см главу 24)
+  /// </summary>
     public class Order
     {
         [BindNever]
