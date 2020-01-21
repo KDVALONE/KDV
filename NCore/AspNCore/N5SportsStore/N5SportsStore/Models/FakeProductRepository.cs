@@ -4,7 +4,7 @@ using System.Linq;
 namespace N5SportsStore.Models
 {
     //Временный класс для хранения данных, пока не будет реализована полноценная БД.
-    public class FakeProductRepository : IProductRepository
+    public class FakeProductRepository /*: IProductRepository*/
     {
         public IQueryable<Product> Products => new List<Product>
         {

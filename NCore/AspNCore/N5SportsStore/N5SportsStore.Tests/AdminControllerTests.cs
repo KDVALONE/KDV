@@ -7,6 +7,8 @@ using System.Linq;
 using Xunit;
 using N5SportsStore.Controllers;
 using N5SportsStore.Models;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
+
 namespace N5SportsStore.Tests
 {
    public class AdminControllerTests
@@ -88,6 +90,54 @@ namespace N5SportsStore.Tests
             Product result = GetViewModel<Product>(target.Edit(4));
             //Утверждение
             Assert.Null(result);
+        }
+
+        /// <summary>
+        /// Модульный тест проверки что корректные данные модели в харнилище  предаются
+        /// </summary>
+        [Fact]
+        public void Can_Save_Valid_Changes()
+        {
+            //Организация - создание имитированного хранилища
+            Mock<IProductRepository> mock = new Mock<IProductRepository>();
+            //Организация - создание имитированного хранилища
+            Mock<ITempDataDictionary> tempData = new Mock<ITempDataDictionary>();
+            //Организация - создание контроллера
+            AdminController target = new AdminController(mock.Object) {
+                TempData = tempData.Object
+            };
+            //Организация - создание товара
+            Product product = new Product { Name = "Test" };
+            //Действие - попытка сохранить товар
+            IActionResult result = target.Edit(product);
+            //Утверждение - проверка того, что к хранилищу было произведено обращение
+            mock.Verify(m => m.SaveProduct(product));
+            //Утверждение - проверка что типом результата является перенаправление
+            Assert.IsType<RedirectToActionResult>(result);
+            Assert.Equal("Index", (result as RedirectToActionResult).ActionName);
+        }
+
+        /// <summary>
+        /// Модульный тест проверки что содержащие ошибки проверки достоверности модели данные в харнилище не предаются
+        /// </summary>
+        [Fact]
+        public void Cannot_Save_Invalid_Changes() {
+            //Организация - создание имитированного хранилища
+            Mock<IProductRepository> mock = new Mock<IProductRepository>();
+            //Организация - создание контроллера
+            AdminController target = new AdminController(mock.Object);
+            //Организация - создание товара
+            Product product = new Product { Name = "Test" };
+            //Организация - добавление ошибки в состояние модели
+            target.ModelState.AddModelError("error", "error");
+            //Действие - попытка сохранить товар
+            IActionResult result = target.Edit(product);
+
+            //Утверждение - проверка что к хранилищу было произведено обращение
+            mock.Verify(m => m.SaveProduct(It.IsAny<Product>()), Times.Never());
+            //Утверждение - проверка что типа результата метода
+            Assert.IsType<ViewResult>(result);
+
         }
 
     }
