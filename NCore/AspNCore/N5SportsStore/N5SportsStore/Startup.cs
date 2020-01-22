@@ -135,6 +135,7 @@ namespace N5SportsStore
 
             });
             SeedData.EnsurePopulated(app);
+            IdentitySeedData.EnsurePopulated(app);
 
             //подключение к закрытой папке node_module куда npm какчает bootstrap, обязятельно должна быть после app.UseStaticFiles()
             // если подключать bootstrap не через NMP а через libman, то это не нужно
