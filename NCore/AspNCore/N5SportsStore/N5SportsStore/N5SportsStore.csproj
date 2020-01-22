@@ -15,6 +15,27 @@
     <Folder Include="wwwroot\lib\bootstrap\scss\mixins\" />
     <Folder Include="wwwroot\lib\bootstrap\scss\utilities\" />
     <Folder Include="wwwroot\lib\bootstrap\scss\vendor\" />
+    <Folder Include="wwwroot\lib\jquery-validation-unobtrusive\dist\" />
+    <Folder Include="wwwroot\lib\jquery\dist\" />
+    <Folder Include="wwwroot\lib\jquery\external\sizzle\dist\" />
+    <Folder Include="wwwroot\lib\jquery\src\ajax\" />
+    <Folder Include="wwwroot\lib\jquery\src\ajax\var\" />
+    <Folder Include="wwwroot\lib\jquery\src\attributes\" />
+    <Folder Include="wwwroot\lib\jquery\src\core\" />
+    <Folder Include="wwwroot\lib\jquery\src\core\var\" />
+    <Folder Include="wwwroot\lib\jquery\src\css\" />
+    <Folder Include="wwwroot\lib\jquery\src\css\var\" />
+    <Folder Include="wwwroot\lib\jquery\src\data\" />
+    <Folder Include="wwwroot\lib\jquery\src\data\var\" />
+    <Folder Include="wwwroot\lib\jquery\src\deferred\" />
+    <Folder Include="wwwroot\lib\jquery\src\effects\" />
+    <Folder Include="wwwroot\lib\jquery\src\event\" />
+    <Folder Include="wwwroot\lib\jquery\src\exports\" />
+    <Folder Include="wwwroot\lib\jquery\src\manipulation\" />
+    <Folder Include="wwwroot\lib\jquery\src\manipulation\var\" />
+    <Folder Include="wwwroot\lib\jquery\src\queue\" />
+    <Folder Include="wwwroot\lib\jquery\src\traversing\var\" />
+    <Folder Include="wwwroot\lib\jquery\src\var\" />
   </ItemGroup>
 
   <ItemGroup>

@@ -10,7 +10,25 @@
     {
       "library": "font-awesome@5.11.2",
       "destination": "wwwroot/lib/fontawesome/"
+    },
+    {
+      "provider": "unpkg",
+      "library": "jquery@3.4.1",
+      "destination": "wwwroot/lib/jquery/"
+    },
+    {
+      "library": "jquery-validate@1.19.1",
+      "destination": "wwwroot/lib/jquery-validate/"
+    },
+    {
+      "provider": "unpkg",
+      "library": "jquery-validation@1.19.1",
+      "destination": "wwwroot/lib/jquery-validation/"
+    },
+    {
+      "provider": "jsdelivr",
+      "library": "jquery-validation-unobtrusive@3.2.11",
+      "destination": "wwwroot/lib/jquery-validation-unobtrusive/"
     }
-  ]  
- 
+  ]
 }
