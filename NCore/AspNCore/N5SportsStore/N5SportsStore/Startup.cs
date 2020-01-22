@@ -53,9 +53,10 @@ namespace N5SportsStore
             // services.AddTransient<IProductRepository, FakeProductRepository>();
 
             //Сконфигурировал подключение к БД для политик безопасности и аутентификации
-            services.AddDbContext<ApplicationDbContext>(options =>
+            services.AddDbContext<AppIdentityDbContext>(options =>
                 options.UseSqlServer(
-                    Configuration["Data:N5SportStoreIdentity:ConnectionString"]));
+                    Configuration["SportStoreIdentity:DefaultConnection"]));
+
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<AppIdentityDbContext>()
                 .AddDefaultTokenProviders();

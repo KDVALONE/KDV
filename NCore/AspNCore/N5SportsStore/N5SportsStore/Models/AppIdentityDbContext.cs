@@ -5,7 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-
+using Microsoft.EntityFrameworkCore.Design;
+using Microsoft.Extensions.DependencyInjection;
 namespace N5SportsStore.Models
 {
 
@@ -16,8 +17,11 @@ namespace N5SportsStore.Models
     /// </summary>
     public class AppIdentityDbContext : IdentityDbContext<IdentityUser>
     {
-        public AppIdentityDbContext(DbContextOptions<AppIdentityDbContext> option)
-            : base (option) { }
+        public AppIdentityDbContext(DbContextOptions<AppIdentityDbContext> options)
+            : base (options) 
+        {
+        
+        }
        
     }
 }
