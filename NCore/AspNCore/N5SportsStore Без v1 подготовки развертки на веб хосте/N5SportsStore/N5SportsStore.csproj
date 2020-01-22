@@ -1,0 +1,74 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\css\" />
+    <Folder Include="wwwroot\lib\bootstrap\dist\css\" />
+    <Folder Include="wwwroot\lib\bootstrap\dist\js\" />
+    <Folder Include="wwwroot\lib\bootstrap\js\dist\" />
+    <Folder Include="wwwroot\lib\bootstrap\js\src\" />
+    <Folder Include="wwwroot\lib\bootstrap\js\src\tools\" />
+    <Folder Include="wwwroot\lib\bootstrap\scss\" />
+    <Folder Include="wwwroot\lib\bootstrap\scss\mixins\" />
+    <Folder Include="wwwroot\lib\bootstrap\scss\utilities\" />
+    <Folder Include="wwwroot\lib\bootstrap\scss\vendor\" />
+    <Folder Include="wwwroot\lib\jquery-validation-unobtrusive\dist\" />
+    <Folder Include="wwwroot\lib\jquery\dist\" />
+    <Folder Include="wwwroot\lib\jquery\external\sizzle\dist\" />
+    <Folder Include="wwwroot\lib\jquery\src\ajax\" />
+    <Folder Include="wwwroot\lib\jquery\src\ajax\var\" />
+    <Folder Include="wwwroot\lib\jquery\src\attributes\" />
+    <Folder Include="wwwroot\lib\jquery\src\core\" />
+    <Folder Include="wwwroot\lib\jquery\src\core\var\" />
+    <Folder Include="wwwroot\lib\jquery\src\css\" />
+    <Folder Include="wwwroot\lib\jquery\src\css\var\" />
+    <Folder Include="wwwroot\lib\jquery\src\data\" />
+    <Folder Include="wwwroot\lib\jquery\src\data\var\" />
+    <Folder Include="wwwroot\lib\jquery\src\deferred\" />
+    <Folder Include="wwwroot\lib\jquery\src\effects\" />
+    <Folder Include="wwwroot\lib\jquery\src\event\" />
+    <Folder Include="wwwroot\lib\jquery\src\exports\" />
+    <Folder Include="wwwroot\lib\jquery\src\manipulation\" />
+    <Folder Include="wwwroot\lib\jquery\src\manipulation\var\" />
+    <Folder Include="wwwroot\lib\jquery\src\queue\" />
+    <Folder Include="wwwroot\lib\jquery\src\traversing\var\" />
+    <Folder Include="wwwroot\lib\jquery\src\var\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+    <PackageReference Include="NMP.Core" Version="3.0.7" />
+    <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\lib\fontawesome\js\all.js" />
+    <None Include="wwwroot\lib\fontawesome\js\all.min.js" />
+    <None Include="wwwroot\lib\fontawesome\js\brands.js" />
+    <None Include="wwwroot\lib\fontawesome\js\brands.min.js" />
+    <None Include="wwwroot\lib\fontawesome\js\conflict-detection.js" />
+    <None Include="wwwroot\lib\fontawesome\js\conflict-detection.min.js" />
+    <None Include="wwwroot\lib\fontawesome\js\fontawesome.js" />
+    <None Include="wwwroot\lib\fontawesome\js\fontawesome.min.js" />
+    <None Include="wwwroot\lib\fontawesome\js\regular.js" />
+    <None Include="wwwroot\lib\fontawesome\js\regular.min.js" />
+    <None Include="wwwroot\lib\fontawesome\js\solid.js" />
+    <None Include="wwwroot\lib\fontawesome\js\solid.min.js" />
+    <None Include="wwwroot\lib\fontawesome\js\v4-shims.js" />
+    <None Include="wwwroot\lib\fontawesome\js\v4-shims.min.js" />
+    <None Include="wwwroot\lib\fontawesome\sprites\brands.svg" />
+    <None Include="wwwroot\lib\fontawesome\sprites\regular.svg" />
+    <None Include="wwwroot\lib\fontawesome\sprites\solid.svg" />
+    <None Include="wwwroot\lib\fontawesome\webfonts\fa-brands-400.svg" />
+    <None Include="wwwroot\lib\fontawesome\webfonts\fa-brands-400.woff2" />
+    <None Include="wwwroot\lib\fontawesome\webfonts\fa-regular-400.svg" />
+    <None Include="wwwroot\lib\fontawesome\webfonts\fa-regular-400.woff2" />
+    <None Include="wwwroot\lib\fontawesome\webfonts\fa-solid-900.svg" />
+    <None Include="wwwroot\lib\fontawesome\webfonts\fa-solid-900.woff2" />
+  </ItemGroup>
+
+</Project>

@@ -16,7 +16,7 @@ using Microsoft.AspNetCore.Identity;
 namespace N5SportsStore
 {
     /// <summary>
-    /// Фримен. AspNetCore. Глава 12. N5SportsStore Защита и развертывание. Максимально приближенный к реальности проект NetCore MVC на NCore 2.1
+    /// Фримен. AspNetCore. Глава 12.N5SportsStore Защита и развертывание. Максимально приближенный к реальности проект NetCore MVC на NCore 2.1
     /// </summary>
     public class Startup
     {

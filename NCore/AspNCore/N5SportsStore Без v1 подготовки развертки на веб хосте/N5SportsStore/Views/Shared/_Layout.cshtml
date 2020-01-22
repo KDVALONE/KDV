@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+
+    @* <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css"*@
+    @*тут чтоб воспользоваться asp-href-include придется вручную
+        перенести bootsrap в wwwroot, а nmp его ствит в node_modules, что я и указал простым href*@
+
+    @*Если подключать bootstrap не через NMP а через libman, то код из книги рабоатет, так как все корректно
+        устанавливается в wwwroot/lib/ *@
+
+    <link rel="stylesheet"
+          asp-href-include="/lib/bootstrap/dist/**/bootstrap.css"
+          asp-href-exclude="**/*-reboot,**-grid*" />
+    <link rel="stylesheet"
+          asp-href-include="/lib/fontawesome/css/*.css" />
+
+    <title>N5SportsStore</title>
+</head>
+
+<body>
+
+    <div class="navbar navbar-dark bg-dark" role="navigation">
+        <div class="container">
+            <a class="col navbar-brand" href="#">SPORTS STORE</a>
+            <div class="navbar-nav mb-auto mt-0 ml-auto">
+                @await Component.InvokeAsync("CartSummary")
+            </div>
+        </div>
+    </div>
+   
+    @*страрый синаксис, заменил на новый выше так как все по другому*@ 
+
+        @*<div class="navbar navbar-inverse bg-inverse" данный синтакси устраел в bootstrap вот актуальный*@
+        @*<div class="navbar navbar-dark bg-dark" role="navigation">
+            <div class="row">
+                <a class="col navbar-brand" href="#">SPORTS STORE</a>
+                <div class="col-4">
+                    @await Component.InvokeAsync("CartSummary")
+                </div>
+            </div>
+        </div>*@
+
+    <div class="row m-1 p-1">
+        <div id="categories" class="col-3">
+            @await Component.InvokeAsync("NavigationMenu")
+        </div>
+        <div class="col-9">
+            @RenderBody()
+        </div>
+
+    </div>
+</body>
+</html>
+
+@*Сетка Bootstrap 4 row> col-*не предназначена для использования внутри Navbar.Теперь,
+когда Bootstrap 4 использует flexbox, намного проще
+без использования grid row> col-*@
+@*Вот код как шпора*@
+
+@*<nav class="navbar navbar-expand navbar-dark fixed-top bg-dark">
+    <div class="container">
+        <h1 class="mb-0"><a href="#">Logo</a></h1>
+        <div class="d-flex flex-column flex-wrap" id="navbarCollapse">
+            <span class="navbar-text ml-auto py-0 px-lg-2">(00) 1234 5678</span>
+            <ul class="navbar-nav mb-auto mt-0 ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link py-0" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link py-0" href="#">Product</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link py-0" href="#">Company</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link py-0" href="#">Blog</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>*@
