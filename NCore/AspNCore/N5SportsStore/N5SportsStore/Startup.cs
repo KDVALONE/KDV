@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
 using System.IO;
 using Microsoft.Extensions.FileProviders;
+using Microsoft.AspNetCore.Identity;
 
 namespace N5SportsStore
 {
@@ -51,6 +52,14 @@ namespace N5SportsStore
             /// по сути это Dependency Injection
             // services.AddTransient<IProductRepository, FakeProductRepository>();
 
+            //Сконфигурировал подключение к БД для политик безопасности и аутентификации
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(
+                    Configuration["Data:N5SportStoreIdentity:ConnectionString"]));
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<AppIdentityDbContext>()
+                .AddDefaultTokenProviders();
+
             //заменили фективное хранилеще реальным
             services.AddTransient<IProductRepository, EFProductRepository>();
 
@@ -84,6 +93,8 @@ namespace N5SportsStore
 
             ///Метод позволяет системе сеансов автоматически ассоциировать запросы сеансами, когда они проступают от клиента.
             app.UseSession();
+            //Метод для установки компанентов перехвата запросов ответов политик безопасности
+            app.UseAuthentication();
 
             /// Включает Net.Core MVC
             app.UseMvc(routes =>
