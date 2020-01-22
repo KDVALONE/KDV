@@ -140,5 +140,26 @@ namespace N5SportsStore.Tests
 
         }
 
+        [Fact]
+        public void Can_Delete_Valid_Product()
+        {
+            //Организация - создание обьекта Product
+            Product prod = new Product { ProductID = 2, Name = "Test" };
+            //Организация - создание имитированного хранилища
+            Mock<IProductRepository> mock = new Mock<IProductRepository>();
+            mock.Setup(m => m.Products).Returns((new Product[]
+            {
+                new Product {ProductID = 1, Name = "P1"},
+                prod,
+                new Product {ProductID = 3, Name = "P3"}
+            }).AsQueryable<Product>());
+            //Организация - создание контроллера
+            AdminController target = new AdminController(mock.Object);
+            //Действие - удаление товара
+            target.Delete(prod.ProductID);
+
+            //Утверждение - проверка что был вызван метод удаления в хранилище с корректным обьектом Product
+            mock.Verify(m => m.DeleteProduct(prod.ProductID));
+        }
     }
 }
