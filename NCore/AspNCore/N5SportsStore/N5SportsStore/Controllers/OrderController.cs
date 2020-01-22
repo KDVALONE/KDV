@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using N5SportsStore.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace N5SportsStore.Controllers
 {
@@ -16,9 +17,12 @@ namespace N5SportsStore.Controllers
             cart = cartService;
         }
 
+        [Authorize]
         public ViewResult List() =>
             View(repository.Orders.Where(o => !o.Shipped));
+
         [HttpPost]
+        [Authorize]
         public IActionResult MarkShipped(int orderID)
         {
             Order order = repository.Orders

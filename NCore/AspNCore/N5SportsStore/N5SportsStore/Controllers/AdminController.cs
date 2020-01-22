@@ -4,9 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using N5SportsStore.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+
 
 namespace N5SportsStore.Controllers
 {
+    //для защиты всех методов действия определенных в контроллере используется [Authorize] на класс
+    [Authorize]
     public class AdminController : Controller
     {
         private IProductRepository repository;
