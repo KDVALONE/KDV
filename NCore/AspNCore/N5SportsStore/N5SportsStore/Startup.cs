@@ -18,6 +18,9 @@ namespace N5SportsStore
     /// <summary>
     /// Фримен. AspNetCore. Глава 12. N5SportsStore Защита и развертывание. Максимально приближенный к реальности проект NetCore MVC на NCore 2.1
     /// </summary>
+    //TODO: !!!!!! Проект подготовлен для развертывания на веб хостиге, для этого нужно:
+    //вставить строки подключения к БД полученых с хостинга в файл appsetting.production.json а так же выполнить комманды миграции
+    // стр434, 444, 347
     public class Startup
     {
         public Startup(IConfiguration configuration) => Configuration = configuration;
@@ -85,6 +88,15 @@ namespace N5SportsStore
         /// <param name="env"></param>
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            if (env.IsDevelopment()) {
+                app.UseDeveloperExceptionPage();
+                app.UseStatusCodePages();
+            }
+            else
+            {
+                app.UseExceptionHandler("/Error");
+            }
+
             app.UseStaticFiles();
             /// Метод расширения, показывает детали исключений в приложении
             app.UseDeveloperExceptionPage();
@@ -134,8 +146,10 @@ namespace N5SportsStore
                 routes.MapRoute(name: null, template: "{controller}/{action}/{id?}");
 
             });
-            SeedData.EnsurePopulated(app);
-            IdentitySeedData.EnsurePopulated(app);
+
+            //!!!закоменчиваем эти строки для подгрузки на веб сервер.
+            //SeedData.EnsurePopulated(app);
+            //IdentitySeedData.EnsurePopulated(app);
 
             //подключение к закрытой папке node_module куда npm какчает bootstrap, обязятельно должна быть после app.UseStaticFiles()
             // если подключать bootstrap не через NMP а через libman, то это не нужно

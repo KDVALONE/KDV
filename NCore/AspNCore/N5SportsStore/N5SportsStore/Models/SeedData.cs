@@ -18,10 +18,10 @@ namespace N5SportsStore.Models
         /// Этот метод заполняет данные в БД
         /// </summary>
         /// <param name="app"></param>
-        public static void EnsurePopulated(IApplicationBuilder app)
+        public static void EnsurePopulated(IServiceProvider services)
         {
-            ApplicationDbContext context = app.ApplicationServices.GetRequiredService<ApplicationDbContext>();
-            context.Database.Migrate();
+            ApplicationDbContext context = services.GetRequiredService<ApplicationDbContext>();
+            //context.Database.Migrate();
             if (!context.Products.Any())
             {
                 context.Products.AddRange(

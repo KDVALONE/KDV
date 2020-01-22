@@ -25,6 +25,7 @@ namespace N5SportsStore.Controllers
         {
             userManager = userMgr;
             signInManager = signInMgr;
+            IdentitySeedData.EnsurePopulated(userMgr).Wait();
         }
 
         [AllowAnonymous]
