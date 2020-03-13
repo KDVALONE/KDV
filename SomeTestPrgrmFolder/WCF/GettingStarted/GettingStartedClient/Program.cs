@@ -7,6 +7,15 @@ using System.Threading.Tasks;
 
 namespace GettingStartedClient
 {
+    /// <summary>
+    /// Клиент для службы WCF
+    /// WCF Служба является простым калькулятором
+    /// WCF Служба находиться в библиотеке GettingStartedLib а запускается на хосте GettingStatedHost Консольног оприложения
+    /// По учебнику Microsoft WCF
+    /// Вроде работает
+    /// </summary>
+
+
     class Program
     {
         static void Main(string[] args)

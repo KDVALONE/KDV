@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MonitoringFolderSevice.Logger
+namespace MonitoringFolderSevice.MyLogger
 {
-  
+   
         public static class MyLogger
         {
             private static ILog log = LogManager.GetLogger("MyLogger");

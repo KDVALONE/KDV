@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace ConsServiceTestDELLAFTER.Models
 {
+    //модель чека. Для JSON 
+
     public class Cheque
     {
         public Guid Id { get; set; }

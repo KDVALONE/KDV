@@ -16,9 +16,11 @@ namespace ConsServiceTestDELLAFTER
 {
 
     /// <summary>
-    /// Удалить потом, консолька, так как писать тесты было влом, 
+    /// РАБОТАЕТ.
+    /// Консольное приложение, так как писать тесты было влом, 
     /// нужно для тестов службы для задания в  MANZANA GROUP 
     /// делает считвание JSON 
+    /// подключил сторонюю библиотеку LOG4NET для логироования. 
     /// </summary>
     class Program
     {
@@ -28,10 +30,13 @@ namespace ConsServiceTestDELLAFTER
 
 
             MyLogger.InitLogger();//инициализация - требуется один раз в начале
-            MyLogger.Log.Info("Ура заработало!");
-            MyLogger.Log.Error("Ошибочка вышла!");
+            MyLogger.Log.Info("Ура заработало!");// - пример для логирования простых действий
+            MyLogger.Log.Error("Ошибочка вышла!");// - пример для логирования при ошибке
 
             WatcherFolder watcherFolder = new WatcherFolder();
+            Console.WriteLine("Начало работы приложения мониторинга папки. \n" +
+                $"Переместите в папку {ConfigurationManager.AppSettings.Get("InputFolder")} файл формата json соттветсующий модели Cheqe" +
+                $" для его десериализации, \nили любой другой для для отражения логирования");// Удалить, это просто чтоб консолька не была пустой в начале
             watcherFolder.Start();
 
         }
@@ -76,6 +81,36 @@ namespace ConsServiceTestDELLAFTER
             enabled = false;
         }
 
+
+        // создание файлов 
+        //Использую как основную логику для отладки.
+        private void Watcher_Created(object sender, FileSystemEventArgs e)
+        {
+             // При создании файла
+            string fileEvent = "создан";
+            string filePath = e.FullPath;
+            RecordEntry(fileEvent, filePath);
+
+
+            //попытка считать json
+            var val = ReadJsonFile(filePath);
+
+            //если файл не был json (вернул null) вывести в лог , и на экран, для тестовой налглядности
+
+            if (val != null)
+            {
+                client.SaveCheque(val);
+            }
+            else {
+                MyLogger.Log.Info($"Файл {filePath} не формата json");
+                Console.WriteLine($"Файл {filePath} не формата json");
+            }
+            Debugger.Break();
+
+        }
+
+
+
         // переименование файлов
         private void Watcher_Renamed(object sender, RenamedEventArgs e)
         {
@@ -90,18 +125,7 @@ namespace ConsServiceTestDELLAFTER
             string filePath = e.FullPath;
             RecordEntry(fileEvent, filePath);
         }
-        // создание файлов
-        private void Watcher_Created(object sender, FileSystemEventArgs e)
-        {
-            string fileEvent = "создан";
-            string filePath = e.FullPath;
-            RecordEntry(fileEvent, filePath);
-
-            var val = ReadJsonFile(filePath);
-            client.SaveCheque(val);
-            Debugger.Break();
-
-        }
+       
         // удаление файлов
         private void Watcher_Deleted(object sender, FileSystemEventArgs e)
         {
@@ -135,6 +159,7 @@ namespace ConsServiceTestDELLAFTER
        private static ServiceReference1.Cheque ReadJsonFile(string filePath)
         {
             String json;
+            ServiceReference1.Cheque deserializedFile;
             using (StreamReader reader = File.OpenText(filePath))
             {
                 //TODO: залогировать этот момент, возможно добавить прекращение по токену, если за N-времени не прочтется файл
@@ -145,10 +170,19 @@ namespace ConsServiceTestDELLAFTER
 
             }
 
-           
+
             //TODO: декомпозировать, вообще разделить метод на 2, чтение файла и десериалиазацию,+ TRY catch и лог 
-            var deserializedFile = JsonConvert.DeserializeObject<ServiceReference1.Cheque>(json);
-             return deserializedFile;
+            try
+            {
+                deserializedFile = JsonConvert.DeserializeObject<ServiceReference1.Cheque>(json);
+                return deserializedFile; ;
+            }
+            catch (Exception ex)
+            {
+                MyLogger.Log.Error($"Ошибка {ex}!");
+                return null;
+            }
+          
         }
     }
 }

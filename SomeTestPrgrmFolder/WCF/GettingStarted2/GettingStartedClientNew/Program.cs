@@ -10,6 +10,12 @@ namespace GettingStartedClientNew
 {
     class Program
     {
+
+        /// <summary>
+        /// Клиент Хост и служба для WCF службы, для  работы с DUPPERом и БД
+        /// РАБОТАЕТ, запускать от АДМИНА
+        /// </summary>
+        /// <param name="args"></param>
         static void Main(string[] args)
         {
 

@@ -9,7 +9,7 @@ using System.Threading;
 using MonitoringFolderSevice.Models;
 using Newtonsoft.Json;
 using System.Configuration;
-using MonitoringFolderSevice.Logger;
+using MonitoringFolderSevice.MyLogger;
 
 namespace MonitoringFolderSevice
 {
