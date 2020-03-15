@@ -7,15 +7,6 @@ using System.Threading.Tasks;
 
 namespace GettingStartedClient
 {
-    /// <summary>
-    /// Устаревший клиент, для WCF службы калькулятора.
-    /// Не используется тут. Просто валяется как шпора
-    /// отчасти делал как тут
-    /// https://docs.microsoft.com/ru-ru/dotnet/framework/wcf/getting-started-tutorial
-    /// </summary>
-
-    //даже как устаревшим его пометил =)
-    [Obsolete("В данном решении данный класс  и клиент не должен использоваться! он тут просто как рудимент- шпора!")]  
     class Program
     {
         static void Main(string[] args)

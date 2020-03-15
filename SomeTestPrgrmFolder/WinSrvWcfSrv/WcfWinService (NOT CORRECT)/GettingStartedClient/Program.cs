@@ -10,8 +10,6 @@ namespace GettingStartedClient
     /// <summary>
     /// Устаревший клиент, для WCF службы калькулятора.
     /// Не используется тут. Просто валяется как шпора
-    /// отчасти делал как тут
-    /// https://docs.microsoft.com/ru-ru/dotnet/framework/wcf/getting-started-tutorial
     /// </summary>
 
     //даже как устаревшим его пометил =)

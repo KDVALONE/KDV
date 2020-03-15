@@ -9,12 +9,6 @@ using System.Threading.Tasks;
 
 namespace GettingStartedHost
 {
-
-    /// <summary>
-    /// Хост для Библиотеки службы
-    /// отчасти делал как тут
-    /// https://docs.microsoft.com/ru-ru/dotnet/framework/wcf/getting-started-tutorial
-    /// </summary>
     class Program
     {
         static void Main(string[] args)
