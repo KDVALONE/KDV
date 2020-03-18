@@ -10,7 +10,8 @@ using FolderWatcherService.Logger;
 
 namespace FolderWatcherService
 {
-   public static class InputFolderCleaner
+    //TODO: ПУТИ НУЖНО ОБЬЕДИНЯТЬ ЧЕРЕЗ !!!!  Path.Combine 
+    public static class InputFolderCleaner
     {
         public static void FileToGarbage(string fileFullPath, string fileName)
         {

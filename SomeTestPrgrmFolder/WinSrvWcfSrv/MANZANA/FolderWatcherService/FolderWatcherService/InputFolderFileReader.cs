@@ -12,7 +12,7 @@ namespace FolderWatcherService
     {
             public static WcfEchoServiceReference.Cheque ReadFile(string filePath)
             {
-                //TODO: добавить TRY CATCH
+               
                 string value;
                 using (StreamReader reader = File.OpenText(filePath))
                 {

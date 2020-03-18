@@ -25,7 +25,7 @@ namespace WcfDbEchoServiceHost
             if (_service_host != null) _service_host.Close();
 
             string address_HTTP = "http://localhost:9001/WcfServiceHostService";
-            //TODO: убрать ?
+          
             string address_TCP = "net.tcp://localhost:9002/WcfServiceHostService";
 
             Uri[] address_base = { new Uri(address_HTTP), new Uri(address_TCP) };

@@ -17,7 +17,7 @@ namespace WcfDbEchoLib
 
         public ChequeRepository()
         {
-            //TODO: убрать этот момент
+           
             ConnectionString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
             // ConnectionString = ConfigurationManager.ConnectionStrings["DupperDbConnection"].ConnectionString;
         }

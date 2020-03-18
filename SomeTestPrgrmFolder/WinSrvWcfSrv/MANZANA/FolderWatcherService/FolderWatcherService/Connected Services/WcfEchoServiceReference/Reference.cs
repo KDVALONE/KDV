@@ -127,27 +127,27 @@ namespace FolderWatcherService.WcfEchoServiceReference {
     public interface IChequeServiceContract {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://MyWcfSrvs.ServiceModel.Samples/IChequeServiceContract/SaveCheque", ReplyAction="http://MyWcfSrvs.ServiceModel.Samples/IChequeServiceContract/SaveChequeResponse")]
-        void SaveCheque(FolderWatcherService.WcfEchoServiceReference.Cheque cheque);
+        void SaveCheque(Cheque cheque);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://MyWcfSrvs.ServiceModel.Samples/IChequeServiceContract/SaveCheque", ReplyAction="http://MyWcfSrvs.ServiceModel.Samples/IChequeServiceContract/SaveChequeResponse")]
-        System.Threading.Tasks.Task SaveChequeAsync(FolderWatcherService.WcfEchoServiceReference.Cheque cheque);
+        System.Threading.Tasks.Task SaveChequeAsync(Cheque cheque);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://MyWcfSrvs.ServiceModel.Samples/IChequeServiceContract/GetLastCheques", ReplyAction="http://MyWcfSrvs.ServiceModel.Samples/IChequeServiceContract/GetLastChequesRespon" +
             "se")]
-        FolderWatcherService.WcfEchoServiceReference.Cheque[] GetLastCheques(int lastChequeCount);
+        Cheque[] GetLastCheques(int lastChequeCount);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://MyWcfSrvs.ServiceModel.Samples/IChequeServiceContract/GetLastCheques", ReplyAction="http://MyWcfSrvs.ServiceModel.Samples/IChequeServiceContract/GetLastChequesRespon" +
             "se")]
-        System.Threading.Tasks.Task<FolderWatcherService.WcfEchoServiceReference.Cheque[]> GetLastChequesAsync(int lastChequeCount);
+        System.Threading.Tasks.Task<Cheque[]> GetLastChequesAsync(int lastChequeCount);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IChequeServiceContractChannel : FolderWatcherService.WcfEchoServiceReference.IChequeServiceContract, System.ServiceModel.IClientChannel {
+    public interface IChequeServiceContractChannel : IChequeServiceContract, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class ChequeServiceContractClient : System.ServiceModel.ClientBase<FolderWatcherService.WcfEchoServiceReference.IChequeServiceContract>, FolderWatcherService.WcfEchoServiceReference.IChequeServiceContract {
+    public partial class ChequeServiceContractClient : System.ServiceModel.ClientBase<IChequeServiceContract>, IChequeServiceContract {
         
         public ChequeServiceContractClient() {
         }
@@ -168,19 +168,19 @@ namespace FolderWatcherService.WcfEchoServiceReference {
                 base(binding, remoteAddress) {
         }
         
-        public void SaveCheque(FolderWatcherService.WcfEchoServiceReference.Cheque cheque) {
+        public void SaveCheque(Cheque cheque) {
             base.Channel.SaveCheque(cheque);
         }
         
-        public System.Threading.Tasks.Task SaveChequeAsync(FolderWatcherService.WcfEchoServiceReference.Cheque cheque) {
+        public System.Threading.Tasks.Task SaveChequeAsync(Cheque cheque) {
             return base.Channel.SaveChequeAsync(cheque);
         }
         
-        public FolderWatcherService.WcfEchoServiceReference.Cheque[] GetLastCheques(int lastChequeCount) {
+        public Cheque[] GetLastCheques(int lastChequeCount) {
             return base.Channel.GetLastCheques(lastChequeCount);
         }
         
-        public System.Threading.Tasks.Task<FolderWatcherService.WcfEchoServiceReference.Cheque[]> GetLastChequesAsync(int lastChequeCount) {
+        public System.Threading.Tasks.Task<Cheque[]> GetLastChequesAsync(int lastChequeCount) {
             return base.Channel.GetLastChequesAsync(lastChequeCount);
         }
     }
