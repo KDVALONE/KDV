@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="314e21a4-33e7-418a-8cea-269d2f3e21b3" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:9001/WcfServiceHostService/mex" Protocol="mex" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="MyWcfSrvs.ServiceModel.Samples.wsdl" MetadataType="Wsdl" ID="c482909a-163b-47c0-94ac-74147b1a3fb3" SourceId="1" SourceUrl="http://localhost:9001/WcfServiceHostService/mex" />
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="14929b00-b51e-43cf-b982-b8bf183d1880" SourceId="1" SourceUrl="http://localhost:9001/WcfServiceHostService/mex" />
+    <MetadataFile FileName="MyWcfSrvs.ServiceModel.Samples.xsd" MetadataType="Schema" ID="8efdebb1-f131-483a-bfab-42fee2630857" SourceId="1" SourceUrl="http://localhost:9001/WcfServiceHostService/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="317b31be-9bb9-4c55-bb45-bc86645cad27" SourceId="1" SourceUrl="http://localhost:9001/WcfServiceHostService/mex" />
+    <MetadataFile FileName="WcfDbEchoLib.xsd" MetadataType="Schema" ID="00c03412-be3e-46f1-9fc2-30e03af5f061" SourceId="1" SourceUrl="http://localhost:9001/WcfServiceHostService/mex" />
+    <MetadataFile FileName="Arrays.xsd" MetadataType="Schema" ID="2aea5da0-f87c-4f51-86cc-e3b849dcc15c" SourceId="1" SourceUrl="http://localhost:9001/WcfServiceHostService/mex" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

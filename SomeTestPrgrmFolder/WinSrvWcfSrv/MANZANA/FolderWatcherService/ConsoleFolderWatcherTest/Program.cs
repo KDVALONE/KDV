@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using ConsoleFolderWatcherTest.Logger;
 using log4net;
@@ -35,14 +36,22 @@ namespace ConsoleFolderWatcherTest
 class Program
     {
         static void Main(string[] args)
-        { 
-            Console.WriteLine("START CONSOLE TEST \n");
-           
-           
+        {
+
+
             MyLoggerTest.InitLogger();//инициализация - требуется один раз в начале
-            MyLoggerTest.Log.Info("Ура заработало!");
-            MyLoggerTest.Log.Error("Ошибочка вышла!");
+            MyLoggerTest.Log.Info("START CONSOLE TEST APP ************** ");
+            Console.WriteLine("START CONSOLE TEST APP \n");
+            InputFolderWatcherTest fwTest = new InputFolderWatcherTest();
+            Thread t1 = new Thread(fwTest.Start);
+            t1.Start();
+            Console.WriteLine("FolderWatcherTest Started. Press any key to stop service \n");
             Console.ReadKey();
+            t1.Abort();
+            
+            Console.WriteLine("FolderWatcherTest Stoped");
+            Console.ReadKey();
+
         }
     }
 }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Configuration;
 using System.IO;
 using FolderWatcherService.Logger;
+using System.Diagnostics;
 
 
 namespace FolderWatcherService
@@ -20,12 +21,12 @@ namespace FolderWatcherService
 
             if (ConfigurationManager.AppSettings.Get("GarbageFolder") == "")
             {
-                garbageFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Garbage";
+                garbageFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "\\Garbage");
                 MyLogger.Log.Info($"Path to folder Garbage not set in App.config, path to Garbage folder {garbageFolderPath}");
             }
             else
             {
-                garbageFolderPath = ConfigurationManager.AppSettings.Get("GarbageFolder") + "\\Garbage";
+                garbageFolderPath = Path.Combine(ConfigurationManager.AppSettings.Get("GarbageFolder"), "\\Garbage");
             }
 
             if (!Directory.Exists(garbageFolderPath))
@@ -36,7 +37,7 @@ namespace FolderWatcherService
                     Directory.CreateDirectory(garbageFolderPath);
                     MyLogger.Log.Info($"Directory {garbageFolderPath} created");
                 }
-                catch { MyLogger.Log.Error($"Directory {garbageFolderPath} not created"); }
+                catch { MyLogger.Log.Error($"Directory  {garbageFolderPath} was not created"); }
             }
 
             MoveFile(fileFullPath, Path.Combine(garbageFolderPath, fileName));

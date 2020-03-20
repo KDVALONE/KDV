@@ -1,4 +1,6 @@
-﻿using log4net;
+﻿using ConsoleFolderWatcherTest.Logger;
+using ConsoleFolderWatcherTest.WcfEchoServiceReferenceTest;
+using log4net;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -11,85 +13,93 @@ using System.Threading.Tasks;
 namespace ConsoleFolderWatcherTest
 {
 
-   
+
     class InputFolderWatcherTest
     {
-
-
-
-       //  ChequeServiceContractClient _client = new ChequeServiceContractClient();
+        WcfServiceInteractionTest _wcfInteraction;
         FileSystemWatcher _watcher;
-        bool _enabled = true;
-        int lastChequeCount = 4;
+        bool _enabled;
 
         public InputFolderWatcherTest()
         {
-
-            
-            /*
-            //Путь к папке InputFolder задан явно в App.Config,  F:\\Temp  согласно заданию
-            var inputFolderPath = ConfigurationManager.AppSettings.Get("InputFolder");
-            _watcher = new FileSystemWatcher(inputFolderPath);
+            _enabled = true;
+            _wcfInteraction = new WcfServiceInteractionTest();
+            _watcher = new FileSystemWatcher(GetInputFolderPath());
 
             //  _watcher.Filter = "*.txt"; -- Можно было сделать так, чтоб работать только с .txt
 
-            //MyLogger.Log.Info("Signed to event");
+            MyLoggerTest.Log.Info("Signed to event");
             _watcher.Deleted += Watcher_Deleted;
             _watcher.Created += Watcher_Created;
             _watcher.Changed += Watcher_Changed;
             _watcher.Renamed += Watcher_Renamed;
-            */
+
         }
 
         public void Start()
         {
+
             _watcher.EnableRaisingEvents = true;
 
             while (_enabled)
             {
                 Thread.Sleep(1000);
             }
+            MyLoggerTest.Log.Info("Service Started ");
         }
         public void Stop()
         {
             _watcher.EnableRaisingEvents = false;
             _enabled = false;
+            MyLoggerTest.Log.Info("Service Stoped");
         }
 
-        /*
+
         // создание файлов
         private void Watcher_Created(object sender, FileSystemEventArgs e)
         {
             string fileEvent = "создан";
             string filePath = e.FullPath;
             string fileName = e.Name;
-           // MyLogger.Log.Info($" файл {filePath} был {fileEvent}");
+            MyLoggerTest.Log.Info($" файл {filePath} был {fileEvent}");
 
+            _wcfInteraction.RunInteraction(fileName, filePath);
 
+            #region вывел в отдельыне методы
 
-            if (ValidateFile(fileName))
-            {
+            //if (ValidateFile(fileName))
+            //{
 
-                try
-                {
-                    var deserializedCheque = InputFolderFileReader.ReadFile(filePath);
-                    _client.SaveCheque(deserializedCheque);
-                    InputFolderCleaner.FileToComplete(filePath, fileName);
-                }
-                catch
-                {
-                    InputFolderCleaner.FileToGarbage(filePath, fileName);
-                    MyLogger.Log.Error($"Cant read file {fileName}");
-                }
+            //    try
+            //    {
+            //        WcfEchoServiceReferenceTest.Cheque deserializedCheque = InputFolderFileReaderTest.ReadFile(filePath);
+            //        if (deserializedCheque != null)
+            //        {
+            //            MyLoggerTest.Log.Info($"Deserialization success");
+            //            //_client.SaveCheque(deserializedCheque);
+            //            InputFolderCleanerTest.FileToComplete(filePath, fileName);
+            //        }
+            //        else {
+            //            MyLoggerTest.Log.Info($"Deserialization failure");
+            //            InputFolderCleanerTest.FileToGarbage(filePath, fileName);
+            //        }
 
-                var lastCheque = _client.GetLastCheques(lastChequeCount);
-                WriteLastCheques(lastCheque);
-            }
-            else
-            {
-                InputFolderCleaner.FileToGarbage(filePath, fileName);
-            }
+            //    }
+            //    catch
+            //    {
+            //        MyLoggerTest.Log.Error($"Cant read file {fileName}");
+            //        InputFolderCleanerTest.FileToGarbage(filePath, fileName);
 
+            //    }
+
+            //    //  var lastCheque = _client.GetLastCheques(lastChequeCount);
+            //    //  WriteLastCheques(lastCheque);
+            //}
+            //else
+            //{
+            //    InputFolderCleanerTest.FileToGarbage(filePath, fileName);
+            //}
+            #endregion
         }
         // переименование файлов
         private void Watcher_Renamed(object sender, RenamedEventArgs e)
@@ -97,32 +107,34 @@ namespace ConsoleFolderWatcherTest
             string fileEvent = "переименован в " + e.FullPath;
             string filePath = e.OldFullPath;
             string fileName = e.Name;
-            MyLogger.Log.Info($" файл {filePath} был {fileEvent}");
+            MyLoggerTest.Log.Info($" файл {filePath} был {fileEvent}");
 
+            _wcfInteraction.RunInteraction(fileName, filePath);
+            #region вывел в отдельыне методы
 
-            if (ValidateFile(fileName))
-            {
+            //if (ValidateFile(fileName))
+            //{
 
-                try
-                {
-                    var deserializedCheque = InputFolderFileReader.ReadFile(filePath);
-                    _client.SaveCheque(deserializedCheque);
-                    InputFolderCleaner.FileToComplete(filePath, fileName);
-                }
-                catch
-                {
-                    InputFolderCleaner.FileToGarbage(filePath, fileName);
-                    MyLogger.Log.Error($"Cant read file {fileName}");
-                }
+            //    try
+            //    {
+            //        var deserializedCheque = InputFolderFileReaderTest.ReadFile(filePath);
+            //        //  _client.SaveCheque(deserializedCheque);
+            //        InputFolderCleanerTest.FileToComplete(filePath, fileName);
+            //    }
+            //    catch
+            //    {
+            //        InputFolderCleanerTest.FileToGarbage(filePath, fileName);
+            //        MyLoggerTest.Log.Error($"Cant read file {fileName}");
+            //    }
 
-                var lastCheque = _client.GetLastCheques(lastChequeCount);
-                WriteLastCheques(lastCheque);
-            }
-            else
-            {
-                InputFolderCleaner.FileToGarbage(filePath, fileName);
-            }
-
+            //    //var lastCheque = _client.GetLastCheques(lastChequeCount);
+            //    //WriteLastCheques(lastCheque);
+            //}
+            //else
+            //{
+            //    InputFolderCleanerTest.FileToGarbage(filePath, fileName);
+            //}
+            #endregion 
         }
         // изменение файлов
         private void Watcher_Changed(object sender, FileSystemEventArgs e)
@@ -130,91 +142,58 @@ namespace ConsoleFolderWatcherTest
             string fileEvent = "изменен";
             string filePath = e.FullPath;
             string fileName = e.Name;
-            MyLogger.Log.Info($" файл {filePath} был {fileEvent}");
+            MyLoggerTest.Log.Info($" файл {filePath} был {fileEvent}");
 
-            if (ValidateFile(fileName))
-            {
+            _wcfInteraction.RunInteraction(fileName, filePath);
+            #region В метод убрать
+            //if (ValidateFile(fileName))
+            //{
 
-                try
-                {
-                    var deserializedCheque = InputFolderFileReader.ReadFile(filePath);
-                    _client.SaveCheque(deserializedCheque);
-                    InputFolderCleaner.FileToComplete(filePath, fileName);
-                }
-                catch
-                {
+            //    try
+            //    {
+            //        var deserializedCheque = InputFolderFileReaderTest.ReadFile(filePath);
+            //        // _client.SaveCheque(deserializedCheque);
+            //        InputFolderCleanerTest.FileToComplete(filePath, fileName);
+            //    }
+            //    catch
+            //    {
 
-                    InputFolderCleaner.FileToGarbage(filePath, fileName);
-                    MyLogger.Log.Error($"Cant read file {fileName}");
-                }
+            //        InputFolderCleanerTest.FileToGarbage(filePath, fileName);
+            //        MyLoggerTest.Log.Error($"Cant read file {fileName}");
+            //    }
 
-                var lastCheque = _client.GetLastCheques(lastChequeCount);
-                WriteLastCheques(lastCheque);
-            }
-            else
-            {
-                InputFolderCleaner.FileToGarbage(filePath, fileName);
-            }
-
+            //    // var lastCheque = _client.GetLastCheques(lastChequeCount);
+            //    // WriteLastCheques(lastCheque);
+            //}
+            //else
+            //{
+            //    InputFolderCleanerTest.FileToGarbage(filePath, fileName);
+            //}
+            #endregion
         }
         // удаление файлов
         private void Watcher_Deleted(object sender, FileSystemEventArgs e)
         {
             string fileEvent = "удален";
             string filePath = e.FullPath;
-            MyLogger.Log.Info($" файл {filePath} был {fileEvent}");
+            MyLoggerTest.Log.Info($" файл {filePath} был {fileEvent}");
 
         }
 
-        private bool ValidateFile(string fileName)
+        private string GetInputFolderPath()
         {
-            MyLogger.Log.Info($"Start validate {fileName}");
-
-            bool isValid;
-            isValid = (fileName.Contains(".txt") && (fileName.Substring(fileName.Length - 4, 4)).Contains(".txt")) == true ? true : false;
-            MyLogger.Log.Info($"File {fileName} valid state = {isValid}");
-            return isValid;
+            string inputFolderPath;
+            if (ConfigurationManager.AppSettings.Get("InputFolder") == "")
+            {
+                inputFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"\FolderWatcherServiceTest\Input");
+                MyLoggerTest.Log.Info($"Path to folder Input not set in App.config, path to Input folder {inputFolderPath}");
+            }
+            else
+            {
+                inputFolderPath = Path.Combine(ConfigurationManager.AppSettings.Get("InputFolder"), @"\FolderWatcherServiceTest\Input");
+            }
+            return inputFolderPath;
         }
 
-    */
-
-        /*
-    /// <summary>
-    /// записывает последние чеки в файл. Сделал для наглядности
-    /// </summary>
-    /// <param name="cheques"></param>
-    private void WriteLastCheques(Cheque[] cheques)
-    {
-        string writePath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\LastCheqes.txt";
-
-        foreach (var e in cheques)
-        {
-            try
-            {
-                using (StreamWriter streamWriter = new StreamWriter(writePath, true, System.Text.Encoding.Default))
-                {
-                    StringBuilder articles = new StringBuilder();
-                    foreach (var val in e.Articles) { articles.Append(val + ';'); }
-                    streamWriter.WriteLine($"Id = {e.Id}, Number = {e.Number}, Simm = {e.Summ}, Descount = {e.Discount}, Articles = {e.Articles[0]}, Articles = {articles}");
-                    MyLogger.Log.Info($"Cheqe added to file {writePath}");
-                }
-            }
-            catch (IOException ex)
-            {
-                MyLogger.Log.Error($"Cant write cheques collecttion, IOException {ex}");
-                throw;
-            }
-            catch (Exception ex)
-            {
-                MyLogger.Log.Error($"Cant write cheques collecttion, Exception {ex}");
-                throw;
-            }
-
-        }
-        MyLogger.Log.Info($"LastCheqes added to file {writePath}");
-        Console.ReadKey();
-    }
-
-    */
     }
 }
