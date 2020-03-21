@@ -16,8 +16,7 @@ namespace WcfDbEchoLib
         string ConnectionString { get; }
 
         public ChequeRepository()
-        {
-           
+        {          
             ConnectionString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
             // ConnectionString = ConfigurationManager.ConnectionStrings["DupperDbConnection"].ConnectionString;
         }
@@ -52,7 +51,6 @@ namespace WcfDbEchoLib
                 }
                 return chequesCollection;
             }
-
            
         }
 

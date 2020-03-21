@@ -13,46 +13,46 @@ namespace ConsoleFolderWatcherTest
     class WcfServiceInteractionTest
     {
         ChequeServiceContractClient _client;
-        int _lastChequeCount; 
+        int _lastChequeCount;
 
         public WcfServiceInteractionTest()
         {
             _lastChequeCount = GetLastChequesCount();
             _client = new ChequeServiceContractClient();
         }
-        
+
         public void RunInteraction(string fileName, string filePath)
         {
             SendChequeToWcfServie(fileName, filePath);
-           // AddLastChequesFromWcfServiceToFile(_lastChequeCount); //TODO: ВКЛЮЧИТЬ
+            // AddLastChequesFromWcfServiceToFile(_lastChequeCount); //TODO: ВКЛЮЧИТЬ
         }
         private void SendChequeToWcfServie(string fileName, string filePath)
         {
+
             if (ValidateFile(fileName))
             {
-
                 try
                 {
                     var deserializedCheque = InputFolderFileReaderTest.ReadFile(filePath);
                     _client.SaveCheque(deserializedCheque);
                     InputFolderCleanerTest.FileToComplete(filePath, fileName);
-                    MyLoggerTest.Log.Info($" file {filePath} was sending to WcfService");
+                    MyLoggerTest.Log.Info($"File {filePath} was sending to WcfService");
                 }
                 catch (Exception ex)
                 {
-
                     InputFolderCleanerTest.FileToGarbage(filePath, fileName);
-                    MyLoggerTest.Log.Error($"Cant read file {fileName} {ex}");
+                    MyLoggerTest.Log.Error($"Cant sending file {fileName} to WcfService  {ex}");
                 }
-
             }
             else
             {
                 InputFolderCleanerTest.FileToGarbage(filePath, fileName);
             }
         }
-        private void AddLastChequesFromWcfServiceToFile(int lastChequesCount) 
+        private void AddLastChequesFromWcfServiceToFile(int lastChequesCount)
         {
+            MyLoggerTest.Log.Info($"Start added {lastChequesCount} last cheques from WcfService to file ");
+
             try
             {
                 Cheque[] lastCheques = _client.GetLastCheques(lastChequesCount);
@@ -62,14 +62,13 @@ namespace ConsoleFolderWatcherTest
                 }
                 else
                 {
-
                     MyLoggerTest.Log.Info("WcfService not returned last cheques ");
                 }
 
             }
             catch (Exception ex)
             {
-                MyLoggerTest.Log.Error($"Cant geting last cheques from wcf service {ex}");
+                MyLoggerTest.Log.Error($"Cant getting last cheques from wcf service {ex}");
             }
         }
 
@@ -100,9 +99,6 @@ namespace ConsoleFolderWatcherTest
                 writePath = Path.Combine(ConfigurationManager.AppSettings.Get("SavedChequesFolder"), @"LastCheques.txt");
             }
 
-
-
-
             foreach (var e in cheques)
             {
                 try
@@ -115,14 +111,8 @@ namespace ConsoleFolderWatcherTest
                         MyLoggerTest.Log.Info($"Cheque added to file {writePath}");
                     }
                 }
-                catch (IOException ex)
-                {
-                    MyLoggerTest.Log.Error($"Cant write cheques collecttion, {ex}");
-                }
-                catch (Exception ex)
-                {
-                    MyLoggerTest.Log.Error($"Cant write cheques collecttion, {ex}");
-                }
+                catch (IOException ex) {  MyLoggerTest.Log.Error($"Cant write cheques collecttion, {ex}"); }
+                catch (Exception ex)   {  MyLoggerTest.Log.Error($"Cant write cheques collecttion, {ex}"); }
 
             }
             MyLoggerTest.Log.Info($"LastCheques added to file {writePath}");

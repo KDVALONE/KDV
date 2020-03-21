@@ -6,9 +6,6 @@ using System.Threading.Tasks;
 
 namespace WcfDbEchoLib
 {
-    
-
-
     public class ChequeService : IChequeServiceContract
     {
         private ChequeRepository _reposytory;

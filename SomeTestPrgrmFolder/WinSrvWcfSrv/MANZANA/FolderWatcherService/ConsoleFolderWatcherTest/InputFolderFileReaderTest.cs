@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace ConsoleFolderWatcherTest
 {
-        static class InputFolderFileReaderTest
+    static class InputFolderFileReaderTest
+    {
+        public static WcfEchoServiceReferenceTest.Cheque ReadFile(string filePath)
         {
-            public static WcfEchoServiceReferenceTest.Cheque ReadFile(string filePath)
-            {
             MyLoggerTest.Log.Info($"Start read file:{filePath}");
 
             string value;
@@ -32,6 +32,6 @@ namespace ConsoleFolderWatcherTest
                 return null;
             }
         }
-        }
-    
+    }
+
 }
