@@ -80,10 +80,40 @@ namespace ConsoleFolderWatcherTest
         }
         private static void MoveFile(string currentPath, string destenationFolder, string fileName)
         {
-            DirectoryInfo diSource;
-            DirectoryInfo diDestenation;
-            string fileNameNew = fileName;
+            DirectoryInfo diSource = new DirectoryInfo(currentPath);
+            DirectoryInfo diDestenation = new DirectoryInfo((Path.Combine(destenationFolder, fileName)));
 
+            if (CheckIsFile(diSource))
+            {
+                try
+                {
+                    CopyFile(currentPath,destenationFolder,fileName);
+                    MyLoggerTest.Log.Info($"File {currentPath} copy to {destenationFolder}");
+                    File.Delete(currentPath);
+                    MyLoggerTest.Log.Info($"File {currentPath} deleted");
+                }
+                catch (Exception ex) { MyLoggerTest.Log.Error($"File {currentPath} cant moved to {diDestenation.FullName} {ex}"); }
+            }
+            else {
+
+                try
+                {
+                    CopyDirectory(diSource, diDestenation);
+                    MyLoggerTest.Log.Info($"Directory {currentPath} copy to {destenationFolder}");
+                    Directory.Delete(currentPath, true);
+                    MyLoggerTest.Log.Info($"Directory {currentPath} deleted");
+                }
+                catch (Exception ex) { MyLoggerTest.Log.Error($"Directory {diSource.FullName} cant moved to {diDestenation.FullName} {ex}"); }
+            }
+
+           
+
+
+
+            #region возможно убрать полностью так как есть DirectoryCopy
+            /*
+            string fileNameNew = fileName;
+            
             while (File.Exists(Path.Combine(destenationFolder, fileNameNew)))
             {
                 fileNameNew = fileNameNew.Replace(".", "-copy.");
@@ -123,26 +153,40 @@ namespace ConsoleFolderWatcherTest
                 }
                 catch (Exception ex) { MyLoggerTest.Log.Error($"Directory {currentPath} cant moved to {fullDestenationPath} {ex}"); }
             }
-
+            */
+            #endregion
         }
         private static void CopyDirectory(DirectoryInfo source, DirectoryInfo target)
         {
+
+            MyLoggerTest.Log.Info($"Method CopyDirectory start copy file {source.FullName} to {target.FullName} ");
+       
             if (source.FullName.ToLower() == target.FullName.ToLower())
             {
                 return;
             }
 
+            int copyCount = 1;
+            string createdDirectory = "";
+            
             if (Directory.Exists(target.FullName) == false)
             {
-                Directory.CreateDirectory(target.FullName);
+                createdDirectory = target.FullName;
+                Directory.CreateDirectory(createdDirectory);
             }
-
-            //TODO: вот тут,возможно вставить добавление номера к файлу, если он существует.
-
+            else 
+            {
+                while (Directory.Exists(Path.Combine(target.FullName + copyCount.ToString())) == true)
+                {
+                    copyCount++;
+                }
+                createdDirectory = (Path.Combine(target.FullName + copyCount.ToString()));
+                Directory.CreateDirectory(createdDirectory);
+            }
 
             foreach (FileInfo fi in source.GetFiles())
             {
-              fi.CopyTo(Path.Combine(target.ToString(), fi.Name), true);
+                fi.CopyTo(Path.Combine(createdDirectory,fi.Name ),true);
             }
 
 
@@ -152,6 +196,40 @@ namespace ConsoleFolderWatcherTest
                 DirectoryInfo nextTargetSubDir =
                               target.CreateSubdirectory(diSourceSubDir.Name);
                 CopyDirectory(diSourceSubDir, nextTargetSubDir);
+            }
+        }
+
+        private static bool CheckIsFile(DirectoryInfo item)
+        {
+            return File.Exists(item.FullName) ? true : false;
+            
+        }
+        private static void CopyFile(string currentPath, string destenationPath,string fileName) 
+        {
+            var temp1 = currentPath.ToLower();//TODO Удалить
+            var temp2 = (Path.Combine(destenationPath, fileName)).ToLower(); //TODO Удалить
+
+            //TODO: незакончено
+            if (currentPath.ToLower() == (Path.Combine(destenationPath,fileName)).ToLower())
+            {
+                return;
+            }
+
+            int copyCount = 1;
+
+            if (File.Exists(Path.Combine(destenationPath, fileName)) == false)
+            {
+                File.Copy(currentPath,(Path.Combine(destenationPath, fileName)));
+            }
+            else
+            {
+                while (File.Exists(Path.Combine(destenationPath, (fileName.Replace(".", $"{copyCount}.")))) == true)
+                {
+                    copyCount++;
+                }
+                File.Copy(currentPath, (Path.Combine(destenationPath, (fileName.Replace(".", $"{copyCount}.")))));
+                //TODO: наверное убрать
+               // MyLoggerTest.Log.Info($"File {Path.Combine(destenationPath, fileName) }  existed, added suffix to file {copyCount}");
             }
         }
     }

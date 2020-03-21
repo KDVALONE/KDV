@@ -32,8 +32,11 @@ namespace ConsoleFolderWatcherTest
             MyLoggerTest.Log.Info("Signed to event");
             _watcher.Deleted += Watcher_Deleted;
             _watcher.Created += Watcher_Created;
-            _watcher.Changed += Watcher_Changed;
-            _watcher.Renamed += Watcher_Renamed;
+            //TODO: По факту, нам и не нужно смотреть за изменнением, так как все что не подошло сразу в Garbage
+            // а все что подошло в комплит
+
+            // _watcher.Changed += Watcher_Changed; 
+           // _watcher.Renamed += Watcher_Renamed;
 
         }
 

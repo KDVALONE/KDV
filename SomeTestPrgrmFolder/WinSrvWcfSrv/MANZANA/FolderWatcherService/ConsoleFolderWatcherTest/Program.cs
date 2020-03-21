@@ -44,7 +44,7 @@ class Program
             Thread t1 = new Thread(fwTest.Start);
             t1.Start();
             Console.WriteLine("FolderWatcherTest Started. Press any key to stop service \n");
-            Console.ReadKey();
+            Console.ReadKey();//TODO: Убрать 
             t1.Abort();
             
             Console.WriteLine("FolderWatcherTest Stoped");
