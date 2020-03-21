@@ -14,101 +14,115 @@ namespace ConsoleFolderWatcherTest
         public static void FileToGarbage(string fileFullPath, string fileName)
         {
             MyLoggerTest.Log.Info($"Sending file {fileName} to Grabage folder");
-            string garbageFolderPath;
+            string garbageFolderPath = "";
 
             if (ConfigurationManager.AppSettings.Get("GarbageFolder") == "")
             {
-                garbageFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"\FolderWatcherServiceTest\Garbage");
+                garbageFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), @"\FolderWatcherServiceTest\Garbage");
                 MyLoggerTest.Log.Info($"Path to folder Garbage not set in App.config, path to Garbage folder {garbageFolderPath}");
             }
             else
             {
-                garbageFolderPath = Path.Combine(ConfigurationManager.AppSettings.Get("GarbageFolder"), @"\FolderWatcherServiceTest\Garbage");
+                garbageFolderPath = ConfigurationManager.AppSettings.Get("GarbageFolder");
             }
 
-            if (!Directory.Exists(garbageFolderPath))
-            {
+            DirectoryCheckerTest.CreateDirectoryIfNotExist(garbageFolderPath);
 
-                try
-                {
-                    Directory.CreateDirectory(garbageFolderPath);
-                    MyLoggerTest.Log.Info($"Directory {garbageFolderPath} created");
-                }
-                catch { MyLoggerTest.Log.Error($"Directory  {garbageFolderPath} was not created"); }
-            }
+            //TODO: УБРАТЬ
+            //if (!Directory.Exists(garbageFolderPath))
+            //{
+            //    try
+            //    {
+            //        Directory.CreateDirectory(garbageFolderPath);
+            //        MyLoggerTest.Log.Info($"Directory {garbageFolderPath} created");
+            //    }
+            //    catch { MyLoggerTest.Log.Error($"Directory  {garbageFolderPath} was not created"); }
+            //}
 
-            MoveFile(fileFullPath, Path.Combine(garbageFolderPath, fileName));
+            MoveFile(fileFullPath, garbageFolderPath,fileName);
 
         }
         public static void FileToComplete(string fileFullPath, string fileName)
         {
+            MyLoggerTest.Log.Info($"Sending file {fileName} to Complete folder");
 
-            string completeFolderPath;
+            string completeFolderPath ="";
 
             if (ConfigurationManager.AppSettings.Get("CompleteFolder") == "")
             {
 
-                completeFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"\FolderWatcherServiceTest\Complete");
+                completeFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), @"\FolderWatcherServiceTest\Complete");
                 MyLoggerTest.Log.Info($"Path to folder Complete not set in App.config, path to Complete folder {completeFolderPath}");
             }
             else
             {
-                completeFolderPath = Path.Combine(ConfigurationManager.AppSettings.Get("CompleteFolder"), @"\FolderWatcherServiceTest\Complete");
+                completeFolderPath = ConfigurationManager.AppSettings.Get("CompleteFolder");
             }
 
-            if (!Directory.Exists(completeFolderPath))
-            {
-                try
-                {
-                    Directory.CreateDirectory(completeFolderPath);
-                    MyLoggerTest.Log.Info($"Directory {completeFolderPath} created");
-                }
-                catch
-                {
-                    MyLoggerTest.Log.Error($"Directory { completeFolderPath} cant created");
-                }
+            DirectoryCheckerTest.CreateDirectoryIfNotExist(completeFolderPath);
 
-                MoveFile(fileFullPath, Path.Combine(completeFolderPath, fileName));
+            //TODO:УБРАТЬ
+            //if (!Directory.Exists(completeFolderPath))
+            //{
+            //    try
+            //    {
+            //        Directory.CreateDirectory(completeFolderPath);
+            //        MyLoggerTest.Log.Info($"Directory {completeFolderPath} created");
+            //    }
+            //    catch
+            //    {
+            //        MyLoggerTest.Log.Error($"Directory { completeFolderPath} cant created");
+            //    }
 
-            }
+            //}
+            MoveFile(fileFullPath,completeFolderPath, fileName);
 
         }
-        private static void MoveFile(string currentPath, string destenationPath)
+        private static void MoveFile(string currentPath, string destenationFolder, string fileName)
         {
+            DirectoryInfo diSource;
+            DirectoryInfo diDestenation;
+            string fileNameNew = fileName;
 
-            DirectoryInfo diSource = new DirectoryInfo(currentPath);
-            DirectoryInfo diDestenation = new DirectoryInfo(destenationPath);
+            while (File.Exists(Path.Combine(destenationFolder, fileNameNew)))
+            {
+                fileNameNew = fileNameNew.Replace(".", "-copy.");
+                MyLoggerTest.Log.Info($"File {Path.Combine(destenationFolder, fileNameNew) }  existed, added suffix to file {Path.Combine(destenationFolder, fileNameNew)}");
+            }
+
+            string fullDestenationPath = Path.Combine(destenationFolder, fileNameNew); // TODO: Внимание, путь до файла, пока не проверяется копия ли
 
             if (File.Exists(currentPath))
             {
-
                 try
                 {
-                    File.Copy(currentPath, destenationPath);
-                    //  File.Move(currentPath, destenationPath); TODO:УБРАТЬ
-                    MyLoggerTest.Log.Info($"File {currentPath} cop to {destenationPath}");
+                    File.Copy(currentPath, fullDestenationPath);
+                    MyLoggerTest.Log.Info($"File {currentPath} cop to {fullDestenationPath}");
                 }
-                catch (Exception ex) { MyLoggerTest.Log.Error($"File {currentPath} cant copy to {destenationPath} {ex}"); }
+                catch (Exception ex) { MyLoggerTest.Log.Error($"File {currentPath} cant copy to {fullDestenationPath} {ex}"); }
+               
                 try
                 {
                     File.Delete(currentPath);
-                    //  File.Move(currentPath, destenationPath);
                     MyLoggerTest.Log.Info($"File {currentPath} deleted ");
                 }
                 catch (Exception ex) { MyLoggerTest.Log.Error($"File {currentPath} cant deleted {ex}"); }
-            }else{
+
+            }
+            else
+            {
+                diSource = new DirectoryInfo(currentPath);
+                diDestenation = new DirectoryInfo(fullDestenationPath);
                 try
                 {
                     CopyDirectory(diSource, diDestenation);
-                    MyLoggerTest.Log.Info($"Directory {currentPath} copy to {destenationPath}");
+                    MyLoggerTest.Log.Info($"Directory {currentPath} copy to {fullDestenationPath}");
                     Directory.Delete(currentPath,true);
                     MyLoggerTest.Log.Info($"Directory {currentPath} deleted");
 
                 }
-                catch (Exception ex) { MyLoggerTest.Log.Error($"Directory {currentPath} cant moved to {destenationPath} {ex}"); }
+                catch (Exception ex) { MyLoggerTest.Log.Error($"Directory {currentPath} cant moved to {fullDestenationPath} {ex}"); }
             }
-
-           
 
         }
         private static void CopyDirectory(DirectoryInfo source, DirectoryInfo target)
@@ -117,13 +131,15 @@ namespace ConsoleFolderWatcherTest
             {
                 return;
             }
-            
+
             if (Directory.Exists(target.FullName) == false)
             {
                 Directory.CreateDirectory(target.FullName);
             }
 
-            
+            //TODO: вот тут,возможно вставить добавление номера к файлу, если он существует.
+
+
             foreach (FileInfo fi in source.GetFiles())
             {
               fi.CopyTo(Path.Combine(target.ToString(), fi.Name), true);

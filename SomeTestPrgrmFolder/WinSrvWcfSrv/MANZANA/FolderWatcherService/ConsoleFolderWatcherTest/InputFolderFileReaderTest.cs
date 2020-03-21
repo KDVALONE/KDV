@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 
 namespace ConsoleFolderWatcherTest
 {
-
         static class InputFolderFileReaderTest
         {
             public static WcfEchoServiceReferenceTest.Cheque ReadFile(string filePath)

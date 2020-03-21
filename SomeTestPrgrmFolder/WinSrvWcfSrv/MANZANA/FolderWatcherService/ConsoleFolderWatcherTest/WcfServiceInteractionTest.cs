@@ -24,7 +24,7 @@ namespace ConsoleFolderWatcherTest
         public void RunInteraction(string fileName, string filePath)
         {
             SendChequeToWcfServie(fileName, filePath);
-            AddLastChequesFromWcfServiceToFile(_lastChequeCount);
+           // AddLastChequesFromWcfServiceToFile(_lastChequeCount); //TODO: ВКЛЮЧИТЬ
         }
         private void SendChequeToWcfServie(string fileName, string filePath)
         {
@@ -97,8 +97,11 @@ namespace ConsoleFolderWatcherTest
             }
             else
             {
-                writePath = Path.Combine(ConfigurationManager.AppSettings.Get("SavedChequesFolder"), @"\SavedCheques\LastCheques.txt");
+                writePath = Path.Combine(ConfigurationManager.AppSettings.Get("SavedChequesFolder"), @"LastCheques.txt");
             }
+
+
+
 
             foreach (var e in cheques)
             {
@@ -122,7 +125,7 @@ namespace ConsoleFolderWatcherTest
                 }
 
             }
-            MyLoggerTest.Log.Info($"LastCheqes added to file {writePath}");
+            MyLoggerTest.Log.Info($"LastCheques added to file {writePath}");
         }
         private int GetLastChequesCount()
         {

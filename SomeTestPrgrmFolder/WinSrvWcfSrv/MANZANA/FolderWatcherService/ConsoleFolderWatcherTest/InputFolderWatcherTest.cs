@@ -4,6 +4,7 @@ using log4net;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -182,15 +183,17 @@ namespace ConsoleFolderWatcherTest
 
         private string GetInputFolderPath()
         {
-            string inputFolderPath;
+            string inputFolderPath = "";
+
             if (ConfigurationManager.AppSettings.Get("InputFolder") == "")
             {
-                inputFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"\FolderWatcherServiceTest\Input");
+                inputFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), @"\FolderWatcherServiceTest\Input");
                 MyLoggerTest.Log.Info($"Path to folder Input not set in App.config, path to Input folder {inputFolderPath}");
             }
             else
             {
-                inputFolderPath = Path.Combine(ConfigurationManager.AppSettings.Get("InputFolder"), @"\FolderWatcherServiceTest\Input");
+                inputFolderPath = ConfigurationManager.AppSettings.Get("InputFolder");
+                DirectoryCheckerTest.CreateDirectoryIfNotExist(inputFolderPath);
             }
             return inputFolderPath;
         }

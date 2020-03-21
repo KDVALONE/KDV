@@ -72,6 +72,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="DirectoryCheckerTest.cs" />
     <Compile Include="InputFolderFileReaderTest.cs" />
     <Compile Include="InputFolderCleanerTest.cs" />
     <Compile Include="InputFolderWatcherTest.cs" />

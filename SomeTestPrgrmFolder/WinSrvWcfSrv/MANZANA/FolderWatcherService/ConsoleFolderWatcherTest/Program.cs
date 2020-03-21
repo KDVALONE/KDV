@@ -37,8 +37,6 @@ class Program
     {
         static void Main(string[] args)
         {
-
-
             MyLoggerTest.InitLogger();//инициализация - требуется один раз в начале
             MyLoggerTest.Log.Info("START CONSOLE TEST APP ************** ");
             Console.WriteLine("START CONSOLE TEST APP \n");
