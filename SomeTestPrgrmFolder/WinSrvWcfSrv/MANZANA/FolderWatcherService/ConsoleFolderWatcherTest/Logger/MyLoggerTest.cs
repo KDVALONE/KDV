@@ -25,6 +25,7 @@ namespace ConsoleFolderWatcherTest.Logger
         public static void InitLogger()
         {
             XmlConfigurator.Configure();
+            //TODO:Удалить
             //// TEST проверки пути к логу
             //var fileAppender = LogManager.GetRepository()
             //.GetAppenders().First(appender => appender is RollingFileAppender);

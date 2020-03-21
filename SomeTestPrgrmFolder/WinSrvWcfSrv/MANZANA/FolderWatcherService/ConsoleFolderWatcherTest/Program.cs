@@ -37,6 +37,11 @@ class Program
     {
         static void Main(string[] args)
         {
+            int count = 1;
+            Random rnd = new Random();
+            int[] currentNumbers = Enumerable.Range(0, count - 1).OrderBy(i => rnd.Next()).ToArray();
+
+
             MyLoggerTest.InitLogger();//инициализация - требуется один раз в начале
             MyLoggerTest.Log.Info("START CONSOLE TEST APP ************** ");
             Console.WriteLine("START CONSOLE TEST APP \n");
