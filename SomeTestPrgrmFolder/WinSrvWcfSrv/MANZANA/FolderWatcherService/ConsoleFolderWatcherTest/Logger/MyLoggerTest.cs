@@ -8,6 +8,8 @@ using log4net;
 using log4net.Appender;
 using log4net.Config;
 using System.Diagnostics;
+using System.Configuration;
+using System.IO;
 
 namespace ConsoleFolderWatcherTest.Logger
 {
@@ -24,6 +26,7 @@ namespace ConsoleFolderWatcherTest.Logger
 
         public static void InitLogger()
         {
+            GlobalContext.Properties["LogPath"] = GetLoggerPath();
             XmlConfigurator.Configure();
             //TODO:Удалить
             //// TEST проверки пути к логу
@@ -31,6 +34,19 @@ namespace ConsoleFolderWatcherTest.Logger
             //.GetAppenders().First(appender => appender is RollingFileAppender);
             //Debugger.Break();
         }
+        private static string GetLoggerPath()
+        {
+            string loggerPath = "";
 
+            if (ConfigurationManager.AppSettings.Get("LogFolder") == "")
+            {
+                loggerPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), @"\FolderWatcherServiceTest\Logs");
+            }
+            else
+            {
+                loggerPath = ConfigurationManager.AppSettings.Get("LogFolder");
+            }
+            return loggerPath;
+        }
     }
 }

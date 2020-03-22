@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,18 +14,16 @@ namespace WcfDbEchoLib
         private IChequeRepository _reposytory;
         public ChequeService()
         {
-            //MyLogger.Log.Info($"Use ChequeRepository ");
-            //_reposytory  = new ChequeRepository();
-            MyLogger.Log.Info($"Use FakeChequeRepository ");
-            _reposytory = new FakeChequeRepository();
-        }      
+            MyLogger.Log.Info($"Cheque service initialization");
+            _reposytory = GetRepository();
+        }
 
-        public List<Cheque> GetLastCheques(int lastChequeCount)
+        public List<Cheque> GetChequesPack(int lastChequeCount)
         {
             try
             {
                 MyLogger.Log.Info($"Getting cheques pack");
-                return _reposytory.GetLastCheques(lastChequeCount);  
+                return _reposytory.GetChequesPack(lastChequeCount);
             }
             catch (Exception ex) { MyLogger.Log.Error($"Cant getting Cheques from repository {ex}"); return null; }
         }
@@ -39,6 +38,20 @@ namespace WcfDbEchoLib
             catch (Exception ex) { MyLogger.Log.Error($"Cant saved Cheques to repository {ex}"); }
         }
 
+        private IChequeRepository GetRepository() {
+            
 
+            if (ConfigurationManager.AppSettings.Get("UseFakeRepository") == "1")
+            {
+                MyLogger.Log.Info($"Use FakeChequeRepository ");
+                return new FakeChequeRepository();
+            }
+            else {
+                MyLogger.Log.Info($"Use ChequeRepository ");
+                return  new ChequeRepository();
+            }
+            
+
+        }
     }
 }

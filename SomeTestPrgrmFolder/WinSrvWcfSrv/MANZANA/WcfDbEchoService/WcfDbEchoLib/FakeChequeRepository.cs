@@ -15,22 +15,19 @@ namespace WcfDbEchoLib
             MyLogger.Log.Info($"Initialzie Fake repositroy");
             _cheques = InitializeChequesCollection();
         }
-        //TODO: Переименовать lastChequeCount chequeCount, 
-        // а метод GetLastCheques() в GetChequePack()
-        //не забыть,
-        //после всего этого пересобрать WatcherService c новой ссылкой на этот роект
+
         //метод возвращает коллекцию из N уникальных случайных чеков 
-        public List<Cheque> GetLastCheques(int lastChequeCount)
+        public List<Cheque> GetChequesPack(int packCount)
         {
 
             MyLogger.Log.Info($"Getting cheques Pack");
-            if (lastChequeCount <= 0) { MyLogger.Log.Error($"Getting cheques pack count  <= 0");  return null; };
+            if (packCount <= 0) { MyLogger.Log.Error($"Getting cheques pack count  <= 0");  return null; };
 
             List<Cheque> cequesPack = new List<Cheque>(); 
             Random rnd = new Random();
             int count = 0;
                       
-            count = _cheques.Count <= lastChequeCount ? _cheques.Count : lastChequeCount;           
+            count = _cheques.Count <= packCount ? _cheques.Count : packCount;           
 
             int[] currentNumbers = Enumerable.Range(0, count-1).OrderBy(i => rnd.Next()).ToArray();
 

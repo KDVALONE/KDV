@@ -36,8 +36,13 @@ namespace ConsoleFolderWatcherTest.Tricks
         ---
 
          
+        FINAL!
+        TODO:Ошибка с ссылкой на WCF после моих правок. отдебажить!!!!!!!!
+
          */
 
+
+        
 
 
     }

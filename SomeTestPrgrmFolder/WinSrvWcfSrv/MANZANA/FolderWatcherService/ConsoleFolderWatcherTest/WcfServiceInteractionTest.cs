@@ -17,7 +17,7 @@ namespace ConsoleFolderWatcherTest
 
         public WcfServiceInteractionTest()
         {
-            _lastChequeCount = GetLastChequesCount();
+            _lastChequeCount = GetChequesPackCount();
             _client = new ChequeServiceContractClient();
         }
 
@@ -49,16 +49,16 @@ namespace ConsoleFolderWatcherTest
                 InputFolderCleanerTest.FileToGarbage(filePath, fileName);
             }
         }
-        private void AddLastChequesFromWcfServiceToFile(int lastChequesCount)
+        private void AddLastChequesFromWcfServiceToFile(int packCount)
         {
-            MyLoggerTest.Log.Info($"Start added {lastChequesCount} last cheques from WcfService to file ");
+            MyLoggerTest.Log.Info($"Start added {packCount} last cheques from WcfService to file ");
 
             try
             {
-                Cheque[] lastCheques = _client.GetLastCheques(lastChequesCount);
-                if (lastCheques?.Length > 0)
+                Cheque[] cheques = _client.GetChequesPack(packCount);
+                if (cheques?.Length > 0)
                 {
-                    WriteLastCheques(lastCheques);
+                    WriteCheques(cheques);
                 }
                 else
                 {
@@ -84,7 +84,7 @@ namespace ConsoleFolderWatcherTest
         /// <summary>
         /// записывает последние чеки в файл. Сделал для наглядности
         /// </summary>
-        private void WriteLastCheques(Cheque[] cheques)
+        private void WriteCheques(Cheque[] cheques)
         {
             string writePath;
 
@@ -115,22 +115,22 @@ namespace ConsoleFolderWatcherTest
                 catch (Exception ex)   {  MyLoggerTest.Log.Error($"Cant write cheques collecttion, {ex}"); }
 
             }
-            MyLoggerTest.Log.Info($"LastCheques added to file {writePath}");
+            MyLoggerTest.Log.Info($"Cheques pack added to file {writePath}");
         }
-        private int GetLastChequesCount()
+        private int GetChequesPackCount()
         {
-            int lastChequeCount;
-            if (ConfigurationManager.AppSettings.Get("LastChequesCount") == "")
+            int chequePackCount;
+            if (ConfigurationManager.AppSettings.Get("ChequesPackCount") == "")
             {
-                lastChequeCount = 4;
-                MyLoggerTest.Log.Info($"LastChequesCount not set in App.config, LastChequesCount = {4}");
+                chequePackCount = 4;
+                MyLoggerTest.Log.Info($"Cheques Pack count not set in App.config, LastChequesCount = {4}");
             }
             else
             {
-                lastChequeCount = Convert.ToInt32(ConfigurationManager.AppSettings.Get("LastChequesCount"));
+                chequePackCount = Convert.ToInt32(ConfigurationManager.AppSettings.Get("ChequesPackCount"));
             }
 
-            return lastChequeCount;
+            return chequePackCount;
         }
     }
 }

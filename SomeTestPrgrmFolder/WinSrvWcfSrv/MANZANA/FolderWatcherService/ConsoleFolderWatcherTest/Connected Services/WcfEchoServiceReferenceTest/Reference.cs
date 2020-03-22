@@ -132,13 +132,13 @@ namespace ConsoleFolderWatcherTest.WcfEchoServiceReferenceTest {
         [System.ServiceModel.OperationContractAttribute(Action="http://MyWcfSrvs.ServiceModel.Samples/IChequeServiceContract/SaveCheque", ReplyAction="http://MyWcfSrvs.ServiceModel.Samples/IChequeServiceContract/SaveChequeResponse")]
         System.Threading.Tasks.Task SaveChequeAsync(ConsoleFolderWatcherTest.WcfEchoServiceReferenceTest.Cheque cheque);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://MyWcfSrvs.ServiceModel.Samples/IChequeServiceContract/GetLastCheques", ReplyAction="http://MyWcfSrvs.ServiceModel.Samples/IChequeServiceContract/GetLastChequesRespon" +
+        [System.ServiceModel.OperationContractAttribute(Action="http://MyWcfSrvs.ServiceModel.Samples/IChequeServiceContract/GetChequesPack", ReplyAction="http://MyWcfSrvs.ServiceModel.Samples/IChequeServiceContract/GetChequesPackRespon" +
             "se")]
-        ConsoleFolderWatcherTest.WcfEchoServiceReferenceTest.Cheque[] GetLastCheques(int lastChequeCount);
+        ConsoleFolderWatcherTest.WcfEchoServiceReferenceTest.Cheque[] GetChequesPack(int packCount);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://MyWcfSrvs.ServiceModel.Samples/IChequeServiceContract/GetLastCheques", ReplyAction="http://MyWcfSrvs.ServiceModel.Samples/IChequeServiceContract/GetLastChequesRespon" +
+        [System.ServiceModel.OperationContractAttribute(Action="http://MyWcfSrvs.ServiceModel.Samples/IChequeServiceContract/GetChequesPack", ReplyAction="http://MyWcfSrvs.ServiceModel.Samples/IChequeServiceContract/GetChequesPackRespon" +
             "se")]
-        System.Threading.Tasks.Task<ConsoleFolderWatcherTest.WcfEchoServiceReferenceTest.Cheque[]> GetLastChequesAsync(int lastChequeCount);
+        System.Threading.Tasks.Task<ConsoleFolderWatcherTest.WcfEchoServiceReferenceTest.Cheque[]> GetChequesPackAsync(int packCount);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -176,12 +176,12 @@ namespace ConsoleFolderWatcherTest.WcfEchoServiceReferenceTest {
             return base.Channel.SaveChequeAsync(cheque);
         }
         
-        public ConsoleFolderWatcherTest.WcfEchoServiceReferenceTest.Cheque[] GetLastCheques(int lastChequeCount) {
-            return base.Channel.GetLastCheques(lastChequeCount);
+        public ConsoleFolderWatcherTest.WcfEchoServiceReferenceTest.Cheque[] GetChequesPack(int packCount) {
+            return base.Channel.GetChequesPack(packCount);
         }
         
-        public System.Threading.Tasks.Task<ConsoleFolderWatcherTest.WcfEchoServiceReferenceTest.Cheque[]> GetLastChequesAsync(int lastChequeCount) {
-            return base.Channel.GetLastChequesAsync(lastChequeCount);
+        public System.Threading.Tasks.Task<ConsoleFolderWatcherTest.WcfEchoServiceReferenceTest.Cheque[]> GetChequesPackAsync(int packCount) {
+            return base.Channel.GetChequesPackAsync(packCount);
         }
     }
 }
