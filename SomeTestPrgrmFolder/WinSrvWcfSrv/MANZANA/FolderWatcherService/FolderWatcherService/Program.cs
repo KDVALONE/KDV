@@ -16,9 +16,7 @@ namespace FolderWatcherService
         /// </summary>
         static void Main()
         {
-            MyLogger.InitLogger();
-            MyLogger.Log.Info("logger initialization");
-            MyLogger.Log.Error($"ERROR TEST");//TODO: УБРАТЬ И ИЗМЕНИТЬ APP.Config
+            MyLogger.InitLogger(); 
             
             ServiceBase[] ServicesToRun;
             ServicesToRun = new ServiceBase[]
@@ -28,7 +26,7 @@ namespace FolderWatcherService
             try
             {
                 ServiceBase.Run(ServicesToRun);
-                MyLogger.Log.Info("Start FolderWatcherService Service");
+                MyLogger.Log.Info("Start FolderWatcherService Service ********************* ");
             }
             catch (Exception ex)
             {

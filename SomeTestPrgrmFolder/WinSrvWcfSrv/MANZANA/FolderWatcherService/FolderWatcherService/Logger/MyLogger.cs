@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -11,11 +12,10 @@ using log4net.Config;
 
 namespace FolderWatcherService.Logger
 {
-   
-    public static class MyLogger
-    { 
-        // Фаил логов службы находиться в ProgramData\FolderWatcherSerivece\Log\Executing.log
-      
+
+    class MyLogger
+    {
+
         private static ILog log = LogManager.GetLogger("MyLogger");
 
 
@@ -26,7 +26,24 @@ namespace FolderWatcherService.Logger
 
         public static void InitLogger()
         {
+            MyLogger.Log.Info("Logger initialization");
+            GlobalContext.Properties["LogPath"] = GetLoggerPath();
             XmlConfigurator.Configure();
+        }
+        private static string GetLoggerPath()
+        {
+            string loggerPath = "";
+
+            if (ConfigurationManager.AppSettings.Get("LogFolder") == "")
+            {
+                loggerPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), @"\FolderWatcherService\Logs");
+            }
+            else
+            {
+                loggerPath = ConfigurationManager.AppSettings.Get("LogFolder");
+            }
+
+            return loggerPath;
         }
     }
 }

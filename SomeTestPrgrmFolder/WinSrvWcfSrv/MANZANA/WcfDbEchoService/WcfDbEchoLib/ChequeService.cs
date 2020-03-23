@@ -14,7 +14,6 @@ namespace WcfDbEchoLib
         static private IChequeRepository _reposytory;
          static ChequeService()
         {
-            //TODO: Сделал Статический конструктор
             _reposytory = GetRepository();
         }
         public ChequeService()
@@ -27,7 +26,6 @@ namespace WcfDbEchoLib
         {
             try
             {
-                MyLogger.Log.Info($"Getting cheques pack");
                 return _reposytory.GetChequesPack(lastChequeCount);
             }
             catch (Exception ex) { MyLogger.Log.Error($"Cant getting Cheques from repository {ex}"); return null; }
