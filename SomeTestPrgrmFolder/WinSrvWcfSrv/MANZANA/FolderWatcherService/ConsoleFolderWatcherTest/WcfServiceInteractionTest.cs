@@ -23,8 +23,8 @@ namespace ConsoleFolderWatcherTest
 
         public void RunInteraction(string fileName, string filePath)
         {
-            SendChequeToWcfServie(fileName, filePath);
-            // AddLastChequesFromWcfServiceToFile(_lastChequeCount); //TODO: ВКЛЮЧИТЬ
+             SendChequeToWcfServie(fileName, filePath);
+             AddLastChequesFromWcfServiceToFile(_lastChequeCount); 
         }
         private void SendChequeToWcfServie(string fileName, string filePath)
         {
@@ -34,9 +34,13 @@ namespace ConsoleFolderWatcherTest
                 try
                 {
                     var deserializedCheque = InputFolderFileReaderTest.ReadFile(filePath);
-                    _client.SaveCheque(deserializedCheque);
-                    InputFolderCleanerTest.FileToComplete(filePath, fileName);
-                    MyLoggerTest.Log.Info($"File {filePath} was sending to WcfService");
+                    if (deserializedCheque != null)
+                    {
+                        _client.SaveCheque(deserializedCheque);
+                        InputFolderCleanerTest.FileToComplete(filePath, fileName);
+                        MyLoggerTest.Log.Info($"File {filePath} was sending to WcfService");
+                    }
+                    else { InputFolderCleanerTest.FileToGarbage(filePath, fileName); }
                 }
                 catch (Exception ex)
                 {
@@ -103,11 +107,13 @@ namespace ConsoleFolderWatcherTest
             {
                 try
                 {
+                    DirectoryCheckerTest.CreateDirectoryIfNotExist(ConfigurationManager.AppSettings.Get("SavedChequesFolder"));
+
                     using (StreamWriter streamWriter = new StreamWriter(writePath, true, System.Text.Encoding.Default))
                     {
                         StringBuilder articles = new StringBuilder();
                         foreach (var val in e.Articles) { articles.Append(val + ';'); }
-                        streamWriter.WriteLine($"Id = {e.Id}, Number = {e.Number}, Simm = {e.Summ}, Descount = {e.Discount}, Articles = {e.Articles[0]}, Articles = {articles}");
+                        streamWriter.WriteLine($"Id = {e.Id}, Number = {e.Number}, Simm = {e.Summ}, Descount = {e.Discount},  Articles = {articles}");
                         MyLoggerTest.Log.Info($"Cheque added to file {writePath}");
                     }
                 }

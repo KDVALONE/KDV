@@ -23,6 +23,8 @@ namespace ConsoleFolderWatcherTest
                     value = reader.ReadToEnd();
                 }
 
+                if (value == "") { MyLoggerTest.Log.Info($"File {filePath} is empty"); return null; }
+
                 var deserializedFile = JsonConvert.DeserializeObject<WcfEchoServiceReferenceTest.Cheque>(value);
                 return deserializedFile;
             }

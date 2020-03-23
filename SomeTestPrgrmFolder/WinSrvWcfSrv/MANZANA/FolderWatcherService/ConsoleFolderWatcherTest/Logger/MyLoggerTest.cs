@@ -29,9 +29,14 @@ namespace ConsoleFolderWatcherTest.Logger
             GlobalContext.Properties["LogPath"] = GetLoggerPath();
             XmlConfigurator.Configure();
             //TODO:Удалить
-            //// TEST проверки пути к логу
+            // TEST проверки пути к логу
+            // обязательно Добавить type = log4net.Util.PatternStringв элемент File в app.config
+            // <File type="log4net.Util.PatternString" value="App_Data/%property{LogName}" />
+            //TEST проверки пути к логу
             //var fileAppender = LogManager.GetRepository()
             //.GetAppenders().First(appender => appender is RollingFileAppender);
+            //var pathToLogger = ((log4net.Appender.FileAppender)fileAppender).File;
+            //Console.WriteLine($"{pathToLogger}");
             //Debugger.Break();
         }
         private static string GetLoggerPath()
@@ -46,6 +51,7 @@ namespace ConsoleFolderWatcherTest.Logger
             {
                 loggerPath = ConfigurationManager.AppSettings.Get("LogFolder");
             }
+
             return loggerPath;
         }
     }

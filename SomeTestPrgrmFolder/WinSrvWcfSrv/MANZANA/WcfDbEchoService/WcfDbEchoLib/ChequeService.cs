@@ -11,11 +11,16 @@ namespace WcfDbEchoLib
 {
     public class ChequeService : IChequeServiceContract
     {
-        private IChequeRepository _reposytory;
+        static private IChequeRepository _reposytory;
+         static ChequeService()
+        {
+            //TODO: Сделал Статический конструктор
+            _reposytory = GetRepository();
+        }
         public ChequeService()
         {
-            MyLogger.Log.Info($"Cheque service initialization");
-            _reposytory = GetRepository();
+            MyLogger.InitLogger();
+            MyLogger.Log.Info($"Cheque service initialization");  
         }
 
         public List<Cheque> GetChequesPack(int lastChequeCount)
@@ -38,7 +43,7 @@ namespace WcfDbEchoLib
             catch (Exception ex) { MyLogger.Log.Error($"Cant saved Cheques to repository {ex}"); }
         }
 
-        private IChequeRepository GetRepository() {
+        private static IChequeRepository GetRepository() {
             
 
             if (ConfigurationManager.AppSettings.Get("UseFakeRepository") == "1")
