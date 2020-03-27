@@ -24,7 +24,7 @@ namespace FolderWatcherService
         public void RunInteraction(string fileName, string filePath)
         {
             SendChequeToWcfServie(fileName, filePath);
-            AddLastChequesFromWcfServiceToFile(_lastChequeCount);
+            AddLastChequesFromWcfServiceToFile(_lastChequeCount); 
         }
         private void SendChequeToWcfServie(string fileName, string filePath)
         {
@@ -36,7 +36,7 @@ namespace FolderWatcherService
                     var deserializedCheque = InputFolderFileReader.ReadFile(filePath);
                     if (deserializedCheque != null)
                     {
-                        _client.SaveCheque(deserializedCheque);
+                        _client.SaveCheque(deserializedCheque); 
                         InputFolderCleanerTest.FileToComplete(filePath, fileName);
                         MyLogger.Log.Info($"File {filePath} was sending to WcfService");
                     }
