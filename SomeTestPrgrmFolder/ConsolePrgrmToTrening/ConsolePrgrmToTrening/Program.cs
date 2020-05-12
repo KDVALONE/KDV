@@ -5,13 +5,17 @@ using System.Diagnostics;
 using System.Text;
 using System.Configuration;
 using System.IO;
+using System.Runtime.InteropServices;
 using static System.Linq.Enumerable;
 
 public class Program
 {
     public static void Main()
     {
-           
+        A val = new B();
+        Console.WriteLine(val.Foo());
+        Console.ReadKey();
+
     }
  
 
@@ -19,13 +23,20 @@ public class Program
 }
 
 
-public class MyClassEvent
+public class A
 {
-    public bool Enable { get; set; }
+    public virtual int Foo()
+    {
+        return 1;
+    }
+}
 
-    public void ChangeProperty() { Enable = true; }
-
-
+public class B :A
+{
+    public override int Foo()
+    {
+        return 2;
+    }
 }
 
 #region Old Program
