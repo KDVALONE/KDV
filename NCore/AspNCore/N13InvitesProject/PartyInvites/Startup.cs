@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using PartyInvites.Model;
 
 namespace PartyInvites
 {
@@ -16,6 +17,8 @@ namespace PartyInvites
         
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<IRepository,EFRepository>();
+            services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -25,8 +28,12 @@ namespace PartyInvites
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseStatusCodePages();
+            app.UseStaticFiles();
+            app.UseMvcWithDefaultRoute();
 
-            app.UseRouting();
+
+          /*  app.UseRouting();
 
             app.UseEndpoints(endpoints =>
             {
@@ -35,6 +42,8 @@ namespace PartyInvites
                     await context.Response.WriteAsync("Hello World!");
                 });
             });
+        */
         }
+        
     }
 }
