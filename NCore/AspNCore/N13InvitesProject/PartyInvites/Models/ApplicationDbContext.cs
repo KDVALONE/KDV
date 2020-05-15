@@ -6,7 +6,7 @@ namespace PartyInvites.Model
         public ApplicationDbContext() {}
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {
-           builder.UseSqlite("Filename=./PartyInvites.db");
+           builder.UseSqlite("Filename=./PartyInvites.db"); //Available here
         }
         
         public DbSet<GuestResponse> Invites {get;set;}
