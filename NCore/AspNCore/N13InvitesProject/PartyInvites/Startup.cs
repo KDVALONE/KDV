@@ -22,35 +22,23 @@ namespace PartyInvites
         /// 5 далее dotnet add package Microsoft.EntityFrameworkCore.Sqlite --version 3.1.4
         /// 6 далее dotnet restore 
         /// 7 dotnet ef migrations add Initial
+        /// 8 dotnet ef database update
      
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<IRepository,EFRepository>();
-            services.AddMvc();
+            // services.AddMvc(); //- так было в книжке, но для того чтоб заработало нужно как ниже
+            services.AddMvc(option => option.EnableEndpointRouting = false);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
+            app.UseDeveloperExceptionPage();
             app.UseStatusCodePages();
             app.UseStaticFiles();
             app.UseMvcWithDefaultRoute();
 
-
-          /*  app.UseRouting();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Hello World!");
-                });
-            });
-        */
         }
         
     }
