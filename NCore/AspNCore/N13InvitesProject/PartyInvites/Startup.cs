@@ -27,16 +27,17 @@ namespace PartyInvites
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<IRepository,EFRepository>();
-            // services.AddMvc(); //- так было в книжке, но для того чтоб заработало нужно как ниже
+            //  services.AddMvc(); //- так было в книжке, но для того чтоб заработало нужно как ниже
             services.AddMvc(option => option.EnableEndpointRouting = false);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseStaticFiles();
             app.UseDeveloperExceptionPage();
             app.UseStatusCodePages();
-            app.UseStaticFiles();
+            
             app.UseMvcWithDefaultRoute();
 
         }

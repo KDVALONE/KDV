@@ -19,7 +19,7 @@ public class HomeController : Controller {
         public ViewResult RsvpForm() => View();
 
         [HttpPost]
-        public ViewResult ResvpForm(GuestResponse guestResponse)
+        public ViewResult RsvpForm(GuestResponse guestResponse)
         {
             if (ModelState.IsValid){
                 repository.AddResponse(guestResponse);
@@ -30,7 +30,7 @@ public class HomeController : Controller {
                 }
         }
 
-        public ViewResult ListResponse() =>
+        public ViewResult ListResponses() =>
          View(repository.Responses.Where(r => r.WillAttend == true));
         }
 
