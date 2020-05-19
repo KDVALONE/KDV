@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using N14ConfiguringApps.Infrastracture;
 
 namespace N14ConfiguringApps
 {
@@ -18,6 +19,7 @@ namespace N14ConfiguringApps
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<UptimeService>();
             services.AddMvc(option => option.EnableEndpointRouting = false);
 
         }
@@ -26,6 +28,7 @@ namespace N14ConfiguringApps
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseMvcWithDefaultRoute();
+            app.UseMiddleware<ContentMiddleware>();
         }
     }
 }
