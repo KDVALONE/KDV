@@ -8,81 +8,45 @@ using System.IO;
 using System.Runtime.InteropServices;
 using static System.Linq.Enumerable;
 
+
 public class Program
 {
     public static void Main()
     {
-        A val = new B();
-        Console.WriteLine(val.Foo());
+        Method();
+    }
+
+
+    public  static void Method()
+    {
+        bool flag = false;
+        Console.WriteLine($"start flag = @{flag}");
+        int count = 0;
+        while (!flag )
+        {
+            Console.WriteLine(flag);
+            if (count == 5) { flag = true; }
+            count++;
+        }
+        Console.WriteLine($"final flag = @{flag}");
         Console.ReadKey();
-
     }
- 
-
-
-}
-
-
-public class A
-{
-    public virtual int Foo()
+    static IEnumerable<TreeNode1> GetChildren(TreeNode1 root)
     {
-        return 1;
+        foreach (TreeNode1 childNode in root.Children)
+        {
+            yield return childNode;
+            foreach (TreeNode1 node in GetChildren(childNode))
+            {
+                yield return node;
+            }
+        }
     }
-}
 
-public class B :A
+}
+class TreeNode1
 {
-    public override int Foo()
-    {
-        return 2;
-    }
+    public IEnumerable<TreeNode1> Children { get; }
 }
 
-#region Old Program
-//public class OLdProgram
-//{
-//    public static OldMain()
-//    {
-//        string path = "F:\\Garbage";
-//        if (!Directory.Exists(path))
-//        {
-//            Console.WriteLine("Directory not found");
-//            Console.ReadKey();
-//            Directory.CreateDirectory(path);
-//            Console.ReadKey();
-//            Console.WriteLine("Directory created");
-//        }
-//        else
-//        {
-//            Console.WriteLine("Directory is existed");
-//            Console.ReadKey();
-//        }
 
-//        //var a = ConfigurationManager.AppSettings.Get("TestFolder1");
-//        //var b = ConfigurationManager.AppSettings.Get("TestFolder2");
-//        //if (ConfigurationManager.AppSettings.Get("TestFolder1") == "") { Console.WriteLine("TestFolder1 is null"); }
-//        //if (ConfigurationManager.AppSettings.Get("TestFolder2") == null) { Console.WriteLine("TestFolder2 is null"); }
-
-//        Console.ReadKey();
-
-//        Console.WriteLine("GetFileName");
-
-//        string fileName = Path.GetFileName(path);
-//        Console.WriteLine(fileName);
-//        Console.ReadKey();
-//        var destFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-//        string fName = "NTD.txt";
-
-//        string suffix = fName.Substring(fName.Length - 4, 4);
-
-//        var appStorageFolder = Path.Combine(destFolder, fName);
-
-//        var oldFile = path + "\\" + fName;
-//        Console.WriteLine();
-//        //        var fullPath = Path.Combine(appStorageFolder, relativePath);
-//        System.IO.File.Move(oldFile, appStorageFolder);
-//        Console.ReadKey();
-//    }
-//}
-#endregion

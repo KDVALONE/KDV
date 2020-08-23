@@ -1,0 +1,55 @@
+
+use master
+
+CREATE DATABASE JOIN_TRENING
+
+
+USE JOIN_TRENING 
+
+
+CREATE TABLE Table1
+(
+	ID INT IDENTITY(101,1) PRIMARY KEY,
+	ValueT1 NVARCHAR(30) NOT NULL
+);
+CREATE TABLE Table2
+(
+	ID INT IDENTITY(201,1) PRIMARY KEY,
+	ValueT2 NVARCHAR (30) NOT NULL
+);
+CREATE TABLE Table3
+(
+    ID INT IDENTITY(301,1) PRIMARY KEY,
+	ValueT3 NVARCHAR(30) NOT NULL
+);
+
+INSERT INTO Table1
+VALUES
+('A1'),
+('B1'),
+('C1'),
+('D1'),
+('E1'),
+('F1')
+GO
+
+INSERT INTO Table2
+VALUES
+('A2'),
+('B2'),
+('C2'),
+('D2'),
+('E2'),
+('F2')
+GO
+
+
+INSERT INTO Table3
+VALUES
+('A'),
+('B'),
+('C'),
+('D'),
+('E'),
+('F')
+GO
