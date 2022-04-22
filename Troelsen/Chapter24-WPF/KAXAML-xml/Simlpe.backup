@@ -1,0 +1,29 @@
+<Page
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:CorLib="clr-namespace:System;assembly=mscorlib">
+  <StackPanel>
+   <!-->Расширение разметки Static позволяет получать значение статического члена класа</-->
+    <Label Content="{x:Static CorLib:Environment.OSVersion}"/>
+    <Label Content="{x:Static CorLib:Environment.ProcessorCount}"/>
+    
+    <!--Расширение разметки Type - это тоже что и typeof только для XAML" -->
+    <Label Content="{x:Type Button}"/>
+    <Label Content="{x:Type CorLib:Boolean}"/>
+    <!-- Наполнение элемента LISTBOX  массивом строк-->
+    <ListBox Width="200" Height="50">
+      <ListBox.ItemsSource>
+        <x:Array Type="CorLib:String">
+          <CorLib:String>Sun Kil Moon</CorLib:String>
+          <CorLib:String>Red House Painters</CorLib:String>
+          <CorLib:String>Besnard Lakes</CorLib:String>
+        </x:Array>
+      </ListBox.ItemsSource>
+      </ListBox>
+      <!--Квадрат с кругом -->
+      <Canvas Height="200" Width="200" Background="LightBlue">
+      <Ellipse Canvas.Top="40" Canvas.Left="40" Height="20" Width="20" Fill="DarkBlue"/>
+    </Canvas>
+   
+  </StackPanel>
+</Page>

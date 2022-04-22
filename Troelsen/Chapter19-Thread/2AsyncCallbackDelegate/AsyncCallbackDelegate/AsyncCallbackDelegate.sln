@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2026
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsyncCallbackDelegate", "AsyncCallbackDelegate\AsyncCallbackDelegate.csproj", "{C676CF21-6462-4AD6-AA79-0C42D8EE4155}"
+EndProject
+Global
+	GlobalSection(Performance) = preSolution
+		HasPerformanceSessions = true
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C676CF21-6462-4AD6-AA79-0C42D8EE4155}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C676CF21-6462-4AD6-AA79-0C42D8EE4155}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C676CF21-6462-4AD6-AA79-0C42D8EE4155}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C676CF21-6462-4AD6-AA79-0C42D8EE4155}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6BA03ACC-32B6-4B90-A76A-0E7A32B7D865}
+	EndGlobalSection
+EndGlobal

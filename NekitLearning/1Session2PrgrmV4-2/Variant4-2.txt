@@ -1,0 +1,70 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace SThreangle
+{
+    //вычислить площадь треугольника по заданным сторонам.
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            double a, b, c;
+            do
+            {
+                Console.WriteLine("Введите стороны треугольника");
+                GetSides(out a, 'a');
+                GetSides(out b, 'b');
+                GetSides(out c, 'c');
+
+                if (IsDegenerateTriangle(a, b, c) == true) //вырожденный ли треугольник? 
+                {
+                    Console.WriteLine("Треугольник вырожденный, сумма длин двух его сторон должна быть больше третей стороны");
+                    Console.WriteLine("Введите значения еще раз");
+                }
+            } while (IsDegenerateTriangle(a, b, c) == true);
+
+            Console.WriteLine($"площадь треугольника равна S = {GetTriangleS(a, b, c)}");
+            Console.ReadKey();
+        }
+        public static bool IsDegenerateTriangle(double a, double b, double c) // вырожденный ли треугольник, сумма длин двух его сторон должан быть больше третей
+        {
+            if ((a + b > c)) { return false; } else { return true; }
+        }
+
+        public static double GetSides(out double side, char sideName) // задать значения сторонам треугольника
+        {
+            bool isValueEntered;
+            do
+            {
+
+                Console.WriteLine($"Введите сторону {sideName}= ");
+                string enteredValue = Console.ReadLine();
+                if (Double.TryParse(enteredValue, out side))
+                {   // проверка, можем ли мы привести int к string  (прочти про ref,out)
+                    side = Convert.ToDouble(enteredValue);
+                    isValueEntered = true;
+                }
+                else
+                {
+                    Console.WriteLine("Вы ввели некорректный символ,(дроби вводяться через запятаю 4,05) попробуйте снова");//если вводить тип double то нужно через запятую 4,05  
+                    isValueEntered = false;
+                }
+            } while (isValueEntered==false);
+
+            return side;
+
+        }
+        public static double GetTriangleS(double a, double b, double c)
+        {
+            //Площадь тругольника по формуле Герона равна корню из произведения разностей
+            //полупериметра треугольника (p) и каждой из его сторон (a, b, c):
+            double p = 0.5 * (a + b + c);
+            double s = Math.Sqrt(p * (p - a) * (p - b) * (p - c));
+            return s;
+        }
+    }
+}

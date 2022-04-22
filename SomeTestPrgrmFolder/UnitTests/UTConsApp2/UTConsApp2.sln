@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2036
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UTConsApp2", "UTConsApp2\UTConsApp2.csproj", "{039DAE85-6B97-4FF2-B1CF-8F8BEC9AF229}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UTConsApp2.Test", "..\UTConsApp2.Test\UTConsApp2.Test.csproj", "{1BEB3AF4-4EF8-462E-8FD2-3CF9BFA0FFB5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{039DAE85-6B97-4FF2-B1CF-8F8BEC9AF229}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{039DAE85-6B97-4FF2-B1CF-8F8BEC9AF229}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{039DAE85-6B97-4FF2-B1CF-8F8BEC9AF229}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{039DAE85-6B97-4FF2-B1CF-8F8BEC9AF229}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1BEB3AF4-4EF8-462E-8FD2-3CF9BFA0FFB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BEB3AF4-4EF8-462E-8FD2-3CF9BFA0FFB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BEB3AF4-4EF8-462E-8FD2-3CF9BFA0FFB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BEB3AF4-4EF8-462E-8FD2-3CF9BFA0FFB5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2D90EA4D-FECE-4A74-8003-9FC5F138116A}
+	EndGlobalSection
+EndGlobal

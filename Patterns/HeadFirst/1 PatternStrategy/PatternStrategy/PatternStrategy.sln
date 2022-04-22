@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2026
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PatternStrategy", "InterfaceCast\PatternStrategy.csproj", "{89F759CE-59B5-4CEA-A3D6-6924F2052DD6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{89F759CE-59B5-4CEA-A3D6-6924F2052DD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89F759CE-59B5-4CEA-A3D6-6924F2052DD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89F759CE-59B5-4CEA-A3D6-6924F2052DD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89F759CE-59B5-4CEA-A3D6-6924F2052DD6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EB86409E-A907-44D1-8621-EF7F4DD422C1}
+	EndGlobalSection
+EndGlobal

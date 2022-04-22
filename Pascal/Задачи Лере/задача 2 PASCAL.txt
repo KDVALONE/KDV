@@ -1,0 +1,35 @@
+//2. Разработать схему алгоритма для отыскания  max(min(a,b), min(c,d)),  не используя сложные логические условия и вложенные ветвления. 
+//    Числа a,b,c,d - целые. Протестировать алгоритм для следующих исходных данных:
+//а) a=4 b=5 c=6 d=9
+//б) a=2 b=1 c=6 d=9
+//в) a=2 b=1 c=8 d=4
+//г) a=12 b=1 c=6 d=9
+
+program Number2;
+var a,b,c,d,x,y:integer;
+       
+procedure min(a,b:integer;var c:integer);
+begin
+if (a<b) then 
+    c:=a 
+    else
+    c:=b;
+end;
+procedure max(a,b:integer;var c:integer);
+begin
+    if (a>b) then c:=a else c:=b;
+end;
+begin
+    writeln('введите a = ');    readln(a) ;
+    writeln('введите b =  ');   readln(b) ;
+    writeln('введите c =  ');   readln(c) ;
+    writeln('введите d =  ');   readln(d) ;
+    min(a,b,x);
+    min(x,c,x);
+    min(x,d,x);
+    max(a,b,y);
+    max(y,c,y);
+    max(y,d,y);
+    writeln('минимальное число=',x);
+    writeln('максимальное число=',y);
+end.

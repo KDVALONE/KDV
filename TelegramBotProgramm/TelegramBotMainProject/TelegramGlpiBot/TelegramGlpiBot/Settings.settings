@@ -1,0 +1,15 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="TelegramGlpiBot" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Token" Type="System.String" Scope="User">
+      <Value Profile="(Default)">249206099:AAHaLl2nxqwdmRR0mQZWJW5fsYLxL_mJnPU</Value>
+    </Setting>
+    <Setting Name="Link" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://api.telegram.org/bot</Value>
+    </Setting>
+    <Setting Name="ConnectionString" Type="System.String" Scope="User">
+      <Value Profile="(Default)">datasource=127.0.0.1;port=3306;charset= utf8;database=glpi_db;username=root;password=;pooling=true;</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

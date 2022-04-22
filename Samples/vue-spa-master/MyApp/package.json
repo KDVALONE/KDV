@@ -1,0 +1,86 @@
+{
+  "name": "my-app",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "postinstall": "npm run build",
+    "dev": "vue-cli-service build --watch",
+    "serve": "vue-cli-service serve",
+    "dtos": "typescript-ref",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "publish": "vue-cli-service build && dotnet publish -c Release",
+    "test": "vue-cli-service test:unit",
+    "test-watch": "vue-cli-service test:unit --watchAll",
+    "e2e": "vue-cli-service test:e2e"
+  },
+  "dependencies": {
+    "@servicestack/client": "^1.0.31",
+    "@servicestack/vue": "^1.0.11",
+    "bootstrap": "^4.5.0",
+    "es6-shim": "^0.35.5",
+    "vue": "^2.6.11",
+    "vue-class-component": "^7.2.3",
+    "vue-property-decorator": "^8.4.2",
+    "vue-router": "^3.3.1"
+  },
+  "devDependencies": {
+    "@types/jest": "^25.2.3",
+    "@vue/cli-plugin-babel": "^4.4.1",
+    "@vue/cli-plugin-e2e-cypress": "^4.4.1",
+    "@vue/cli-plugin-typescript": "^4.4.1",
+    "@vue/cli-plugin-unit-jest": "^4.4.1",
+    "@vue/cli-service": "^4.4.1",
+    "@vue/test-utils": "^1.0.3",
+    "babel-core": "7.0.0-bridge.0",
+    "gulp": "^4.0.2",
+    "node-sass": "^4.14.1",
+    "sass-loader": "^8.0.2",
+    "ts-jest": "^26.0.0",
+    "typescript": "^3.9.3",
+    "vue-template-compiler": "^2.6.11"
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {}
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ],
+  "jest": {
+    "setupTestFrameworkScriptFile": "<rootDir>/tests/setup.js",
+    "modulePathIgnorePatterns": [
+      "<rootDir>/bin/"
+    ],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "vue"
+    ],
+    "transform": {
+      "^.+\\.vue$": "vue-jest",
+      ".+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$": "jest-transform-stub",
+      "^.+\\.tsx?$": "ts-jest",
+      "^@servicestack/vue$": "ts-jest"
+    },
+    "transformIgnorePatterns": [
+      "node_modules/(?!(babel-jest|jest-vue-preprocessor)/)"
+    ],
+    "moduleNameMapper": {
+      "^@/(.*)$": "<rootDir>/src/$1"
+    },
+    "snapshotSerializers": [
+      "jest-serializer-vue"
+    ],
+    "testMatch": [
+      "**/tests/unit/**/*.spec.(js|jsx|ts|tsx)|**/__tests__/*.(js|jsx|ts|tsx)"
+    ],
+    "testURL": "https://localhost:5001/"
+  }
+}

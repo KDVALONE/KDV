@@ -1,0 +1,59 @@
+﻿<!--Представление Razor (в старых версиях Страница представления MVC)-->
+@model Product []
+@{
+    ViewBag.Title = "Product Name";
+}
+<!--использованиe foreach -->
+<table>
+    <thead>
+        <tr><th>Name</th><th>Price</th></tr>
+    </thead>
+    <tbody>
+        @foreach (Product p in Model)
+         {
+            <tr>
+                <td>@p.Name</td>
+                <td>@($"{p.Price:C2}")</td>
+            </tr>
+         }
+    </tbody>
+</table>
+<!--использованиe switch и if/else -->
+        @*<div data-productid="@Model.ProductID" data-socklevel="@ViewBag.StockLevel">
+             <p>Product Name: @Model.Name</p>
+
+            <p>Product Price: @($"{Model.Price:C2}")</p>
+             <p>
+             Stock Level:
+             <!--использованиe if/else -->
+
+            @if (ViewBag.StockLevel == 0)
+             {
+                 @: Out of Stock
+             }
+             else if (ViewBag.StockLevel > 0 && ViewBag.StockLevel <= 3)
+             {
+                 <b>Low Stock (@ViewBag.StockLevel)</b>
+             }
+             else
+             {
+                 @: @ViewBag.StockLevel in Stock
+             }*@
+
+        <!--использованиe switch -->
+        @*@switch (ViewBag.StockLevel)
+                    {
+                        case 0:
+                            @: Out of Stock
+                            break;
+                        case 1:
+                        case 2:
+                        case 3:
+                            <b>Low Stock (@ViewBag.StockLevel)</b>
+                            break;
+                            default:
+                                @: @ViewBag.StockLevel in Stock;
+                                break;
+                    }
+             </p>
+            </div> *@
