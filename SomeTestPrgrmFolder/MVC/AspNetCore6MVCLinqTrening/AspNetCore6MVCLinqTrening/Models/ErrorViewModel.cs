@@ -6,4 +6,4 @@ namespace AspNetCore6MVCLinqTrening.Models
 
 		public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
 	}
-}
+}//Test
